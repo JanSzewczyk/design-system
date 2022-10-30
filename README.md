@@ -1,1 +1,2 @@
-# design-system
+# Szum-Tech Design System
+
