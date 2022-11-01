@@ -5,7 +5,7 @@ module.exports = {
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    ["@semantic-release/npm", { pkgRoot: ["dist", "package.json"] }],
+    ["@semantic-release/npm"],
     ["@semantic-release/git", { assets: ["CHANGELOG.md", "package.json"] }],
     "@semantic-release/github"
   ]
