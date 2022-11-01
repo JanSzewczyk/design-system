@@ -1,11 +1,7 @@
 import React from "react";
 
 function Button() {
-  React.useEffect(() => {
-    console.log("run...");
-  }, []);
-
-  return <button className="">button</button>;
+  return <button className="rounded-lg border border-red-800 bg-red-300 p-4">button</button>;
 }
 
 export { Button };

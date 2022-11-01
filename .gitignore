@@ -83,6 +83,9 @@ typings/
 # vuepress build output
 .vuepress/dist
 
+# next.js build output
+storybook-static
+
 # Serverless directories
 .serverless/
 
