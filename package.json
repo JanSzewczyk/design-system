@@ -47,7 +47,9 @@
     "typescript": "^4.8.4"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "tailwind-preset.js",
+    "src/theme/index.css"
   ],
   "homepage": "https://github.com/JanSzewczyk/design-system#readme",
   "keywords": [
