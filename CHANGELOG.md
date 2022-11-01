@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/JanSzewczyk/design-system/compare/v1.0.1...v1.0.2) (2022-11-01)
+
+
+### Bug Fixes
+
+* fix package structure v2 ([c2f60ce](https://github.com/JanSzewczyk/design-system/commit/c2f60ced9e35055f9ffea1f8f9544045558ca7aa))
+
 ## [1.0.1](https://github.com/JanSzewczyk/design-system/compare/v1.0.0...v1.0.1) (2022-11-01)
 
 
