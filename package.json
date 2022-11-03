@@ -80,9 +80,9 @@
     "postbuild": "cpy './theme' '../' --cwd='src'",
     "storybook": "start-storybook -p 6006",
     "semantic-release": "semantic-release",
-    "build-storybook": "build-storybook",
-    "build-storybook:docs": "build-storybook --docs",
-    "sd": "tailwindcss -i ./src/theme/global.css -o ./src/styles/default.css"
+    "build:storybook": "build-storybook",
+    "build:storybook:docs": "build-storybook --docs",
+    "prebuild:storybook": "tailwindcss -i ./src/theme/global.css -o ./src/styles/default.css"
   },
   "sideEffects": false,
   "types": "./dist/index.d.ts",
