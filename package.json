@@ -87,5 +87,7 @@
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "version": "1.0.2",
-  "dependencies": {}
+  "dependencies": {
+    "@storybook/addon-docs": "^6.5.13"
+  }
 }

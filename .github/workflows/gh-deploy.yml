@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build:
-    name: GH Page Deploy
+    name: Build Storybook App
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -38,7 +38,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build 🏗️
-        run: yarn prebuild:storybook && yarn build:storybook
+        run: yarn prebuild:storybook && yarn build:storybook:docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
@@ -46,6 +46,7 @@ jobs:
           path: ./storybook-static
 
   deploy:
+    name: GH Page Deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
