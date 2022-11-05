@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/JanSzewczyk/design-system/compare/v1.1.1...v1.1.2) (2022-11-05)
+
+
+### Bug Fixes
+
+* default body background ([77b92ef](https://github.com/JanSzewczyk/design-system/commit/77b92ef9002dcaceffefd952bf07ab97fd6febe6))
+
 ## [1.1.1](https://github.com/JanSzewczyk/design-system/compare/v1.1.0...v1.1.1) (2022-11-05)
 
 
