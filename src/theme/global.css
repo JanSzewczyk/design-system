@@ -121,6 +121,12 @@
   }
 
   body {
-    @apply text-typography-primary font-sans;
+    @apply app-scroll font-sans text-typography-primary;
+  }
+}
+
+@layer components {
+  .app-scroll {
+    @apply scrollbar scrollbar-thin scrollbar-thumb-gray-600/100 hover:scrollbar-thumb-gray-600/80;
   }
 }

@@ -3,6 +3,7 @@ import { useDarkMode } from "storybook-dark-mode";
 import { ThemeProvider, useTheme } from "../src";
 import React from "react";
 import { themes } from "@storybook/theming";
+import { version } from "../package.json";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -17,13 +18,13 @@ export const parameters = {
     // Override the default dark theme
     dark: {
       ...themes.dark,
-      brandTitle: "My custom storybook dark theme",
+      brandTitle: version,
       brandUrl: "https://example.com",
       brandImage: "https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png",
       brandTarget: "_self"
     },
     // Override the default light theme
-    light: themes.light
+    light: { ...themes.light, brandTitle: version }
   }
 };
 
