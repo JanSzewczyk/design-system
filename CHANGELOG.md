@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/JanSzewczyk/design-system/compare/v1.0.2...v1.1.0) (2022-11-05)
+
+
+### Features
+
+* add scroll bar styles ([cea9708](https://github.com/JanSzewczyk/design-system/commit/cea9708eed6e6e382ac52ae4a189eadbde01600a))
+
 ## [1.0.2](https://github.com/JanSzewczyk/design-system/compare/v1.0.1...v1.0.2) (2022-11-01)
 
 
