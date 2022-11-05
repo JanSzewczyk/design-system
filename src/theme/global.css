@@ -121,7 +121,7 @@
   }
 
   body {
-    @apply app-scroll font-sans text-typography-primary;
+    @apply app-scroll bg-gray-900 font-sans text-typography-primary antialiased;
   }
 }
 
