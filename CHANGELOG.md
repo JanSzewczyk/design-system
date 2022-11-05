@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/JanSzewczyk/design-system/compare/v1.1.0...v1.1.1) (2022-11-05)
+
+
+### Bug Fixes
+
+* fix importing `tailwind-scrollbar` ([503ed5d](https://github.com/JanSzewczyk/design-system/commit/503ed5d77214d7fdc9892210782b34cbec63a0df))
+
 # [1.1.0](https://github.com/JanSzewczyk/design-system/compare/v1.0.2...v1.1.0) (2022-11-05)
 
 
