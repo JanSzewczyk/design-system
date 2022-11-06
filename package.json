@@ -56,10 +56,15 @@
   "keywords": [
     "szum-tech",
     "Szum-Tech",
-    "szum-tech design system",
     "tailwindcss",
-    "React components",
-    "React JS"
+    "react",
+    "javascript",
+    "theme",
+    "typescript",
+    "react-components",
+    "storybook",
+    "design-system",
+    "semantic-release"
   ],
   "license": "MIT",
   "main": "./dist/index.js",

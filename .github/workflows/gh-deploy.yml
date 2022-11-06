@@ -1,4 +1,4 @@
-name: GH Deploy 🚀
+name: GH Pages Deploy 🚀
 
 on:
   workflow_run:
