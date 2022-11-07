@@ -2,7 +2,7 @@ import { ThemeContext } from "./theme.context";
 import React from "react";
 import { ThemeType } from "./theme.types";
 
-function getInitialTheme(): ThemeType {
+function getInitialTheme(defaultTheme?: ThemeType): ThemeType {
   if (typeof window !== "undefined" && window.localStorage) {
     const storageTheme = window.localStorage.getItem("theme");
 
@@ -14,17 +14,27 @@ function getInitialTheme(): ThemeType {
     }
   }
 
-  return "light";
+  return defaultTheme ?? "light";
 }
 
 export interface ThemeProviderProps {
-  defaultTheme?: ThemeType;
+  /**
+   * Children Components using theming.
+   */
   children?: React.ReactNode;
+  /**
+   * Define the default theme which is set at the beginning if neither local storage nor media is defined.
+   */
+  defaultTheme?: ThemeType;
+  /**
+   * Define theme that is always set initially.
+   */
+  theme?: ThemeType;
 }
 
-export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
-  const [theme, setTheme] = React.useState<ThemeType>(
-    defaultTheme ? defaultTheme : getInitialTheme
+export function ThemeProvider({ children, defaultTheme, theme }: ThemeProviderProps) {
+  const [themeState, setThemeState] = React.useState<ThemeType>(
+    theme ? theme : getInitialTheme(defaultTheme)
   );
 
   function rawSetTheme(rawTheme: ThemeType): void {
@@ -40,8 +50,12 @@ export function ThemeProvider({ children, defaultTheme }: ThemeProviderProps) {
   }
 
   React.useEffect(() => {
-    rawSetTheme(theme);
-  }, [theme]);
+    rawSetTheme(themeState);
+  }, [themeState]);
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme: themeState, setTheme: setThemeState }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
