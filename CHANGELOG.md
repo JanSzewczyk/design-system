@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/JanSzewczyk/design-system/compare/v1.1.4...v1.1.5) (2022-11-07)
+
+
+### Bug Fixes
+
+* **ThemeProvider:** fix `ThemeProvider` default theme behaviour ([862017c](https://github.com/JanSzewczyk/design-system/commit/862017c1b7c5f2e63df466e21e5d57e80b9ee363))
+
 ## [1.1.4](https://github.com/JanSzewczyk/design-system/compare/v1.1.3...v1.1.4) (2022-11-07)
 
 
