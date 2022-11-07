@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/JanSzewczyk/design-system/compare/v1.1.3...v1.1.4) (2022-11-07)
+
+
+### Bug Fixes
+
+* **deps:** add peerdeps ([ce8bea3](https://github.com/JanSzewczyk/design-system/commit/ce8bea3ab6f8ccf21f6a1b714407d9b9a73d74bd))
+
 ## [1.1.3](https://github.com/JanSzewczyk/design-system/compare/v1.1.2...v1.1.3) (2022-11-06)
 
 
