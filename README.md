@@ -23,12 +23,14 @@ Szum-Tech Design System is available as an [npm package](https://www.npmjs.com/p
 
 ```sh
 npm install @szum-tech/design-system
+npm install -D tailwindcss tailwind-scrollbar 
 ```
 
 **yarn:**
 
 ```sh
 yarn add @szum-tech/design-system
+yarn add -D tailwindcss tailwind-scrollbar
 ```
 
 ## Configuration 
@@ -82,8 +84,6 @@ function Providers({children}) {
   return <ThemeProvider>{children}</ThemeProvider>;
 }
 ```
-
-
 
 ## Documentation 
 
