@@ -121,12 +121,6 @@
   }
 
   body {
-    @apply app-scroll bg-gray-900 font-sans text-typography-primary antialiased;
-  }
-}
-
-@layer components {
-  .app-scroll {
-    @apply scrollbar scrollbar-thin scrollbar-thumb-gray-600/100 hover:scrollbar-thumb-gray-600/80;
+    @apply scroll bg-gray-900 font-sans text-typography-primary antialiased;
   }
 }

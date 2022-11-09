@@ -50,8 +50,7 @@
   },
   "files": [
     "dist/**",
-    "tailwind-preset.js",
-    "theme/**"
+    "tailwindcss/**"
   ],
   "homepage": "https://github.com/JanSzewczyk/design-system#readme",
   "keywords": [
@@ -83,13 +82,13 @@
     "clean": "rm -rf node_modules && rm -rf dist",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
     "dev:build": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
-    "dev:css": "tailwindcss -w -i ./src/theme/global.css -o ./src/styles/default.css",
-    "postbuild": "cpy './theme' '../' --cwd='src'",
+    "dev:css": "tailwindcss -w -i tailwindcss/global.css -o src/styles/default.css",
+    "postbuild": "",
     "storybook": "start-storybook -p 6006",
     "semantic-release": "semantic-release",
     "build:storybook": "build-storybook",
     "build:storybook:docs": "build-storybook --docs",
-    "prebuild:storybook": "tailwindcss -i ./src/theme/global.css -o ./src/styles/default.css"
+    "prebuild:storybook": "tailwindcss -i tailwindcss/global.css -o src/styles/default.css"
   },
   "sideEffects": false,
   "types": "./dist/index.d.ts",
