@@ -83,7 +83,6 @@
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
     "dev:build": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
     "dev:css": "tailwindcss -w -i tailwindcss/global.css -o src/styles/default.css",
-    "postbuild": "",
     "storybook": "start-storybook -p 6006",
     "semantic-release": "semantic-release",
     "build:storybook": "build-storybook",
