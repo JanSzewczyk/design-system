@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/JanSzewczyk/design-system/compare/v1.1.6...v1.1.7) (2022-11-13)
+
+
+### Bug Fixes
+
+* **packages:** fix publish files in npm package ([a1df00d](https://github.com/JanSzewczyk/design-system/commit/a1df00d8d2a91bc5ad89da6c4a80fbd34884e13d))
+
 ## [1.1.6](https://github.com/JanSzewczyk/design-system/compare/v1.1.5...v1.1.6) (2022-11-09)
 
 
