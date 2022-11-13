@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/JanSzewczyk/design-system/compare/v1.1.7...v1.1.8) (2022-11-13)
+
+
+### Bug Fixes
+
+* **packages:** revert to previous version ([aa5cd24](https://github.com/JanSzewczyk/design-system/commit/aa5cd2462cf379ace3232453d44d853e32f06beb))
+
 ## [1.1.7](https://github.com/JanSzewczyk/design-system/compare/v1.1.6...v1.1.7) (2022-11-13)
 
 
