@@ -50,8 +50,7 @@
   },
   "files": [
     "dist/**",
-    "tailwindcss/main-preset.js",
-    "tailwindcss/global.css"
+    "tailwindcss/**"
   ],
   "homepage": "https://github.com/JanSzewczyk/design-system#readme",
   "keywords": [
