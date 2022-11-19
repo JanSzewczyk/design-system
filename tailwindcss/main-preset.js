@@ -87,5 +87,9 @@ module.exports = {
       }
     }
   },
-  plugins: [require("tailwind-scrollbar"), require("./plugins/components")]
+  plugins: [
+    require("@tailwindcss/container-queries"),
+    require("tailwind-scrollbar"),
+    require("./plugins/components")
+  ]
 };
