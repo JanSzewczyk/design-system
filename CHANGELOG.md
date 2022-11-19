@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/JanSzewczyk/design-system/compare/v1.1.8...v1.2.0) (2022-11-19)
+
+
+### Features
+
+* add `@tailwindcss/container-queries` package ([c0cbd3d](https://github.com/JanSzewczyk/design-system/commit/c0cbd3d10e66bcf62594554284e8255255b994f5))
+
 ## [1.1.8](https://github.com/JanSzewczyk/design-system/compare/v1.1.7...v1.1.8) (2022-11-13)
 
 
