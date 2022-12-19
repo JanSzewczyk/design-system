@@ -16,7 +16,7 @@ export const parameters = {
     }
   },
   docs: {
-    iframeStories: true
+    iframeStories: false
   },
   darkMode: {
     // Override the default dark theme
