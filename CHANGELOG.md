@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/JanSzewczyk/design-system/compare/v1.2.0...v1.3.0) (2022-12-19)
+
+
+### Features
+
+* **typography:** add typography and refactor config file ([f39dc70](https://github.com/JanSzewczyk/design-system/commit/f39dc70161c49226f0a75384f510c61bed0ceba2))
+
 # [1.2.0](https://github.com/JanSzewczyk/design-system/compare/v1.1.8...v1.2.0) (2022-11-19)
 
 
