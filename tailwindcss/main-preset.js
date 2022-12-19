@@ -68,13 +68,24 @@ module.exports = {
       },
       white: "rgb(var(--white) / <alpha-value>)"
     },
+    fontFamily: {
+      sans: ["'Open Sans', sans-serif"],
+      code: ["'JetBrains Mono', monospace"]
+    },
+    fontSize: {
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "2.125rem",
+      "4xl": "3rem",
+      "5xl": "3.75rem",
+      "6xl": "6rem"
+    },
     extend: {
       borderRadius: {
         "1/2": "50%"
-      },
-      fontFamily: {
-        sans: ["'Open Sans', sans-serif"],
-        code: ["'JetBrains Mono', monospace"]
       },
       letterSpacing: {
         1: "0.25rem",
@@ -90,6 +101,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/container-queries"),
     require("tailwind-scrollbar"),
-    require("./plugins/components")
+    require("./plugins/components/scroll"),
+    require("./plugins/components/typography")
   ]
 };

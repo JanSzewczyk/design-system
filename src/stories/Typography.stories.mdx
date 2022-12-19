@@ -1,0 +1,164 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+
+<Meta title="Guidelines/Typography" />
+
+export const code = [
+  '<button className="scroll rounded-lg border border-primary-500">',
+  "  button",
+  "</button>"
+];
+
+# Typography
+
+The Typography styles makes it easy to apply a default set of font weights and sizes in your application.
+
+<br />
+
+## Styles
+
+<Canvas>
+  <div className="mx-auto max-w-3xl">
+    <div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-4">
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code whitespace-nowrap">typography-heading-1</code>
+        </div>
+      </div>
+      <div>
+        <h1 className="typography-heading-1">Heading 1</h1>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-heading-2</code>
+        </div>
+      </div>
+      <div>
+        <h2 className="typography-heading-2">Heading 2</h2>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-heading-3</code>
+        </div>
+      </div>
+      <div>
+        <h3 className="typography-heading-3">Heading 3</h3>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-heading-4</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <h4 className="typography-heading-4">Heading 4</h4>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-heading-5</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <h5 className="typography-heading-5">Heading 5</h5>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-heading-6</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <h6 className="typography-heading-6">Heading 6</h6>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code whitespace-nowrap">typography-subtitle-1</code>
+        </div>
+      </div>
+      <div className="">
+        <p className="typography-subtitle-1">
+          Subtitle 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code whitespace-nowrap">typography-subtitle-2</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <p className="typography-subtitle-2">
+          Subtitle 2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-body-1</code>
+        </div>
+      </div>
+      <div>
+        <p className="typography-body-1">
+          Body 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-body-2</code>
+        </div>
+      </div>
+      <div>
+        <p className="typography-body-2">
+          Body 2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-button</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <span className="typography-button">BUTTON TEXT</span>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-caption</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <span className="typography-caption">caption text</span>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-overline</code>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <span className="typography-overline my-auto">OVERLINE TEXT</span>
+      </div>
+      <div className="flex items-center">
+        <div>
+          <div className="typography-subtitle-1">Class Name:</div>
+          <code className="typography-code">typography-code</code>
+        </div>
+      </div>
+      <div className="overflow-x-auto">
+        <pre className="typography-code py-2">{code.join("\n")}</pre>
+      </div>
+    </div>
+  </div>
+</Canvas>

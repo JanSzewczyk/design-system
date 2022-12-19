@@ -1,6 +1,10 @@
 import addons from "@storybook/addons";
 import { STORY_RENDERED } from "@storybook/core-events";
 
+addons.setConfig({
+  theme: { fontBase: "'Open Sans', sans-serif" }
+});
+
 addons.register("TitleAddon", (api) => {
   const customTitle = "Szum-Tech Design System";
   let interval = null;

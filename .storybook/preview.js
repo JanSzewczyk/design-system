@@ -1,4 +1,5 @@
 import "../src/styles/default.css";
+
 import { useDarkMode } from "storybook-dark-mode";
 import { ThemeProvider, useTheme } from "../src";
 import React from "react";
@@ -14,6 +15,9 @@ export const parameters = {
       date: /Date$/
     }
   },
+  docs: {
+    iframeStories: true
+  },
   darkMode: {
     // Override the default dark theme
     dark: {
@@ -21,10 +25,17 @@ export const parameters = {
       brandTitle: version,
       brandUrl: "https://example.com",
       brandImage: "https://1000logos.net/wp-content/uploads/2021/04/Facebook-logo.png",
-      brandTarget: "_self"
+      brandTarget: "_self",
+      fontBase: "'Open Sans', sans-serif",
+      fontCode: "'JetBrains Mono', monospace"
     },
     // Override the default light theme
-    light: { ...themes.light, brandTitle: version }
+    light: {
+      ...themes.light,
+      brandTitle: version,
+      fontBase: "'Open Sans', sans-serif",
+      fontCode: "'JetBrains Mono', monospace"
+    }
   }
 };
 
