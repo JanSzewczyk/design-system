@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/JanSzewczyk/design-system/compare/v1.3.0...v1.4.0) (2023-02-16)
+
+
+### Features
+
+* **Button:** create `Button` component ([884c579](https://github.com/JanSzewczyk/design-system/commit/884c579ff595801126f1958027f7bcacc30cb01c))
+
 # [1.3.0](https://github.com/JanSzewczyk/design-system/compare/v1.2.0...v1.3.0) (2022-12-19)
 
 
