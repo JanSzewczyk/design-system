@@ -4579,6 +4579,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+class-variance-authority@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/class-variance-authority/-/class-variance-authority-0.4.0.tgz#2ff1b5a836a68ce7a2dac0cc12f6fdc50e47f666"
+  integrity sha512-74enNN8O9ZNieycac/y8FxqgyzZhZbxmCitAtAeUrLPlxjSd5zA7LfpprmxEcOmQBnaGs5hYhiSGnJ0mqrtBLQ==
+
 clean-css@^4.2.3:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.4.tgz#733bf46eba4e607c6891ea57c24a989356831178"

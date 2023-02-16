@@ -33,7 +33,7 @@ module.exports = plugin(function ({ addComponents }) {
       "@apply font-sans text-sm font-normal leading-[1.43] tracking-[.01071em]": {}
     },
     ".typography-button": {
-      "@apply font-sans text-sm font-medium leading-7 tracking-[.02857em]": {}
+      "@apply font-sans text-sm font-medium leading-[1.75] tracking-[.02857em]": {}
     },
     ".typography-caption": {
       "@apply font-sans text-xs font-normal leading-[1.66] tracking-[.03333em]": {}

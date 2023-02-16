@@ -5,6 +5,7 @@
   },
   "description": "Szum-Tech design system with tailwindcss support",
   "dependencies": {
+    "class-variance-authority": "^0.4.0",
     "tailwindcss": "^3.2.4"
   },
   "devDependencies": {

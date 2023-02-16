@@ -45,7 +45,7 @@ export const decorators = [
 
     const { setTheme } = useTheme();
 
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
       setTheme(mode);
     }, [mode]);
 
