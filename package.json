@@ -58,6 +58,7 @@
     "vite": "^4.1.2"
   },
   "files": [
+    "index.*",
     "components/**",
     "hooks/**",
     "contexts/**",
