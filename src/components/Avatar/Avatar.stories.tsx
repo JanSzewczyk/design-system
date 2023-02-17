@@ -1,34 +1,39 @@
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import Avatar from "./Avatar";
 import { BeakerIcon } from "@heroicons/react/20/solid";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-export default {
+const meta = {
   title: "Components/Avatar",
   component: Avatar
-} as ComponentMeta<typeof Avatar>;
+} satisfies Meta<typeof Avatar>;
+export default meta;
 
-const ImageAvatarTemplate: ComponentStory<typeof Avatar> = (args) => (
-  <div>
-    <Avatar
-      alt="User Avatar"
-      src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
-    />
-  </div>
-);
-export const ImageAvatar = ImageAvatarTemplate.bind({});
+type Story = StoryObj<typeof meta>;
 
-const LetterAvatarTemplate: ComponentStory<typeof Avatar> = (args) => (
-  <div className="flex flex-row items-center gap-x-4">
-    <Avatar>ST</Avatar>
-    <Avatar bg="bg-primary-500">JS</Avatar>
-    <Avatar bg="bg-error-500">KD</Avatar>
-  </div>
-);
-export const LetterAvatar = LetterAvatarTemplate.bind({});
+// const ImageAvatarTemplate =  (
+//
+//     <Avatar
+//       alt="User Avatar"
+//       src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
+//     />
+//   </div>
+// );
+export const ImageAvatar: Story = {
+  args:{
+    alt:"User Avatar",
+    src:"https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
+  }
+};
 
-const SizesTemplate: ComponentStory<typeof Avatar> = (args) => (
+export const LetterAvatar: Story = {
+  args:{
+    children: 'ST',
+    bg: 'bg-primary-500'
+  }
+};
+
+export const Sizes = () => (
   <div>
     <div className="mb-4 flex flex-row items-center gap-x-4">
       <Avatar
@@ -53,13 +58,9 @@ const SizesTemplate: ComponentStory<typeof Avatar> = (args) => (
     </div>
   </div>
 );
-export const Sizes = SizesTemplate.bind({});
 
-const IconAvatarTemplate: ComponentStory<typeof Avatar> = (args) => (
-  <div>
-    <Avatar>
-      <BeakerIcon className="h-8 w-8" />
-    </Avatar>
-  </div>
-);
-export const IconAvatar = IconAvatarTemplate.bind({});
+export const IconAvatar: Story = {
+  args:{
+    children:  <BeakerIcon className="h-8 w-8" />
+  }
+};

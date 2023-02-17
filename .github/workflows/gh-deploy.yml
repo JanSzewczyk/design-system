@@ -38,7 +38,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build 🏗️
-        run: yarn prebuild:storybook && yarn build:storybook:docs
+        run: yarn storybook:prebuild && yarn storybook:build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
