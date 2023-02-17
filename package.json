@@ -7,7 +7,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.15",
     "class-variance-authority": "^0.4.0",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
@@ -50,9 +50,9 @@
     "react-dom": "^18.2.0",
     "semantic-release": "^19.0.5",
     "storybook-dark-mode": "^1.1.2",
-    "tailwind-scrollbar": "^2.0.1",
-    "tsup": "^6.3.0",
-    "typescript": "^4.8.4"
+    "tailwind-scrollbar": "^2.1.0",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5"
   },
   "files": [
     "dist/**",
@@ -84,7 +84,8 @@
     "url": "git+https://github.com/JanSzewczyk/design-system.git"
   },
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --dts --treeshake --external react,react-dom",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
     "clean": "rm -rf node_modules && rm -rf dist",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
     "dev:build": "tsup src/index.tsx --format esm,cjs --watch --dts --external react,react-dom",
