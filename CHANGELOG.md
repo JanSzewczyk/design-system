@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/JanSzewczyk/design-system/compare/v1.5.1...v1.5.2) (2023-02-17)
+
+
+### Bug Fixes
+
+* **build:** add indexes files ([95ad897](https://github.com/JanSzewczyk/design-system/commit/95ad89708c0e370346845ed44eedb8c8279eab56))
+
 ## [1.5.1](https://github.com/JanSzewczyk/design-system/compare/v1.5.0...v1.5.1) (2023-02-17)
 
 
