@@ -103,6 +103,12 @@ Thumbs.db
 __tests__/runner/*
 lib
 dist
+hooks/
+components/
+contexts/
+index.js
+index.d.ts
+index.mjs
 
 # Ignore testing results file
 jest-results.json
