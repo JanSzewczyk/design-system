@@ -37,7 +37,7 @@ export default React.forwardRef(function <T extends React.ElementType = "button"
   const buttonRootStyles = buttonCva({ size, variant, color });
 
   return (
-    <Component className={buttonRootStyles + " " + ""} ref={ref} {...restProps}>
+    <Component className={buttonRootStyles} ref={ref} {...restProps}>
       {children}
     </Component>
   );
