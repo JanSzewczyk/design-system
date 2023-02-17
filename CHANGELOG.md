@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/JanSzewczyk/design-system/compare/v1.4.0...v1.5.0) (2023-02-17)
+
+
+### Features
+
+* **Avatar:** create `Avatar` component ([d4a085d](https://github.com/JanSzewczyk/design-system/commit/d4a085dd3e8d91694649eb69ede8d223b5e5edb6))
+
 # [1.4.0](https://github.com/JanSzewczyk/design-system/compare/v1.3.0...v1.4.0) (2023-02-16)
 
 
