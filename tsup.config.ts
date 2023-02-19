@@ -15,7 +15,6 @@ export default defineConfig([
   {
     entry: ["./src/components/index.ts?(x)"],
     dts: true,
-    treeshake: true,
     minify: true,
     format: ["esm", "cjs"],
     external: ["react", "react-dom"],
@@ -35,7 +34,6 @@ export default defineConfig([
   {
     entry: ["./src/contexts/index.ts?(x)"],
     dts: true,
-    treeshake: true,
     minify: true,
     format: ["esm", "cjs"],
     external: ["react", "react-dom"],
@@ -55,7 +53,6 @@ export default defineConfig([
   {
     entry: ["./src/hooks/index.ts?(x)"],
     dts: true,
-    treeshake: true,
     minify: true,
     format: ["esm", "cjs"],
     external: ["react", "react-dom"],
@@ -66,7 +63,6 @@ export default defineConfig([
   {
     entry: ["./src/index.ts?(x)"],
     dts: true,
-    treeshake: true,
     minify: true,
     format: ["esm", "cjs"],
     external: ["react", "react-dom"],
