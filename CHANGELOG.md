@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/JanSzewczyk/design-system/compare/v1.5.2...v1.5.3) (2023-02-19)
+
+
+### Bug Fixes
+
+* **build:** fix compile configuration ([c2379f2](https://github.com/JanSzewczyk/design-system/commit/c2379f2559f9ee0f9072b6b9f2205b3e49996925))
+
 ## [1.5.2](https://github.com/JanSzewczyk/design-system/compare/v1.5.1...v1.5.2) (2023-02-17)
 
 
