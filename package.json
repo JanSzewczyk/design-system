@@ -105,7 +105,7 @@
   },
   "sideEffects": false,
   "types": "./index.d.ts",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "peerDependencies": {
     "@tailwindcss/container-queries": "^0.1.0",
     "react": "^18.2.0",

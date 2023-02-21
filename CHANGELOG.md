@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/JanSzewczyk/design-system/compare/v1.5.3...v1.5.4) (2023-02-21)
+
+
+### Bug Fixes
+
+* **palette:** refactor `palette` styles ([1b2eb12](https://github.com/JanSzewczyk/design-system/commit/1b2eb12c72b17806580c641575e64bcaf44d7f8d))
+
 ## [1.5.3](https://github.com/JanSzewczyk/design-system/compare/v1.5.2...v1.5.3) (2023-02-19)
 
 
