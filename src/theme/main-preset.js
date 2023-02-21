@@ -86,7 +86,7 @@ module.exports = {
       white: "rgb(var(--white) / <alpha-value>)"
     },
     fontFamily: {
-      sans: ["'Open Sans', sans-serif"],
+      poppins: ["'Poppins', sans-serif"],
       code: ["'JetBrains Mono', monospace"]
     },
     fontSize: {

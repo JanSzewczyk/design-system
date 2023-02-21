@@ -101,14 +101,15 @@ Thumbs.db
 
 # Ignore built ts files
 __tests__/runner/*
-lib
-dist
-hooks/
-components/
-contexts/
-index.js
-index.d.ts
-index.mjs
+/lib
+/dist
+/hooks
+/components
+/contexts
+/theme
+/index.js
+/index.d.ts
+/index.mjs
 
 # Ignore testing results file
 jest-results.json
@@ -122,4 +123,3 @@ eslint-results.sarif
 
 # Tailwindcss computed styles
 src/styles
-theme
