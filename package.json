@@ -62,7 +62,7 @@
     "components/**",
     "hooks/**",
     "contexts/**",
-    "tailwindcss/**"
+    "theme/**"
   ],
   "homepage": "https://github.com/JanSzewczyk/design-system#readme",
   "keywords": [
@@ -90,16 +90,16 @@
     "url": "git+https://github.com/JanSzewczyk/design-system.git"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cpy './src/theme/global.css' './theme' --flat",
     "typecheck": "tsc --noEmit",
-    "clean": "rm -rf node_modules && rm -rf dist && yarn clear:build",
-    "clear:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf index.d.ts && rm -rf index.js && rm -rf index.mjs",
+    "clean": "rm -rf node_modules && yarn clear:build",
+    "clear:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf theme && rm -rf index.*",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
     "dev:build": "tsup src/index.tsx --format esm,cjs --watch --dts --external react,react-dom",
-    "dev:css": "tailwindcss -w -i tailwindcss/global.css -o src/styles/default.css",
+    "dev:css": "tailwindcss -w -i src/theme/global.css -o src/styles/default.css",
     "semantic-release": "semantic-release",
     "storybook": "storybook dev -p 6006 -s public",
-    "storybook:prebuild": "tailwindcss -i tailwindcss/global.css -o src/styles/default.css",
+    "storybook:prebuild": "tailwindcss -i src/theme/global.css -o src/styles/default.css",
     "storybook:build": "storybook build --docs",
     "storybook:serve": "serve storybook-static"
   },

@@ -68,5 +68,12 @@ export default defineConfig([
     external: ["react", "react-dom"],
     outDir: ".",
     bundle: false
+  },
+
+  {
+    entry: ["./src/theme/main-preset.js"],
+    minify: false,
+    bundle: true,
+    outDir: "theme",
   }
 ]);
