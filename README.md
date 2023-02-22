@@ -46,13 +46,13 @@ After installing the [@szum-tech/design-system](https://www.npmjs.com/package/@s
 module.exports = {
   content: [
     "...",
-    "./node_modules/@szum-tech/design-system/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@szum-tech/design-system/{components,hooks,contexts}/**/*{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {}
   },
   plugins: [],
-  presets: [require("@szum-tech/design-system/tailwindcss/main-preset")]
+  presets: [require("@szum-tech/design-system/theme/main-preset")]
 };
 ```
 
@@ -61,7 +61,7 @@ module.exports = {
 > Import CSS file from `@szum-tech/design-system/theme` with colors palette for dark and light theme and default styles (see file with [theme styles](https://github.com/JanSzewczyk/design-system/blob/main/src/theme/global.css))
 
 ```css
-@import "@szum-tech/design-system/tailwindcss/global.css";
+@import "@szum-tech/design-system/theme/global.css";
 
 @tailwind base;
 @tailwind components;
