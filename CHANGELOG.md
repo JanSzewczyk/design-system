@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/JanSzewczyk/design-system/compare/v1.5.4...v1.5.5) (2023-02-22)
+
+
+### Bug Fixes
+
+* **package:** refactor package structure ([ba61bbd](https://github.com/JanSzewczyk/design-system/commit/ba61bbdeb2b4f18b110ece40bf79f204606a2b3d))
+
 ## [1.5.4](https://github.com/JanSzewczyk/design-system/compare/v1.5.3...v1.5.4) (2023-02-21)
 
 
