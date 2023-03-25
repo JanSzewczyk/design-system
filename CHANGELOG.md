@@ -1,3 +1,15 @@
+<!-- markdownlint-disable --><!-- textlint-disable -->
+# 📓 Changelog
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.5.6](https://github.com/JanSzewczyk/design-system/compare/v1.5.5...v1.5.6) (2023-03-25)
+
+
+### Bug Fixes
+
+* **tailwind-scrollbar:** add `tailwind-scrollbar` package to dependencies ([7eb6126](https://github.com/JanSzewczyk/design-system/commit/7eb6126b03d937175d11758daa00626bae89ca48))
+
 ## [1.5.5](https://github.com/JanSzewczyk/design-system/compare/v1.5.4...v1.5.5) (2023-02-22)
 
 
