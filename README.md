@@ -33,7 +33,7 @@ yarn add @szum-tech/design-system
 yarn add -D tailwindcss @tailwindcss/container-queries
 ```
 
-## Configuration 
+## Configuration
 
 After installing the [@szum-tech/design-system](https://www.npmjs.com/package/@szum-tech/design-system) package in accordance with paragraph [Installation](#Installation), during [Tailwind initialization](https://tailwindcss.com/docs/installation), follow these steps:
 
@@ -56,7 +56,7 @@ module.exports = {
 };
 ```
 
-### 2. Import theme styles to CSS file with Tailwind directives 
+### 2. Import theme styles to CSS file with Tailwind directives
 
 > Import CSS file from `@szum-tech/design-system/theme` with colors palette for dark and light theme and default styles (see file with [theme styles](https://github.com/JanSzewczyk/design-system/blob/main/src/theme/global.css))
 
@@ -70,22 +70,22 @@ module.exports = {
 
 ## Getting started
 
-### Theme Provider 
+### Theme Provider
 
 `ThemeProvider` relies on the [context feature of React](https://reactjs.org/docs/context.html) to handle theme mode and pass it to components, so you need to make sure `ThemeProvider` is the parent of the components you are trying to customize.
 
 Here is an example of a basic app using `ThemeProvider` component:
 
 ```jsx
-import * as React from 'react';
-import { ThemeProvider } from '@szum-tech/design-system';
+import * as React from "react";
+import { ThemeProvider } from "@szum-tech/design-system";
 
-function Providers({children}) {
+function Providers({ children }) {
   return <ThemeProvider>{children}</ThemeProvider>;
 }
 ```
 
-## Documentation 
+## Documentation
 
 [Szum-Tech Design System](https://janszewczyk.github.io/design-system)
 

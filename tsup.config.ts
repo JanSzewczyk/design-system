@@ -1,7 +1,5 @@
 import { defineConfig } from "tsup";
 
-const dirNames = ["components", "contexts", "theme"];
-
 export default defineConfig([
   {
     entry: ["./src/components/!(index.ts?(x))/index.ts?(x)"],
@@ -74,6 +72,6 @@ export default defineConfig([
     entry: ["./src/theme/main-preset.js"],
     minify: false,
     bundle: true,
-    outDir: "theme",
+    outDir: "theme"
   }
 ]);

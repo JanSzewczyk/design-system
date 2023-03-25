@@ -20,16 +20,16 @@ type Story = StoryObj<typeof meta>;
 //   </div>
 // );
 export const ImageAvatar: Story = {
-  args:{
-    alt:"User Avatar",
-    src:"https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
+  args: {
+    alt: "User Avatar",
+    src: "https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
   }
 };
 
 export const LetterAvatar: Story = {
-  args:{
-    children: 'ST',
-    bg: 'bg-primary-500'
+  args: {
+    children: "ST",
+    bg: "bg-primary-500"
   }
 };
 
@@ -60,7 +60,7 @@ export const Sizes = () => (
 );
 
 export const IconAvatar: Story = {
-  args:{
-    children:  <BeakerIcon className="h-8 w-8" />
+  args: {
+    children: <BeakerIcon className="h-8 w-8" />
   }
 };

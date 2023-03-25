@@ -121,6 +121,6 @@
   }
 
   body {
-    @apply font-poppins scroll bg-gray-900 text-typography-primary antialiased;
+    @apply scroll bg-gray-900 font-poppins text-typography-primary antialiased;
   }
 }

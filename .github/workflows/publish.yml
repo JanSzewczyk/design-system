@@ -25,11 +25,11 @@ jobs:
       - name: Install packages ⚙️
         run: yarn install --frozen-lockfile
 
-#      - name: Run ESLint 🧹
-#        run: yarn lint
+      #      - name: Run ESLint 🧹
+      #        run: yarn lint
 
-#      - name: Run tests 🧪
-#        run: yarn test
+      #      - name: Run tests 🧪
+      #        run: yarn test
 
       - name: Build 🏗️
         run: yarn build
