@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/JanSzewczyk/design-system/compare/v1.5.6...v1.5.7) (2023-03-26)
+
+
+### Bug Fixes
+
+* **deps:** fix project dependency ([a81a8dc](https://github.com/JanSzewczyk/design-system/commit/a81a8dc03117fd01de4e420393fa3e6cf0dccc02))
+
 ## [1.5.6](https://github.com/JanSzewczyk/design-system/compare/v1.5.5...v1.5.6) (2023-03-25)
 
 
