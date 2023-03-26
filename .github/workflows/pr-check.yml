@@ -1,0 +1,120 @@
+name: PR Checks ✅
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    name: Build 🏗️
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v3
+
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages ⚙️
+        run: yarn install --frozen-lockfile
+
+      - name: Build Check 🏗️
+        run: yarn build
+
+  build-storybook:
+    name: Build Storybook 📖
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v3
+
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages ⚙️
+        run: yarn install --frozen-lockfile
+
+      - name: Build Check 🏗️
+        run: yarn storybook:prebuild && yarn storybook:build
+
+  prettier:
+    name: Prettier 🧹
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v3
+
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages ⚙️
+        run: yarn install --frozen-lockfile
+
+      - name: Prettier Check 🧹
+        run: yarn prettier:check
+
+  #  lint:
+  #    name: Eslint ⬣
+  #    runs-on: ${{ matrix.os }}
+  #    strategy:
+  #      matrix:
+  #        node-version: [18.x]
+  #        os: [ubuntu-latest]
+  #
+  #    steps:
+  #      - name: Checkout code 📚
+  #        uses: actions/checkout@v3
+  #
+  #      - name: Set up Node 🟢
+  #        uses: actions/setup-node@v3
+  #        with:
+  #          node-version: ${{ matrix.node-version }}
+  #
+  #      - name: Install packages ⚙️
+  #        run: yarn install --frozen-lockfile
+  #
+  #      - name: Eslint Check ⬣
+  #        run: yarn lint:ci
+
+  type-check:
+    name: TypeScript
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v3
+
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install packages ⚙️
+        run: yarn install --frozen-lockfile
+
+      - name: TypeScript Check
+        run: yarn type-check
