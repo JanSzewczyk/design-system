@@ -11,20 +11,16 @@ jobs:
       matrix:
         node-version: [18.x]
         os: [ubuntu-latest]
-
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v3
-
       - name: Set up Node 🟢
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-
       - name: Install packages ⚙️
         run: yarn install --frozen-lockfile
-
       - name: Build Check 🏗️
         run: yarn build
 
@@ -35,20 +31,16 @@ jobs:
       matrix:
         node-version: [18.x]
         os: [ubuntu-latest]
-
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v3
-
       - name: Set up Node 🟢
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-
       - name: Install packages ⚙️
         run: yarn install --frozen-lockfile
-
       - name: Build Check 🏗️
         run: yarn storybook:prebuild && yarn storybook:build
 
@@ -59,20 +51,16 @@ jobs:
       matrix:
         node-version: [18.x]
         os: [ubuntu-latest]
-
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v3
-
       - name: Set up Node 🟢
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-
       - name: Install packages ⚙️
         run: yarn install --frozen-lockfile
-
       - name: Prettier Check 🧹
         run: yarn prettier:check
 
@@ -106,19 +94,15 @@ jobs:
       matrix:
         node-version: [18.x]
         os: [ubuntu-latest]
-
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v3
-
       - name: Set up Node 🟢
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
-
       - name: Install packages ⚙️
         run: yarn install --frozen-lockfile
-
       - name: TypeScript Check
         run: yarn type-check
