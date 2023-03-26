@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/JanSzewczyk/design-system/compare/v1.5.7...v1.6.0) (2023-03-26)
+
+
+### Features
+
+* **icons:** add `Google` icon ([a119828](https://github.com/JanSzewczyk/design-system/commit/a1198286df0fa55648f65ce92a5ced649c8bc2c0))
+
 ## [1.5.7](https://github.com/JanSzewczyk/design-system/compare/v1.5.6...v1.5.7) (2023-03-26)
 
 
