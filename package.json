@@ -41,7 +41,7 @@
     "clean": "rm -rf node_modules && yarn clear:build",
     "clear:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf theme && rm -rf index.*",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
-    "dev:build": "tsup src/index.tsx --format esm,cjs --watch --dts --external react,react-dom",
+    "dev:build": "tsup",
     "dev:css": "tailwindcss -w -i src/theme/global.css -o src/styles/default.css",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
@@ -53,13 +53,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.15",
+    "@tailwindcss/container-queries": "^0.1.0",
     "class-variance-authority": "^0.4.0",
     "tailwind-scrollbar": "^3.0.0",
     "tailwindcss": "^3.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
+    "@heroicons/react": "^2.0.16",
     "@storybook/addon-a11y": "^7.0.0-beta.47",
     "@storybook/addon-actions": "^7.0.0-beta.47",
     "@storybook/addon-docs": "^7.0.0-beta.47",
@@ -73,7 +74,6 @@
     "@storybook/theming": "^7.0.0-beta.47",
     "@szum-tech/prettier-config": "^1.1.1",
     "@szum-tech/semantic-release-preset": "^1.3.0",
-    "@tailwindcss/container-queries": "^0.1.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.24",
@@ -101,7 +101,6 @@
     "vite": "^4.1.2"
   },
   "peerDependencies": {
-    "@tailwindcss/container-queries": "^0.1.0",
     "react": "^18.2.0",
     "tailwindcss": "^3.2.7"
   },

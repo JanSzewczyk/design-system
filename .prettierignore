@@ -1,6 +1,13 @@
 # dependencies
 /node_modules
 
+# build
+/index.*
+/components
+/contexts
+/hooks
+/theme
+
 # WebStorm
 /.idea
 

@@ -7,7 +7,7 @@ export default defineConfig([
     treeshake: true,
     minify: true,
     format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "class-variance-authority"],
     outDir: "components"
   },
   {
