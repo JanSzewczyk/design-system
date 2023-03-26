@@ -11,14 +11,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-// const ImageAvatarTemplate =  (
-//
-//     <Avatar
-//       alt="User Avatar"
-//       src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
-//     />
-//   </div>
-// );
 export const ImageAvatar: Story = {
   args: {
     alt: "User Avatar",
