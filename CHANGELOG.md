@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/JanSzewczyk/design-system/compare/v1.6.0...v1.6.1) (2023-04-01)
+
+
+### Performance Improvements
+
+* **gh-action:** add cache to gh action ([96c0b1f](https://github.com/JanSzewczyk/design-system/commit/96c0b1f5693ab7b6db9231c2ebe937909db733e0))
+* **gh-action:** add cache to gh action ([7ee830c](https://github.com/JanSzewczyk/design-system/commit/7ee830c7aac9b72d65a904e0785631cd4b6fea35))
+
 # [1.6.0](https://github.com/JanSzewczyk/design-system/compare/v1.5.7...v1.6.0) (2023-03-26)
 
 
