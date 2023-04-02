@@ -2,7 +2,11 @@
 /node_modules
 
 # build
+/dist
 /index.*
+/*.d.ts
+/chunk-*.mjs
+/chunk-*.js
 /components
 /contexts
 /hooks

@@ -1,77 +1,34 @@
 import { defineConfig } from "tsup";
 
+const env = process.env.NODE_ENV || "development";
+
 export default defineConfig([
   {
-    entry: ["./src/components/!(index.ts?(x))/index.ts?(x)"],
+    splitting: true,
+    clean: env !== "production",
     dts: true,
+    format: ["esm", "cjs"],
+    minify: env === "production",
+    bundle: env === "production",
     treeshake: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom", "class-variance-authority"],
-    outDir: "components"
+    skipNodeModulesBundle: true,
+    target: "es2020",
+    outDir: env === "production" ? "." : "dist",
+    entry: [
+      "./src/components/!(index.ts?(x))/index.ts?(x)",
+      "./src/components/index.ts?(x)",
+      "./src/contexts/!(index.ts?(x))/index.ts?(x)",
+      "./src/contexts/index.ts?(x)",
+      "./src/hooks/!(index.ts?(x))/index.ts?(x)",
+      "./src/hooks/index.ts?(x)",
+      "./src/index.ts?(x)"
+    ],
+    external: ["react", "react-dom", "class-variance-authority"]
   },
-  {
-    entry: ["./src/components/index.ts?(x)"],
-    dts: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: "components",
-    bundle: false
-  },
-
-  {
-    entry: ["./src/contexts/theme/index.ts?(x)"],
-    dts: true,
-    treeshake: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: "contexts/theme"
-  },
-  {
-    entry: ["./src/contexts/index.ts?(x)"],
-    dts: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: "contexts",
-    bundle: false
-  },
-
-  {
-    entry: ["./src/hooks/useTheme/index.ts?(x)"],
-    dts: true,
-    treeshake: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: "hooks/useTheme"
-  },
-  {
-    entry: ["./src/hooks/index.ts?(x)"],
-    dts: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: "hooks",
-    bundle: false
-  },
-
-  {
-    entry: ["./src/index.ts?(x)"],
-    dts: true,
-    minify: true,
-    format: ["esm", "cjs"],
-    external: ["react", "react-dom"],
-    outDir: ".",
-    bundle: false
-  },
-
   {
     entry: ["./src/theme/main-preset.js"],
     minify: false,
     bundle: true,
-    outDir: "theme"
+    outDir: env === "production" ? "theme" : "dist/theme"
   }
 ]);

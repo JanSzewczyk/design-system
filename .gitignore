@@ -74,17 +74,10 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
 
 # vuepress build output
 .vuepress/dist
 
-# next.js build output
-storybook-static
 
 # Serverless directories
 .serverless/
@@ -103,6 +96,7 @@ Thumbs.db
 __tests__/runner/*
 /lib
 /dist
+
 /hooks
 /components
 /contexts
@@ -110,6 +104,9 @@ __tests__/runner/*
 /index.js
 /index.d.ts
 /index.mjs
+/*.d.ts
+/chunk-*.mjs
+/chunk-*.js
 
 # Ignore testing results file
 jest-results.json
