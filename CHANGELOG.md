@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/JanSzewczyk/design-system/compare/v1.6.2...v1.7.0) (2023-04-02)
+
+
+### Features
+
+* **build:** update build script ([41d5982](https://github.com/JanSzewczyk/design-system/commit/41d59829f5c358cdc467056c8f1e858d9271abf2))
+
 ## [1.6.2](https://github.com/JanSzewczyk/design-system/compare/v1.6.1...v1.6.2) (2023-04-02)
 
 
