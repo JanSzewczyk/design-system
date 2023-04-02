@@ -9,10 +9,8 @@ export type AsProp<C extends React.ElementType> = {
 
 export type PropsToOmit<C extends React.ElementType, P> = keyof (AsProp<C> & P);
 
-export type PolymorphicComponentProp<
-  C extends React.ElementType,
-  Props = {}
-> = React.PropsWithChildren<Props & AsProp<C>> &
+export type PolymorphicComponentProp<C extends React.ElementType, Props = {}> = Props &
+  AsProp<C> &
   Omit<React.ComponentPropsWithoutRef<C>, PropsToOmit<C, Props>>;
 
 // This is the type for the "ref" only

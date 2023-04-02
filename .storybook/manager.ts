@@ -1,12 +1,10 @@
 import { addons } from "@storybook/addons";
 import { STORY_RENDERED } from "@storybook/core-events";
+import customDarkTheme from "./theme/dark";
 
-// addons.setConfig({
-//   theme: {
-//     fontBase: "'Open Sans', sans-serif",
-//
-//   }
-// });
+addons.setConfig({
+  theme: customDarkTheme
+});
 
 addons.register("TitleAddon", (api) => {
   const customTitle = "Szum-Tech Design System";
