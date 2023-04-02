@@ -20,6 +20,10 @@ export type AvatarProps = React.ComponentPropsWithoutRef<"div"> & {
    * Defines avatar image src
    */
   src?: string;
+  /**
+   * Defines avatar children
+   */
+  children?: React.ReactNode;
 };
 
 export default function Avatar({ alt, bg, children, size = "md", src, ...props }: AvatarProps) {

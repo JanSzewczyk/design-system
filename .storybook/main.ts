@@ -1,33 +1,29 @@
-import type { StorybookConfig } from "@storybook/core-common";
+import { StorybookConfig } from "@storybook/react-vite";
 
-const config: StorybookConfig = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+export default {
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "storybook-addon-themes",
     "storybook-addon-pseudo-states",
-    "@storybook/addon-docs"
+    "@storybook/addon-docs",
+    "@storybook/addon-interactions",
+    "@storybook/addon-mdx-gfm"
   ],
   framework: {
     name: "@storybook/react-vite",
     options: {}
   },
-  core: {
-    builder: "@storybook/builder-vite",
-    disableTelemetry: true
-  },
   typescript: {
-    reactDocgen: "react-docgen-typescript"
+    reactDocgen: "react-docgen-typescript",
+    check: true
   },
   features: {
     storyStoreV7: true
   },
-  // @ts-ignore
   docs: {
     autodocs: true
   }
-};
-
-module.exports = config;
+} satisfies StorybookConfig;

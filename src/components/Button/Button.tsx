@@ -19,6 +19,10 @@ export type ButtonProp = {
    * @default 'md'
    */
   size?: ButtonSizeType;
+  /**
+   * Defines avatar children
+   */
+  children?: React.ReactNode;
 };
 
 export default React.forwardRef(function <T extends React.ElementType = "button">(
