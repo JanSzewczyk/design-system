@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { avatarCva } from "./Avatar.styles";
 import { AvatarSizeType } from "./Avatar.types";
 

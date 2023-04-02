@@ -119,7 +119,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/container-queries"),
     require("tailwind-scrollbar"),
-    require("./plugins/components/scroll"),
-    require("./plugins/components/typography")
+    require("./plugins/utilities/scroll"),
+    require("./plugins/utilities/typography")
   ]
 };

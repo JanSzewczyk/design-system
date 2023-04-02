@@ -1,7 +1,9 @@
 import React from "react";
-import { Meta, StoryObj } from "@storybook/react";
-import Avatar from "./Avatar";
+
 import { BeakerIcon } from "@heroicons/react/20/solid";
+import { Meta, StoryObj } from "@storybook/react";
+
+import Avatar from "./Avatar";
 
 const meta = {
   title: "Components/Avatar",

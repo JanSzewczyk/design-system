@@ -1,7 +1,8 @@
-import "../src/styles/default.css";
+import { Preview } from "@storybook/react";
 
 import customDarkTheme from "./theme/dark";
-import { Preview } from "@storybook/react";
+
+import "../src/styles/default.css";
 
 export default {
   decorators: [],

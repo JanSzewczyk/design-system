@@ -78,6 +78,7 @@ Here is an example of a basic app using `ThemeProvider` component:
 
 ```jsx
 import * as React from "react";
+
 import { ThemeProvider } from "@szum-tech/design-system";
 
 function Providers({ children }) {

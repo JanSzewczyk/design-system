@@ -52,6 +52,11 @@
     "storybook:serve": "serve storybook-static",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "@tailwindcss/container-queries": "^0.1.0",
+    "class-variance-authority": "^0.5.1",
+    "tailwind-scrollbar": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "@heroicons/react": "^2.0.17",
@@ -97,11 +102,6 @@
     "typescript": "^5.0.3",
     "vite": "^4.2.1"
   },
-  "dependencies": {
-    "@tailwindcss/container-queries": "^0.1.0",
-    "class-variance-authority": "^0.5.1",
-    "tailwind-scrollbar": "^3.0.0"
-  },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -111,4 +111,3 @@
     "access": "public"
   }
 }
-
