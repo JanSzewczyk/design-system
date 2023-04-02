@@ -31,15 +31,19 @@
   "types": "./index.d.ts",
   "files": [
     "index.*",
+    "*.d.ts",
+    "chunk-*.mjs",
+    "chunk-*.js",
     "components/**",
     "hooks/**",
     "contexts/**",
     "theme/**"
   ],
   "scripts": {
-    "build": "tsup && cpy './src/theme/global.css' './theme' --flat",
+    "build": "env NODE_ENV=production tsup && cpy './src/theme/global.css' './theme' --flat",
     "clean": "rm -rf node_modules && yarn clear:build",
-    "clear:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf theme && rm -rf index.*",
+    "clear:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf theme && rm -rf index.* && rm -rf chunk-*.js && rm -rf chunk-*.mjs && rm -rf *.d.ts",
+    "clear:build:dev": "rm -rf dist",
     "dev": "concurrently \"npm run dev:css\" \"npm run dev:build\"",
     "dev:build": "tsup",
     "dev:css": "tailwindcss -w -i src/theme/global.css -o src/styles/default.css",
