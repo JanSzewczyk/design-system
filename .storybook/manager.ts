@@ -1,5 +1,6 @@
 import { addons } from "@storybook/addons";
 import { STORY_RENDERED } from "@storybook/core-events";
+
 import customDarkTheme from "./theme/dark";
 
 addons.setConfig({

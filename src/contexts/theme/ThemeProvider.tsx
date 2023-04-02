@@ -1,5 +1,6 @@
-import { ThemeContext } from "./theme.context";
 import React from "react";
+
+import { ThemeContext } from "./theme.context";
 import { ThemeType } from "./theme.types";
 
 function getInitialTheme(defaultTheme?: ThemeType): ThemeType {
