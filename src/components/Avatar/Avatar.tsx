@@ -8,23 +8,26 @@ export type AvatarProps = React.ComponentPropsWithoutRef<"div"> & {
    * Defines avatar image alt
    */
   alt?: string;
+
   /**
    * Defines background color
    */
   bg?: `bg-${string}` | `bg-${string}-${number}`;
-  /**
-   * Defines avatar size
-   * @default 'md'
-   */
-  size?: AvatarSizeType;
-  /**
-   * Defines avatar image src
-   */
-  src?: string;
+
   /**
    * Defines avatar children
    */
   children?: React.ReactNode;
+
+  /**
+   * Defines avatar size
+   */
+  size?: AvatarSizeType;
+
+  /**
+   * Defines avatar image src
+   */
+  src?: string;
 };
 
 export default function Avatar({ alt, bg, children, size = "md", src, ...props }: AvatarProps) {

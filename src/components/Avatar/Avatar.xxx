@@ -1,10 +1,10 @@
-import { ArgTypes, Canvas, Controls, Meta } from "@storybook/addon-docs";
+import { ArgTypes, Canvas, Controls, Meta, Title } from "@storybook/addon-docs";
 
 import * as AvatarStories from "./Avatar.stories";
 
 <Meta of={AvatarStories} />
 
-# Avatar
+<Title>Avatar</Title>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
@@ -12,7 +12,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 <Canvas of={AvatarStories.Default} />
 
-<ArgTypes of={AvatarStories} />
+<ArgTypes of={AvatarStories.Default} />
 
 <Controls of={AvatarStories.Default} />
 

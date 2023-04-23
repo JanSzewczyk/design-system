@@ -8,13 +8,6 @@ export default {
   decorators: [],
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
-    themes: {
-      default: "Dark",
-      list: [
-        { name: "Light", class: "" },
-        { name: "Dark", class: "dark" }
-      ]
-    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -22,8 +15,18 @@ export default {
       }
     },
     docs: {
-      theme: customDarkTheme
+      theme: customDarkTheme,
+      controls: {
+        sort: "requiredFirst"
+      }
     },
-    layout: "centered"
+    layout: "centered",
+    themes: {
+      default: "Dark",
+      list: [
+        { name: "Light", class: "" },
+        { name: "Dark", class: "dark" }
+      ]
+    }
   }
 } satisfies Preview;

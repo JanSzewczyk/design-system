@@ -5,37 +5,41 @@ import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "./Button.typ
 
 import { PolymorphicComponentProp, PolymorphicRef } from "../../types/utils.types";
 
-export type ButtonProp = {
+type Props = {
   /**
    * Defines button color
-   * @default 'primary'
    */
   color?: ButtonColorType;
   /**
    * Defines button variant
-   * @default 'text'
    */
   variant?: ButtonVariantType;
   /**
    * Defines button size
-   * @default 'md'
    */
   size?: ButtonSizeType;
   /**
-   * Defines avatar children
+   * Defines button content
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  /**
+   * Disabled button
+   */
+  disabled?: boolean;
 };
 
-export default React.forwardRef(function <T extends React.ElementType = "button">(
+export type ButtonProps<T extends React.ElementType> = PolymorphicComponentProp<T, Props>;
+
+const Button = React.forwardRef(function <T extends React.ElementType = "button">(
   {
     as,
     color = "primary",
     children,
     size = "md",
     variant = "text",
+    disabled = false,
     ...restProps
-  }: PolymorphicComponentProp<T, ButtonProp>,
+  }: ButtonProps<T>,
   ref?: PolymorphicRef<T>
 ) {
   const Component = as || "button";
@@ -48,3 +52,5 @@ export default React.forwardRef(function <T extends React.ElementType = "button"
     </Component>
   );
 });
+
+export default Button;
