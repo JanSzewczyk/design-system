@@ -9,7 +9,7 @@ export default defineConfig([
     dts: true,
     format: ["esm", "cjs"],
     minify: env === "production",
-    bundle: env === "production",
+    bundle: true,
     treeshake: true,
     skipNodeModulesBundle: true,
     target: "es2020",

@@ -11,14 +11,26 @@ const meta = {
   argTypes: {
     bg: {
       control: "text"
+    },
+    children: {
+      description: "Defines avatar children, eg. 'JS', icon or image",
+      control: "text",
+      table: {
+        type: {
+          summary: "ReactNode"
+        }
+      }
     }
-  }
+  },
+  tags: ["autodocs"]
 } satisfies Meta<typeof Avatar>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: ({ children, ...args }) => <Avatar {...args}>{children}</Avatar>
+};
 
 export const ImageAvatar: Story = {
   args: {
