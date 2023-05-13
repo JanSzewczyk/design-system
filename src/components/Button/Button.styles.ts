@@ -1,9 +1,12 @@
 import { cva } from "class-variance-authority";
 
 export const buttonCva = cva(
-  "border rounded font-sans font-medium leading-[1.75] tracking-[.02857em]",
+  "font-sans appearance-none select-none rounded-sm border font-medium tracking-[.02857em] aria-disabled:pointer-events-none aria-disabled:opacity-50",
   {
     variants: {
+      block: {
+        true: "w-full"
+      },
       color: {
         neutral: "",
         primary: "",
@@ -12,25 +15,25 @@ export const buttonCva = cva(
         error: ""
       },
       size: {
-        sm: "py-1 px-2.5 text-[.8125rem]",
+        sm: "px-2.5 py-1 text-[.8125rem]",
         md: "px-4 py-1.5 text-sm",
         lg: "px-5 py-2 text-[.9375rem]"
       },
       variant: {
         text: "border-transparent bg-transparent hover:text-white",
-        outlined: "",
+        outlined: "bg-transparent",
         contained: ""
       }
     },
     compoundVariants: [
+      // ----------- TEXT ----------- //
       {
         variant: "text",
         color: "neutral",
         class: [
-          "text-gray-400",
-          "hover:border-gray-400 hover:bg-gray-400",
-          "active:text-white active:border-gray-300 active:bg-gray-300",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:text-gray-400"
+          "text-gray-500",
+          "hover:border-gray-500 hover:bg-gray-500",
+          "active:text-white active:border-gray-400 active:bg-gray-400"
         ]
       },
       {
@@ -38,9 +41,8 @@ export const buttonCva = cva(
         color: "primary",
         class: [
           "text-primary-500",
-          "hover:border-primary-400 hover:bg-primary-400",
-          "active:text-white active:border-primary-600 active:bg-primary-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:text-primary-500"
+          "hover:border-primary-500 hover:bg-primary-500",
+          "active:border-primary-600 active:bg-primary-600 active:text-white"
         ]
       },
       {
@@ -48,9 +50,8 @@ export const buttonCva = cva(
         color: "success",
         class: [
           "text-success-500",
-          "hover:border-success-400 hover:bg-success-400",
-          "active:text-white active:border-success-600 active:bg-success-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:text-success-500"
+          "hover:border-success-500 hover:bg-success-500",
+          "active:border-success-600 active:bg-success-600 active:text-white"
         ]
       },
       {
@@ -58,9 +59,8 @@ export const buttonCva = cva(
         color: "warning",
         class: [
           "text-warning-500",
-          "hover:border-warning-400 hover:bg-warning-400",
-          "active:text-white active:border-warning-600 active:bg-warning-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:text-warning-500"
+          "hover:border-warning-500 hover:bg-warning-500",
+          "active:border-warning-600 active:bg-warning-600 active:text-white"
         ]
       },
       {
@@ -68,61 +68,110 @@ export const buttonCva = cva(
         color: "error",
         class: [
           "text-error-500",
-          "hover:border-error-400 hover:bg-error-400",
-          "active:text-white active:border-error-600 active:bg-error-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-transparent disabled:hover:bg-transparent disabled:hover:text-error-500"
+          "hover:border-error-500 hover:bg-error-500",
+          "active:border-error-600 active:bg-error-600 active:text-white"
         ]
       },
+
+      // ----------- OUTLINED ----------- //
       {
         variant: "outlined",
         color: "neutral",
         class: [
-          "text-gray-400 border-gray-400 bg-transparent",
-          "hover:bg-gray-500 hover:text-white",
-          "active:text-white active:bg-gray-300",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-gray-400"
+          "text-gray-100 border-gray-100",
+          "hover:bg-gray-100 hover:text-gray-600",
+          "active:text-gray-600 active:bg-gray-200"
         ]
       },
       {
         variant: "outlined",
         color: "primary",
         class: [
-          "text-primary-500 border-primary-500 bg-transparent",
-          "hover:bg-primary-400 hover:text-white",
-          "active:text-white active:bg-primary-600",
-          "disabled:cursor-not-allowed disabled:opacity-50  disabled:hover:bg-transparent disabled:hover:text-primary-500"
+          "text-primary-500 border-primary-500",
+          "hover:bg-primary-500 hover:text-white",
+          "active:text-white active:bg-primary-600"
         ]
       },
       {
         variant: "outlined",
         color: "success",
         class: [
-          "text-success-500 border-success-500 bg-transparent",
-          "hover:bg-success-400 hover:text-white",
-          "active:text-white active:bg-success-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-success-500"
+          "text-success-500 border-success-500",
+          "hover:bg-success-500 hover:text-white",
+          "active:text-white active:bg-success-600"
         ]
       },
       {
         variant: "outlined",
         color: "warning",
         class: [
-          "text-warning-500 border-warning-500 bg-transparent",
-          "hover:bg-warning-400 hover:text-white",
-          "active:text-white active:bg-warning-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-warning-500"
+          "text-warning-500 border-warning-500",
+          "hover:bg-warning-500 hover:text-white",
+          "active:text-white active:bg-warning-600"
         ]
       },
       {
         variant: "outlined",
         color: "error",
         class: [
-          "text-error-500 border-error-500 bg-transparent",
-          "hover:bg-error-400 hover:text-white",
-          "active:text-white active:bg-error-600",
-          "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:text-error-500"
+          "text-error-500 border-error-500",
+          "hover:bg-error-500 hover:text-white",
+          "active:text-white active:bg-error-600"
+        ]
+      },
+
+      // ----------- OUTLINED ----------- //
+      {
+        variant: "contained",
+        color: "neutral",
+        class: [
+          "border-gray-100 bg-gray-100 text-gray-600",
+          "hover:border-white hover:bg-white",
+          "active:border-gray-200 active:bg-gray-200"
+        ]
+      },
+      {
+        variant: "contained",
+        color: "primary",
+        class: [
+          "border-primary-500 bg-primary-500 text-white",
+          "hover:border-primary-400 hover:bg-primary-400",
+          "active:border-primary-600 active:bg-primary-600"
+        ]
+      },
+      {
+        variant: "contained",
+        color: "success",
+        class: [
+          "border-success-500 bg-success-500 text-white",
+          "hover:border-success-400 hover:bg-success-400",
+          "active:border-success-600 active:bg-success-600"
+        ]
+      },
+      {
+        variant: "contained",
+        color: "warning",
+        class: [
+          "border-warning-500 bg-warning-500 text-white",
+          "hover:border-warning-400 hover:bg-warning-400",
+          "active:border-warning-600 active:bg-warning-600"
+        ]
+      },
+      {
+        variant: "contained",
+        color: "error",
+        class: [
+          "border-error-500 bg-error-500 text-white",
+          "hover:border-error-400 hover:bg-error-400",
+          "active:border-error-600 active:bg-error-600"
         ]
       }
-    ]
+    ],
+    defaultVariants: {
+      block: false,
+      color: "primary",
+      size: "md",
+      variant: "text"
+    }
   }
 );
