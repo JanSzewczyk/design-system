@@ -7,6 +7,10 @@ import { PolymorphicComponentProp, PolymorphicRef } from "../../types/utils.type
 
 type Props = {
   /**
+   * Defines button full width
+   */
+  block?: boolean;
+  /**
    * Defines button color
    */
   color?: ButtonColorType;
@@ -21,18 +25,22 @@ type Props = {
   /**
    * Defines button content
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Disabled button
    */
   disabled?: boolean;
 };
 
-export type ButtonProps<T extends React.ElementType> = PolymorphicComponentProp<T, Props>;
+export type ButtonProps<T extends React.ElementType = "button"> = PolymorphicComponentProp<
+  T,
+  Props
+>;
 
 const Button = React.forwardRef(function <T extends React.ElementType = "button">(
   {
     as,
+    block = false,
     color = "primary",
     children,
     size = "md",
@@ -44,10 +52,17 @@ const Button = React.forwardRef(function <T extends React.ElementType = "button"
 ) {
   const Component = as || "button";
 
-  const buttonRootStyles = buttonCva({ size, variant, color });
+  const buttonRootStyles = buttonCva({ block, size, variant, color });
 
   return (
-    <Component className={buttonRootStyles} ref={ref} {...restProps}>
+    <Component
+      aria-disabled={disabled || undefined}
+      className={buttonRootStyles}
+      disabled={disabled}
+      ref={ref}
+      role="button"
+      {...restProps}
+    >
       {children}
     </Component>
   );
