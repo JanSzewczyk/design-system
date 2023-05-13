@@ -14,7 +14,8 @@ const meta = {
     children: {
       control: "text"
     }
-  }
+  },
+  tags: ["autodocs"]
 } satisfies Meta<typeof Button>;
 export default meta;
 
