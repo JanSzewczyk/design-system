@@ -1,9 +1,9 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, vi } from "vitest";
 
 import Button from "./Button";
+import { TrashIcon } from "~/icons";
 
 const mockedFn = vi.fn();
 

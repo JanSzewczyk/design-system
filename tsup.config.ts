@@ -21,6 +21,7 @@ export default defineConfig([
       "./src/contexts/index.ts?(x)",
       "./src/hooks/!(index.ts?(x))/index.ts?(x)",
       "./src/hooks/index.ts?(x)",
+      "./src/icons/index.tsx",
       "./src/index.ts?(x)"
     ],
     external: ["react", "react-dom", "class-variance-authority"]

@@ -100,6 +100,7 @@ __tests__/runner/*
 /components
 /contexts
 /theme
+/icons
 /index.js
 /index.d.ts
 /index.mjs

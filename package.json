@@ -37,12 +37,13 @@
     "components/**",
     "hooks/**",
     "contexts/**",
+    "icons/**",
     "theme/**"
   ],
   "scripts": {
     "build": "env NODE_ENV=production tsup && cpy './src/theme/global.css' './theme' --flat",
     "clean": "rm -rf node_modules && yarn clear:build && yarn clean:build:dev",
-    "clean:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf theme && rm -rf index.* && rm -rf chunk-*.js && rm -rf chunk-*.mjs && rm -rf *.d.ts",
+    "clean:build": "rm -rf components && rm -rf contexts && rm -rf hooks && rm -rf icons && rm -rf theme && rm -rf index.* && rm -rf chunk-*.js && rm -rf chunk-*.mjs && rm -rf *.d.ts",
     "clean:build:dev": "rm -rf dist",
     "dev": "concurrently \"yarn dev:css\" \"yarn dev:build\"",
     "dev:build": "tsup",
