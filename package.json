@@ -54,10 +54,10 @@
     "storybook:build": "storybook build --docs",
     "storybook:prebuild": "tailwindcss -i src/theme/global.css -o src/styles/default.css",
     "storybook:serve": "serve storybook-static",
-    "type-check": "tsc --noEmit",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
-    "test:coverage": "vitest run --coverage"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.0.5",
