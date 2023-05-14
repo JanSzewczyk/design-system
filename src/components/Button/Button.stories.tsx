@@ -108,19 +108,19 @@ export const Color: Story = {
   render: (args) => (
     <div className="flex flex-wrap gap-4">
       <Button color="neutral" {...args}>
-        neutral
+        NEUTRAL
       </Button>
       <Button color="primary" {...args}>
-        neutral
+        PRIMARY
       </Button>
       <Button color="success" {...args}>
-        neutral
+        SUCCESS
       </Button>
       <Button color="warning" {...args}>
-        neutral
+        WARNING
       </Button>
       <Button color="error" {...args}>
-        neutral
+        ERROR
       </Button>
     </div>
   ),
@@ -181,6 +181,19 @@ export const WithIcon: Story = {
       </Button>
       <Button color="primary" endIcon={<CurrencyDollarIcon />}>
         RIGHT ICON
+      </Button>
+    </div>
+  )
+};
+
+export const Loading: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Button color="error" variant="contained" loading>
+        LEFT LOADING
+      </Button>
+      <Button color="primary" loading loadingPosition="end">
+        RIGHT LOADING
       </Button>
     </div>
   )
