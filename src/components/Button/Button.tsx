@@ -77,12 +77,12 @@ const Button = React.forwardRef(function <T extends React.ElementType = "button"
   const buttonStyles = buttonCva({ block, size, variant, color });
 
   const isStartLoading = loading && loadingPosition === "start";
-  const StartIcon = isStartLoading ? <LoadingIcon /> : startIcon || null;
+  const StartIcon = isStartLoading ? <LoadingIcon aria-label="Loading" /> : startIcon || null;
   const startIconStyles = iconCva({ size, loading: isStartLoading });
   const startIconContainerStyles = iconContainerCva({ size, site: "left" });
 
   const isEndLoading = loading && loadingPosition === "end";
-  const EndIcon = isEndLoading ? <LoadingIcon /> : endIcon || null;
+  const EndIcon = isEndLoading ? <LoadingIcon aria-label="Loading" /> : endIcon || null;
   const endIconStyles = iconCva({ size, loading: isEndLoading });
   const endIconContainerStyles = iconContainerCva({ size, site: "right" });
 
