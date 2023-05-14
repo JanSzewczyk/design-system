@@ -110,6 +110,10 @@ module.exports = {
         2: "0.5rem",
         8: "2.0rem"
       },
+      spacing: {
+        4.5: "1.125rem",
+        5.5: "1.375rem"
+      },
       width: {
         128: "32.0rem",
         300: "75.0rem"
