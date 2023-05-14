@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/JanSzewczyk/design-system/compare/v1.9.0...v1.10.0) (2023-05-14)
+
+
+### Bug Fixes
+
+* **storybook:** fix storybook build ([82e937f](https://github.com/JanSzewczyk/design-system/commit/82e937fd789dbae5836bbf9e1682b9771d25d50d))
+
+
+### Features
+
+* **icons:** add icons ([d4126b5](https://github.com/JanSzewczyk/design-system/commit/d4126b5c7034588c8ca5a8b6a9e7ab5c0ea92549))
+* **icons:** add icons ([5a8f9c1](https://github.com/JanSzewczyk/design-system/commit/5a8f9c1927f2a720ceabcf6b27a508a49a09e459))
+
 # [1.9.0](https://github.com/JanSzewczyk/design-system/compare/v1.8.0...v1.9.0) (2023-05-14)
 
 
