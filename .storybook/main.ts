@@ -1,4 +1,5 @@
 import { StorybookConfig } from "@storybook/react-vite";
+import viteTsConfigPaths from "vite-tsconfig-paths";
 
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -25,5 +26,9 @@ export default {
   },
   docs: {
     autodocs: true
+  },
+  async viteFinal(config) {
+    config.plugins.push(viteTsConfigPaths());
+    return config;
   }
 } satisfies StorybookConfig;

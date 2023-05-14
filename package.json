@@ -61,6 +61,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@radix-ui/react-tooltip": "^1.0.5",
     "@tailwindcss/container-queries": "^0.1.0",
     "class-variance-authority": "^0.6.0",
@@ -68,7 +69,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
-    "@heroicons/react": "^2.0.18",
     "@storybook/addon-a11y": "^7.0.6",
     "@storybook/addon-actions": "^7.0.6",
     "@storybook/addon-docs": "^7.0.6",
