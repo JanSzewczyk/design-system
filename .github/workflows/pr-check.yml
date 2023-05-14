@@ -64,6 +64,26 @@ jobs:
       - name: Prettier Check 🧹
         run: yarn prettier:check
 
+  test:
+    name: Test 🧪
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v3
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+      - name: Install packages ⚙️
+        run: yarn install --frozen-lockfile
+      - name: Check Tests 🧪
+        run: yarn test
+
   #  lint:
   #    name: Eslint ⬣
   #    runs-on: ${{ matrix.os }}
