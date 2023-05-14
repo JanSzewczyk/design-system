@@ -12,6 +12,7 @@
 /hooks
 /theme
 /src/styles
+/storybook-static
 
 # WebStorm
 /.idea
