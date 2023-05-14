@@ -54,7 +54,10 @@
     "storybook:build": "storybook build --docs",
     "storybook:prebuild": "tailwindcss -i src/theme/global.css -o src/styles/default.css",
     "storybook:serve": "serve storybook-static",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.0.5",
@@ -95,6 +98,7 @@
     "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",
     "cpy-cli": "^4.2.0",
+    "happy-dom": "^9.18.3",
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.8",
@@ -110,7 +114,9 @@
     "tailwindcss": "^3.3.2",
     "tsup": "^6.7.0",
     "typescript": "^5.0.4",
-    "vite": "^4.3.1"
+    "vite": "^4.3.1",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.31.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
