@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/JanSzewczyk/design-system/compare/v1.8.0...v1.9.0) (2023-05-14)
+
+
+### Features
+
+* **Button:** add `icon` props ([add8d17](https://github.com/JanSzewczyk/design-system/commit/add8d1744020a5cc29a56980f57e5ae3e77f7355))
+* **Button:** add `loading` props ([293d28d](https://github.com/JanSzewczyk/design-system/commit/293d28d34786703acba13d169278e9968d37b1f3))
+* **Button:** add `variant` props ([7caa63d](https://github.com/JanSzewczyk/design-system/commit/7caa63d725dd9d0b72412d0d7ddccb05ea5d028b))
+
 # [1.8.0](https://github.com/JanSzewczyk/design-system/compare/v1.7.1...v1.8.0) (2023-05-13)
 
 
