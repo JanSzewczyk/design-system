@@ -2,9 +2,9 @@ import { cva } from "class-variance-authority";
 
 export const buttonCva = cva(
   [
-    "inline-flex items-center justify-center align-middle no-underline",
+    "inline-flex items-center justify-center align-middle no-underline transition-colors ease-in-out duration-300",
     "font-sans appearance-none select-none rounded-sm border font-medium tracking-[.02857em]",
-    "aria-disabled:pointer-events-none aria-disabled:opacity-50"
+    "aria-disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
   ],
   {
     variants: {
@@ -182,7 +182,7 @@ export const buttonCva = cva(
 
 export const iconContainerCva = cva("", {
   variants: {
-    side: {
+    site: {
       left: "",
       right: ""
     },
@@ -195,45 +195,49 @@ export const iconContainerCva = cva("", {
   compoundVariants: [
     // ---------- LEFT ---------- //
     {
-      side: "left",
+      site: "left",
       size: "sm",
       class: "-ml-0.5 mr-1.5"
     },
     {
-      side: "left",
+      site: "left",
       size: "md",
       class: "-ml-1 mr-2"
     },
     {
-      side: "left",
+      site: "left",
       size: "lg",
       class: "-ml-1.5 mr-2.5"
     },
 
     // ---------- RIGHT ---------- //
     {
-      side: "right",
+      site: "right",
       size: "sm",
       class: "-mr-0.5 ml-1.5"
     },
     {
-      side: "right",
+      site: "right",
       size: "md",
       class: "-mr-1 ml-2"
     },
     {
-      side: "right",
+      site: "right",
       size: "lg",
       class: "-mr-1.5 ml-2.5"
     }
   ],
   defaultVariants: {
+    site: "left",
     size: "md"
   }
 });
 
-export const iconCva = cva("animate-spin", {
+export const iconCva = cva("", {
   variants: {
+    loading: {
+      true: "animate-spin"
+    },
     size: {
       sm: "h-4.5 w-4.5",
       md: "h-5 w-5",
@@ -241,6 +245,7 @@ export const iconCva = cva("animate-spin", {
     }
   },
   defaultVariants: {
+    loading: false,
     size: "md"
   }
 });
