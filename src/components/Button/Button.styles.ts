@@ -1,7 +1,11 @@
 import { cva } from "class-variance-authority";
 
 export const buttonCva = cva(
-  "font-sans appearance-none select-none rounded-sm border font-medium tracking-[.02857em] aria-disabled:pointer-events-none aria-disabled:opacity-50",
+  [
+    "inline-flex items-center justify-center align-middle no-underline",
+    "font-sans appearance-none select-none rounded-sm border font-medium tracking-[.02857em]",
+    "aria-disabled:pointer-events-none aria-disabled:opacity-50"
+  ],
   {
     variants: {
       block: {
@@ -26,7 +30,7 @@ export const buttonCva = cva(
       }
     },
     compoundVariants: [
-      // ----------- TEXT ----------- //
+      // ---------- TEXT ---------- //
       {
         variant: "text",
         color: "neutral",
@@ -73,7 +77,7 @@ export const buttonCva = cva(
         ]
       },
 
-      // ----------- OUTLINED ----------- //
+      // ---------- OUTLINED ---------- //
       {
         variant: "outlined",
         color: "neutral",
@@ -120,7 +124,7 @@ export const buttonCva = cva(
         ]
       },
 
-      // ----------- OUTLINED ----------- //
+      // ---------- OUTLINED ---------- //
       {
         variant: "contained",
         color: "neutral",
@@ -175,3 +179,68 @@ export const buttonCva = cva(
     }
   }
 );
+
+export const iconContainerCva = cva("", {
+  variants: {
+    side: {
+      left: "",
+      right: ""
+    },
+    size: {
+      sm: "",
+      md: "",
+      lg: ""
+    }
+  },
+  compoundVariants: [
+    // ---------- LEFT ---------- //
+    {
+      side: "left",
+      size: "sm",
+      class: "-ml-0.5 mr-1.5"
+    },
+    {
+      side: "left",
+      size: "md",
+      class: "-ml-1 mr-2"
+    },
+    {
+      side: "left",
+      size: "lg",
+      class: "-ml-1.5 mr-2.5"
+    },
+
+    // ---------- RIGHT ---------- //
+    {
+      side: "right",
+      size: "sm",
+      class: "-mr-0.5 ml-1.5"
+    },
+    {
+      side: "right",
+      size: "md",
+      class: "-mr-1 ml-2"
+    },
+    {
+      side: "right",
+      size: "lg",
+      class: "-mr-1.5 ml-2.5"
+    }
+  ],
+  defaultVariants: {
+    size: "md"
+  }
+});
+
+export const iconCva = cva("animate-spin", {
+  variants: {
+    size: {
+      sm: "h-4.5 w-4.5",
+      md: "h-5 w-5",
+      lg: "h-5.5 w-5.5"
+    }
+  },
+  defaultVariants: {
+    size: "md"
+  }
+});
