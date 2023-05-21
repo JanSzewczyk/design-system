@@ -21,13 +21,13 @@ module.exports = plugin(function ({ addUtilities }) {
       "@apply font-poppins text-xl font-normal font-medium leading-[1.6] tracking-[.0075em]": {}
     },
     ".typography-subtitle-1": {
-      "@apply font-poppins text-base leading-7 tracking-[.00938em]": {}
+      "@apply font-poppins text-md leading-7 tracking-[.00938em]": {}
     },
     ".typography-subtitle-2": {
       "@apply font-poppins text-sm font-medium leading-[1.57] tracking-[.00714em]": {}
     },
     ".typography-body-1": {
-      "@apply font-poppins text-base font-normal leading-normal tracking-[.00938em]": {}
+      "@apply font-poppins text-md font-normal leading-normal tracking-[.00938em]": {}
     },
     ".typography-body-2": {
       "@apply font-poppins text-sm font-normal leading-[1.43] tracking-[.01071em]": {}
@@ -42,7 +42,7 @@ module.exports = plugin(function ({ addUtilities }) {
       "@apply font-poppins text-xs font-normal uppercase leading-[2.66] tracking-[.08333em]": {}
     },
     ".typography-code": {
-      "@apply font-code text-base font-bold leading-5 tracking-wide": {}
+      "@apply font-code text-md font-bold leading-5 tracking-wide": {}
     }
   });
 });

@@ -236,7 +236,7 @@ export const iconContainerCva = cva("", {
 export const iconCva = cva("", {
   variants: {
     loading: {
-      true: "animate-spin"
+      true: "motion-reduce:hidden animate-spin"
     },
     size: {
       sm: "h-4.5 w-4.5",

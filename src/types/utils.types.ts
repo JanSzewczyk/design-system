@@ -16,4 +16,4 @@ export type PolymorphicComponentProp<C extends React.ElementType, Props = {}> = 
 // This is the type for the "ref" only
 export type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>["ref"];
 
-export type OmitStylesProps<T extends React.ElementType> = Omit<T, "className" | "style">;
+export type OmitStylesProps<T> = Omit<T, "className" | "style">;

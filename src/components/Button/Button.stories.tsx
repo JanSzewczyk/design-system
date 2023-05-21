@@ -1,9 +1,10 @@
 import * as React from "react";
 
-import { BoltIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline";
 import { Meta, StoryObj } from "@storybook/react";
 
 import Button from "./Button";
+
+import { IconBolt, IconCurrencyDollar } from "../../icons";
 
 const meta = {
   title: "Components/Button",
@@ -176,10 +177,10 @@ export const Block: Story = {
 export const WithIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" startIcon={<BoltIcon />}>
+      <Button color="error" variant="contained" startIcon={<IconBolt />}>
         LEFT ICON
       </Button>
-      <Button color="primary" endIcon={<CurrencyDollarIcon />}>
+      <Button color="primary" endIcon={<IconCurrencyDollar />}>
         RIGHT ICON
       </Button>
     </div>
