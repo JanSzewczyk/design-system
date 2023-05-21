@@ -61,8 +61,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
     "@radix-ui/react-tooltip": "^1.0.5",
+    "@tabler/icons-react": "^2.18.0",
     "@tailwindcss/container-queries": "^0.1.0",
     "class-variance-authority": "^0.6.0",
     "tailwind-scrollbar": "^3.0.1"

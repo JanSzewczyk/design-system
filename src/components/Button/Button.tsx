@@ -1,9 +1,10 @@
 import * as React from "react";
 
 import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
-import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "~/components";
-import { LoadingIcon } from "~/icons";
-import { PolymorphicComponentProp, PolymorphicRef } from "~/types/utils.types";
+import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "./Button.types";
+
+import { LoadingIcon } from "../../icons";
+import { PolymorphicComponentProp, PolymorphicRef } from "../../types/utils.types";
 
 type Props = {
   /**

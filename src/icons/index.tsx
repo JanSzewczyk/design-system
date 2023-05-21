@@ -1,4 +1,4 @@
-export * from "@heroicons/react/24/outline";
+export { IconTrash, IconCurrencyDollar, IconBrandGoogle } from "@tabler/icons-react";
 
 export * from "./google";
 export * from "./loading";
