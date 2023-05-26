@@ -1,9 +1,10 @@
 import React from "react";
 
-import { BeakerIcon } from "@heroicons/react/20/solid";
 import { Meta, StoryObj } from "@storybook/react";
 
 import Avatar from "./Avatar";
+
+import { IconBolt } from "../../icons";
 
 const meta = {
   title: "Components/Avatar",
@@ -76,6 +77,6 @@ export const Sizes: Story = {
 
 export const IconAvatar: Story = {
   args: {
-    children: <BeakerIcon className="h-8 w-8" />
+    children: <IconBolt className="h-8 w-8" />
   }
 };
