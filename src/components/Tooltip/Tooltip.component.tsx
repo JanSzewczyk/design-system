@@ -34,7 +34,7 @@ export default function Tooltip({
       {content ? (
         <ReactTooltip.Portal>
           <ReactTooltip.Content
-            className="select-none rounded bg-white p-2 text-typography-primary will-change-[transform,opacity] typography-body-1 data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade"
+            className="text-typography-primary select-none rounded bg-white p-2 will-change-[transform,opacity] typography-body-1 data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade"
             sideOffset={sideOffset}
             side={side}
             align={align}

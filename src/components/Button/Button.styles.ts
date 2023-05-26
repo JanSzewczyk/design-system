@@ -19,12 +19,12 @@ export const buttonCva = cva(
         error: ""
       },
       size: {
-        sm: "px-2.5 py-1 text-[.8125rem]",
-        md: "px-4 py-1.5 text-sm",
-        lg: "px-5 py-2 text-[.9375rem]"
+        sm: "px-2.5 py-1 text-[.8125rem] leading-4",
+        md: "px-4 py-1.5 text-sm leading-5",
+        lg: "px-5 py-2 text-[.9375rem] leading-6"
       },
       variant: {
-        text: "border-transparent bg-transparent hover:text-white",
+        text: "border-transparent bg-transparent",
         outlined: "bg-transparent",
         contained: ""
       }
@@ -35,9 +35,9 @@ export const buttonCva = cva(
         variant: "text",
         color: "neutral",
         class: [
-          "text-gray-500",
-          "hover:border-gray-500 hover:bg-gray-500",
-          "active:text-white active:border-gray-400 active:bg-gray-400"
+          "text-gray-100",
+          "hover:border-gray-100 hover:bg-gray-100 hover:text-black",
+          "active:border-gray-200 active:bg-gray-200"
         ]
       },
       {
@@ -45,7 +45,7 @@ export const buttonCva = cva(
         color: "primary",
         class: [
           "text-primary-500",
-          "hover:border-primary-500 hover:bg-primary-500",
+          "hover:border-primary-500 hover:bg-primary-500 hover:text-white",
           "active:border-primary-600 active:bg-primary-600 active:text-white"
         ]
       },
@@ -54,7 +54,7 @@ export const buttonCva = cva(
         color: "success",
         class: [
           "text-success-500",
-          "hover:border-success-500 hover:bg-success-500",
+          "hover:border-success-500 hover:bg-success-500 hover:text-white",
           "active:border-success-600 active:bg-success-600 active:text-white"
         ]
       },
@@ -63,7 +63,7 @@ export const buttonCva = cva(
         color: "warning",
         class: [
           "text-warning-500",
-          "hover:border-warning-500 hover:bg-warning-500",
+          "hover:border-warning-500 hover:bg-warning-500 hover:text-white",
           "active:border-warning-600 active:bg-warning-600 active:text-white"
         ]
       },
@@ -72,7 +72,7 @@ export const buttonCva = cva(
         color: "error",
         class: [
           "text-error-500",
-          "hover:border-error-500 hover:bg-error-500",
+          "hover:border-error-500 hover:bg-error-500 hover:text-white",
           "active:border-error-600 active:bg-error-600 active:text-white"
         ]
       },
@@ -83,7 +83,7 @@ export const buttonCva = cva(
         color: "neutral",
         class: [
           "text-gray-100 border-gray-100",
-          "hover:bg-gray-100 hover:text-gray-600",
+          "hover:bg-gray-100 hover:text-black",
           "active:text-gray-600 active:bg-gray-200"
         ]
       },
@@ -129,7 +129,7 @@ export const buttonCva = cva(
         variant: "contained",
         color: "neutral",
         class: [
-          "border-gray-100 bg-gray-100 text-gray-600",
+          "border-gray-100 bg-gray-100 text-black",
           "hover:border-white hover:bg-white",
           "active:border-gray-200 active:bg-gray-200"
         ]

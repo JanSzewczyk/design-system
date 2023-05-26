@@ -3,6 +3,7 @@ import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import Button from "./Button";
+import { ButtonVariantType } from "./Button.types";
 
 import { IconBolt, IconCurrencyDollar } from "../../icons";
 
@@ -106,28 +107,29 @@ export const Contained: Story = {
 };
 
 export const Color: Story = {
-  render: (args) => (
-    <div className="flex flex-wrap gap-4">
-      <Button color="neutral" {...args}>
-        NEUTRAL
-      </Button>
-      <Button color="primary" {...args}>
-        PRIMARY
-      </Button>
-      <Button color="success" {...args}>
-        SUCCESS
-      </Button>
-      <Button color="warning" {...args}>
-        WARNING
-      </Button>
-      <Button color="error" {...args}>
-        ERROR
-      </Button>
+  render: () => (
+    <div className="space-y-4">
+      {["text", "outlined", "contained"].map((variant) => (
+        <div className="flex flex-wrap gap-4">
+          <Button color="neutral" variant={variant as ButtonVariantType}>
+            NEUTRAL
+          </Button>
+          <Button color="primary" variant={variant as ButtonVariantType}>
+            PRIMARY
+          </Button>
+          <Button color="success" variant={variant as ButtonVariantType}>
+            SUCCESS
+          </Button>
+          <Button color="warning" variant={variant as ButtonVariantType}>
+            WARNING
+          </Button>
+          <Button color="error" variant={variant as ButtonVariantType}>
+            ERROR
+          </Button>
+        </div>
+      ))}
     </div>
-  ),
-  args: {
-    variant: "contained"
-  }
+  )
 };
 
 export const Sizes: Story = {

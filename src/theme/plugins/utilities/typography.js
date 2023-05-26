@@ -33,7 +33,7 @@ module.exports = plugin(function ({ addUtilities }) {
       "@apply font-poppins text-sm font-normal leading-[1.43] tracking-[.01071em]": {}
     },
     ".typography-button": {
-      "@apply font-poppins text-sm font-medium leading-[1.75] tracking-[.02857em]": {}
+      "@apply font-poppins text-sm font-medium leading-5 tracking-[.02857em]": {}
     },
     ".typography-caption": {
       "@apply font-poppins text-xs font-normal leading-[1.66] tracking-[.03333em]": {}
