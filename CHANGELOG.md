@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/JanSzewczyk/design-system/compare/v1.10.0...v1.11.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* fix imports ([d33391f](https://github.com/JanSzewczyk/design-system/commit/d33391ff91639a97d9410c65d57715095a8c0f93))
+
+
+### Features
+
+* **Input:** add `OmitStylesProps` type ([15e41ec](https://github.com/JanSzewczyk/design-system/commit/15e41eca55050a46a126ad8f86e59cdb2a578716))
+* **types:** add `OmitStylesProps` type ([0cb2c24](https://github.com/JanSzewczyk/design-system/commit/0cb2c2493bbb551e6eefd084299a76b25b9b125a))
+
 # [1.10.0](https://github.com/JanSzewczyk/design-system/compare/v1.9.0...v1.10.0) (2023-05-14)
 
 
