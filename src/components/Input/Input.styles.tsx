@@ -2,18 +2,16 @@ import { cva } from "class-variance-authority";
 
 export const inputCva = cva(
   [
-    "h-10 w-full appearance-none border bg-black py-2 font-poppins outline-0 transition-colors duration-300 ease-in-out",
-    "placeholder:select-none placeholder:text-typography-secondary",
-    "invalid:border-error-700 focus:border-primary-500 active:border-primary-500",
-    "disabled:border-gray-700 disabled:text-typography-secondary disabled:placeholder:text-typography-disabled"
+    "h-10 w-full appearance-none border bg-white dark:bg-black py-2 font-poppins outline-0 transition-colors duration-300 ease-in-out",
+    "placeholder:select-none placeholder:text-gray-200",
+    "invalid:border-error-500 focus:border-primary-400 active:border-primary-400",
+    "disabled:border-white dark:disabled:border-black disabled:text-gray-200 disabled:placeholder:text-gray-300"
   ],
   {
     variants: {
       invalid: {
-        true: [
-          "text-error-700 border-error-700 hover:border-error-500 active:text-typography-primary focus:text-typography-primary"
-        ],
-        false: ["text-typography-primary border-gray-600 hover:border-primary-700"]
+        true: ["text-error-500 border-error-500 hover:border-error-400 focus:text-gray-100"],
+        false: ["text-gray-100 border-gray-400 hover:border-primary-500"]
       },
       withStartIcon: {
         true: "pl-11",
@@ -39,11 +37,11 @@ export const inputIconContainerCva = cva(
   {
     variants: {
       disabled: {
-        true: "text-typography-secondary"
+        true: "text-gray-200"
       },
       site: {
-        right: "right-0 border-l border-l-gray-600 pr-1",
-        left: "left-0 border-r border-r-gray-600 pl-1"
+        right: "right-0 border-l border-l-gray-400 pr-1",
+        left: "left-0 border-r border-r-gray-400 pl-1"
       }
     },
     defaultVariants: {

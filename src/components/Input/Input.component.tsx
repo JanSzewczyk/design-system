@@ -21,7 +21,7 @@ const InputComponent = React.forwardRef(function (
   const inputIconEndContainer = inputIconContainerCva({ site: "right", disabled });
 
   return (
-    <div className="relative typography-body-2">
+    <div className="relative text-gray-100 typography-body-2">
       {startIcon ? <span className={inputIconStartContainer}>{startIcon}</span> : null}
       <input
         aria-invalid={invalid || undefined}
