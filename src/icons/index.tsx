@@ -7,7 +7,8 @@ export {
   IconDownload,
   IconBook,
   IconBrandNpm,
-  IconBrandGithub
+  IconBrandGithub,
+  IconRocket
 } from "@tabler/icons-react";
 
 export * from "./google";
