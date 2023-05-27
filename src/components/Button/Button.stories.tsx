@@ -110,7 +110,7 @@ export const Color: Story = {
   render: () => (
     <div className="space-y-4">
       {["text", "outlined", "contained"].map((variant) => (
-        <div className="flex flex-wrap gap-4">
+        <div key={variant} className="flex flex-wrap gap-4">
           <Button color="neutral" variant={variant as ButtonVariantType}>
             NEUTRAL
           </Button>

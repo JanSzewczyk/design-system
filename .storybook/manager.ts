@@ -1,10 +1,10 @@
-import { addons } from "@storybook/addons";
-
-import customDarkTheme from "./theme/dark";
-
-addons.setConfig({
-  theme: customDarkTheme
-});
+// import { addons } from "@storybook/addons";
+//
+// import customDarkTheme from "./theme/dark";
+//
+// addons.setConfig({
+//   theme: customDarkTheme
+// });
 
 // addons.register("TitleAddon", (api) => {
 //   const customTitle = "Szum-Tech Design System";
