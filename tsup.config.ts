@@ -11,7 +11,7 @@ export default defineConfig([
     minify: env === "production",
     bundle: true,
     treeshake: true,
-    skipNodeModulesBundle: true,
+    skipNodeModulesBundle: false,
     target: "es2020",
     outDir: env === "production" ? "." : "dist",
     entry: [
@@ -24,7 +24,8 @@ export default defineConfig([
       "./src/icons/index.tsx",
       "./src/index.ts?(x)"
     ],
-    external: ["react", "react-dom", "class-variance-authority"]
+    external: ["react", "react-dom", "class-variance-authority", "@radix-ui/*"],
+    keepNames: true
   },
   {
     entry: ["./src/theme/main-preset.js"],

@@ -61,7 +61,6 @@
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.0.6",
-    "@tabler/icons-react": "^2.20.0",
     "@tailwindcss/container-queries": "^0.1.0",
     "class-variance-authority": "^0.6.0",
     "tailwind-scrollbar": "^3.0.4"
@@ -76,6 +75,7 @@
     "@storybook/react-vite": "^7.0.18",
     "@szum-tech/prettier-config": "^1.2.1",
     "@szum-tech/semantic-release-preset": "^1.5.1",
+    "@tabler/icons-react": "^2.20.0",
     "@testing-library/dom": "^9.3.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
