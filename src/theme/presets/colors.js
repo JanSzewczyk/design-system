@@ -2,6 +2,10 @@
 module.exports = {
   theme: {
     colors: {
+      app: {
+        primary: "rgb(var(--background-primary))",
+        secondary: "rgb(var(--background-secondary))"
+      },
       black: "rgb(var(--black) / <alpha-value>)",
       error: {
         100: "rgb(var(--error-100) / <alpha-value>)",

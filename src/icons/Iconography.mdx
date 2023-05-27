@@ -1,13 +1,55 @@
 import { IconGallery, IconItem, Meta } from "@storybook/addon-docs";
 
 import { GoogleIcon } from "./google";
+import {
+  IconBolt,
+  IconBook,
+  IconBrandGithub,
+  IconBrandGoogle,
+  IconBrandNpm,
+  IconCurrencyDollar,
+  IconDownload,
+  IconMail,
+  IconTrash,
+  LoadingIcon
+} from "./index";
 
 <Meta title="Components/Icons" />
 
 # Iconography
 
 <IconGallery>
-  <IconItem name="GoogleIcon">
+  <IconItem name="Google">
     <GoogleIcon className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="Loading">
+    <LoadingIcon className="h-5 w-5" />
+  </IconItem>
+
+  <IconItem name="Mail">
+    <IconMail className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="Bolt">
+    <IconBolt className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="Trash">
+    <IconTrash className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="BrandGoogle">
+    <IconBrandGoogle className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="CurrencyDollar">
+    <IconCurrencyDollar className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="Download">
+    <IconDownload className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="IconBook">
+    <IconBook className="h-5 w-5" />
+  </IconItem>
+  <IconItem name="BrandNpm">
+    <IconBrandNpm className="h-5 w-5" />
+  </IconItem><IconItem name="BrandGithub">
+    <IconBrandGithub className="h-5 w-5" />
   </IconItem>
 </IconGallery>
