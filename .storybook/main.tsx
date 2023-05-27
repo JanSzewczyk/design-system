@@ -3,8 +3,12 @@ import { StorybookConfig } from "@storybook/react-vite";
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
-    "@storybook/addon-essentials",
-    "@storybook/addon-links",
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        backgrounds: false // 👈 disable the backgrounds addon
+      }
+    },
     "@storybook/addon-a11y",
     "@storybook/addon-interactions",
     "@storybook/addon-styling",
