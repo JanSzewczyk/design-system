@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/JanSzewczyk/design-system/compare/v1.11.0...v1.11.1) (2023-05-27)
+
+
+### Bug Fixes
+
+* **scroll:** fix scroll styles ([fff09a7](https://github.com/JanSzewczyk/design-system/commit/fff09a7efba2cddd8303cd7ecd4e26df36658ed1))
+
 # [1.11.0](https://github.com/JanSzewczyk/design-system/compare/v1.10.0...v1.11.0) (2023-05-26)
 
 
