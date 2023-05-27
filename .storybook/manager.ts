@@ -5,7 +5,6 @@
 // addons.setConfig({
 //   theme: customDarkTheme
 // });
-
 // addons.register("TitleAddon", (api) => {
 //   const customTitle = "Szum-Tech Design System";
 //   let interval: string | number | NodeJS.Timeout | null | undefined = null;
