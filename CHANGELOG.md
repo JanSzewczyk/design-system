@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/JanSzewczyk/design-system/compare/v1.11.1...v1.11.2) (2023-05-27)
+
+
+### Bug Fixes
+
+* **icons:** add rocket icon ([728c16b](https://github.com/JanSzewczyk/design-system/commit/728c16b49957e38c99ff2432ec426c33ad8ca31a))
+
 ## [1.11.1](https://github.com/JanSzewczyk/design-system/compare/v1.11.0...v1.11.1) (2023-05-27)
 
 
