@@ -18,6 +18,7 @@ module.exports = {
         100: "rgb(var(--gray-100) / <alpha-value>)",
         200: "rgb(var(--gray-200) / <alpha-value>)",
         300: "rgb(var(--gray-300) / <alpha-value>)",
+        350: "rgb(var(--gray-350) / <alpha-value>)",
         400: "rgb(var(--gray-400) / <alpha-value>)"
       },
       primary: {
