@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.3](https://github.com/JanSzewczyk/design-system/compare/v1.11.2...v1.11.3) (2023-05-27)
+
+
+### Bug Fixes
+
+* **package:** fix package bundling ([d231497](https://github.com/JanSzewczyk/design-system/commit/d231497b27a6ed3eb80de2c5a7807c2e55f8edbd))
+
 ## [1.11.2](https://github.com/JanSzewczyk/design-system/compare/v1.11.1...v1.11.2) (2023-05-27)
 
 
