@@ -11,7 +11,9 @@ export {
   IconRocket,
   IconBadgeFilled,
   IconBrandTwitter,
-  IconBrandLinkedin
+  IconBrandLinkedin,
+  IconMapPin,
+  IconPhone
 } from "@tabler/icons-react";
 
 export * from "./google";
