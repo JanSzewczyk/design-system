@@ -1,2 +1,2 @@
-export { default } from "./textarea";
-export * from "./textarea";
+export { default } from "./Textarea";
+export * from "./Textarea";

@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Tooltip from "./Tooltip.component";
+import Tooltip from "./Tooltip";
 import { TooltipProvider } from "./Tooltip.provider";
 
-import ButtonComponent from "../Button";
+import Button from "../button";
 
 const meta = {
   title: "Components/Tooltip",
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: (args) => (
     <Tooltip {...args}>
-      <ButtonComponent>Click</ButtonComponent>
+      <Button>Click</Button>
     </Tooltip>
   ),
   args: {

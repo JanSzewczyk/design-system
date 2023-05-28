@@ -1,4 +1,4 @@
-export { default } from "./Tooltip.component";
-export * from "./Tooltip.component";
+export { default } from "./Tooltip";
+export * from "./Tooltip";
 
 export * from "./Tooltip.provider";

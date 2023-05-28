@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import ButtonComponent from "./Button.component";
+import ButtonComponent from "./Button";
 import { ButtonVariantType } from "./Button.types";
 
 import { IconBolt, IconCurrencyDollar } from "../../icons";
