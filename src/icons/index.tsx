@@ -1,3 +1,4 @@
+// Icon DOCS: https://tabler-icons.io/
 export {
   IconTrash,
   IconCurrencyDollar,
@@ -13,7 +14,8 @@ export {
   IconBrandTwitter,
   IconBrandLinkedin,
   IconMapPin,
-  IconPhone
+  IconPhone,
+  IconSend
 } from "@tabler/icons-react";
 
 export * from "./google";
