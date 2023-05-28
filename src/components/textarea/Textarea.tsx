@@ -10,7 +10,7 @@ type Props = {
 
 export type TextareaProps = OmitStylesProps<React.ComponentPropsWithoutRef<"textarea">> & Props;
 
-const Textarea = React.forwardRef(function (
+export const Textarea = React.forwardRef(function (
   { invalid = false, ...props }: TextareaProps,
   ref: React.Ref<HTMLTextAreaElement>
 ) {
@@ -20,5 +20,3 @@ const Textarea = React.forwardRef(function (
     <textarea aria-invalid={invalid || undefined} className={textareaStyles} ref={ref} {...props} />
   );
 });
-
-export default Textarea;

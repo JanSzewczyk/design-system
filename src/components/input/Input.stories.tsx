@@ -3,7 +3,7 @@ import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { IconBrandGoogle, IconCurrencyDollar } from "@tabler/icons-react";
 
-import Input from "./Input";
+import { Input } from "./Input";
 
 const meta = {
   title: "Components/Input",

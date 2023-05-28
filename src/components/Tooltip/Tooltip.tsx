@@ -11,7 +11,7 @@ export type TooltipProps = ReactTooltip.TooltipContentProps & {
   collisionPadding?: number;
 };
 
-export default function Tooltip({
+export function Tooltip({
   defaultOpen,
   content,
   open,

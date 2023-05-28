@@ -54,7 +54,7 @@ export type ButtonProps<T extends React.ElementType = "button"> = PolymorphicCom
   Props
 >;
 
-const Button = React.forwardRef(function <T extends React.ElementType = "button">(
+export const Button = React.forwardRef(function <T extends React.ElementType = "button">(
   {
     as,
     block = false,
@@ -117,5 +117,3 @@ const Button = React.forwardRef(function <T extends React.ElementType = "button"
     </Component>
   );
 });
-
-export default Button;

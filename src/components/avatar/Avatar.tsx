@@ -30,7 +30,7 @@ export type AvatarProps = React.ComponentPropsWithoutRef<"div"> & {
   src?: string;
 };
 
-export default function Avatar({ alt, bg, children, size = "md", src, ...props }: AvatarProps) {
+export function Avatar({ alt, bg, children, size = "md", src, ...props }: AvatarProps) {
   const avatarStyles = avatarCva({ size, className: bg });
 
   return (

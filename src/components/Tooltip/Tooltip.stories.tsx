@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Tooltip from "./Tooltip";
+import { Tooltip } from "./Tooltip";
 import { TooltipProvider } from "./Tooltip.provider";
 
-import Button from "../button";
+import { Button } from "../button";
 
 const meta = {
   title: "Components/Tooltip",

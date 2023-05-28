@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Textarea from "./Textarea";
+import { Textarea } from "./Textarea";
 
 const meta = {
   title: "Components/Textarea",
