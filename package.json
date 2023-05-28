@@ -51,7 +51,7 @@
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "semantic-release": "semantic-release",
-    "storybook": "storybook dev -p 6006",
+    "storybook:dev": "storybook dev -p 6006",
     "storybook:build": "storybook build --docs",
     "storybook:serve": "serve storybook-static",
     "test": "vitest",
