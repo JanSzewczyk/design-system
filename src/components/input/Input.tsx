@@ -12,7 +12,7 @@ type Props = {
 
 export type InputProps = OmitStylesProps<React.ComponentPropsWithoutRef<"input">> & Props;
 
-const Input = React.forwardRef(function (
+export const Input = React.forwardRef(function (
   { invalid = false, startIcon, endIcon, disabled = false, ...props }: InputProps,
   ref: React.Ref<HTMLInputElement>
 ) {
@@ -38,5 +38,3 @@ const Input = React.forwardRef(function (
     </div>
   );
 });
-
-export default Input;
