@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/JanSzewczyk/design-system/compare/v1.12.0...v1.12.1) (2023-05-28)
+
+
+### Bug Fixes
+
+* **Icon:** add `IconMapPin` and `IconPhone` icons ([a33172e](https://github.com/JanSzewczyk/design-system/commit/a33172eebf2dc1d8b3bf4ad6dc1e5981a0537604))
+
 # [1.12.0](https://github.com/JanSzewczyk/design-system/compare/v1.11.3...v1.12.0) (2023-05-28)
 
 
