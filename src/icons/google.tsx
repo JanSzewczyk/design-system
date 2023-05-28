@@ -1,6 +1,6 @@
-import { IconProps } from "./types";
+import * as React from "react";
 
-export function GoogleIcon(props: IconProps) {
+export function GoogleIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path

@@ -1,60 +1,67 @@
 import { IconGallery, IconItem, Meta } from "@storybook/addon-docs";
 
-import { GoogleIcon } from "./google";
-import {
-  IconBolt,
-  IconBook,
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandNpm,
-  IconCurrencyDollar,
-  IconDownload,
-  IconMail,
-  IconRocket,
-  IconTrash,
-  LoadingIcon
-} from "./index";
+import * as Icons from "./index";
 
-<Meta title="Components/Icons" />
+<Meta title="Icons" />
 
 # Iconography
 
+## Custom
+
 <IconGallery>
   <IconItem name="Google">
-    <GoogleIcon className="h-5 w-5" />
+    <Icons.GoogleIcon />
   </IconItem>
   <IconItem name="Loading">
-    <LoadingIcon className="h-5 w-5" />
+    <Icons.LoadingIcon />
   </IconItem>
+</IconGallery>
 
+## Icons
+
+<IconGallery>
   <IconItem name="Mail">
-    <IconMail className="h-5 w-5" />
+    <Icons.IconMail />
   </IconItem>
   <IconItem name="Bolt">
-    <IconBolt className="h-5 w-5" />
+    <Icons.IconBolt />
   </IconItem>
   <IconItem name="Trash">
-    <IconTrash className="h-5 w-5" />
-  </IconItem>
-  <IconItem name="BrandGoogle">
-    <IconBrandGoogle className="h-5 w-5" />
+    <Icons.IconTrash />
   </IconItem>
   <IconItem name="CurrencyDollar">
-    <IconCurrencyDollar className="h-5 w-5" />
+    <Icons.IconCurrencyDollar />
   </IconItem>
   <IconItem name="Download">
-    <IconDownload className="h-5 w-5" />
+    <Icons.IconDownload />
   </IconItem>
   <IconItem name="IconBook">
-    <IconBook className="h-5 w-5" />
-  </IconItem>
-  <IconItem name="BrandNpm">
-    <IconBrandNpm className="h-5 w-5" />
-  </IconItem>
-  <IconItem name="BrandGithub">
-    <IconBrandGithub className="h-5 w-5" />
+    <Icons.IconBook />
   </IconItem>
   <IconItem name="Rocket">
-    <IconRocket className="h-5 w-5" />
+    <Icons.IconRocket />
+  </IconItem>
+  <IconItem name="BadgeFilled">
+    <Icons.IconBadgeFilled />
+  </IconItem>
+</IconGallery>
+
+## Socials
+
+<IconGallery>
+  <IconItem name="BrandGoogle">
+    <Icons.IconBrandGoogle />
+  </IconItem>
+  <IconItem name="BrandNpm">
+    <Icons.IconBrandNpm />
+  </IconItem>
+  <IconItem name="BrandGithub">
+    <Icons.IconBrandGithub />
+  </IconItem>
+  <IconItem name="BrandTwitter">
+    <Icons.IconBrandTwitter />
+  </IconItem>
+  <IconItem name="BrandLinkedin">
+    <Icons.IconBrandLinkedin />
   </IconItem>
 </IconGallery>
