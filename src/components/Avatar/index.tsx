@@ -1,3 +1,3 @@
-export { default } from "./Avatar";
-export * from "./Avatar";
+export { default } from "./Avatar.component";
+export * from "./Avatar.component";
 export * from "./Avatar.types";

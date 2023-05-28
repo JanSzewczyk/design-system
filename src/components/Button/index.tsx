@@ -1,3 +1,3 @@
-export { default } from "./Button";
-export * from "./Button";
+export { default } from "./Button.component";
+export * from "./Button.component";
 export * from "./Button.types";

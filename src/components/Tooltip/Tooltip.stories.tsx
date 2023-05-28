@@ -5,7 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import Tooltip from "./Tooltip.component";
 import { TooltipProvider } from "./Tooltip.provider";
 
-import Button from "../Button";
+import ButtonComponent from "../Button";
 
 const meta = {
   title: "Components/Tooltip",
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: (args) => (
     <Tooltip {...args}>
-      <Button>Click</Button>
+      <ButtonComponent>Click</ButtonComponent>
     </Tooltip>
   ),
   args: {

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, vi } from "vitest";
 
-import Button from "./Button";
+import ButtonComponent from "./Button.component";
 
 import { IconTrash } from "../../icons";
 
@@ -14,7 +14,7 @@ describe("Component > Button", () => {
   });
 
   test("renders correctly", async () => {
-    render(<Button onClick={mockedFn}>Text</Button>);
+    render(<ButtonComponent onClick={mockedFn}>Text</ButtonComponent>);
     const button = screen.getByRole("button");
 
     expect(button).toBeInTheDocument();
@@ -28,9 +28,9 @@ describe("Component > Button", () => {
 
   test("renders disabled", async () => {
     render(
-      <Button onClick={mockedFn} disabled>
+      <ButtonComponent onClick={mockedFn} disabled>
         Text
-      </Button>
+      </ButtonComponent>
     );
     const button = screen.getByRole("button");
 
@@ -46,9 +46,9 @@ describe("Component > Button", () => {
 
   test("renders as link", async () => {
     render(
-      <Button as="a" href="" onClick={mockedFn}>
+      <ButtonComponent as="a" href="" onClick={mockedFn}>
         Link
-      </Button>
+      </ButtonComponent>
     );
     const button = screen.getByRole("button");
 
@@ -64,9 +64,9 @@ describe("Component > Button", () => {
 
   test("renders as disabled link", async () => {
     render(
-      <Button as="a" disabled href="" onClick={mockedFn}>
+      <ButtonComponent as="a" disabled href="" onClick={mockedFn}>
         Link
-      </Button>
+      </ButtonComponent>
     );
     const button = screen.getByRole("button");
 
@@ -78,9 +78,9 @@ describe("Component > Button", () => {
 
   test("replace start icon with loading icon", async () => {
     render(
-      <Button startIcon={<IconTrash />} loading>
+      <ButtonComponent startIcon={<IconTrash />} loading>
         Label
-      </Button>
+      </ButtonComponent>
     );
 
     const button = screen.getByRole("button");
