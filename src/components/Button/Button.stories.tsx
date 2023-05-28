@@ -2,14 +2,14 @@ import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import Button from "./Button";
+import ButtonComponent from "./Button.component";
 import { ButtonVariantType } from "./Button.types";
 
 import { IconBolt, IconCurrencyDollar } from "../../icons";
 
 const meta = {
   title: "Components/Button",
-  component: Button,
+  component: ButtonComponent,
   argTypes: {
     as: {
       control: "text"
@@ -19,13 +19,13 @@ const meta = {
     }
   },
   tags: ["autodocs"]
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof ButtonComponent>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: ({ children, ...args }) => <Button {...args}>{children}</Button>,
+  render: ({ children, ...args }) => <ButtonComponent {...args}>{children}</ButtonComponent>,
   args: {
     children: "Label"
   },
@@ -35,15 +35,15 @@ export const Default: Story = {
 export const Basic: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Button variant="text" {...args}>
+      <ButtonComponent variant="text" {...args}>
         TEXT
-      </Button>
-      <Button variant="contained" {...args}>
+      </ButtonComponent>
+      <ButtonComponent variant="contained" {...args}>
         CONTAINED
-      </Button>
-      <Button variant="outlined" {...args}>
+      </ButtonComponent>
+      <ButtonComponent variant="outlined" {...args}>
         OUTLINED
-      </Button>
+      </ButtonComponent>
     </div>
   )
 };
@@ -51,16 +51,16 @@ export const Basic: Story = {
 export const Text: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
+      <ButtonComponent {...args}>PRIMARY</ButtonComponent>
+      <ButtonComponent {...args} disabled>
         DISABLED
-      </Button>
-      <Button as="a" href="" {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" {...args}>
         LINK
-      </Button>
-      <Button as="a" href="" disabled {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" disabled {...args}>
         LINK DISABLED
-      </Button>
+      </ButtonComponent>
     </div>
   ),
   args: {}
@@ -69,16 +69,16 @@ export const Text: Story = {
 export const Outlined: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
+      <ButtonComponent {...args}>PRIMARY</ButtonComponent>
+      <ButtonComponent {...args} disabled>
         DISABLED
-      </Button>
-      <Button as="a" href="" {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" {...args}>
         LINK
-      </Button>
-      <Button as="a" href="" disabled {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" disabled {...args}>
         LINK DISABLED
-      </Button>
+      </ButtonComponent>
     </div>
   ),
   args: {
@@ -89,16 +89,16 @@ export const Outlined: Story = {
 export const Contained: Story = {
   render: (args) => (
     <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
+      <ButtonComponent {...args}>PRIMARY</ButtonComponent>
+      <ButtonComponent {...args} disabled>
         DISABLED
-      </Button>
-      <Button as="a" href="" {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" {...args}>
         LINK
-      </Button>
-      <Button as="a" href="" disabled {...args}>
+      </ButtonComponent>
+      <ButtonComponent as="a" href="" disabled {...args}>
         LINK DISABLED
-      </Button>
+      </ButtonComponent>
     </div>
   ),
   args: {
@@ -111,21 +111,21 @@ export const Color: Story = {
     <div className="space-y-4">
       {["text", "outlined", "contained"].map((variant) => (
         <div key={variant} className="flex flex-wrap gap-4">
-          <Button color="neutral" variant={variant as ButtonVariantType}>
+          <ButtonComponent color="neutral" variant={variant as ButtonVariantType}>
             NEUTRAL
-          </Button>
-          <Button color="primary" variant={variant as ButtonVariantType}>
+          </ButtonComponent>
+          <ButtonComponent color="primary" variant={variant as ButtonVariantType}>
             PRIMARY
-          </Button>
-          <Button color="success" variant={variant as ButtonVariantType}>
+          </ButtonComponent>
+          <ButtonComponent color="success" variant={variant as ButtonVariantType}>
             SUCCESS
-          </Button>
-          <Button color="warning" variant={variant as ButtonVariantType}>
+          </ButtonComponent>
+          <ButtonComponent color="warning" variant={variant as ButtonVariantType}>
             WARNING
-          </Button>
-          <Button color="error" variant={variant as ButtonVariantType}>
+          </ButtonComponent>
+          <ButtonComponent color="error" variant={variant as ButtonVariantType}>
             ERROR
-          </Button>
+          </ButtonComponent>
         </div>
       ))}
     </div>
@@ -136,31 +136,31 @@ export const Sizes: Story = {
   render: (args) => (
     <div className="space-y-4">
       <div className="flex flex-row items-center gap-x-4">
-        <Button variant="text" size="sm" {...args}>
+        <ButtonComponent variant="text" size="sm" {...args}>
           SMALL
-        </Button>
-        <Button variant="text">MEDIUM</Button>
-        <Button size="lg" {...args}>
+        </ButtonComponent>
+        <ButtonComponent variant="text">MEDIUM</ButtonComponent>
+        <ButtonComponent size="lg" {...args}>
           LARGE
-        </Button>
+        </ButtonComponent>
       </div>
       <div className="flex flex-row items-center gap-x-4">
-        <Button size="sm" variant="outlined">
+        <ButtonComponent size="sm" variant="outlined">
           SMALL
-        </Button>
-        <Button variant="outlined">MEDIUM</Button>
-        <Button size="lg" variant="outlined">
+        </ButtonComponent>
+        <ButtonComponent variant="outlined">MEDIUM</ButtonComponent>
+        <ButtonComponent size="lg" variant="outlined">
           LARGE
-        </Button>
+        </ButtonComponent>
       </div>
       <div className="flex flex-row items-center gap-x-4">
-        <Button size="sm" variant="contained">
+        <ButtonComponent size="sm" variant="contained">
           SMALL
-        </Button>
-        <Button variant="contained">MEDIUM</Button>
-        <Button size="lg" variant="contained">
+        </ButtonComponent>
+        <ButtonComponent variant="contained">MEDIUM</ButtonComponent>
+        <ButtonComponent size="lg" variant="contained">
           LARGE
-        </Button>
+        </ButtonComponent>
       </div>
     </div>
   )
@@ -169,9 +169,9 @@ export const Sizes: Story = {
 export const Block: Story = {
   render: () => (
     <div className="w-52">
-      <Button block variant="contained">
+      <ButtonComponent block variant="contained">
         BLOCK
-      </Button>
+      </ButtonComponent>
     </div>
   )
 };
@@ -179,12 +179,12 @@ export const Block: Story = {
 export const WithIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" startIcon={<IconBolt />}>
+      <ButtonComponent color="error" variant="contained" startIcon={<IconBolt />}>
         LEFT ICON
-      </Button>
-      <Button color="primary" endIcon={<IconCurrencyDollar />}>
+      </ButtonComponent>
+      <ButtonComponent color="primary" endIcon={<IconCurrencyDollar />}>
         RIGHT ICON
-      </Button>
+      </ButtonComponent>
     </div>
   )
 };
@@ -192,12 +192,12 @@ export const WithIcon: Story = {
 export const Loading: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" loading>
+      <ButtonComponent color="error" variant="contained" loading>
         LEFT LOADING
-      </Button>
-      <Button color="primary" loading loadingPosition="end">
+      </ButtonComponent>
+      <ButtonComponent color="primary" loading loadingPosition="end">
         RIGHT LOADING
-      </Button>
+      </ButtonComponent>
     </div>
   )
 };
