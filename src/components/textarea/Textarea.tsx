@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { textareaCva } from "./textarea.styles";
+import { textareaCva } from "./Textarea.styles";
 
 import { OmitStylesProps } from "../../types/utils.types";
 

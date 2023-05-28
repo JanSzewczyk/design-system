@@ -2,7 +2,7 @@ import React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import AvatarComponent from "./Avatar.component";
+import AvatarComponent from "./Avatar";
 
 import { IconBolt } from "../../icons";
 

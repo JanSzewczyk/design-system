@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, vi } from "vitest";
 
-import ButtonComponent from "./Button.component";
+import ButtonComponent from "./Button";
 
 import { IconTrash } from "../../icons";
 
