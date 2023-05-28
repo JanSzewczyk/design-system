@@ -9,3 +9,6 @@ export * from "./Input";
 
 export { default as Tooltip } from "./Tooltip";
 export * from "./Tooltip";
+
+export { default as Textarea } from "./textarea";
+export * from "./textarea";

@@ -52,6 +52,9 @@ module.exports = {
         128: "32.0rem",
         300: "75.0rem"
       },
+      minHeight: {
+        10: "2.5rem"
+      },
       keyframes: {
         slideDownAndFade: {
           from: { opacity: 0, transform: "translateY(-2px)" },
