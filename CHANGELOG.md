@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/JanSzewczyk/design-system/compare/v1.11.3...v1.12.0) (2023-05-28)
+
+
+### Bug Fixes
+
+* **ci:** fix pr-check action ([5976a53](https://github.com/JanSzewczyk/design-system/commit/5976a53c105319f87a64b24f2424649545d7635b))
+* **Icons:** refactor icons and icon story ([e6a3c76](https://github.com/JanSzewczyk/design-system/commit/e6a3c76ab229e3b8a3e89b475f9d9673be0c585f))
+* **imports:** fix files structure ([1c8322a](https://github.com/JanSzewczyk/design-system/commit/1c8322aa4e4d1a24c06b028fa04872ec1585ba57))
+
+
+### Features
+
+* **Textarea:** add `Textarea` component ([56162bc](https://github.com/JanSzewczyk/design-system/commit/56162bc4358a9e8bdca0023a3f5759635cb8807e))
+
+
+### Performance Improvements
+
+* **imports:** change to named imports ([db386df](https://github.com/JanSzewczyk/design-system/commit/db386df302c62aaf691f79e1262754159c21335c))
+
 ## [1.11.3](https://github.com/JanSzewczyk/design-system/compare/v1.11.2...v1.11.3) (2023-05-27)
 
 
