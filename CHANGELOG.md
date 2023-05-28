@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.2](https://github.com/JanSzewczyk/design-system/compare/v1.12.1...v1.12.2) (2023-05-28)
+
+
+### Bug Fixes
+
+* **Icon:** add `IconSend` icon ([d6970d6](https://github.com/JanSzewczyk/design-system/commit/d6970d6ff535bdb215e01f40389c406e7b1ac291))
+
 ## [1.12.1](https://github.com/JanSzewczyk/design-system/compare/v1.12.0...v1.12.1) (2023-05-28)
 
 
