@@ -1,21 +1,21 @@
 // Icon DOCS: https://tabler-icons.io/
 export {
-  IconTrash,
-  IconCurrencyDollar,
-  IconBrandGoogle,
-  IconBolt,
-  IconMail,
-  IconDownload,
-  IconBook,
-  IconBrandNpm,
-  IconBrandGithub,
-  IconRocket,
   IconBadgeFilled,
-  IconBrandTwitter,
+  IconBolt,
+  IconBook,
+  IconBrandGithub,
+  IconBrandGoogle,
   IconBrandLinkedin,
+  IconBrandNpm,
+  IconBrandTwitter,
+  IconCurrencyDollar,
+  IconDownload,
+  IconMail,
   IconMapPin,
   IconPhone,
-  IconSend
+  IconRocket,
+  IconSend,
+  IconTrash
 } from "@tabler/icons-react";
 
 export * from "./google";
