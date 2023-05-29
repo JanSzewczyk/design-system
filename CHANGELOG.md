@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.3](https://github.com/JanSzewczyk/design-system/compare/v1.12.2...v1.12.3) (2023-05-29)
+
+
+### Bug Fixes
+
+* **Icon:** fix icons types ([ced4106](https://github.com/JanSzewczyk/design-system/commit/ced41068e56dc68b08d0a46bddd145c0d5f8db63))
+
 ## [1.12.2](https://github.com/JanSzewczyk/design-system/compare/v1.12.1...v1.12.2) (2023-05-28)
 
 
