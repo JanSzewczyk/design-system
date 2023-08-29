@@ -15,7 +15,9 @@ export {
   IconPhone,
   IconRocket,
   IconSend,
-  IconTrash
+  IconTrash,
+  IconSelector,
+  IconCheck
 } from "@tabler/icons-react";
 
 export * from "./google";
