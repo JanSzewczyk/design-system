@@ -7,3 +7,5 @@ export * from "./input";
 export * from "./tooltip";
 
 export * from "./textarea";
+
+export * from "./select";
