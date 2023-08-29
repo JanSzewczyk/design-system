@@ -12,17 +12,8 @@ export default defineConfig([
     bundle: true,
     treeshake: true,
     skipNodeModulesBundle: false,
-    outDir: env === "production" ? "." : "dist",
-    entry: [
-      "./src/components/!(index.ts?(x))/index.ts?(x)",
-      "./src/components/index.ts?(x)",
-      "./src/contexts/!(index.ts?(x))/index.ts?(x)",
-      "./src/contexts/index.ts?(x)",
-      "./src/hooks/!(index.ts?(x))/index.ts?(x)",
-      "./src/hooks/index.ts?(x)",
-      "./src/icons/index.tsx",
-      "./src/index.ts?(x)"
-    ],
+    outDir: "dist",
+    entry: ["./src/index.ts?(x)"],
     external: [
       "react",
       "react-dom",
@@ -30,6 +21,19 @@ export default defineConfig([
       "@radix-ui/*",
       "@tabler/icons-react"
     ]
+  },
+  {
+    splitting: true,
+    clean: env !== "production",
+    dts: true,
+    format: ["esm", "cjs"],
+    minify: env === "production",
+    bundle: true,
+    treeshake: true,
+    skipNodeModulesBundle: false,
+    outDir: "icons",
+    entry: ["./src/icons/index.tsx"],
+    external: ["@tabler/icons-react"]
   },
   {
     entry: ["./src/theme/main-preset.js"],
