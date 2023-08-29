@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/JanSzewczyk/design-system/compare/v1.12.3...v1.13.0) (2023-08-29)
+
+
+### Features
+
+* **select:** create `Select` component ([5d9e963](https://github.com/JanSzewczyk/design-system/commit/5d9e9632822b2d0c09d3f6459d39e98c693c5bf1))
+
 ## [1.12.3](https://github.com/JanSzewczyk/design-system/compare/v1.12.2...v1.12.3) (2023-05-29)
 
 
