@@ -8,7 +8,8 @@ import { Input } from "./Input";
 const meta = {
   title: "Components/Input",
   component: Input,
-  tags: ["autodocs"]
+  tags: ["autodocs"],
+  decorators: [(story) => <div className="w-52">{story()}</div>]
 } satisfies Meta<typeof Input>;
 export default meta;
 
