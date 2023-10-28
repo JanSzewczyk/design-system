@@ -9,3 +9,5 @@ export * from "./tooltip";
 export * from "./textarea";
 
 export * from "./select";
+
+export * from "./card";
