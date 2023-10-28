@@ -59,6 +59,7 @@
     "@tabler/icons-react": "^2.20.0",
     "@tailwindcss/container-queries": "^0.1.0",
     "class-variance-authority": "^0.6.0",
+    "tailwind-merge": "^1.14.0",
     "tailwind-scrollbar": "^3.0.4"
   },
   "devDependencies": {
