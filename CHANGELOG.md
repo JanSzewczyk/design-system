@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/JanSzewczyk/design-system/compare/v1.13.1...v1.14.0) (2023-10-29)
+
+
+### Bug Fixes
+
+* **button:** update `button` component ([0b44601](https://github.com/JanSzewczyk/design-system/commit/0b44601b431479929e07afa14402dbe41dde0c59))
+* **icons:** fix icons ([1d34109](https://github.com/JanSzewczyk/design-system/commit/1d34109c09bf1d253f4313283515ace80e12992f))
+
+
+### Features
+
+* **card:** create `card` component ([989f542](https://github.com/JanSzewczyk/design-system/commit/989f542c3a25d14a14d874774477292b81ef1b2c))
+
 ## [1.13.1](https://github.com/JanSzewczyk/design-system/compare/v1.13.0...v1.13.1) (2023-08-29)
 
 
