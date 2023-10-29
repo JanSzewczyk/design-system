@@ -1,9 +1,10 @@
 import * as React from "react";
 
 import { Meta, StoryObj } from "@storybook/react";
-import { IconBrandGoogle, IconCurrencyDollar } from "@tabler/icons-react";
 
 import { Input } from "./Input";
+
+import { BadgeIcon, GitHubLogoIcon } from "../../icons";
 
 const meta = {
   title: "Components/Input",
@@ -23,12 +24,8 @@ export const Base: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input
-        defaultValue="Start Icon"
-        startIcon={<IconBrandGoogle className="h-4 w-4" />}
-        {...args}
-      />
-      <Input defaultValue="End Icon" endIcon={<IconBrandGoogle className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
     </div>
   ),
   args: {}
@@ -40,12 +37,8 @@ export const Disabled: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input
-        defaultValue="Start Icon"
-        startIcon={<IconCurrencyDollar className="h-4 w-4" />}
-        {...args}
-      />
-      <Input defaultValue="End Icon" endIcon={<IconBrandGoogle className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
     </div>
   ),
   args: {
@@ -59,12 +52,8 @@ export const Invalid: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input
-        defaultValue="Start Icon"
-        startIcon={<IconBrandGoogle className="h-4 w-4" />}
-        {...args}
-      />
-      <Input defaultValue="End Icon" endIcon={<IconBrandGoogle className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
     </div>
   ),
   args: {

@@ -1,24 +1,6 @@
-// Icon DOCS: https://tabler-icons.io/
-export {
-  IconBadgeFilled,
-  IconBolt,
-  IconBook,
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandLinkedin,
-  IconBrandNpm,
-  IconBrandTwitter,
-  IconCurrencyDollar,
-  IconDownload,
-  IconMail,
-  IconMapPin,
-  IconPhone,
-  IconRocket,
-  IconSend,
-  IconTrash,
-  IconSelector,
-  IconCheck
-} from "@tabler/icons-react";
+export * from "@radix-ui/react-icons";
 
-export * from "./google";
+export * from "./google-logo";
 export * from "./loading";
+export * from "./auth0-logo";
+export * from "./x-logo";

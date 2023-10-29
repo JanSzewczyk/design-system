@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { Avatar } from "./Avatar";
 
-import { IconBolt } from "../../icons";
+import { LightningBoltIcon } from "../../icons";
 
 const meta = {
   title: "Components/Avatar",
@@ -77,6 +77,6 @@ export const Sizes: Story = {
 
 export const IconAvatar: Story = {
   args: {
-    children: <IconBolt className="h-8 w-8" />
+    children: <LightningBoltIcon className="h-8 w-8" />
   }
 };

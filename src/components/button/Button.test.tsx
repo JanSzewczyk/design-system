@@ -4,7 +4,7 @@ import { expect, vi } from "vitest";
 
 import { Button } from "./Button";
 
-import { IconTrash } from "../../icons";
+import { TrashIcon } from "../../icons";
 
 const mockedFn = vi.fn();
 
@@ -46,8 +46,8 @@ describe("Component > Button", () => {
 
   test("renders as link", async () => {
     render(
-      <Button as="a" href="" onClick={mockedFn}>
-        Link
+      <Button asChild onClick={mockedFn}>
+        <a href="">Link</a>
       </Button>
     );
     const button = screen.getByRole("button");
@@ -64,8 +64,8 @@ describe("Component > Button", () => {
 
   test("renders as disabled link", async () => {
     render(
-      <Button as="a" disabled href="" onClick={mockedFn}>
-        Link
+      <Button disabled asChild onClick={mockedFn}>
+        <a href="">Link</a>
       </Button>
     );
     const button = screen.getByRole("button");
@@ -78,7 +78,7 @@ describe("Component > Button", () => {
 
   test("replace start icon with loading icon", async () => {
     render(
-      <Button startIcon={<IconTrash />} loading>
+      <Button startIcon={<TrashIcon />} loading>
         Label
       </Button>
     );

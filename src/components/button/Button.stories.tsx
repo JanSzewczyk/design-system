@@ -5,7 +5,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import { ButtonVariantType } from "./Button.types";
 
-import { IconBolt, IconCurrencyDollar } from "../../icons";
+import { ArrowBottomLeftIcon, GitHubLogoIcon } from "../../icons";
 
 const meta = {
   title: "Components/Button",
@@ -176,10 +176,10 @@ export const FullWidth: Story = {
 export const WithIcon: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" startIcon={<IconBolt />}>
+      <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />}>
         LEFT ICON
       </Button>
-      <Button color="primary" endIcon={<IconCurrencyDollar />}>
+      <Button color="primary" endIcon={<GitHubLogoIcon />}>
         RIGHT ICON
       </Button>
     </div>

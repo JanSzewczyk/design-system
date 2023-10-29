@@ -14,13 +14,7 @@ export default defineConfig([
     skipNodeModulesBundle: false,
     outDir: "dist",
     entry: ["./src/index.ts?(x)"],
-    external: [
-      "react",
-      "react-dom",
-      "class-variance-authority",
-      "@radix-ui/*",
-      "@tabler/icons-react"
-    ]
+    external: ["react", "react-dom", "class-variance-authority", "@radix-ui/*"]
   },
   {
     splitting: true,
@@ -32,8 +26,7 @@ export default defineConfig([
     treeshake: true,
     skipNodeModulesBundle: false,
     outDir: "icons",
-    entry: ["./src/icons/index.tsx"],
-    external: ["@tabler/icons-react"]
+    entry: ["./src/icons/index.tsx"]
   },
   {
     entry: ["./src/theme/main-preset.js"],

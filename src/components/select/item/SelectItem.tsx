@@ -2,7 +2,7 @@ import * as React from "react";
 
 import * as ReactSelect from "@radix-ui/react-select";
 
-import { IconCheck } from "../../../icons";
+import { CheckIcon } from "../../../icons";
 import { OmitStylesProps } from "../../../types/utils.types";
 
 export type SelectItemProps = OmitStylesProps<ReactSelect.SelectItemProps>;
@@ -17,7 +17,7 @@ export const SelectItem = React.forwardRef(
       >
         <ReactSelect.ItemText className="flex-1">{children}</ReactSelect.ItemText>
         <ReactSelect.ItemIndicator>
-          <IconCheck className="h-4 w-4" />
+          <CheckIcon className="h-4 w-4" />
         </ReactSelect.ItemIndicator>
       </ReactSelect.Item>
     );
