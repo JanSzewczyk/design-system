@@ -1,16 +1,17 @@
 import * as React from "react";
 
+import { Slot } from "@radix-ui/react-slot";
+
 import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
 import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "./Button.types";
 
 import { LoadingIcon } from "../../icons";
-import { PolymorphicComponentProp, PolymorphicRef } from "../../types/utils.types";
 
 type Props = {
   /**
    * Defines button full width
    */
-  block?: boolean;
+  fullWidth?: boolean;
   /**
    * Defines button color
    */
@@ -47,35 +48,78 @@ type Props = {
    * Defines is position of loading icon
    */
   loadingPosition?: "start" | "end";
+
+  asChild?: boolean;
 };
 
-export type ButtonProps<T extends React.ElementType = "button"> = PolymorphicComponentProp<
-  T,
-  Props
->;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Props;
 
-export const Button = React.forwardRef(function <T extends React.ElementType = "button">(
+export const Button = React.forwardRef(function (
   {
-    as,
-    block = false,
+    asChild = false,
+    fullWidth = false,
     color = "primary",
     children,
     size = "md",
     variant = "text",
     disabled = false,
-    startIcon,
-    endIcon,
-    type,
+    type = "button",
     loading = false,
     loadingPosition = "start",
+    endIcon,
+    startIcon,
     ...restProps
-  }: ButtonProps<T>,
-  ref?: PolymorphicRef<T>
+  }: ButtonProps,
+  ref?: React.Ref<HTMLButtonElement>
 ) {
-  const Component = as || "button";
+  const props = {
+    asChild,
+    fullWidth,
+    color,
+    children,
+    size,
+    variant,
+    disabled,
+    type,
+    loading,
+    loadingPosition,
+    endIcon,
+    startIcon,
+    ...restProps
+  };
 
-  const buttonStyles = buttonCva({ block, size, variant, color });
+  const Component = asChild ? Slot : "button";
 
+  const buttonStyles = buttonCva({ fullWidth, size, variant, color });
+
+  const isDisabled = disabled || loading;
+
+  return (
+    <Component
+      {...restProps}
+      aria-disabled={isDisabled || undefined}
+      className={buttonStyles}
+      data-state={loading ? "loading" : undefined}
+      disabled={isDisabled}
+      ref={ref}
+      role={Component !== "button" ? "button" : undefined}
+      tabIndex={isDisabled ? -1 : 0}
+      type={Component === "button" ? type : undefined}
+    >
+      {asChild ? <ButtonComponent>{children}</ButtonComponent> : <ButtonComponent {...props} />}
+    </Component>
+  );
+});
+
+function ButtonComponent({
+  children,
+  loading,
+  size,
+  loadingPosition,
+  startIcon,
+  endIcon,
+  ...props
+}: Partial<ButtonProps>) {
   const isStartLoading = loading && loadingPosition === "start";
   const StartIcon = isStartLoading ? <LoadingIcon aria-label="Loading" /> : startIcon || null;
   const startIconStyles = iconCva({ size, loading: isStartLoading });
@@ -86,34 +130,34 @@ export const Button = React.forwardRef(function <T extends React.ElementType = "
   const endIconStyles = iconCva({ size, loading: isEndLoading });
   const endIconContainerStyles = iconContainerCva({ size, site: "right" });
 
-  const isDisabled = disabled || loading;
+  const LeadingIcon = StartIcon ? (
+    <span className={startIconContainerStyles} role={isStartLoading ? "progressbar" : undefined}>
+      {React.cloneElement(StartIcon, { className: startIconStyles })}
+    </span>
+  ) : null;
 
-  return (
-    <Component
-      aria-disabled={isDisabled || undefined}
-      className={buttonStyles}
-      data-state={loading ? "loading" : undefined}
-      disabled={isDisabled}
-      ref={ref}
-      role="button"
-      tabIndex={isDisabled ? -1 : 0}
-      type={Component === "button" ? "button" : undefined}
-      {...restProps}
-    >
-      {StartIcon ? (
-        <span
-          className={startIconContainerStyles}
-          role={isStartLoading ? "progressbar" : undefined}
-        >
-          {React.cloneElement(StartIcon, { className: startIconStyles })}
-        </span>
-      ) : null}
+  const TrailingIcon = EndIcon ? (
+    <span className={endIconContainerStyles} role={isEndLoading ? "progressbar" : undefined}>
+      {React.cloneElement(EndIcon, { className: endIconStyles })}
+    </span>
+  ) : null;
+
+  return React.isValidElement(children) ? (
+    React.cloneElement(children as React.ReactElement, {
+      ...props,
+      children: (
+        <>
+          {LeadingIcon}
+          {React.isValidElement(children) ? children.props.children : null}
+          {TrailingIcon}
+        </>
+      )
+    })
+  ) : (
+    <>
+      {LeadingIcon}
       {children}
-      {EndIcon ? (
-        <span className={endIconContainerStyles} role={isEndLoading ? "progressbar" : undefined}>
-          {React.cloneElement(EndIcon, { className: endIconStyles })}
-        </span>
-      ) : null}
-    </Component>
+      {TrailingIcon}
+    </>
   );
-});
+}

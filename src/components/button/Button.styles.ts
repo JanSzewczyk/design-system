@@ -8,7 +8,7 @@ export const buttonCva = cva(
   ],
   {
     variants: {
-      block: {
+      fullWidth: {
         true: "w-full"
       },
       color: {
@@ -172,7 +172,7 @@ export const buttonCva = cva(
       }
     ],
     defaultVariants: {
-      block: false,
+      fullWidth: false,
       color: "primary",
       size: "md",
       variant: "text"

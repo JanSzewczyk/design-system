@@ -11,9 +11,6 @@ const meta = {
   title: "Components/Button",
   component: Button,
   argTypes: {
-    as: {
-      control: "text"
-    },
     children: {
       control: "text"
     }
@@ -55,11 +52,11 @@ export const Text: Story = {
       <Button {...args} disabled>
         DISABLED
       </Button>
-      <Button as="a" href="" {...args}>
-        LINK
+      <Button asChild {...args}>
+        <a href="">LINK</a>
       </Button>
-      <Button as="a" href="" disabled {...args}>
-        LINK DISABLED
+      <Button asChild disabled {...args}>
+        <a href="">LINK DISABLED</a>
       </Button>
     </div>
   ),
@@ -73,11 +70,11 @@ export const Outlined: Story = {
       <Button {...args} disabled>
         DISABLED
       </Button>
-      <Button as="a" href="" {...args}>
-        LINK
+      <Button asChild {...args}>
+        <a href="">LINK</a>
       </Button>
-      <Button as="a" href="" disabled {...args}>
-        LINK DISABLED
+      <Button asChild disabled {...args}>
+        <a href="">LINK DISABLED</a>
       </Button>
     </div>
   ),
@@ -93,11 +90,11 @@ export const Contained: Story = {
       <Button {...args} disabled>
         DISABLED
       </Button>
-      <Button as="a" href="" {...args}>
-        LINK
+      <Button asChild {...args}>
+        <a href="">LINK</a>
       </Button>
-      <Button as="a" href="" disabled {...args}>
-        LINK DISABLED
+      <Button asChild disabled {...args}>
+        <a href="">LINK DISABLED</a>
       </Button>
     </div>
   ),
@@ -166,11 +163,11 @@ export const Sizes: Story = {
   )
 };
 
-export const Block: Story = {
+export const FullWidth: Story = {
   render: () => (
     <div className="w-52">
-      <Button block variant="contained">
-        BLOCK
+      <Button fullWidth variant="contained">
+        FULL WIDTH
       </Button>
     </div>
   )
