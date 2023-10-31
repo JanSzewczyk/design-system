@@ -85,6 +85,7 @@ module.exports = {
   plugins: [
     require("@tailwindcss/container-queries"),
     require("tailwind-scrollbar"),
+    require("tailwindcss-animate"),
     require("./plugins/utilities/scroll"),
     require("./plugins/utilities/typography")
   ]
