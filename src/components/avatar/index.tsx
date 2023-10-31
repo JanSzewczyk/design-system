@@ -1,2 +1,5 @@
-export * from "./Avatar";
-export * from "./Avatar.types";
+export * from "./avatar";
+export * from "./avatar.types";
+
+export * from "./image";
+export * from "./fallback";
