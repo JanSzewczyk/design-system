@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/JanSzewczyk/design-system/compare/v1.16.0...v1.16.1) (2023-11-01)
+
+
+### Bug Fixes
+
+* **import:** fix components imports ([147a28a](https://github.com/JanSzewczyk/design-system/commit/147a28a754127280c20fe35540a827f1dabce5e3))
+
 # [1.16.0](https://github.com/JanSzewczyk/design-system/compare/v1.15.5...v1.16.0) (2023-11-01)
 
 
