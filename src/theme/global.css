@@ -136,6 +136,6 @@
   }
 
   body {
-    @apply border-gray-400 bg-background font-poppins text-gray-100 antialiased scroll;
+    @apply bg-background font-poppins text-gray-100 antialiased scroll;
   }
 }
