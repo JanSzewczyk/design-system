@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     colors: {
       app: {
-        primary: "rgb(var(--background-primary))",
-        secondary: "rgb(var(--background-secondary))"
+        primary: "rgb(var(--foreground))",
+        secondary: "rgb(var(--background))"
       },
       black: "rgb(var(--black) / <alpha-value>)",
       error: {
@@ -61,13 +61,9 @@ module.exports = {
         900: "rgb(var(--warning-900) / <alpha-value>)",
         950: "rgb(var(--warning-950) / <alpha-value>)"
       },
-      white: "rgb(var(--white) / <alpha-value>)"
-    },
-    extend: {
-      backgroundColor: {
-        "app-primary": "rgb(var(--background-primary))",
-        "app-secondary": "rgb(var(--background-secondary))"
-      }
+      white: "rgb(var(--white) / <alpha-value>)",
+      foreground: "rgb(var(--foreground) / <alpha-value>)",
+      background: "rgb(var(--background) / <alpha-value>)"
     }
   }
 };
