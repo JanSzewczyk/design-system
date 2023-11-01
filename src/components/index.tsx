@@ -13,3 +13,5 @@ export * from "./select";
 export * from "./card";
 
 export * from "./sheet";
+
+export * from "./separator";
