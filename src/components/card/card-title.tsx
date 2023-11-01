@@ -6,6 +6,6 @@ export type CardTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
 
 export const CardTitle = React.forwardRef(
   ({ className, ...props }: CardTitleProps, ref: React.Ref<HTMLParagraphElement>) => (
-    <h3 ref={ref} className={twMerge("typography-subtitle-1", className)} {...props} />
+    <h3 ref={ref} className={twMerge("typography-heading-5", className)} {...props} />
   )
 );
