@@ -8,3 +8,4 @@ export * from "./card";
 export * from "./sheet";
 export * from "./separator";
 export * from "./header";
+export * from "./dialog";
