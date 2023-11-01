@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/JanSzewczyk/design-system/compare/v1.14.0...v1.15.0) (2023-11-01)
+
+
+### Bug Fixes
+
+* **avatar:** fix `avatar` component ([d588309](https://github.com/JanSzewczyk/design-system/commit/d5883098e2bd4d7b9f0f25867382c990f6c8afeb))
+* **styles:** update typography styles ([cb8fa37](https://github.com/JanSzewczyk/design-system/commit/cb8fa37a3294a9304b28a9e44a583a20d0a238a3))
+* **tailwindcss:** update container styles ([34fd43d](https://github.com/JanSzewczyk/design-system/commit/34fd43dd17f794a757bd9d62b83ee78c5eedc65c))
+
+
+### Features
+
+* **header:** create `Header` component ([cd9b103](https://github.com/JanSzewczyk/design-system/commit/cd9b103bb224c1b3336647d3c75b2c853993703b))
+* **separator:** create `Separator` component ([2b42dd2](https://github.com/JanSzewczyk/design-system/commit/2b42dd2c54a7a42f6e2dbe5f971360abbae1ddda))
+* **sheet:** create `Sheet` component ([a62c938](https://github.com/JanSzewczyk/design-system/commit/a62c938bb6e154b86059b00def22e8ce5332b0bd))
+
 # [1.14.0](https://github.com/JanSzewczyk/design-system/compare/v1.13.1...v1.14.0) (2023-10-29)
 
 
