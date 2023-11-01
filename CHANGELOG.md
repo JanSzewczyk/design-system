@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/JanSzewczyk/design-system/compare/v1.15.1...v1.15.2) (2023-11-01)
+
+
+### Bug Fixes
+
+* **header:** update `Header` height ([1ee9121](https://github.com/JanSzewczyk/design-system/commit/1ee91219ddf4f50e3090cf0e92e3bfd93402a8c6))
+
 ## [1.15.1](https://github.com/JanSzewczyk/design-system/compare/v1.15.0...v1.15.1) (2023-11-01)
 
 
