@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/JanSzewczyk/design-system/compare/v1.15.5...v1.16.0) (2023-11-01)
+
+
+### Bug Fixes
+
+* **button:** fix `Button` behavior ([211532a](https://github.com/JanSzewczyk/design-system/commit/211532ac35ea3bbcf7c8f1cb8dfc7befc92a673f))
+* **button:** fix `Button` link icons ([e3583cb](https://github.com/JanSzewczyk/design-system/commit/e3583cbc60fe4535da41158543102bda4bc916ac))
+
+
+### Features
+
+* **dialog:** create `Dialog` component ([2518f59](https://github.com/JanSzewczyk/design-system/commit/2518f59e181ab55cc94b72d9ccea86aab00d21ef))
+
 ## [1.15.5](https://github.com/JanSzewczyk/design-system/compare/v1.15.4...v1.15.5) (2023-11-01)
 
 
