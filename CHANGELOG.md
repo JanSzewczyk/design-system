@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.3](https://github.com/JanSzewczyk/design-system/compare/v1.15.2...v1.15.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* **sheet:** update `Sheet` styles ([2f15dd3](https://github.com/JanSzewczyk/design-system/commit/2f15dd3c786268f92c238629a6f37d513ab199d3))
+
 ## [1.15.2](https://github.com/JanSzewczyk/design-system/compare/v1.15.1...v1.15.2) (2023-11-01)
 
 
