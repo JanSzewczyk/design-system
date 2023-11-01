@@ -8,7 +8,7 @@ export const Card = React.forwardRef(
   ({ className, ...props }: CardProps, ref: React.Ref<HTMLDivElement>) => (
     <div
       ref={ref}
-      className={twMerge("h-full rounded border border-gray-400 bg-app-primary", className)}
+      className={twMerge("h-full rounded border border-gray-400 bg-foreground", className)}
       {...props}
     />
   )
