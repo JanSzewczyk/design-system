@@ -10,10 +10,6 @@ export const SheetTitle = React.forwardRef<
   SheetTitleProps
 >(function ({ className, ...props }, ref) {
   return (
-    <ReactSheet.Title
-      ref={ref}
-      className={twMerge("typography-subtitle-1", className)}
-      {...props}
-    />
+    <ReactSheet.Title ref={ref} className={twMerge("typography-heading-6", className)} {...props} />
   );
 });
