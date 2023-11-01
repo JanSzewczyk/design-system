@@ -73,9 +73,6 @@ export const Button = React.forwardRef(function (
   ref?: React.Ref<HTMLButtonElement>
 ) {
   const props = {
-    asChild,
-    fullWidth,
-    color,
     children,
     size,
     variant,
@@ -106,7 +103,11 @@ export const Button = React.forwardRef(function (
       tabIndex={isDisabled ? -1 : 0}
       type={Component === "button" ? type : undefined}
     >
-      {asChild ? <ButtonComponent>{children}</ButtonComponent> : <ButtonComponent {...props} />}
+      {asChild ? (
+        <ButtonComponent {...props}>{children}</ButtonComponent>
+      ) : (
+        <ButtonComponent {...props} />
+      )}
     </Component>
   );
 });

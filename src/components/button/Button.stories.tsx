@@ -175,13 +175,23 @@ export const FullWidth: Story = {
 
 export const WithIcon: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />}>
-        LEFT ICON
-      </Button>
-      <Button color="primary" endIcon={<GitHubLogoIcon />}>
-        RIGHT ICON
-      </Button>
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-4">
+        <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />}>
+          LEFT ICON
+        </Button>
+        <Button color="primary" endIcon={<GitHubLogoIcon />}>
+          RIGHT ICON
+        </Button>
+      </div>
+      <div className="flex flex-wrap gap-4">
+        <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />} asChild>
+          <a href="">LEFT ICON link</a>
+        </Button>
+        <Button color="primary" endIcon={<GitHubLogoIcon />} asChild>
+          <a href="">RIGHT ICON link</a>
+        </Button>
+      </div>
     </div>
   )
 };
