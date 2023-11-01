@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.4](https://github.com/JanSzewczyk/design-system/compare/v1.15.3...v1.15.4) (2023-11-01)
+
+
+### Bug Fixes
+
+* **styles:** fix `container` class styles ([3f05c01](https://github.com/JanSzewczyk/design-system/commit/3f05c01111cbc56a3d7da460088f64770b2b188d))
+
 ## [1.15.3](https://github.com/JanSzewczyk/design-system/compare/v1.15.2...v1.15.3) (2023-11-01)
 
 
