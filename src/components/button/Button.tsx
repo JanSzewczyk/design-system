@@ -54,36 +54,27 @@ type Props = {
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Props;
 
-export const Button = React.forwardRef(function (
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function (
   {
     asChild = false,
-    fullWidth = false,
-    color = "primary",
-    children,
-    size = "md",
     variant = "text",
+    color = "primary",
     disabled = false,
+    fullWidth = false,
+    ...props
+  },
+  ref
+) {
+  const {
+    children,
     type = "button",
     loading = false,
+    size = "md",
     loadingPosition = "start",
     endIcon,
     startIcon,
-    ...restProps
-  }: ButtonProps,
-  ref?: React.Ref<HTMLButtonElement>
-) {
-  const props = {
-    children,
-    size,
-    variant,
-    disabled,
-    type,
-    loading,
-    loadingPosition,
-    endIcon,
-    startIcon,
-    ...restProps
-  };
+    ...rest
+  } = props;
 
   const Component = asChild ? Slot : "button";
 
@@ -93,7 +84,7 @@ export const Button = React.forwardRef(function (
 
   return (
     <Component
-      {...restProps}
+      {...(asChild ? props : rest)}
       aria-disabled={isDisabled || undefined}
       className={buttonStyles}
       data-state={loading ? "loading" : undefined}
@@ -103,20 +94,16 @@ export const Button = React.forwardRef(function (
       tabIndex={isDisabled ? -1 : 0}
       type={Component === "button" ? type : undefined}
     >
-      {asChild ? (
-        <ButtonComponent {...props}>{children}</ButtonComponent>
-      ) : (
-        <ButtonComponent {...props} />
-      )}
+      {asChild ? <ButtonComponent>{children}</ButtonComponent> : <ButtonComponent {...props} />}
     </Component>
   );
 });
 
 function ButtonComponent({
   children,
-  loading,
-  size,
-  loadingPosition,
+  loading = false,
+  size = "md",
+  loadingPosition = "start",
   startIcon,
   endIcon,
   ...props
