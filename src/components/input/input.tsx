@@ -1,20 +1,18 @@
 import * as React from "react";
 
-import { inputCva, inputIconContainerCva } from "./Input.styles";
+import { twMerge } from "tailwind-merge";
 
-import { OmitStylesProps } from "../../types/utils.types";
+import { inputCva, inputIconContainerCva } from "./input.styles";
 
-type Props = {
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   invalid?: boolean;
   startIcon?: React.ReactElement | string;
   endIcon?: React.ReactElement | string;
 };
 
-export type InputProps = OmitStylesProps<React.ComponentPropsWithoutRef<"input">> & Props;
-
-export const Input = React.forwardRef(function (
-  { invalid = false, startIcon, endIcon, disabled = false, ...props }: InputProps,
-  ref: React.Ref<HTMLInputElement>
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(function (
+  { invalid = false, startIcon, endIcon, disabled = false, className, ...props },
+  ref
 ) {
   const inputStyles = inputCva({ withEndIcon: !!endIcon, withStartIcon: !!startIcon, invalid });
   const inputIconStartContainer = inputIconContainerCva({ site: "left", disabled });
@@ -24,11 +22,11 @@ export const Input = React.forwardRef(function (
     <div className="relative text-gray-100 typography-body-2">
       {startIcon ? <span className={inputIconStartContainer}>{startIcon}</span> : null}
       <input
+        {...props}
         aria-invalid={invalid || undefined}
         disabled={disabled}
-        className={inputStyles}
+        className={twMerge(inputStyles, className)}
         ref={ref}
-        {...props}
       />
       {endIcon ? (
         <span aria-hidden className={inputIconEndContainer}>
