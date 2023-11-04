@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/JanSzewczyk/design-system/compare/v1.16.2...v1.17.0) (2023-11-04)
+
+
+### Features
+
+* **form:** add `Form` component ([d7aaaef](https://github.com/JanSzewczyk/design-system/commit/d7aaaef1868b18825e80cbf31a034f909891d88c))
+
 ## [1.16.2](https://github.com/JanSzewczyk/design-system/compare/v1.16.1...v1.16.2) (2023-11-02)
 
 
