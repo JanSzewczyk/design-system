@@ -14,7 +14,14 @@ export default defineConfig([
     skipNodeModulesBundle: false,
     outDir: "dist",
     entry: ["./src/index.ts?(x)"],
-    external: ["react", "react-dom", "class-variance-authority", "@radix-ui/*"]
+    external: [
+      "react",
+      "react-dom",
+      "class-variance-authority",
+      "@radix-ui/*",
+      "react-hook-form",
+      "tailwind-merge"
+    ]
   },
   {
     splitting: true,
