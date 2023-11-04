@@ -9,3 +9,6 @@ export * from "./sheet";
 export * from "./separator";
 export * from "./header";
 export * from "./dialog";
+export * from "./form";
+export * from "./helper-text";
+export * from "./label";
