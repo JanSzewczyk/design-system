@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/JanSzewczyk/design-system/compare/v1.17.0...v1.17.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* **dialog:** fix dialog styles ([3313284](https://github.com/JanSzewczyk/design-system/commit/3313284da255969670c32b05fd7e657d38e89300))
+
 # [1.17.0](https://github.com/JanSzewczyk/design-system/compare/v1.16.2...v1.17.0) (2023-11-04)
 
 
