@@ -18,13 +18,7 @@ export default defineConfig([
       "react",
       "react-dom",
       "class-variance-authority",
-      "@radix-ui/react-avatar",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-label",
-      "@radix-ui/react-select",
-      "@radix-ui/react-separator",
-      "@radix-ui/react-slot",
-      "@radix-ui/react-tooltip",
+      "@radix-ui/*",
       "react-hook-form",
       "tailwind-merge"
     ]
