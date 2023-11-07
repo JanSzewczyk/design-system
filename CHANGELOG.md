@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://github.com/JanSzewczyk/design-system/compare/v1.17.1...v1.17.2) (2023-11-07)
+
+
+### Bug Fixes
+
+* **icons:** fix icons deploy ([02d4f3b](https://github.com/JanSzewczyk/design-system/commit/02d4f3b8e2c841e63c316438f4a66083f7026b65))
+
 ## [1.17.1](https://github.com/JanSzewczyk/design-system/compare/v1.17.0...v1.17.1) (2023-11-07)
 
 
