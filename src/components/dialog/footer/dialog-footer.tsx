@@ -7,10 +7,7 @@ export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
 export function DialogFooter({ className, ...props }: DialogFooterProps) {
   return (
     <div
-      className={twMerge(
-        "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-        className
-      )}
+      className={twMerge("mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   );

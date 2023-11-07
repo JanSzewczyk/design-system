@@ -6,7 +6,7 @@ export type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement>;
 export function DialogHeader({ className, ...props }: DialogHeaderProps) {
   return (
     <div
-      className={twMerge("flex flex-col space-y-1.5 text-center sm:text-left", className)}
+      className={twMerge("mb-4 flex flex-col space-y-1.5 text-center sm:text-left", className)}
       {...props}
     />
   );
