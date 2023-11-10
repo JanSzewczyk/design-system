@@ -21,7 +21,7 @@ export const Select = React.forwardRef(
     return (
       <ReactSelect.Root {...props}>
         <ReactSelect.Trigger className={selectStyles} ref={forwardedRef}>
-          <ReactSelect.Value placeholder="Select a fruit…" />
+          <ReactSelect.Value placeholder={placeholder} />
           <ReactSelect.Icon className="-mr-1.5">
             <CaretSortIcon className="h-5 w-5 text-gray-200" />
           </ReactSelect.Icon>
@@ -30,7 +30,7 @@ export const Select = React.forwardRef(
         <ReactSelect.Portal>
           <ReactSelect.Content
             sideOffset={4}
-            className="w-full overflow-hidden border border-gray-350 bg-app-primary py-1"
+            className="w-full overflow-hidden border border-gray-400 bg-foreground py-1"
           >
             <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
           </ReactSelect.Content>
