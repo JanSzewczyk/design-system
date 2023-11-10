@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.3](https://github.com/JanSzewczyk/design-system/compare/v1.17.2...v1.17.3) (2023-11-10)
+
+
+### Bug Fixes
+
+* **select:** fix select styles ([7e8e62a](https://github.com/JanSzewczyk/design-system/commit/7e8e62a5292e7a60171045b8c01dd9fd669be536))
+
 ## [1.17.2](https://github.com/JanSzewczyk/design-system/compare/v1.17.1...v1.17.2) (2023-11-07)
 
 
