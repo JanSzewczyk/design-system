@@ -30,7 +30,7 @@ export const Select = React.forwardRef(
         <ReactSelect.Portal>
           <ReactSelect.Content
             sideOffset={4}
-            className="w-full overflow-hidden border border-gray-400 bg-foreground py-1"
+            className="z-50 w-full overflow-hidden border border-gray-400 bg-foreground py-1"
           >
             <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
           </ReactSelect.Content>
