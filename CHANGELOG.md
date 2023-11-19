@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.5](https://github.com/JanSzewczyk/design-system/compare/v1.17.4...v1.17.5) (2023-11-19)
+
+
+### Bug Fixes
+
+* **z-indexes:** fix z-indexes ([552b35e](https://github.com/JanSzewczyk/design-system/commit/552b35e911b9319bbb67416e34422873eec075bd))
+
 ## [1.17.4](https://github.com/JanSzewczyk/design-system/compare/v1.17.3...v1.17.4) (2023-11-10)
 
 
