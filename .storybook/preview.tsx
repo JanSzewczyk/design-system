@@ -15,8 +15,10 @@ const channel = addons.getChannel();
 // switch body class for story along with interface theme
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
   if (isDark) {
+    // @ts-ignore
     document.body.classList.add("dark");
   } else {
+    // @ts-ignore
     document.body.classList.remove("dark");
   }
 });
