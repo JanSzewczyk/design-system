@@ -16,7 +16,5 @@ export const Textarea = React.forwardRef(function (
 ) {
   const textareaStyles = textareaCva({ invalid });
 
-  return (
-    <textarea aria-invalid={invalid || undefined} className={textareaStyles} ref={ref} {...props} />
-  );
+  return <textarea aria-invalid={invalid || undefined} className={textareaStyles} ref={ref} {...props} />;
 });

@@ -54,9 +54,7 @@ export const Side: Story = {
           <SheetContent side={side}>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>
-                Make changes to your profile here. Click save when you're done.
-              </SheetDescription>
+              <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">Some content</div>
             <SheetFooter>

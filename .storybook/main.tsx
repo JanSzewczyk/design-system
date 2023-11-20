@@ -12,7 +12,8 @@ export default {
     "@storybook/addon-a11y",
     "@storybook/addon-interactions",
     "@storybook/addon-styling",
-    "storybook-dark-mode"
+    "storybook-dark-mode",
+    "@storybook/addon-mdx-gfm"
   ],
   framework: {
     name: "@storybook/react-vite",

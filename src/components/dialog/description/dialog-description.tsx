@@ -9,10 +9,6 @@ export const DialogDescription = React.forwardRef<
   DialogDescriptionProps
 >(function ({ className, ...props }, ref) {
   return (
-    <ReactDialog.Description
-      ref={ref}
-      className={twMerge("text-gray-200 typography-body-2", className)}
-      {...props}
-    />
+    <ReactDialog.Description ref={ref} className={twMerge("text-gray-200 typography-body-2", className)} {...props} />
   );
 });

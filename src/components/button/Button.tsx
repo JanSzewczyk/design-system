@@ -55,14 +55,7 @@ type Props = {
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Props;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function (
-  {
-    asChild = false,
-    variant = "text",
-    color = "primary",
-    disabled = false,
-    fullWidth = false,
-    ...props
-  },
+  { asChild = false, variant = "text", color = "primary", disabled = false, fullWidth = false, ...props },
   ref
 ) {
   const {

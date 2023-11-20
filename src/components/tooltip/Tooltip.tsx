@@ -24,12 +24,7 @@ export function Tooltip({
   ...props
 }: TooltipProps) {
   return (
-    <ReactTooltip.Root
-      delayDuration={0}
-      open={open}
-      defaultOpen={defaultOpen}
-      onOpenChange={onOpenChange}
-    >
+    <ReactTooltip.Root delayDuration={0} open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       <ReactTooltip.Trigger asChild>{children}</ReactTooltip.Trigger>
       {content ? (
         <ReactTooltip.Portal>

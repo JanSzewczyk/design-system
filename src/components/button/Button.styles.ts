@@ -35,9 +35,9 @@ export const buttonCva = cva(
         variant: "text",
         color: "neutral",
         class: [
-          "text-gray-100",
-          "hover:border-gray-100 hover:bg-gray-100 hover:text-black",
-          "active:border-gray-200 active:bg-gray-200"
+          "text-gray-200",
+          "hover:border-gray-350 hover:bg-gray-350 hover:text-gray-100",
+          "active:border-gray-300 active:bg-gray-300"
         ]
       },
       {
