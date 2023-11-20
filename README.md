@@ -44,10 +44,7 @@ After installing the [@szum-tech/design-system](https://www.npmjs.com/package/@s
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "...",
-    "./node_modules/@szum-tech/design-system/{components,hooks,contexts}/**/*{js,ts,jsx,tsx}"
-  ],
+  content: ["...", "./node_modules/@szum-tech/design-system/{components,hooks,contexts}/**/*{js,ts,jsx,tsx}"],
   theme: {
     extend: {}
   },

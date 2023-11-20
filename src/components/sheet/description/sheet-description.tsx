@@ -9,10 +9,6 @@ export const SheetDescription = React.forwardRef<
   SheetDescriptionProps
 >(function ({ className, ...props }, ref) {
   return (
-    <ReactSheet.Description
-      ref={ref}
-      className={twMerge("text-gray-200 typography-body-2", className)}
-      {...props}
-    />
+    <ReactSheet.Description ref={ref} className={twMerge("text-gray-200 typography-body-2", className)} {...props} />
   );
 });

@@ -7,10 +7,7 @@ function getInitialTheme(defaultTheme?: ThemeType): ThemeType {
   if (typeof window !== "undefined" && window.localStorage) {
     const storageTheme = window.localStorage.getItem("theme");
 
-    if (
-      storageTheme === "dark" ||
-      (!storageTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
+    if (storageTheme === "dark" || (!storageTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       return "dark";
     }
   }
@@ -34,9 +31,7 @@ export interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children, defaultTheme, theme }: ThemeProviderProps) {
-  const [themeState, setThemeState] = React.useState<ThemeType>(
-    theme ? theme : getInitialTheme(defaultTheme)
-  );
+  const [themeState, setThemeState] = React.useState<ThemeType>(theme ? theme : getInitialTheme(defaultTheme));
 
   function rawSetTheme(rawTheme: ThemeType): void {
     if (typeof window !== "undefined" && window.localStorage) {
@@ -55,8 +50,6 @@ export function ThemeProvider({ children, defaultTheme, theme }: ThemeProviderPr
   }, [themeState]);
 
   return (
-    <ThemeContext.Provider value={{ theme: themeState, setTheme: setThemeState }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme: themeState, setTheme: setThemeState }}>{children}</ThemeContext.Provider>
   );
 }

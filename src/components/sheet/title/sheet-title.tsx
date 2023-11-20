@@ -5,11 +5,9 @@ import { twMerge } from "tailwind-merge";
 
 export type SheetTitleProps = React.ComponentPropsWithoutRef<typeof ReactSheet.Title>;
 
-export const SheetTitle = React.forwardRef<
-  React.ElementRef<typeof ReactSheet.Title>,
-  SheetTitleProps
->(function ({ className, ...props }, ref) {
-  return (
-    <ReactSheet.Title ref={ref} className={twMerge("typography-heading-6", className)} {...props} />
-  );
+export const SheetTitle = React.forwardRef<React.ElementRef<typeof ReactSheet.Title>, SheetTitleProps>(function (
+  { className, ...props },
+  ref
+) {
+  return <ReactSheet.Title ref={ref} className={twMerge("typography-heading-6", className)} {...props} />;
 });

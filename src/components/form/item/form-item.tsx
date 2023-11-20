@@ -6,10 +6,7 @@ import { FormItemContext } from "./form-item.context";
 
 export type FormItemProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(function (
-  { className, ...props },
-  ref
-) {
+export const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(function ({ className, ...props }, ref) {
   const id = React.useId();
 
   return (

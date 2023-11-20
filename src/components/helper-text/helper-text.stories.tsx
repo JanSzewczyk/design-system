@@ -17,7 +17,5 @@ export const Description: Story = {
 };
 
 export const Error: Story = {
-  render: () => (
-    <HelperText type="error">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</HelperText>
-  )
+  render: () => <HelperText type="error">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</HelperText>
 };

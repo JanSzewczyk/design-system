@@ -4,10 +4,5 @@ import { twMerge } from "tailwind-merge";
 
 export type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement>;
 export function DialogHeader({ className, ...props }: DialogHeaderProps) {
-  return (
-    <div
-      className={twMerge("mb-4 flex flex-col space-y-1.5 text-center sm:text-left", className)}
-      {...props}
-    />
-  );
+  return <div className={twMerge("mb-4 flex flex-col space-y-1.5 text-center sm:text-left", className)} {...props} />;
 }

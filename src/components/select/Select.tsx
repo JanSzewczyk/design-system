@@ -12,10 +12,7 @@ export type SelectProps = OmitStylesProps<ReactSelect.SelectProps> & {
 };
 
 export const Select = React.forwardRef(
-  (
-    { children, placeholder, ...props }: SelectProps,
-    forwardedRef: React.Ref<HTMLButtonElement>
-  ) => {
+  ({ children, placeholder, ...props }: SelectProps, forwardedRef: React.Ref<HTMLButtonElement>) => {
     const selectStyles = selectCva();
 
     return (
@@ -30,8 +27,7 @@ export const Select = React.forwardRef(
         <ReactSelect.Portal>
           <ReactSelect.Content
             sideOffset={4}
-            position="popper"
-            className="z-[51] w-full overflow-hidden border border-gray-400 bg-foreground py-1"
+            className="z-50 w-full overflow-hidden border border-gray-400 bg-foreground py-1"
           >
             <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
           </ReactSelect.Content>
