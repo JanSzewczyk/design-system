@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.8](https://github.com/JanSzewczyk/design-system/compare/v1.17.7...v1.17.8) (2023-11-20)
+
+
+### Bug Fixes
+
+* **dialog:** update dialog and bump libraries ([d3729e7](https://github.com/JanSzewczyk/design-system/commit/d3729e7fbf53477019a88125e8cff0082ee9eb95))
+* **storybook:** fix storybook config ([71470b8](https://github.com/JanSzewczyk/design-system/commit/71470b89693228ba165afc5cce86ac63dac6ecab))
+
 ## [1.17.7](https://github.com/JanSzewczyk/design-system/compare/v1.17.6...v1.17.7) (2023-11-19)
 
 
