@@ -12,3 +12,4 @@ export * from "./dialog";
 export * from "./form";
 export * from "./helper-text";
 export * from "./label";
+export * from "./alert-dialog";
