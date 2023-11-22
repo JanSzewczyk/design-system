@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/JanSzewczyk/design-system/compare/v1.17.8...v1.18.0) (2023-11-22)
+
+
+### Features
+
+* **alert-dialog:** add `AlertDialog` component ([fe7367b](https://github.com/JanSzewczyk/design-system/commit/fe7367b562b5cd3890442fba721c1cd267b702be))
+
 ## [1.17.8](https://github.com/JanSzewczyk/design-system/compare/v1.17.7...v1.17.8) (2023-11-20)
 
 
