@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code 📚
         uses: actions/checkout@v3
       - name: Set up Node 🟢
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code 📚
         uses: actions/checkout@v3
       - name: Set up Node 🟢
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -55,7 +55,7 @@ jobs:
       - name: Checkout code 📚
         uses: actions/checkout@v3
       - name: Set up Node 🟢
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -75,7 +75,7 @@ jobs:
       - name: Checkout code 📚
         uses: actions/checkout@v3
       - name: Set up Node 🟢
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -97,7 +97,7 @@ jobs:
   #        uses: actions/checkout@v3
   #
   #      - name: Set up Node 🟢
-  #        uses: actions/setup-node@v3
+  #        uses: actions/setup-node@v4
   #        with:
   #          node-version: ${{ matrix.node-version }}
   #
@@ -118,7 +118,7 @@ jobs:
       - name: Checkout code 📚
         uses: actions/checkout@v3
       - name: Set up Node 🟢
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
