@@ -71,7 +71,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.6",
+    "@babel/core": "^7.24.0",
     "@hookform/resolvers": "^3.3.2",
     "@storybook/addon-a11y": "^7.6.6",
     "@storybook/addon-essentials": "^7.6.6",
