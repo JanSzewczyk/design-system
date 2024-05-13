@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
         os: [ubuntu-latest]
     steps:
       - name: Checkout code 📚
@@ -19,25 +19,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "npm"
       - name: Install packages ⚙️
-        run: yarn install --frozen-lockfile
-
+        run: npm ci
       #      - name: Run ESLint 🧹
       #        run: yarn lint
 
       - name: Run tests 🧪
-        run: yarn test
-
+        run: npm run test
       - name: Build 🏗️
-        run: yarn build
+        run: npm run build
 
   release:
     name: Github Release
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
         os: [ubuntu-latest]
     needs: [test]
     steps:
@@ -47,13 +45,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "npm"
       - name: Install packages ⚙️
-        run: yarn install --frozen-lockfile
+        run: npm ci
       - name: Build 🏗️
-        run: yarn build
+        run: npm run build
       - name: Deploy package 🚀
-        run: yarn semantic-release
+        run: npx semantic-release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
