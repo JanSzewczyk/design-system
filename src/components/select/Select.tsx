@@ -5,7 +5,7 @@ import * as ReactSelect from "@radix-ui/react-select";
 import { selectCva } from "./Select.styles";
 
 import { CaretSortIcon } from "../../icons";
-import { OmitStylesProps } from "../../types/utils.types";
+import { OmitStylesProps } from "~/types/utils.types";
 
 export type SelectProps = OmitStylesProps<ReactSelect.SelectProps> & {
   placeholder?: React.ReactNode;
@@ -30,7 +30,7 @@ export const Select = React.forwardRef(function (
       <ReactSelect.Portal>
         <ReactSelect.Content
           sideOffset={4}
-          className="w-full overflow-hidden border border-gray-400 bg-foreground py-1 z-50"
+          className="z-50 w-full overflow-hidden border border-gray-400 bg-foreground py-1"
         >
           <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
         </ReactSelect.Content>

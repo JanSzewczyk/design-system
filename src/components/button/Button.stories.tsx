@@ -3,7 +3,7 @@ import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Button } from "./Button";
-import { ButtonVariantType } from "./Button.types";
+import { type ButtonVariantType } from "./Button.types";
 
 import { ArrowBottomLeftIcon, GitHubLogoIcon } from "../../icons";
 
