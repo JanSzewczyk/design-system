@@ -5,8 +5,11 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "21:37"
+      timezone: "Europe/Warsaw"
     groups:
-      connect-dependencies:
+      github-dependencies:
         patterns:
           - "*"
 
@@ -15,7 +18,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "21:37"
+      timezone: "Europe/Warsaw"
     groups:
-      connect-dependencies:
+      design-system-dependencies:
         patterns:
           - "*"

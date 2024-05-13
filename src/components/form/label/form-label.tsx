@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import { Label, LabelProps } from "../../label";
+import { Label, LabelProps } from "~/components/label";
 import { useFormField } from "../field/use-form-field";
 
 export type FormLabelProps = LabelProps & {

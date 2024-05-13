@@ -10,7 +10,7 @@ export const AlertDialogOverlay = React.forwardRef<
   return (
     <ReactAlertDialog.Overlay
       className={twMerge(
-        "fixed inset-0 z-60 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        "z-60 fixed inset-0 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className
       )}
       {...props}
