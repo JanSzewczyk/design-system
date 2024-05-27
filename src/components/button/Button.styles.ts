@@ -2,9 +2,9 @@ import { cva } from "class-variance-authority";
 
 export const buttonCva = cva(
   [
-    "inline-flex items-center justify-center align-middle no-underline transition-colors ease-in-out duration-300",
-    "font-sans appearance-none select-none rounded-sm border font-medium tracking-[.02857em]",
-    "aria-disabled:pointer-events-none aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
+    "inline-flex items-center justify-center align-middle no-underline transition-colors duration-300 ease-in-out",
+    "font-sans select-none appearance-none rounded-sm border font-medium tracking-[.02857em]",
+    "aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
   ],
   {
     variants: {
@@ -81,42 +81,42 @@ export const buttonCva = cva(
       {
         variant: "outlined",
         color: "neutral",
-        class: ["text-gray-100 border-gray-350", "hover:bg-gray-350", "active:bg-gray-400"]
+        class: ["border-gray-350 text-gray-100", "hover:bg-gray-350", "active:bg-gray-400"]
       },
       {
         variant: "outlined",
         color: "primary",
         class: [
-          "text-primary-500 border-primary-500",
+          "border-primary-500 text-primary-500",
           "hover:bg-primary-500 hover:text-white",
-          "active:text-white active:bg-primary-600"
+          "active:bg-primary-600 active:text-white"
         ]
       },
       {
         variant: "outlined",
         color: "success",
         class: [
-          "text-success-500 border-success-500",
+          "border-success-500 text-success-500",
           "hover:bg-success-500 hover:text-white",
-          "active:text-white active:bg-success-600"
+          "active:bg-success-600 active:text-white"
         ]
       },
       {
         variant: "outlined",
         color: "warning",
         class: [
-          "text-warning-500 border-warning-500",
+          "border-warning-500 text-warning-500",
           "hover:bg-warning-500 hover:text-white",
-          "active:text-white active:bg-warning-600"
+          "active:bg-warning-600 active:text-white"
         ]
       },
       {
         variant: "outlined",
         color: "error",
         class: [
-          "text-error-500 border-error-500",
+          "border-error-500 text-error-500",
           "hover:bg-error-500 hover:text-white",
-          "active:text-white active:bg-error-600"
+          "active:bg-error-600 active:text-white"
         ]
       },
 
@@ -125,7 +125,7 @@ export const buttonCva = cva(
         variant: "contained",
         color: "neutral",
         class: [
-          "text-gray-100 border-gray-350 bg-gray-350",
+          "border-gray-350 bg-gray-350 text-gray-100",
           "hover:border-gray-300 hover:bg-gray-300",
           "active:border-gray-400 active:bg-gray-400"
         ]
@@ -232,7 +232,7 @@ export const iconContainerCva = cva("", {
 export const iconCva = cva("", {
   variants: {
     loading: {
-      true: "motion-reduce:hidden animate-spin"
+      true: "animate-spin motion-reduce:hidden"
     },
     size: {
       sm: "h-4.5 w-4.5",
