@@ -10,8 +10,8 @@ export const textareaCva = cva(
   {
     variants: {
       invalid: {
-        true: ["text-error-500 border-error-500", "hover:border-error-400", "focus:text-gray-100"],
-        false: ["text-gray-100 border-gray-350", "hover:border-primary-500"]
+        true: ["border-error-500 text-error-500", "hover:border-error-400", "focus:text-gray-100"],
+        false: ["border-gray-350 text-gray-100", "hover:border-primary-500"]
       }
     },
     defaultVariants: {

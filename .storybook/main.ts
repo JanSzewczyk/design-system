@@ -20,9 +20,6 @@ export default {
     reactDocgen: "react-docgen-typescript",
     check: true
   },
-  docs: {
-    autodocs: true
-  },
   viteFinal: async (config) => {
     return mergeConfig(config, {
       plugins: [tsConfigPaths()]
