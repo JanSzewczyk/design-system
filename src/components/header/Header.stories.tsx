@@ -18,7 +18,7 @@ export const Default: Story = {
   render: () => (
     <Header>
       <h1 className="typography-heading-4">LOGO</h1>
-      <div className="ml-16 flex flex-row items-center">
+      <div className="ml-auto flex flex-row items-center">
         <div className="mr-8 flex flex-row items-center gap-4">
           <div className="typography-button">Docs</div>
           <div className="typography-button">Source</div>

@@ -111,5 +111,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "preserveWatchOutput": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }

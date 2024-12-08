@@ -1,8 +1,10 @@
 import { type Config } from "tailwindcss";
+import colorsPreset from "./src/theme/tailwind-preset";
 
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx,mdx}"],
-  presets: [require("./src/theme/main-preset")],
+  presets: [colorsPreset],
+  darkMode: ["class", '[data-mode="dark"]'],
   theme: {
     extend: {}
   },
