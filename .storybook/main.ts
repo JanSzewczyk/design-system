@@ -8,8 +8,6 @@ export default {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-interactions",
-    "storybook-dark-mode",
-    "@storybook/addon-themes",
     "storybook-dark-mode"
   ],
   framework: {
