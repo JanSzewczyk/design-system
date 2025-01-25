@@ -1,57 +1,30 @@
-name: Release 🚀
+name: Publish 🚀
 
 on:
   push:
     branches: [main]
 
+env:
+  NODE_VERSION: 22.x
+
 jobs:
-  test:
-    name: Test
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
+  publish:
+    name: Publish 🚀
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v4
       - name: Set up Node 🟢
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Install packages ⚙️
-        run: npm ci
-      #      - name: Run ESLint 🧹
-      #        run: yarn lint
-
-      - name: Run tests 🧪
-        run: npm run test
-      - name: Build 🏗️
-        run: npm run build
-
-  release:
-    name: Github Release
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
-    needs: [test]
-    steps:
-      - name: Checkout code 📚
-        uses: actions/checkout@v4
-      - name: Set up Node 🟢
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
       - name: Build 🏗️
         run: npm run build
-      - name: Deploy package 🚀
+      - name: Publish package 🚀
         run: npx semantic-release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
