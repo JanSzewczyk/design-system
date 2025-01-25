@@ -77,7 +77,7 @@ jobs:
       - name: Install packages ⚙️
         run: npm ci
       - name: Check Tests 🧪
-        run: npm run test
+        run: npm run test:ci
 
   build-storybook:
     name: Build Storybook 📖
