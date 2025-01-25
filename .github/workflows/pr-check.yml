@@ -3,126 +3,124 @@ name: PR Checks ✅
 on:
   pull_request:
 
-jobs:
-  build:
-    name: Build 🏗️
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
-    steps:
-      - name: Checkout code 📚
-        uses: actions/checkout@v4
-      - name: Set up Node 🟢
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - name: Install packages ⚙️
-        run: npm ci
-      - name: Build Check 🏗️
-        run: npm run build
+env:
+  NODE_VERSION: 22.x
 
-  build-storybook:
-    name: Build Storybook 📖
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
+jobs:
+  type-check:
+    name: TypeScript
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v4
       - name: Set up Node 🟢
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
-      - name: Build Check 🏗️
-        run: npm run storybook:build
+      - name: TypeScript Check
+        run: npm ci type-check
 
   prettier:
     name: Prettier 🧹
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v4
       - name: Set up Node 🟢
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
       - name: Prettier Check 🧹
         run: npm run prettier:check
 
-  test:
-    name: Test 🧪
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
+  lint:
+    name: ESlint ⬣
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v4
       - name: Set up Node 🟢
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      - name: Install dependencies ⚙️
+        run: npm ci
+      - name: Install utils ⚙️
+        run: npm install @microsoft/eslint-formatter-sarif
+      - name: ESlint Check ⬣
+        run: npm run lint:ci
+        continue-on-error: true
+      - name: Upload ESlint results to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: eslint-results.sarif
+          wait-for-processing: true
+
+  test:
+    name: Test 🧪
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v4
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
       - name: Check Tests 🧪
         run: npm run test
 
-  #  lint:
-  #    name: Eslint ⬣
-  #    runs-on: ${{ matrix.os }}
-  #    strategy:
-  #      matrix:
-  #        node-version: [18.x]
-  #        os: [ubuntu-latest]
-  #
-  #    steps:
-  #      - name: Checkout code 📚
-  #        uses: actions/checkout@v4
-  #
-  #      - name: Set up Node 🟢
-  #        uses: actions/setup-node@v4
-  #        with:
-  #          node-version: ${{ matrix.node-version }}
-  #
-  #      - name: Install packages ⚙️
-  #        run: yarn install --frozen-lockfile
-  #
-  #      - name: Eslint Check ⬣
-  #        run: yarn lint:ci
-
-  type-check:
-    name: TypeScript
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node-version: [20.x]
-        os: [ubuntu-latest]
+  build-storybook:
+    name: Build Storybook 📖
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code 📚
         uses: actions/checkout@v4
       - name: Set up Node 🟢
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
-      - name: TypeScript Check
-        run: npm ci type-check
+      - name: Build Check 🏗️
+        run: npm run storybook:build
+
+  build:
+    name: Build 🏗️
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v4
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      - name: Install packages ⚙️
+        run: npm ci
+      - name: Build Check 🏗️
+        run: npm run build
+
+  dependency-review:
+    name: Dependency Review 👀
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v4
+      - name: Dependency Review 👀
+        uses: actions/dependency-review-action@v4
+        with:
+          comment-summary-in-pr: on-failure
