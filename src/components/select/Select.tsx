@@ -5,22 +5,19 @@ import * as ReactSelect from "@radix-ui/react-select";
 import { selectCva } from "./Select.styles";
 
 import { CaretSortIcon } from "../../icons";
-import { OmitStylesProps } from "~/types/utils.types";
 
-export type SelectProps = OmitStylesProps<ReactSelect.SelectProps> & {
+export type SelectProps = ReactSelect.SelectProps & {
+  ref?: React.ComponentProps<typeof ReactSelect.Trigger>["ref"];
   placeholder?: React.ReactNode;
   invalid?: boolean;
 };
 
-export const Select = React.forwardRef(function (
-  { children, placeholder, invalid = false, ...props }: SelectProps,
-  forwardedRef: React.Ref<HTMLButtonElement>
-) {
+export function Select({ children, placeholder, invalid = false, ref, ...props }: SelectProps) {
   const selectStyles = selectCva({ invalid });
 
   return (
     <ReactSelect.Root {...props}>
-      <ReactSelect.Trigger className={selectStyles} ref={forwardedRef}>
+      <ReactSelect.Trigger className={selectStyles} ref={ref}>
         <ReactSelect.Value placeholder={placeholder} />
         <ReactSelect.Icon className="-mr-1.5">
           <CaretSortIcon className="h-5 w-5 text-gray-200" />
@@ -37,4 +34,4 @@ export const Select = React.forwardRef(function (
       </ReactSelect.Portal>
     </ReactSelect.Root>
   );
-});
+}

@@ -2,11 +2,9 @@ import * as ReactAlertDialog from "@radix-ui/react-alert-dialog";
 import { twMerge } from "tailwind-merge";
 import * as React from "react";
 
-export type AlertDialogOverlayProps = React.ComponentPropsWithoutRef<typeof ReactAlertDialog.Overlay>;
-export const AlertDialogOverlay = React.forwardRef<
-  React.ElementRef<typeof ReactAlertDialog.Overlay>,
-  AlertDialogOverlayProps
->(function ({ className, ...props }, ref) {
+export type AlertDialogOverlayProps = React.ComponentProps<typeof ReactAlertDialog.Overlay>;
+
+export function AlertDialogOverlay({ className, ...props }: AlertDialogOverlayProps) {
   return (
     <ReactAlertDialog.Overlay
       className={twMerge(
@@ -14,7 +12,6 @@ export const AlertDialogOverlay = React.forwardRef<
         className
       )}
       {...props}
-      ref={ref}
     />
   );
-});
+}

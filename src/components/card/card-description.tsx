@@ -2,10 +2,8 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-export type CardDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+export type CardDescriptionProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-export const CardDescription = React.forwardRef(
-  ({ className, ...props }: CardDescriptionProps, ref: React.Ref<HTMLParagraphElement>) => (
-    <p ref={ref} className={twMerge("text-gray-200 typography-body-2", className)} {...props} />
-  )
-);
+export function CardDescription({ className, ...props }: CardDescriptionProps) {
+  return <p className={twMerge("text-gray-200 typography-body-2", className)} {...props} />;
+}

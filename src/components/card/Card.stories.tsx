@@ -3,10 +3,10 @@ import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Card } from "./card";
-import { CardContent } from "./card-content";
-import { CardDescription } from "./card-description";
-import { CardFooter } from "./card-footer";
-import { CardHeader } from "./card-header";
+import { CardContent } from "~/components";
+import { CardDescription } from "~/components";
+import { CardFooter } from "~/components";
+import { CardHeader } from "~/components";
 import { CardTitle } from "./card-title";
 
 import { Button } from "../button";

@@ -1,6 +1,6 @@
-const plugin = require("tailwindcss/plugin");
+import plugin from "tailwindcss/plugin";
 
-module.exports = plugin(function ({ addUtilities }) {
+export default plugin(function ({ addUtilities }) {
   addUtilities({
     ".typography-heading-1": {
       "@apply font-poppins text-6xl font-light leading-relaxed -tracking-[.01562em]": {}

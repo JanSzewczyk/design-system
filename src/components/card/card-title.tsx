@@ -1,11 +1,9 @@
-import React from "react";
+import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-export type CardTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
+export type CardTitleProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>;
 
-export const CardTitle = React.forwardRef(
-  ({ className, ...props }: CardTitleProps, ref: React.Ref<HTMLParagraphElement>) => (
-    <h3 ref={ref} className={twMerge("typography-heading-5", className)} {...props} />
-  )
-);
+export function CardTitle({ className, ...props }: CardTitleProps) {
+  return <h3 className={twMerge("typography-heading-5", className)} {...props} />;
+}

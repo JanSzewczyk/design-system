@@ -3,15 +3,11 @@ import * as React from "react";
 import * as ReactSeparator from "@radix-ui/react-separator";
 import { twMerge } from "tailwind-merge";
 
-export type SeparatorProps = React.ComponentPropsWithoutRef<typeof ReactSeparator.Root>;
+export type SeparatorProps = React.ComponentProps<typeof ReactSeparator.Root>;
 
-export const Separator = React.forwardRef<React.ElementRef<typeof ReactSeparator.Root>, SeparatorProps>(function (
-  { className, orientation = "horizontal", decorative = true, ...props },
-  ref
-) {
+export function Separator({ className, orientation = "horizontal", decorative = true, ...props }: SeparatorProps) {
   return (
     <ReactSeparator.Root
-      ref={ref}
       decorative={decorative}
       orientation={orientation}
       className={twMerge(
@@ -22,4 +18,4 @@ export const Separator = React.forwardRef<React.ElementRef<typeof ReactSeparator
       {...props}
     />
   );
-});
+}

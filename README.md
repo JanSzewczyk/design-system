@@ -13,7 +13,9 @@
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/JanSzewczyk/design-system/blob/main/LICENSE)
 
-Design system supported by [tailwindcss](https://tailwindcss.com/) library, it allows the creation of applications supporting light and dark themes, shares UI React Components and a color palette in compliance with the Szum-Tech standards.
+Design system supported by [tailwindcss](https://tailwindcss.com/) library, it allows the creation of applications
+supporting light and dark themes, shares UI React Components and a color palette in compliance with the Szum-Tech
+standards.
 
 ## Installation
 
@@ -35,7 +37,9 @@ yarn add -D tailwindcss
 
 ## Configuration
 
-After installing the [@szum-tech/design-system](https://www.npmjs.com/package/@szum-tech/design-system) package in accordance with paragraph [Installation](#Installation), during [Tailwind initialization](https://tailwindcss.com/docs/installation), follow these steps:
+After installing the [@szum-tech/design-system](https://www.npmjs.com/package/@szum-tech/design-system) package in
+accordance with paragraph [Installation](#Installation), during
+[Tailwind initialization](https://tailwindcss.com/docs/installation), follow these steps:
 
 ### 1. Add preset to `tailwind.config.js` file
 
@@ -55,7 +59,8 @@ module.exports = {
 
 ### 2. Import theme styles to CSS file with Tailwind directives
 
-> Import CSS file from `@szum-tech/design-system/theme` with colors palette for dark and light theme and default styles (see file with [theme styles](https://github.com/JanSzewczyk/design-system/blob/main/src/theme/global.css))
+> Import CSS file from `@szum-tech/design-system/theme` with colors palette for dark and light theme and default styles
+> (see file with [theme styles](https://github.com/JanSzewczyk/design-system/blob/main/src/theme/global.css))
 
 ```css
 @import "@szum-tech/design-system/theme/global.css";
@@ -69,7 +74,9 @@ module.exports = {
 
 ### Theme Provider
 
-`ThemeProvider` relies on the [context feature of React](https://reactjs.org/docs/context.html) to handle theme mode and pass it to components, so you need to make sure `ThemeProvider` is the parent of the components you are trying to customize.
+`ThemeProvider` relies on the [context feature of React](https://reactjs.org/docs/context.html) to handle theme mode and
+pass it to components, so you need to make sure `ThemeProvider` is the parent of the components you are trying to
+customize.
 
 Here is an example of a basic app using `ThemeProvider` component:
 
@@ -89,7 +96,8 @@ function Providers({ children }) {
 
 ## Changelog
 
-The [changelog](https://github.com/JanSzewczyk/design-system/blob/main/CHANGELOG.md) is regularly updated to reflect what's changed in each new release.
+The [changelog](https://github.com/JanSzewczyk/design-system/blob/main/CHANGELOG.md) is regularly updated to reflect
+what's changed in each new release.
 
 ## License
 

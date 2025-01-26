@@ -1,5 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import typographyPlugin from "./plugins/utilities/typography";
+import scrollPlugin from "./plugins/utilities/scroll";
+import animatePlugin from "tailwindcss-animate";
+import scrollbarPlugin from "tailwind-scrollbar";
+import containerQueriesPlugin from "@tailwindcss/container-queries";
+import { PresetsConfig } from "tailwindcss/types/config";
+import colorsPreset from "./presets/colors";
+
+const preset: PresetsConfig = {
   darkMode: "class",
   theme: {
     container: {
@@ -46,20 +53,20 @@ module.exports = {
       },
       keyframes: {
         slideDownAndFade: {
-          from: { opacity: 0, transform: "translateY(-2px)" },
-          to: { opacity: 1, transform: "translateY(0)" }
+          from: { opacity: "0", transform: "translateY(-2px)" },
+          to: { opacity: "1", transform: "translateY(0)" }
         },
         slideLeftAndFade: {
-          from: { opacity: 0, transform: "translateX(2px)" },
-          to: { opacity: 1, transform: "translateX(0)" }
+          from: { opacity: "0", transform: "translateX(2px)" },
+          to: { opacity: "1", transform: "translateX(0)" }
         },
         slideUpAndFade: {
-          from: { opacity: 0, transform: "translateY(2px)" },
-          to: { opacity: 1, transform: "translateY(0)" }
+          from: { opacity: "0", transform: "translateY(2px)" },
+          to: { opacity: "1", transform: "translateY(0)" }
         },
         slideRightAndFade: {
-          from: { opacity: 0, transform: "translateX(-2px)" },
-          to: { opacity: 1, transform: "translateX(0)" }
+          from: { opacity: "0", transform: "translateX(-2px)" },
+          to: { opacity: "1", transform: "translateX(0)" }
         }
       },
       animation: {
@@ -70,12 +77,8 @@ module.exports = {
       }
     }
   },
-  presets: [require("./presets/colors")],
-  plugins: [
-    require("@tailwindcss/container-queries"),
-    require("tailwind-scrollbar"),
-    require("tailwindcss-animate"),
-    require("./plugins/utilities/scroll"),
-    require("./plugins/utilities/typography")
-  ]
+  presets: [colorsPreset],
+  plugins: [containerQueriesPlugin, scrollbarPlugin, animatePlugin, scrollPlugin, typographyPlugin]
 };
+
+export default preset;

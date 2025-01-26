@@ -134,7 +134,9 @@
     --background-color-warning: var(--warning-500) / 0.25;
     --background-color-error: var(--error-500) / 0.25;
   }
+}
 
+@layer {
   body {
     @apply bg-background font-poppins text-gray-100 antialiased scroll;
   }

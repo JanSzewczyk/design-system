@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-export type DialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
+export type DialogFooterProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function DialogFooter({ className, ...props }: DialogFooterProps) {
   return (
