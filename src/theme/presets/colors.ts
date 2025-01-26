@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import { PresetsConfig } from "tailwindcss/types/config";
+
+export default {
   theme: {
     colors: {
       app: {
@@ -66,4 +67,4 @@ module.exports = {
       background: "rgb(var(--background) / <alpha-value>)"
     }
   }
-};
+} satisfies PresetsConfig;

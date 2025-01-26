@@ -2,6 +2,8 @@ import { defineConfig } from "tsup";
 
 const env = process.env.NODE_ENV || "development";
 
+// TODO refactor this
+
 export default defineConfig([
   {
     splitting: true,
@@ -29,9 +31,10 @@ export default defineConfig([
     entry: ["./src/icons/index.tsx"]
   },
   {
-    entry: ["./src/theme/main-preset.js"],
+    entry: ["./src/theme/main-preset.ts"],
     minify: false,
     bundle: true,
+    dts: true,
     outDir: env === "production" ? "theme" : "dist/theme"
   }
 ]);

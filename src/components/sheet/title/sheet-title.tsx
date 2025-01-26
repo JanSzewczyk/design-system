@@ -3,11 +3,8 @@ import * as React from "react";
 import * as ReactSheet from "@radix-ui/react-dialog";
 import { twMerge } from "tailwind-merge";
 
-export type SheetTitleProps = React.ComponentPropsWithoutRef<typeof ReactSheet.Title>;
+export type SheetTitleProps = React.ComponentProps<typeof ReactSheet.Title>;
 
-export const SheetTitle = React.forwardRef<React.ElementRef<typeof ReactSheet.Title>, SheetTitleProps>(function (
-  { className, ...props },
-  ref
-) {
-  return <ReactSheet.Title ref={ref} className={twMerge("typography-heading-6", className)} {...props} />;
-});
+export function SheetTitle({ className, ...props }: SheetTitleProps) {
+  return <ReactSheet.Title className={twMerge("typography-heading-6", className)} {...props} />;
+}

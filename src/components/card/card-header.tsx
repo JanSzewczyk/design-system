@@ -2,10 +2,8 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-export type CardHeaderProps = React.HTMLAttributes<HTMLDivElement>;
+export type CardHeaderProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-export const CardHeader = React.forwardRef(
-  ({ className, ...props }: CardHeaderProps, ref: React.Ref<HTMLDivElement>) => (
-    <div ref={ref} className={twMerge("flex flex-col p-6", className)} {...props} />
-  )
-);
+export function CardHeader({ className, ...props }: CardHeaderProps) {
+  return <div className={twMerge("flex flex-col p-6", className)} {...props} />;
+}

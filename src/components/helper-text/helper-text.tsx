@@ -3,16 +3,14 @@ import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
 import { helperTextCva } from "./helper-text.styles";
-import { HelperTextType } from "./text-helper.types";
+import { HelperTextType } from "~/components";
 
-export type HelperTextProps = React.HTMLAttributes<HTMLParagraphElement> & {
-  type?: HelperTextType;
-};
+export type HelperTextProps = React.HTMLAttributes<HTMLParagraphElement> &
+  React.RefAttributes<HTMLParagraphElement> & {
+    type?: HelperTextType;
+  };
 
-export const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps>(function (
-  { className, children, type = "description", role, ...props },
-  ref
-) {
+export function HelperText({ className, children, type = "description", role, ref, ...props }: HelperTextProps) {
   return (
     <p
       ref={ref}
@@ -23,4 +21,4 @@ export const HelperText = React.forwardRef<HTMLParagraphElement, HelperTextProps
       {children}
     </p>
   );
-});
+}

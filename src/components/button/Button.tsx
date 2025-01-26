@@ -3,9 +3,9 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
-import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "./Button.types";
+import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "~/components";
 
-import { LoadingIcon } from "../../icons";
+import { LoadingIcon } from "~/icons";
 
 type Props = {
   /**
@@ -52,12 +52,19 @@ type Props = {
   asChild?: boolean;
 };
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & Props;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.RefAttributes<HTMLButtonElement> &
+  Props;
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function (
-  { asChild = false, variant = "text", color = "primary", disabled = false, fullWidth = false, ...props },
-  ref
-) {
+export function Button({
+  asChild = false,
+  variant = "text",
+  color = "primary",
+  disabled = false,
+  fullWidth = false,
+  ref,
+  ...props
+}: ButtonProps) {
   const {
     children,
     type = "button",
@@ -87,12 +94,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
       tabIndex={isDisabled ? -1 : 0}
       type={Component === "button" ? type : undefined}
     >
-      {asChild ? <ButtonComponent>{children}</ButtonComponent> : <ButtonComponent {...props} />}
+      {asChild ? <ButtonContent>{children}</ButtonContent> : <ButtonContent {...props} />}
     </Component>
   );
-});
+}
 
-function ButtonComponent({
+function ButtonContent({
   children,
   loading = false,
   size = "md",
@@ -124,21 +131,20 @@ function ButtonComponent({
   ) : null;
 
   return React.isValidElement(children) ? (
-    React.cloneElement(children as React.ReactElement, {
-      ...props,
-      children: (
-        <>
-          {LeadingIcon}
-          {React.isValidElement(children) ? children.props.children : null}
-          {TrailingIcon}
-        </>
-      )
-    })
+    React.cloneElement(
+      children as React.ReactElement,
+      props,
+      <React.Fragment>
+        {LeadingIcon}
+        {React.isValidElement<React.PropsWithChildren<{}>>(children) ? children.props?.children : null}
+        {TrailingIcon}
+      </React.Fragment>
+    )
   ) : (
-    <>
+    <React.Fragment>
       {LeadingIcon}
       {children}
       {TrailingIcon}
-    </>
+    </React.Fragment>
   );
 }

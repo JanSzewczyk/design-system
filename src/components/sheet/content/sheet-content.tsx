@@ -6,22 +6,19 @@ import { twMerge } from "tailwind-merge";
 import { SheetOverlay } from "./overlay";
 import { SheetPortal } from "./portal";
 import { sheetContentStyles } from "./sheet-content.styles";
-import { SheetContentSide } from "./sheet-content.types";
+import { SheetContentSide } from "~/components";
 
 import { Cross1Icon } from "../../../icons";
 
-export type SheetContentProps = React.ComponentPropsWithoutRef<typeof ReactSheet.Content> & {
+export type SheetContentProps = React.ComponentProps<typeof ReactSheet.Content> & {
   side?: SheetContentSide;
 };
 
-export const SheetContent = React.forwardRef<React.ElementRef<typeof ReactSheet.Content>, SheetContentProps>(function (
-  { side = "right", className, children, ...props },
-  ref
-) {
+export function SheetContent({ side = "right", className, children, ...props }: SheetContentProps) {
   return (
     <SheetPortal>
       <SheetOverlay />
-      <ReactSheet.Content ref={ref} className={twMerge(sheetContentStyles({ side }), className)} {...props}>
+      <ReactSheet.Content className={twMerge(sheetContentStyles({ side }), className)} {...props}>
         {children}
         <ReactSheet.Close className="focus:ring-ring absolute right-4 top-4 rounded-sm opacity-70 ring-primary-500 ring-offset-foreground transition-opacity data-[state=open]:bg-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none">
           <Cross1Icon className="h-4 w-4" />
@@ -30,4 +27,4 @@ export const SheetContent = React.forwardRef<React.ElementRef<typeof ReactSheet.
       </ReactSheet.Content>
     </SheetPortal>
   );
-});
+}
