@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const selectCva = cva(
   [
-    "h-10 px-3 w-full appearance-none border bg-app-primary py-2 font-poppins outline-0 inline-flex items-center justify-between text-gray-100 typography-body-2 gap-2 transition-colors duration-300 ease-in-out",
+    "h-10 px-3 w-full appearance-none border bg-app-foreground py-2 outline-0 inline-flex items-center justify-between text-gray-100 text-body-2 gap-2 transition-colors duration-300 ease-in-out",
     "placeholder:select-none placeholder:text-gray-200",
     "invalid:border-error-500 focus:border-primary-400 active:border-primary-400",
     "disabled:border-gray-400 disabled:text-gray-200 disabled:placeholder:text-gray-300"

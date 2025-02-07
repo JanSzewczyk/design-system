@@ -6,5 +6,5 @@ import { twMerge } from "tailwind-merge";
 export type DialogDescriptionProps = React.ComponentProps<typeof ReactDialog.Description>;
 
 export function DialogDescription({ className, ...props }: DialogDescriptionProps) {
-  return <ReactDialog.Description className={twMerge("text-gray-200 typography-body-2", className)} {...props} />;
+  return <ReactDialog.Description className={twMerge("text-body-2 text-gray-200", className)} {...props} />;
 }

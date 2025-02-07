@@ -119,13 +119,13 @@ function ButtonContent({
   const endIconContainerStyles = iconContainerCva({ size, site: "right" });
 
   const LeadingIcon = StartIcon ? (
-    <span className={startIconContainerStyles} role={isStartLoading ? "progressbar" : undefined}>
+    <span title="asdfads" className={startIconContainerStyles} role={isStartLoading ? "progressbar" : undefined}>
       {React.cloneElement(StartIcon, { className: startIconStyles })}
     </span>
   ) : null;
 
   const TrailingIcon = EndIcon ? (
-    <span className={endIconContainerStyles} role={isEndLoading ? "progressbar" : undefined}>
+    <span title="asdfas" className={endIconContainerStyles} role={isEndLoading ? "progressbar" : undefined}>
       {React.cloneElement(EndIcon, { className: endIconStyles })}
     </span>
   ) : null;

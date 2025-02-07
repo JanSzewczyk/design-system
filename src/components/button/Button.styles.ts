@@ -20,7 +20,7 @@ export const buttonCva = cva(
       },
       size: {
         sm: "px-2.5 py-1 text-[.8125rem] leading-4",
-        md: "px-4 py-1.5 text-sm leading-5",
+        md: "px-4 py-1.5 text-[0.875rem] leading-5",
         lg: "px-5 py-2 text-[.9375rem] leading-6"
       },
       variant: {

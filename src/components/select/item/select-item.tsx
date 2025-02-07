@@ -9,7 +9,7 @@ export type SelectItemProps = React.ComponentProps<typeof ReactSelect.Item>;
 export function SelectItem({ children, ...props }: SelectItemProps) {
   return (
     <ReactSelect.Item
-      className="flex w-full select-none flex-row items-center justify-between px-3 py-2 font-poppins text-gray-100 data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-400 data-[state=checked]:bg-primary-300 data-[highlighted]:outline-none"
+      className="text-body-2 data-[state=checked]:bg-primary-300 flex w-full flex-row items-center justify-between px-3 py-2 text-gray-100 select-none data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-400 data-[highlighted]:outline-none"
       {...props}
     >
       <ReactSelect.ItemText className="flex-1">{children}</ReactSelect.ItemText>

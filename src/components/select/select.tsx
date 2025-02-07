@@ -27,7 +27,7 @@ export function Select({ children, placeholder, invalid = false, ref, ...props }
       <ReactSelect.Portal>
         <ReactSelect.Content
           sideOffset={4}
-          className="z-50 w-full overflow-hidden border border-gray-400 bg-foreground py-1"
+          className="bg-app-foreground z-50 w-full overflow-hidden border border-gray-400 py-1"
         >
           <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
         </ReactSelect.Content>
