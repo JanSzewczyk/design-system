@@ -1,9 +1,8 @@
 import darkTheme from "./theme/dark";
 import lightTheme from "./theme/light";
 import { type Preview } from "@storybook/react";
-import "../src/theme/global.css";
 
-import { DocsContainer } from "./components/DocsContainer";
+import { DocsContainer } from "./components/docs-container";
 
 export default {
   parameters: {
@@ -24,8 +23,8 @@ export default {
         date: /Date$/
       }
     },
-    container: DocsContainer,
     docs: {
+      container: DocsContainer,
       controls: {
         sort: "requiredFirst"
       }

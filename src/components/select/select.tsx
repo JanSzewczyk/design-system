@@ -2,7 +2,7 @@ import * as React from "react";
 
 import * as ReactSelect from "@radix-ui/react-select";
 
-import { selectCva } from "./Select.styles";
+import { selectCva } from "./select.styles";
 
 import { CaretSortIcon } from "../../icons";
 

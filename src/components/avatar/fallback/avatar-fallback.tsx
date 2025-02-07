@@ -9,7 +9,7 @@ export function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps
   return (
     <ReactAvatar.Fallback
       ref={ref}
-      className={twMerge("flex h-full w-full items-center justify-center bg-gray-350", className)}
+      className={twMerge("bg-gray-350 flex h-full w-full items-center justify-center", className)}
       {...props}
     />
   );
