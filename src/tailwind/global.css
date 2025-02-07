@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "@tailwindcss";
 @import "typography.css";
 @import "palette.css";
 @import "animation.css";
