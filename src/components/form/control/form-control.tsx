@@ -20,3 +20,4 @@ export const FormControl = React.forwardRef<React.ElementRef<typeof Slot>, FormC
     />
   );
 });
+FormControl.displayName = "FormControl";

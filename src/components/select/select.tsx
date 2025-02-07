@@ -2,9 +2,9 @@ import * as React from "react";
 
 import * as ReactSelect from "@radix-ui/react-select";
 
-import { selectCva } from "./select.styles";
-
 import { CaretSortIcon } from "../../icons";
+
+import { selectCva } from "./select.styles";
 
 export type SelectProps = ReactSelect.SelectProps & {
   ref?: React.ComponentProps<typeof ReactSelect.Trigger>["ref"];
@@ -20,7 +20,7 @@ export function Select({ children, placeholder, invalid = false, ref, ...props }
       <ReactSelect.Trigger className={selectStyles} ref={ref}>
         <ReactSelect.Value placeholder={placeholder} />
         <ReactSelect.Icon className="-mr-1.5">
-          <CaretSortIcon className="h-5 w-5 text-gray-200" />
+          <CaretSortIcon className="size-5 text-gray-200" />
         </ReactSelect.Icon>
       </ReactSelect.Trigger>
 

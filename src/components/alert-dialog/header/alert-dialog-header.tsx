@@ -1,5 +1,6 @@
-import { twMerge } from "tailwind-merge";
 import * as React from "react";
+
+import { twMerge } from "tailwind-merge";
 
 export type AlertDialogHeaderProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Meta, StoryObj } from "@storybook/react";
-
-import { Input } from "./input";
+import { type Meta, type StoryObj } from "@storybook/react";
 
 import { BadgeIcon, GitHubLogoIcon } from "../../icons";
+
+import { Input } from "./input";
 
 const meta = {
   title: "Components/Input",
@@ -24,8 +24,8 @@ export const Base: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
     </div>
   ),
   args: {}
@@ -37,8 +37,8 @@ export const Disabled: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
     </div>
   ),
   args: {
@@ -52,8 +52,8 @@ export const Invalid: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="h-4 w-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="h-4 w-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
     </div>
   ),
   args: {

@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { twMerge } from "tailwind-merge";
-
 import { inputCva, inputIconContainerCva } from "./input.styles";
+import { cn } from "~/utils";
 
 export type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   invalid?: boolean;
@@ -21,7 +20,7 @@ export function Input({ invalid = false, startIcon, endIcon, disabled = false, c
       <input
         aria-invalid={invalid || undefined}
         disabled={disabled}
-        className={twMerge(inputStyles, className)}
+        className={cn(inputStyles, className)}
         {...props}
       />
       {endIcon ? (

@@ -1,6 +1,6 @@
-import { VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 
-import { avatarCva } from "./avatar.styles";
+import { type avatarCva } from "./avatar.styles";
 
 type AvatarCvaProps = VariantProps<typeof avatarCva>;
 

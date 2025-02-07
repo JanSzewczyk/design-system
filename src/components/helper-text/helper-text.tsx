@@ -2,8 +2,9 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
+import { type HelperTextType } from "~/components";
+
 import { helperTextCva } from "./helper-text.styles";
-import { HelperTextType } from "~/components";
 
 export type HelperTextProps = React.HTMLAttributes<HTMLParagraphElement> &
   React.RefAttributes<HTMLParagraphElement> & {

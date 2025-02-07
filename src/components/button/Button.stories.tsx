@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Meta, StoryObj } from "@storybook/react";
-
-import { Button } from "./Button";
-import { type ButtonVariantType } from "./Button.types";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { type ButtonVariantType } from "~/components";
 
 import { ArrowBottomLeftIcon, GitHubLogoIcon } from "../../icons";
+
+import { Button } from "./Button";
 
 const meta = {
   title: "Components/Button",

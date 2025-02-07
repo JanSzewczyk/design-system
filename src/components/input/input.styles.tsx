@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const inputCva = cva(
   [
-    "h-10 w-full appearance-none border bg-app-foreground py-2 font-poppins outline-0 transition-colors duration-300 ease-in-out",
+    "bg-app-foreground font-poppins h-10 w-full appearance-none border py-2 outline-0 transition-colors duration-300 ease-in-out",
     "placeholder:select-none placeholder:text-gray-200",
     "invalid:border-error-500 focus:border-primary-400 active:border-primary-400",
     "disabled:border-gray-400 disabled:text-gray-200 disabled:placeholder:text-gray-300"
@@ -11,7 +11,7 @@ export const inputCva = cva(
     variants: {
       invalid: {
         true: ["text-error-500 border-error-500 hover:border-error-400 focus:text-gray-100"],
-        false: ["text-gray-100 border-gray-350 hover:border-primary-500"]
+        false: ["border-gray-350 hover:border-primary-500 text-gray-100"]
       },
       withStartIcon: {
         true: "pl-11",
@@ -31,9 +31,7 @@ export const inputCva = cva(
 );
 
 export const inputIconContainerCva = cva(
-  [
-    "pointer-events-none absolute bottom-2 top-2 inline-flex w-10 content-center items-center justify-center text-center"
-  ],
+  ["pointer-events-none absolute inset-y-2 inline-flex w-10 place-content-center items-center text-center"],
   {
     variants: {
       disabled: {

@@ -1,5 +1,6 @@
-import { StorybookConfig } from "@storybook/react-vite";
 import tsConfigPaths from "vite-tsconfig-paths";
+
+import { type StorybookConfig } from "@storybook/react-vite";
 
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],

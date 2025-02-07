@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { HelperText } from "../../helper-text";
+import { HelperText } from "~/components";
+
 import { useFormField } from "../field/use-form-field";
 
 export type FormMessageProps = React.HTMLAttributes<HTMLParagraphElement>;
@@ -22,3 +23,4 @@ export const FormMessage = React.forwardRef<HTMLParagraphElement, FormMessagePro
     </HelperText>
   );
 });
+FormMessage.displayName = "FormMessage";

@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { type Meta, type StoryObj } from "@storybook/react";
+
 import { HelperText } from ".";
-import { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
   title: "Components/Helper Text",

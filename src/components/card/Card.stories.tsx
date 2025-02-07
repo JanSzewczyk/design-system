@@ -1,15 +1,12 @@
 import * as React from "react";
 
-import { Meta, StoryObj } from "@storybook/react";
-
-import { Card } from "./card";
-import { CardContent } from "~/components";
-import { CardDescription } from "~/components";
-import { CardFooter } from "~/components";
-import { CardHeader } from "~/components";
-import { CardTitle } from "./card-title";
+import { type Meta, type StoryObj } from "@storybook/react";
+import { CardContent, CardDescription, CardFooter, CardHeader } from "~/components";
 
 import { Button } from "../button";
+
+import { Card } from "./card";
+import { CardTitle } from "./card-title";
 
 const meta = {
   title: "Components/Card",

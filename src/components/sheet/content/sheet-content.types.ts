@@ -1,6 +1,6 @@
-import { VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 
-import { sheetContentStyles } from "./sheet-content.styles";
+import { type sheetContentStyles } from "./sheet-content.styles";
 
 type SheetContentCvaProps = VariantProps<typeof sheetContentStyles>;
 
