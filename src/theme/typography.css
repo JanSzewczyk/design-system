@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --font-code: "JetBrains Mono", monospace;
+
+  /* HEADING */
+  --text-heading-1: 6rem;
+  --text-heading-1--line-height: 1.5;
+  --text-heading-1--letter-spacing: -0.01562em;
+  --text-heading-1--font-weight: 300;
+
+  --text-heading-2: 3.75rem;
+  --text-heading-2--line-height: 1.2;
+  --text-heading-2--letter-spacing: -0.00833em;
+  --text-heading-2--font-weight: 300;
+
+  --text-heading-3: 3rem;
+  --text-heading-3--line-height: 1.167;
+  --text-heading-3--letter-spacing: 0em;
+  --text-heading-3--font-weight: 400;
+
+  --text-heading-4: 2.125rem;
+  --text-heading-4--line-height: 1.235;
+  --text-heading-4--letter-spacing: 0.00735em;
+  --text-heading-4--font-weight: 400;
+
+  --text-heading-5: 1.5rem;
+  --text-heading-5--line-height: 1.334;
+  --text-heading-5--letter-spacing: 0.00735em;
+  --text-heading-5--font-weight: 400;
+
+  --text-heading-6: 1.25rem;
+  --text-heading-6--line-height: 1.6;
+  --text-heading-6--letter-spacing: 0.0075em;
+  --text-heading-6--font-weight: 500;
+
+  --text-subtitle-1: 1rem;
+  --text-subtitle-1--line-height: 1.75;
+  --text-subtitle-1--letter-spacing: 0.00938em;
+  --text-subtitle-1--font-weight: 400;
+
+  --text-subtitle-2: 0.875rem;
+  --text-subtitle-2--line-height: 1.57;
+  --text-subtitle-2--letter-spacing: 0.00714em;
+  --text-subtitle-2--font-weight: 500;
+
+  /* BODY */
+  --text-body-1: 1rem;
+  --text-body-1--line-height: 1.5;
+  --text-body-1--letter-spacing: 0.00938em;
+  --text-body-1--font-weight: 400;
+
+  --text-body-2: 0.875rem;
+  --text-body-2--line-height: 1.43;
+  --text-body-2--letter-spacing: 0.01071em;
+  --text-body-2--font-weight: 400;
+
+  /* Other */
+  --text-button: 0.875rem;
+  --text-button--line-height: 1.25rem;
+  --text-button--letter-spacing: 0.02857em;
+  --text-button--font-weight: 500;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.66;
+  --text-caption--letter-spacing: 0.03333em;
+  --text-caption--font-weight: 400;
+
+  --text-overline: 0.75rem;
+  --text-overline--line-height: 2.66;
+  --text-overline--letter-spacing: 0.08333em;
+  --text-overline--font-weight: 400;
+}
