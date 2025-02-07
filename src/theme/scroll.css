@@ -1,10 +1,4 @@
 @import "tailwindcss";
-@import "typography.css";
-@import "palette.css";
-@import "animation.css";
-@import "scroll.css";
-
-@plugin "tailwindcss-animate";
 
 @layer base {
   * {
@@ -27,18 +21,5 @@
     ::-webkit-scrollbar-thumb:hover {
       background: var(--color-gray-350);
     }
-  }
-
-  body {
-    @apply bg-app-background font-poppins text-gray-100 antialiased;
-  }
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 0.5rem;
-
-  @media (width >= 40rem) {
-    padding-inline: 1rem;
   }
 }
