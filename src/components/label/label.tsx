@@ -8,7 +8,7 @@ export type LabelProps = React.ComponentProps<typeof ReactLabel.Root>;
 export function Label({ className, ...props }: LabelProps) {
   return (
     <ReactLabel.Root
-      className={twMerge("typography-subtitle-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70", className)}
+      className={twMerge("text-subtitle-1 peer-disabled:cursor-not-allowed peer-disabled:opacity-70", className)}
       {...props}
     />
   );

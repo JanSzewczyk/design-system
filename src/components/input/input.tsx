@@ -16,7 +16,7 @@ export function Input({ invalid = false, startIcon, endIcon, disabled = false, c
   const inputIconEndContainer = inputIconContainerCva({ site: "right", disabled });
 
   return (
-    <div className="relative text-gray-100 typography-body-2">
+    <div className="text-body-2 relative text-gray-100">
       {startIcon ? <span className={inputIconStartContainer}>{startIcon}</span> : null}
       <input
         aria-invalid={invalid || undefined}
