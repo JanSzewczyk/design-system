@@ -1,6 +1,6 @@
-import { VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 
-import { dialogContentStyles } from "./dialog-content.styles";
+import { type dialogContentStyles } from "./dialog-content.styles";
 
 type DialogContentCvaProps = VariantProps<typeof dialogContentStyles>;
 

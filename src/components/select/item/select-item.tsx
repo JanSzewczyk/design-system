@@ -14,7 +14,7 @@ export function SelectItem({ children, ...props }: SelectItemProps) {
     >
       <ReactSelect.ItemText className="flex-1">{children}</ReactSelect.ItemText>
       <ReactSelect.ItemIndicator>
-        <CheckIcon className="h-4 w-4" />
+        <CheckIcon className="size-4" />
       </ReactSelect.ItemIndicator>
     </ReactSelect.Item>
   );

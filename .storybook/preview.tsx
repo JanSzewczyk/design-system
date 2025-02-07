@@ -1,8 +1,8 @@
-import darkTheme from "./theme/dark";
-import lightTheme from "./theme/light";
 import { type Preview } from "@storybook/react";
 
 import { DocsContainer } from "./components/docs-container";
+import darkTheme from "./theme/dark";
+import lightTheme from "./theme/light";
 
 export default {
   parameters: {

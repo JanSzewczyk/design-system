@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import * as ReactAvatar from "@radix-ui/react-avatar";
-import { twMerge } from "tailwind-merge";
+import { cn } from "~/utils";
 
 export type AvatarFallbackProps = React.ComponentProps<typeof ReactAvatar.Fallback>;
 
@@ -9,7 +9,7 @@ export function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps
   return (
     <ReactAvatar.Fallback
       ref={ref}
-      className={twMerge("bg-gray-350 flex h-full w-full items-center justify-center", className)}
+      className={cn("bg-gray-350 flex h-full w-full items-center justify-center", className)}
       {...props}
     />
   );

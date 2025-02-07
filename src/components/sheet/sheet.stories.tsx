@@ -1,5 +1,9 @@
 import * as React from "react";
 
+import { type Meta, type StoryObj } from "@storybook/react";
+
+import { Button } from "../button";
+
 import {
   Sheet,
   SheetClose,
@@ -10,9 +14,6 @@ import {
   SheetTitle,
   SheetTrigger
 } from ".";
-import { Meta, StoryObj } from "@storybook/react";
-
-import { Button } from "../button";
 
 const meta = {
   title: "Components/Sheet",
@@ -54,7 +55,7 @@ export const Side: Story = {
           <SheetContent side={side}>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
+              <SheetDescription>Make changes to your profile here. Click save when you&lsquo;re done.</SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">Some content</div>
             <SheetFooter>

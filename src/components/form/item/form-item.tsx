@@ -15,3 +15,4 @@ export const FormItem = React.forwardRef<HTMLDivElement, FormItemProps>(function
     </FormItemContext.Provider>
   );
 });
+FormItem.displayName = "FormItem";

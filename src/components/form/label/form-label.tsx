@@ -2,7 +2,8 @@ import * as React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import { Label, LabelProps } from "~/components/label";
+import { Label, type LabelProps } from "~/components/label";
+
 import { useFormField } from "../field/use-form-field";
 
 export type FormLabelProps = LabelProps & {
@@ -27,3 +28,4 @@ export const FormLabel = React.forwardRef<React.ElementRef<typeof Label>, FormLa
     );
   }
 );
+FormLabel.displayName = "FormLabel";

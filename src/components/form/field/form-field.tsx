@@ -1,4 +1,4 @@
-import { Controller, ControllerProps, FieldPath, FieldValues } from "react-hook-form";
+import { Controller, type ControllerProps, type FieldPath, type FieldValues } from "react-hook-form";
 
 import { FormFieldContext } from "./form-field.context";
 

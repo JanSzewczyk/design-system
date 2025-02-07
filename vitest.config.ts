@@ -1,5 +1,6 @@
-import { defineConfig } from "vitest/config";
 import tsConfigPaths from "vite-tsconfig-paths";
+
+import { defineConfig } from "vitest/config";
 
 const reporters = process.env.CI ? ["dot", "github-actions"] : ["dot"];
 

@@ -1,11 +1,10 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
+import { type ButtonColorType, type ButtonSizeType, type ButtonVariantType } from "~/components";
+import { LoadingIcon } from "~/icons";
 
 import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
-import { ButtonColorType, ButtonSizeType, ButtonVariantType } from "~/components";
-
-import { LoadingIcon } from "~/icons";
 
 type Props = {
   /**
@@ -136,7 +135,7 @@ function ButtonContent({
       props,
       <React.Fragment>
         {LeadingIcon}
-        {React.isValidElement<React.PropsWithChildren<{}>>(children) ? children.props?.children : null}
+        {React.isValidElement<React.PropsWithChildren>(children) ? children.props?.children : null}
         {TrailingIcon}
       </React.Fragment>
     )

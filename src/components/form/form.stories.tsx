@@ -1,13 +1,15 @@
 import * as React from "react";
 
-import * as z from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from ".";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Meta } from "@storybook/react";
 import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type Meta } from "@storybook/react";
 
 import { Button } from "../button";
 import { Input } from "../input";
+
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from ".";
 
 const meta = {
   title: "Components/Form",

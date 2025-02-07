@@ -1,11 +1,12 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { expect, vi } from "vitest";
 
-import { Button } from "./Button";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import { TrashIcon } from "../../icons";
+
+import { Button } from "./Button";
 
 const mockedFn = vi.fn();
 

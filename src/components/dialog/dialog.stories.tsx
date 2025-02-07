@@ -1,5 +1,10 @@
 import * as React from "react";
 
+import { type Meta, type StoryObj } from "@storybook/react";
+
+import { Button } from "../button";
+import { Select, SelectItem } from "../select";
+
 import {
   Dialog,
   DialogClose,
@@ -10,10 +15,6 @@ import {
   DialogTitle,
   DialogTrigger
 } from ".";
-import { Meta, StoryObj } from "@storybook/react";
-
-import { Button } from "../button";
-import { Select, SelectItem } from "../select";
 
 const meta = {
   title: "Components/Dialog",
