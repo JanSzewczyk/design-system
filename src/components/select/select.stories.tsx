@@ -3,7 +3,7 @@ import * as React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import { SelectItem } from "./item";
-import { Select } from "./Select";
+import { Select } from "./select";
 
 const meta = {
   title: "Components/Select",

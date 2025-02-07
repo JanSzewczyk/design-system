@@ -7,28 +7,6 @@
 @plugin "tailwindcss-animate";
 
 @layer base {
-  * {
-    /* width */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: var(--color-app-background);
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: var(--color-gray-400);
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-gray-350);
-    }
-  }
-
   body {
     @apply bg-app-background font-poppins text-gray-100 antialiased;
   }

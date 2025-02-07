@@ -22,7 +22,7 @@ export const FormLabel = React.forwardRef<React.ElementRef<typeof Label>, FormLa
           {...props}
         />
 
-        {caption ? <div className="text-gray-200 typography-caption">{caption}</div> : null}
+        {caption ? <div className="typography-caption text-gray-200">{caption}</div> : null}
       </div>
     );
   }
