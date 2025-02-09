@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import * as ReactAvatar from "@radix-ui/react-avatar";
+import { Avatar as ReactAvatar } from "radix-ui";
+
 import { cn } from "~/utils";
 
 export type AvatarFallbackProps = React.ComponentProps<typeof ReactAvatar.Fallback>;

@@ -1,8 +1,7 @@
 import * as React from "react";
 
+import { Dialog as ReactSheet } from "radix-ui";
 import { twMerge } from "tailwind-merge";
-
-import * as ReactSheet from "@radix-ui/react-dialog";
 
 export type SheetDescriptionProps = React.ComponentProps<typeof ReactSheet.Description>;
 

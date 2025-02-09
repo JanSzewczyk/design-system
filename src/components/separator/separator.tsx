@@ -1,8 +1,7 @@
 import * as React from "react";
 
+import { Separator as ReactSeparator } from "radix-ui";
 import { twMerge } from "tailwind-merge";
-
-import * as ReactSeparator from "@radix-ui/react-separator";
 
 export type SeparatorProps = React.ComponentProps<typeof ReactSeparator.Root>;
 

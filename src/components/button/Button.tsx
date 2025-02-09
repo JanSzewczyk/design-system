@@ -75,26 +75,26 @@ export function Button({
     ...rest
   } = props;
 
-  const Component = asChild ? Slot : "button";
+  const Comp = asChild ? Slot : "button";
 
   const buttonStyles = buttonCva({ fullWidth, size, variant, color });
 
   const isDisabled = disabled || loading;
 
   return (
-    <Component
+    <Comp
       {...(asChild ? props : rest)}
       aria-disabled={isDisabled || undefined}
       className={buttonStyles}
       data-state={loading ? "loading" : undefined}
       disabled={isDisabled}
       ref={ref}
-      role={Component !== "button" ? "button" : undefined}
+      role={Comp !== "button" ? "button" : undefined}
       tabIndex={isDisabled ? -1 : 0}
-      type={Component === "button" ? type : undefined}
+      type={Comp === "button" ? type : undefined}
     >
       {asChild ? <ButtonContent>{children}</ButtonContent> : <ButtonContent {...props} />}
-    </Component>
+    </Comp>
   );
 }
 

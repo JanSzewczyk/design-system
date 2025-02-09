@@ -1,8 +1,7 @@
 import * as React from "react";
 
+import { Label as ReactLabel } from "radix-ui";
 import { twMerge } from "tailwind-merge";
-
-import * as ReactLabel from "@radix-ui/react-label";
 
 export type LabelProps = React.ComponentProps<typeof ReactLabel.Root>;
 
