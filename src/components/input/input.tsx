@@ -1,7 +1,8 @@
 import * as React from "react";
 
-import { inputCva, inputIconContainerCva } from "./input.styles";
 import { cn } from "~/utils";
+
+import { inputCva, inputIconContainerCva } from "./input.styles";
 
 export type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   invalid?: boolean;

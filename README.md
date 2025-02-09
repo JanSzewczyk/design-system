@@ -148,4 +148,4 @@ what's changed in each new release.
 ## 📜 License
 
 This project is licensed under the terms of the
-[MIT license](https://github.com/JanSzewczyk/design-system/blob/main/LICENCE).
+[MIT license](https://github.com/JanSzewczyk/design-system/blob/main/LICENSE).

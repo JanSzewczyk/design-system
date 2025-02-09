@@ -1,8 +1,7 @@
 import * as React from "react";
 
+import { Dialog as ReactDialog } from "radix-ui";
 import { twMerge } from "tailwind-merge";
-
-import * as ReactDialog from "@radix-ui/react-dialog";
 
 export type DialogDescriptionProps = React.ComponentProps<typeof ReactDialog.Description>;
 

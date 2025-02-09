@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 export type HeaderProps = React.RefAttributes<HTMLHtmlElement> & {
   children?: React.ReactNode;

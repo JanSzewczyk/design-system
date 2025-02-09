@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as ReactDialog from "@radix-ui/react-dialog";
+import { Dialog as ReactDialog } from "radix-ui";
 
 export type DialogOverlayProps = React.ComponentProps<typeof ReactDialog.Overlay>;
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as ReactTooltip from "@radix-ui/react-tooltip";
+import { Tooltip as ReactTooltip } from "radix-ui";
 
 export type TooltipProps = ReactTooltip.TooltipContentProps & {
   children?: React.ReactNode;
@@ -35,9 +35,6 @@ export function Tooltip({
             align={align}
             collisionPadding={collisionPadding}
             {...props}
-            style={{
-              maxWidth: "var(--radix-tooltip-content-available-width)"
-            }}
           >
             {content}
             <ReactTooltip.Arrow width={8} height={4} className="fill-white" />

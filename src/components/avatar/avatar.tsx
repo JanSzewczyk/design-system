@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import * as ReactAvatar from "@radix-ui/react-avatar";
+import { Avatar as ReactAvatar } from "radix-ui";
+
 import { type AvatarSizeType } from "~/components";
 import { cn } from "~/utils";
 

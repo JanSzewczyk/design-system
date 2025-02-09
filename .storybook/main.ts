@@ -20,7 +20,6 @@ export default {
     reactDocgen: "react-docgen-typescript",
     check: true
   },
-  docs: { docsMode: true },
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
 

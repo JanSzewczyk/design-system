@@ -6,23 +6,23 @@ export default defineConfig([
     clean: true,
     dts: true,
     format: ["esm", "cjs"],
-    minify: false,
     bundle: true,
     treeshake: true,
     outDir: "dist",
-    entry: ["./src/index.ts?(x)"],
-    external: ["react", "react-dom", "class-variance-authority", "@radix-ui", "react-hook-form", "tailwind-merge"]
-  },
-  {
-    splitting: true,
-    clean: true,
-    dts: true,
-    format: ["esm", "cjs"],
-    minify: true,
-    bundle: true,
-    treeshake: true,
-    skipNodeModulesBundle: false,
-    outDir: "icons",
-    entry: ["./src/icons/index.tsx"]
+    entry: {
+      index: "src/index.tsx",
+      utils: "src/utils/index.ts",
+      icons: "src/icons/index.tsx"
+    },
+    external: [
+      "react",
+      "react-dom",
+      "class-variance-authority",
+      "radix-ui",
+      "@radix-ui/react-slot",
+      "react-hook-form",
+      "tailwind-merge",
+      "clx"
+    ]
   }
 ]);

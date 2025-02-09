@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { Dialog as ReactDialog } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
-import * as ReactDialog from "@radix-ui/react-dialog";
 import { type DialogContentWidth } from "~/components";
 
 import { Cross1Icon } from "../../../icons";

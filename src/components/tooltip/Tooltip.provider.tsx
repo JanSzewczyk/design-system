@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as ReactTooltip from "@radix-ui/react-tooltip";
+import { Tooltip as ReactTooltip } from "radix-ui";
 
 export type TooltipProviderProps = {
   children: React.ReactNode;
