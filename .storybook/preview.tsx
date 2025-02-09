@@ -4,8 +4,15 @@ import { DocsContainer } from "./components/docs-container";
 import darkTheme from "./theme/dark";
 import lightTheme from "./theme/light";
 
+import "../src/tailwind/global.css";
+
 export default {
   parameters: {
+    options: {
+      storySort: {
+        order: ["Getting Started", ["Introduction"], "Components"]
+      }
+    },
     darkMode: {
       current: "light",
       classTarget: "html",
