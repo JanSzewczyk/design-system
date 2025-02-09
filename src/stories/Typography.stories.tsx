@@ -24,7 +24,7 @@ function TypographyStories({ classes, text = SampleText }: { classes: Array<stri
 }
 
 const meta: Meta = {
-  title: "Guidelines/Typography"
+  title: "Getting Started/Typography"
 };
 
 export default meta;
