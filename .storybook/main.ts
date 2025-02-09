@@ -8,6 +8,7 @@ export default {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-interactions",
+    "@storybook/addon-docs",
     "storybook-dark-mode"
   ],
   framework: "@storybook/react-vite",
@@ -19,11 +20,13 @@ export default {
     reactDocgen: "react-docgen-typescript",
     check: true
   },
+  docs: { docsMode: true },
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
 
     return mergeConfig(config, {
       plugins: [tsConfigPaths()],
+      assetsInclude: ["**/*.md"],
       optimizeDeps: {
         include: ["storybook-dark-mode"]
       }
