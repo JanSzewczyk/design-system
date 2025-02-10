@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-@import "typography.css";
-@import "palette.css";
-@import "animation.css";
-@import "scroll.css";
+@import "./typography.css";
+@import "./palette.css";
+@import "./animation.css";
+@import "./scroll.css";
 
 @plugin "tailwindcss-animate";
 

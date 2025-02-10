@@ -58,10 +58,7 @@
         "require": "./dist/utils.cjs"
       }
     },
-    "./tailwind/*.css": {
-      "import": "./tailwind/*.css",
-      "require": "./tailwind/*.css"
-    },
+    "./tailwind/*.css":  "./tailwind/*.css",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
