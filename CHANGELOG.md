@@ -1,3 +1,53 @@
+<!-- markdownlint-disable --><!-- textlint-disable -->
+# 📓 Changelog
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.0.0](https://github.com/JanSzewczyk/design-system/compare/v1.18.3...v2.0.0) (2025-02-09)
+
+### ⚠ BREAKING CHANGES
+
+* **components:** Update components to react 19
+
+### Features
+
+* **components:** update components to React 19 ([48821bf](https://github.com/JanSzewczyk/design-system/commit/48821bf030b89aaf5be1f99208610a25c2ccf56c))
+* **storybook:** upgrade storybook to latest version ([5f5fd00](https://github.com/JanSzewczyk/design-system/commit/5f5fd00ed67b14ae2aaa3d2555025037675b578a))
+* **storybook:** upgrade storybook to latest version ([7f731b8](https://github.com/JanSzewczyk/design-system/commit/7f731b8d2dcb45fe09b246515215af77a7409001))
+* **tailwind:** upgrade tailwind configuration to v4 ([37b8787](https://github.com/JanSzewczyk/design-system/commit/37b8787de376dba9aefa52f2ade05e963164fe33))
+* **theme:** add theme component ([a60b30f](https://github.com/JanSzewczyk/design-system/commit/a60b30f61c87a069c8595e52ed4e2f86be3ff6d2))
+
+### Documentation
+
+* **LICENSE:** update `LICENSE` file ([1df6265](https://github.com/JanSzewczyk/design-system/commit/1df6265e164460ef666f15cc1f6c028ec27eadca))
+* **README:** update `README.md` file with latest info ([f4598cb](https://github.com/JanSzewczyk/design-system/commit/f4598cbbb07aea44108cc91dd4040db28399ea0e))
+* **storybook:** reorganise `Getting Started` stories ([65ceb64](https://github.com/JanSzewczyk/design-system/commit/65ceb644d1f58fc8b56b14a0a9bef64a37f69ca2))
+* **storybook:** update storybook configuration > update stories order ([e319dce](https://github.com/JanSzewczyk/design-system/commit/e319dce080bfd8ffdaa6d44a811b53df30542b76))
+
+### Code Refactoring
+
+* **components:** refactor components ([536c0fe](https://github.com/JanSzewczyk/design-system/commit/536c0fe1b58cc6ccf9ce9526f07a1ca0f843a696))
+* **components:** remove theme provider from package ([3305d3b](https://github.com/JanSzewczyk/design-system/commit/3305d3b54bcb67171d2b9685f1b42c0585ed784f))
+
+### Tests
+
+* update test deps ([71173e6](https://github.com/JanSzewczyk/design-system/commit/71173e6323fa592a7c0a7bd0e898378a9af42acd))
+
+### Build System
+
+* **@szum-tech:** bump `[@szum-tech](https://github.com/szum-tech)` deps ([eb59f06](https://github.com/JanSzewczyk/design-system/commit/eb59f068abd8423fac7730208b9331e1550996ad))
+* **eslint:** add `eslint` configuration ([119cc5d](https://github.com/JanSzewczyk/design-system/commit/119cc5d7c6694ee0dc557915ba671c263ff0c719))
+* **semantic-release:** update `semantic-release` config ([9481168](https://github.com/JanSzewczyk/design-system/commit/948116886e7bdfb0546909f54cb4b8069602a84a))
+* **tsuo:** update `tsup` configuration ([04561ee](https://github.com/JanSzewczyk/design-system/commit/04561ee57823666959420672993d54b950310d25))
+* **tsup:** change `tsup` configuration ([cc19e6a](https://github.com/JanSzewczyk/design-system/commit/cc19e6a2c23e200c9b24b0ec203cb15c1c55ee22))
+
+### Continuous Integration
+
+* **gh-action:** update `CodeQL 📈` Github action ([cbbbb5f](https://github.com/JanSzewczyk/design-system/commit/cbbbb5f3cc31436263da718cb4b7186f40fdbac3))
+* **gh-action:** update `PR Checks ✅` Github action ([8e9d2dd](https://github.com/JanSzewczyk/design-system/commit/8e9d2dd343b138677d5ad6d1c8c6b1574c615f8e))
+* **gh-action:** update `Publish 🚀` Github action ([2808ffa](https://github.com/JanSzewczyk/design-system/commit/2808ffac66f977310198d49cedd072d4a526a578))
+* **gh-ation:** create `codeql.yml` ([c2c230e](https://github.com/JanSzewczyk/design-system/commit/c2c230e25acc938819d377f1184ecb10fc83f6a7))
+
 # 📓 Changelog
 
 All notable changes to this project will be documented in this file. See
