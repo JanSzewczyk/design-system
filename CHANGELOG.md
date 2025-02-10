@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/JanSzewczyk/design-system/compare/v2.0.0...v2.0.1) (2025-02-10)
+
+### Bug Fixes
+
+* **package:** fix `export` export configuration ([207719c](https://github.com/JanSzewczyk/design-system/commit/207719c4e8fef0ab03315f72dce855ba4d1a74e3))
+
 ## [2.0.0](https://github.com/JanSzewczyk/design-system/compare/v1.18.3...v2.0.0) (2025-02-09)
 
 ### ⚠ BREAKING CHANGES
