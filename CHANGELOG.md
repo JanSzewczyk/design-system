@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/JanSzewczyk/design-system/compare/v2.0.1...v2.0.2) (2025-02-10)
+
+### Bug Fixes
+
+* **package:** fix exporting css files ([79e9037](https://github.com/JanSzewczyk/design-system/commit/79e903712b9acb0f02e58f487d2a2f9afc979b8a))
+
 ## [2.0.1](https://github.com/JanSzewczyk/design-system/compare/v2.0.0...v2.0.1) (2025-02-10)
 
 ### Bug Fixes

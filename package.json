@@ -1,6 +1,6 @@
 {
   "name": "@szum-tech/design-system",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Szum-Tech design system with tailwindcss support",
   "keywords": [
     "szum-tech",
@@ -58,7 +58,7 @@
         "require": "./dist/utils.cjs"
       }
     },
-    "./tailwind/*.css":  "./tailwind/*.css",
+    "./tailwind/*.css": "./tailwind/*.css",
     "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
