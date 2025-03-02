@@ -1,0 +1,15 @@
+name: "❓ Questions & Help"
+description: "Ask a question or request guidance"
+title: "[Help]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: "### 🤔 What do you need help with?"
+  - type: textarea
+    attributes:
+      label: "Question"
+      description: "Describe your question or request."
+  - type: input
+    attributes:
+      label: "Additional Context"

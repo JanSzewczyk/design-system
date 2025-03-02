@@ -1,6 +1,6 @@
 import tsConfigPaths from "vite-tsconfig-paths";
-import react from "@vitejs/plugin-react";
 
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 const reporters = process.env.CI ? ["dot", "github-actions"] : ["dot"];
