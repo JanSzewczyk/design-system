@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/JanSzewczyk/design-system/compare/v2.0.2...v2.0.3) (2025-03-02)
+
+### Bug Fixes
+
+* **deps:** bump deps ([bb6ead7](https://github.com/JanSzewczyk/design-system/commit/bb6ead7607d1912d30fe0f06e5ab9f80ab529741))
+
+### Continuous Integration
+
+* **github:** add GitHub issues templates ([61c57ed](https://github.com/JanSzewczyk/design-system/commit/61c57ed0341c65c37504794d2caa45be8aa49827))
+* **github:** add GitHub pull request template ([4edac2c](https://github.com/JanSzewczyk/design-system/commit/4edac2cfb9e623439a6caaaa57862ad6b9f1f39b))
+
 ## [2.0.2](https://github.com/JanSzewczyk/design-system/compare/v2.0.1...v2.0.2) (2025-02-10)
 
 ### Bug Fixes
