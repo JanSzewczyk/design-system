@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const buttonCva = cva(
   [
-    "inline-flex items-center justify-center align-middle no-underline transition-colors duration-300 ease-in-out cursor-pointer",
+    "inline-flex cursor-pointer items-center justify-center align-middle no-underline transition-colors duration-300 ease-in-out",
     "select-none appearance-none rounded-sm border font-sans font-medium tracking-[.02857em]",
     "aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
   ],

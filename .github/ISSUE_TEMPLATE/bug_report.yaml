@@ -1,0 +1,43 @@
+name: "🐛 Bug Report"
+description: "Report an issue with the project"
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "### 🐞 Describe the bug"
+  - type: textarea
+    attributes:
+      label: "Bug Description"
+      description: "A clear and concise description of the issue."
+      placeholder: "What happened?"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Steps to reproduce the issue."
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+  - type: textarea
+    attributes:
+      label: "Expected Behavior"
+      description: "What should happen instead?"
+  - type: textarea
+    attributes:
+      label: "Screenshots"
+      description: "If applicable, add screenshots to help explain the problem."
+  - type: dropdown
+    attributes:
+      label: "Operating System"
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+  - type: input
+    attributes:
+      label: "Additional Context"
+      description: "Any other relevant information."

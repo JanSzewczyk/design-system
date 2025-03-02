@@ -1,0 +1,19 @@
+name: "📖 Documentation Issue"
+description: "Report an issue with the documentation"
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: "### 📝 Describe the documentation issue"
+  - type: textarea
+    attributes:
+      label: "Issue"
+      description: "What part of the documentation is unclear or incorrect?"
+  - type: input
+    attributes:
+      label: "Suggested Fix"
+      description: "Provide a suggestion for improvement."
+  - type: input
+    attributes:
+      label: "Additional Context"

@@ -1,0 +1,24 @@
+name: "🔒 Security Issue"
+description: "Report a security vulnerability"
+title: "[Security]: "
+labels: ["security"]
+body:
+  - type: markdown
+    attributes:
+      value: "### 🚨 Security Concern"
+  - type: textarea
+    attributes:
+      label: "Describe the Security Issue"
+      description: "Provide details of the vulnerability."
+  - type: input
+    attributes:
+      label: "Severity Level"
+      description: "How critical is this issue?"
+  - type: textarea
+    attributes:
+      label: "Possible Fix"
+      description: "Do you have a suggested fix?"
+  - type: textarea
+    attributes:
+      label: "Additional Context"
+      description: "Any other relevant information."
