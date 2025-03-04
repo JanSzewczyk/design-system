@@ -7,9 +7,9 @@ export default {
   addons: [
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
-    "@storybook/addon-interactions",
     "@storybook/addon-docs",
-    "storybook-dark-mode"
+    "storybook-dark-mode",
+    "@storybook/experimental-addon-test"
   ],
   framework: "@storybook/react-vite",
   core: {
