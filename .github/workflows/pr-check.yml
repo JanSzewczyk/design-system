@@ -76,6 +76,8 @@ jobs:
           cache: "npm"
       - name: Install packages ⚙️
         run: npm ci
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
       - name: Check Tests 🧪
         run: npm run test:ci
 

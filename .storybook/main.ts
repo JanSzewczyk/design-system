@@ -2,14 +2,15 @@ import tsConfigPaths from "vite-tsconfig-paths";
 
 import { type StorybookConfig } from "@storybook/react-vite";
 
+process.env.STORYBOOK = "true";
+
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
     "@storybook/addon-essentials",
-    "@storybook/addon-a11y",
-    "@storybook/addon-interactions",
-    "@storybook/addon-docs",
-    "storybook-dark-mode"
+    "@storybook/addon-links",
+    "storybook-dark-mode",
+    "@storybook/experimental-addon-test"
   ],
   framework: "@storybook/react-vite",
   core: {
@@ -25,10 +26,7 @@ export default {
 
     return mergeConfig(config, {
       plugins: [tsConfigPaths()],
-      assetsInclude: ["**/*.md"],
-      optimizeDeps: {
-        include: ["storybook-dark-mode"]
-      }
+      assetsInclude: ["**/*.md"]
     });
   }
 } satisfies StorybookConfig;
