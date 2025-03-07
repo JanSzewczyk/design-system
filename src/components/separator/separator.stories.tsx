@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { type Meta, type StoryObj } from "@storybook/react";
+import { within, expect } from "@storybook/test";
 
 import { Separator } from "./separator";
 
@@ -13,19 +12,38 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => (
-    <div>
-      <h1 className="text-heading-5">Lorem ipsum</h1>
-      <p className="text-body-1 mt-1 text-gray-200">Maecenas in velit ac elit vulputate sollicitudin vel eget dui</p>
-      <Separator className="my-4" />
-      <div className="flex h-5 items-center gap-4">
-        <div className="text-button">Blog</div>
-        <Separator orientation="vertical" />
-        <div className="text-button">Docs</div>
-        <Separator orientation="vertical" />
-        <div className="text-button">Source</div>
-      </div>
-    </div>
-  )
+export const Horizontal: Story = {
+  args: { orientation: "horizontal" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const separator = canvas.getByRole("separator");
+    await expect(separator).toBeInTheDocument();
+    await expect(separator).toHaveAttribute("aria-orientation", "horizontal");
+    await expect(separator).toHaveAttribute("data-orientation", "horizontal");
+  }
+};
+
+export const Vertical: Story = {
+  args: { orientation: "vertical", className: "h-32" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const separator = canvas.getByRole("separator");
+    await expect(separator).toBeInTheDocument();
+    await expect(separator).toHaveAttribute("aria-orientation", "vertical");
+    await expect(separator).toHaveAttribute("data-orientation", "vertical");
+  }
+};
+
+export const Decorative: Story = {
+  args: { decorative: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const separator = canvas.getByRole("none");
+    await expect(separator).toBeInTheDocument();
+    await expect(separator).toHaveAttribute("aria-orientation", "horizontal");
+    await expect(separator).toHaveAttribute("data-orientation", "horizontal");
+  }
 };
