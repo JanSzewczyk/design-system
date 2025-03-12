@@ -29,9 +29,7 @@ export function FormStory() {
     resolver: zodResolver(formSchema)
   });
 
-  function formSubmitHandler() {
-    console.log("Submitted");
-  }
+  function formSubmitHandler() {}
 
   return (
     <Form {...form}>

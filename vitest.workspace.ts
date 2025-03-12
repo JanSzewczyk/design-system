@@ -8,7 +8,7 @@ export default defineWorkspace([
       include: ["**\/*.{test,spec}.ts"],
       name: "unit",
       environment: "node",
-      setupFiles: ["./src/test/setup.ts"]
+      setupFiles: ["src/test/setup.ts"]
     }
   },
   {
