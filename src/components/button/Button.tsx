@@ -61,6 +61,7 @@ export function Button({
   color = "primary",
   disabled = false,
   fullWidth = false,
+  loadingPosition = "start",
   ref,
   ...props
 }: ButtonProps) {
@@ -69,11 +70,10 @@ export function Button({
     type = "button",
     loading = false,
     size = "md",
-    loadingPosition = "start",
     endIcon,
     startIcon,
     ...rest
-  } = props;
+  } = { ...props, loadingPosition };
 
   const Comp = asChild ? Slot : "button";
 
