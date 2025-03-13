@@ -3,9 +3,8 @@ import * as React from "react";
 import { Dialog as ReactDialog } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
+import { Cross1Icon } from "@radix-ui/react-icons";
 import { type DialogContentWidth } from "~/components";
-
-import { Cross1Icon } from "../../../icons";
 
 import { dialogContentStyles } from "./dialog-content.styles";
 import { DialogOverlay } from "./overlay";

@@ -22,7 +22,8 @@ export default defineConfig([
       "@radix-ui/react-slot",
       "react-hook-form",
       "tailwind-merge",
-      "clx"
+      "clx",
+      "@radix-ui/react-icons"
     ]
   }
 ]);
