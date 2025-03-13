@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Select as ReactSelect } from "radix-ui";
 
-import { CheckIcon } from "~/icons";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 export type SelectItemProps = React.ComponentProps<typeof ReactSelect.Item>;
 

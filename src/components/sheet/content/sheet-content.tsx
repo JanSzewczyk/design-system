@@ -3,8 +3,8 @@ import * as React from "react";
 import { Dialog as ReactSheet } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
+import { Cross1Icon } from "@radix-ui/react-icons";
 import { type SheetContentSide } from "~/components";
-import { Cross1Icon } from "~/icons";
 
 import { sheetContentStyles } from "./sheet-content.styles";
 
