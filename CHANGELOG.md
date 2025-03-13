@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/JanSzewczyk/design-system/compare/v2.0.3...v2.0.4) (2025-03-13)
+
+### Bug Fixes
+
+* **icons:** fix design system icons export ([14ef553](https://github.com/JanSzewczyk/design-system/commit/14ef553a51a6b6f8e3be5bb3d61e214ac395af9f))
+
+### Tests
+
+* **storybook:** set up storybook tests ([ba06c47](https://github.com/JanSzewczyk/design-system/commit/ba06c47dbca20f6abcbdffa34cd0b989bb19c4f3))
+
+### Build System
+
+* **deps-dev:** bump typescript ([b9c4371](https://github.com/JanSzewczyk/design-system/commit/b9c43710ec45d470fb23c3befea3315488f4c9b5))
+* **deps:** bump deps ([ba36d50](https://github.com/JanSzewczyk/design-system/commit/ba36d5073bebde281b3c361936d7ded98c0d4f9d))
+* **deps:** bump deps ([7eb9678](https://github.com/JanSzewczyk/design-system/commit/7eb9678ec42bea2402dfea978202607b51e40cfb))
+* **eslint:** add eslint configuration ([a29a01b](https://github.com/JanSzewczyk/design-system/commit/a29a01b7a29cea2710990ebb5c19be0b2a940ed5))
+
 ## [2.0.3](https://github.com/JanSzewczyk/design-system/compare/v2.0.2...v2.0.3) (2025-03-02)
 
 ### Bug Fixes
