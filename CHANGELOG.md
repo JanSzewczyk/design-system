@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/JanSzewczyk/design-system/compare/v2.0.4...v2.1.0) (2025-03-25)
+
+### Features
+
+* **build:** change build strategy ([a3a1193](https://github.com/JanSzewczyk/design-system/commit/a3a11933c906d22b445c9dfc3b731ecbf1e67953))
+
+### Build System
+
+* **deps:** bump deps ([0d428d1](https://github.com/JanSzewczyk/design-system/commit/0d428d1d11369bf74c2d1a619c728fb7e4a06dc2))
+
+### Continuous Integration
+
+* **gh-action:** fix `PR Checks ✅` action typo ([3d6b2b5](https://github.com/JanSzewczyk/design-system/commit/3d6b2b56e2ef00ce91abe32c3a19814f9a4a5878))
+
 ## [2.0.4](https://github.com/JanSzewczyk/design-system/compare/v2.0.3...v2.0.4) (2025-03-13)
 
 ### Bug Fixes
