@@ -1,5 +1,14 @@
 import { defineConfig } from "tsup";
 
+export function useClientPlugin() {
+  return {
+    name: "use-client-plugin",
+    renderChunk(code: string) {
+      return { code: `"use client";\n${code}` };
+    }
+  };
+}
+
 export default defineConfig([
   {
     splitting: true,
@@ -9,10 +18,10 @@ export default defineConfig([
     bundle: true,
     treeshake: true,
     outDir: "dist",
-    entry: {
-      index: "src/index.tsx",
-      utils: "src/utils/index.ts",
-      icons: "src/icons/index.tsx"
+    entry: ["src/components/*/index.tsx", "src/components/index.tsx", "src/utils/index.ts", "src/icons/index.tsx"],
+    esbuildOptions(options) {
+      // the directory structure will be the same as the source
+      options.outbase = "./src";
     },
     external: [
       "react",
@@ -24,6 +33,7 @@ export default defineConfig([
       "tailwind-merge",
       "clx",
       "@radix-ui/react-icons"
-    ]
+    ],
+    plugins: [useClientPlugin()]
   }
 ]);
