@@ -107,7 +107,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@hookform/resolvers": "^4.1.3",
+    "@hookform/resolvers": "^5.0.1",
     "@storybook/addon-essentials": "^8.6.9",
     "@storybook/addon-links": "^8.6.9",
     "@storybook/experimental-addon-test": "^8.6.9",
