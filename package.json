@@ -79,11 +79,12 @@
     "tailwind/**"
   ],
   "scripts": {
-    "build": "tsup && cpy 'src/tailwind/*.css' './tailwind' --flat",
+    "build": "tsup && cpy 'src/tailwind/*.css' './tailwind' --flat && npm run post-build",
     "lint": "eslint .",
     "lint:ci": "eslint . -o eslint-results.sarif -f @microsoft/eslint-formatter-sarif",
     "lint:fix": "eslint . --fix",
     "lint:inspect": "npx @eslint/config-inspector@latest",
+    "post-build": "node src/scripts/post-build.js",
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "storybook:build": "storybook build --docs",
