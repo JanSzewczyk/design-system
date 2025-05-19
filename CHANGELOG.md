@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/JanSzewczyk/design-system/compare/v2.1.0...v2.1.1) (2025-05-19)
+
+### Bug Fixes
+
+* add `use client` directives ([0db1eb7](https://github.com/JanSzewczyk/design-system/commit/0db1eb786409d57e7ce9549914ee668e6da911ee))
+
+### Build System
+
+* **deps:** bump deps ([7c44b98](https://github.com/JanSzewczyk/design-system/commit/7c44b98e0579acc1bb89f5ea5acd3100a72ecade))
+
 ## [2.1.0](https://github.com/JanSzewczyk/design-system/compare/v2.0.4...v2.1.0) (2025-03-25)
 
 ### Features
