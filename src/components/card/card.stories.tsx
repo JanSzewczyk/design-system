@@ -14,7 +14,7 @@ const meta = {
   title: "Components/Card",
   component: Card,
   // subcomponents: { CardTitle, CardHeader, CardDescription, CardContent, CardFooter },
-  decorators: [(story) => <div className="w-128">{story()}</div>]
+  decorators: [(Story) => <div className="w-128">{Story()}</div>]
 } satisfies Meta<typeof Card>;
 export default meta;
 
