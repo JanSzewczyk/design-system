@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const sheetContentStyles = cva(
-  "bg-foreground data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col border-gray-400 p-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+  "bg-app-foreground data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col border-gray-800 p-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
   {
     variants: {
       side: {
