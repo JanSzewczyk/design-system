@@ -14,7 +14,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 const meta = {
   title: "Components/Form",
   component: Form,
-  tags: ["autodocs"]
+  tags: ["autodocs", "deprecated"]
 } satisfies Meta<typeof Form>;
 export default meta;
 
