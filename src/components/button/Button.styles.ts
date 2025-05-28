@@ -36,8 +36,8 @@ export const buttonCva = cva(
         color: "neutral",
         class: [
           "text-gray-100",
-          "hover:border-gray-350 hover:bg-gray-350 hover:text-gray-100",
-          "active:border-gray-400 active:bg-gray-400"
+          "hover:border-gray-500 hover:bg-gray-500 hover:text-app-foreground",
+          "active:border-gray-600 active:bg-gray-600"
         ]
       },
       {
@@ -81,7 +81,7 @@ export const buttonCva = cva(
       {
         variant: "outlined",
         color: "neutral",
-        class: ["border-gray-350 text-gray-100", "hover:bg-gray-350", "active:bg-gray-400"]
+        class: ["border-gray-500 text-gray-100", "hover:bg-gray-500 hover:text-app-foreground", "active:bg-gray-600"]
       },
       {
         variant: "outlined",
@@ -125,9 +125,9 @@ export const buttonCva = cva(
         variant: "contained",
         color: "neutral",
         class: [
-          "border-gray-350 bg-gray-350 text-gray-100",
-          "hover:border-gray-300 hover:bg-gray-300",
-          "active:border-gray-400 active:bg-gray-400"
+          "border-gray-500 bg-gray-500 text-gray-100",
+          "hover:border-gray-400 hover:bg-gray-400 hover:text-app-foreground",
+          "active:border-gray-600 active:bg-gray-600"
         ]
       },
       {
