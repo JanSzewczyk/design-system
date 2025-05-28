@@ -10,7 +10,7 @@ export function AvatarFallback({ className, ref, ...props }: AvatarFallbackProps
   return (
     <ReactAvatar.Fallback
       ref={ref}
-      className={cn("bg-gray-350 flex h-full w-full items-center justify-center", className)}
+      className={cn("flex h-full w-full items-center justify-center bg-gray-600", className)}
       {...props}
     />
   );
