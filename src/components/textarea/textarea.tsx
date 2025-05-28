@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { textareaCva } from "./Textarea.styles";
+import { textareaCva } from "./textarea.styles";
 
 export type TextareaProps = React.DetailedHTMLProps<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
