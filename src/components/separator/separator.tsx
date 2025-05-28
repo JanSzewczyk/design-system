@@ -13,7 +13,7 @@ export function Separator({ className, orientation = "horizontal", decorative = 
       orientation={orientation}
       aria-orientation={orientation}
       className={cn(
-        "shrink-0 bg-gray-400",
+        "shrink-0 bg-gray-800",
         orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]",
         className
       )}
