@@ -17,17 +17,17 @@ export function Select({ children, placeholder, invalid = false, ref, ...props }
 
   return (
     <ReactSelect.Root {...props}>
-      <ReactSelect.Trigger className={selectStyles} ref={ref}>
+      <ReactSelect.Trigger className={selectStyles} ref={ref} aria-invalid={invalid || undefined}>
         <ReactSelect.Value placeholder={placeholder} />
-        <ReactSelect.Icon className="-mr-1.5">
-          <CaretSortIcon className="size-5 text-gray-200" />
+        <ReactSelect.Icon asChild>
+          <CaretSortIcon className="size-5 text-gray-100" />
         </ReactSelect.Icon>
       </ReactSelect.Trigger>
 
       <ReactSelect.Portal>
         <ReactSelect.Content
           sideOffset={4}
-          className="bg-app-foreground z-50 w-full overflow-hidden border border-gray-400 py-1"
+          className="bg-app-foreground z-50 w-full overflow-hidden border border-gray-800 py-1"
         >
           <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
         </ReactSelect.Content>
