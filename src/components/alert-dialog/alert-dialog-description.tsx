@@ -7,5 +7,5 @@ import { cn } from "~/utils";
 export type AlertDialogDescriptionProps = React.ComponentProps<typeof ReactAlertDialog.Description>;
 
 export function AlertDialogDescription({ className, ...props }: AlertDialogDescriptionProps) {
-  return <ReactAlertDialog.Description className={cn("text-body-2 text-gray-200", className)} {...props} />;
+  return <ReactAlertDialog.Description className={cn("text-body-2 text-gray-300", className)} {...props} />;
 }
