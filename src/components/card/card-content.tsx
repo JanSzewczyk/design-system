@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { twMerge } from "tailwind-merge";
+import { cn } from "~/utils";
 
 export type CardContentProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 export function CardContent({ className, ...props }: CardContentProps) {
-  return <div className={twMerge("p-6 pt-0", className)} {...props} />;
+  return <div className={cn("p-6 pt-0", className)} {...props} />;
 }

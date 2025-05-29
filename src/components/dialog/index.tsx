@@ -1,8 +1,11 @@
 export * from "./dialog";
-export * from "./close";
-export * from "./content";
-export * from "./trigger";
-export * from "./header";
-export * from "./footer";
-export * from "./title";
-export * from "./description";
+export * from "./dialog-close";
+
+export * from "./dialog-content";
+export * from "./dialog-content.types";
+
+export * from "./dialog-trigger";
+export * from "./dialog-header";
+export * from "./dialog-footer";
+export * from "./dialog-title";
+export * from "./dialog-description";
