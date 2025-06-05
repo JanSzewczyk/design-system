@@ -1,2 +1,2 @@
-export * from "./Tooltip";
-export * from "./Tooltip.provider";
+export * from "./tooltip";
+export * from "./tooltip-provider";

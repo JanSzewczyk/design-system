@@ -15,7 +15,7 @@ export type AvatarProps = ReactAvatar.AvatarProps &
     size?: AvatarSizeType;
   };
 
-export function Avatar({ className, size, ref, ...props }: AvatarProps) {
+export function Avatar({ className, size = "md", ref, ...props }: AvatarProps) {
   const avatarStyles = avatarCva({ size });
 
   return <ReactAvatar.Root ref={ref} className={cn(avatarStyles, className)} {...props} />;

@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 
-async function updateFilesWithText(filePaths, text) {
+export async function updateFilesWithText(filePaths, text) {
   for (const filePath of filePaths) {
     try {
       const content = await fs.readFile(filePath, "utf8");

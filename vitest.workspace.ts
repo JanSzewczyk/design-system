@@ -5,15 +5,24 @@ export default defineWorkspace([
   {
     extends: "vitest.config.ts",
     test: {
-      include: ["**\/*.{test,spec}.ts"],
+      include: ["**\/*.{test,spec}.{ts,js}"],
       name: "unit",
       environment: "node",
-      setupFiles: ["src/test/setup.ts"]
+      setupFiles: ["src/tests/unit/vitest.setup.ts"]
     }
   },
   {
     extends: "vitest.config.ts",
-    plugins: [storybookTest({ configDir: ".storybook" })],
+    plugins: [
+      storybookTest({
+        configDir: ".storybook",
+        tags: {
+          include: ["test"],
+          exclude: ["experimental"],
+          skip: ["skip-test"]
+        }
+      })
+    ],
     test: {
       name: "storybook",
       browser: {
@@ -21,7 +30,7 @@ export default defineWorkspace([
         provider: "playwright",
         instances: [{ browser: "chromium", headless: true }]
       },
-      setupFiles: [".storybook/vitest.setup.ts"]
+      setupFiles: ["src/tests/integration/vitest.setup.ts"]
     }
   }
 ]);
