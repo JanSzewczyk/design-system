@@ -17,8 +17,8 @@ export default {
   addons: [
     "@storybook/addon-essentials",
     "@storybook/addon-links",
-    "storybook-dark-mode",
     "@storybook/experimental-addon-test",
+    "storybook-dark-mode",
     "storybook-addon-tag-badges"
   ],
   framework: "@storybook/react-vite",
@@ -31,7 +31,6 @@ export default {
     check: true
   },
   tags,
-
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
     const tailwindcss = (await import("@tailwindcss/vite")).default();

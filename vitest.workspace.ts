@@ -8,7 +8,7 @@ export default defineWorkspace([
       include: ["**\/*.{test,spec}.{ts,js}"],
       name: "unit",
       environment: "node",
-      setupFiles: ["src/test/setup.ts"]
+      setupFiles: ["src/tests/unit/vitest.setup.ts"]
     }
   },
   {
@@ -30,7 +30,7 @@ export default defineWorkspace([
         provider: "playwright",
         instances: [{ browser: "chromium", headless: true }]
       },
-      setupFiles: [".storybook/vitest.setup.ts"]
+      setupFiles: ["src/tests/integration/vitest.setup.ts"]
     }
   }
 ]);
