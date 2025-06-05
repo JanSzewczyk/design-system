@@ -4,7 +4,6 @@ import { addons } from "@storybook/manager-api";
 
 addons.setConfig({
   tagBadges: [
-    // Add an entry that matches 'frog' and displays a cool badge in the sidebar only
     {
       tags: "test-only",
       badge: {
