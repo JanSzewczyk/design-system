@@ -80,6 +80,9 @@ jobs:
         run: npx playwright install --with-deps
       - name: Check Tests 🧪
         run: npm run test:ci
+      - name: Report Coverage
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
 
   build-storybook:
     name: Build Storybook 📖

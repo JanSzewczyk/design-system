@@ -14,6 +14,7 @@ export default {
     darkMode: {
       current: "light",
       classTarget: "html",
+      // Applies theme to the preview iframe
       stylePreview: true,
       // Override the default dark theme
       dark: darkTheme,

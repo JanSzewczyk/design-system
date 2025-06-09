@@ -91,7 +91,7 @@
     "storybook:dev": "storybook dev -p 6006",
     "storybook:serve": "serve storybook-static",
     "test": "vitest",
-    "test:ci": "CI=true vitest",
+    "test:ci": "CI=true vitest --coverage",
     "test:coverage": "vitest --coverage",
     "test:storybook": "vitest --project=storybook --coverage",
     "test:ui": "vitest --ui",
