@@ -115,3 +115,5 @@ eslint-results.sarif
 
 # Tailwindcss computed styles
 src/styles
+
+/CHANGELOG.mdx
