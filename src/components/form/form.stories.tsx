@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Meta } from "@storybook/react";
+import { type Meta } from "@storybook/react-vite";
 
 import { Button } from "../button";
 import { Input } from "../input";

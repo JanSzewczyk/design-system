@@ -1,6 +1,6 @@
 import React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./index";
 

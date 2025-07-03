@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 import { BadgeIcon, GitHubLogoIcon } from "../../icons";
 

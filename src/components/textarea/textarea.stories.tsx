@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react";
-import { within, expect, userEvent } from "@storybook/test";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
+import { within, expect, userEvent } from "storybook/test";
 
 import { Textarea } from "./textarea";
 
