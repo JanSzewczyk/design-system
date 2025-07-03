@@ -130,6 +130,7 @@
     "@vitest/ui": "^3.1.4",
     "cpy-cli": "^5.0.0",
     "eslint": "^9.29.0",
+    "eslint-plugin-storybook": "9.0.15",
     "playwright": "^1.53.1",
     "prettier": "^3.6.0",
     "react": "^19.1.0",
@@ -147,8 +148,7 @@
     "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4",
-    "zod": "^3.25.67",
-    "eslint-plugin-storybook": "9.0.15"
+    "zod": "^3.25.67"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
