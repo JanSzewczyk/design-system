@@ -2,7 +2,7 @@ import { defaultConfig, type TagBadgeParameters } from "storybook-addon-tag-badg
 
 import { addons } from "storybook/manager-api";
 
-// import darkTheme from "./theme/dark";
+import darkTheme from "./theme/dark";
 
 addons.setConfig({
   tagBadges: [
@@ -25,6 +25,6 @@ addons.setConfig({
   ] satisfies TagBadgeParameters
 });
 
-// addons.setConfig({
-//   theme: darkTheme
-// });
+addons.setConfig({
+  theme: darkTheme
+});
