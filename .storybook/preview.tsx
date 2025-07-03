@@ -27,7 +27,7 @@ export default {
     theme: {
       name: "Theme",
       description: "Global theme for components",
-      defaultValue: "light",
+      defaultValue: "dark",
       toolbar: {
         icon: "circlehollow",
         items: [
