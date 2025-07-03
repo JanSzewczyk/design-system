@@ -1,8 +1,8 @@
-import { type Preview } from "@storybook/react";
+import { type Preview } from "@storybook/react-vite";
 
-import { DocsContainer } from "./components/docs-container";
 import darkTheme from "./theme/dark";
-import lightTheme from "./theme/light";
+
+import "../src/tailwind/global.css";
 
 export default {
   parameters: {
@@ -10,16 +10,6 @@ export default {
       storySort: {
         order: ["Getting Started", ["Introduction"], "Components"]
       }
-    },
-    darkMode: {
-      current: "light",
-      classTarget: "html",
-      // Applies theme to the preview iframe
-      stylePreview: true,
-      // Override the default dark theme
-      dark: darkTheme,
-      // Override the default light theme
-      light: lightTheme
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
     backgrounds: { disable: true },
@@ -30,12 +20,37 @@ export default {
       }
     },
     docs: {
-      container: DocsContainer,
-      controls: {
-        sort: "requiredFirst"
+      theme: darkTheme
+    }
+  },
+  globalTypes: {
+    theme: {
+      name: "Theme",
+      description: "Global theme for components",
+      defaultValue: "light",
+      toolbar: {
+        icon: "circlehollow",
+        items: [
+          { value: "light", icon: "circlehollow", title: "Light" },
+          { value: "dark", icon: "circle", title: "Dark" }
+        ],
+        showName: true,
+        dynamicTitle: true
       }
     }
   },
-  decorators: [],
+  decorators: [
+    (Story, context) => {
+      const theme = context.globals.theme;
+      // Apply theme class to html
+      document.documentElement.setAttribute("class", theme);
+      // Also wrap the story with theme context if needed
+      return (
+        <div className={theme}>
+          <Story />
+        </div>
+      );
+    }
+  ],
   tags: ["autodocs"]
 } satisfies Preview;

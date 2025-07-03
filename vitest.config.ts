@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import react from "@vitejs/plugin-react";
 
 const reporters = process.env.CI ? ["dot", "github-actions"] : ["default"];
@@ -34,6 +35,39 @@ export default defineConfig({
       reporter: ["text", "html", "json-summary", "json"],
       reportOnFailure: true,
       provider: "v8"
-    }
+    },
+    projects: [
+      {
+        extends: "vitest.config.ts",
+        test: {
+          include: ["**\/*.{test,spec}.{ts,js}"],
+          name: "unit",
+          environment: "node",
+          setupFiles: ["src/tests/unit/vitest.setup.ts"]
+        }
+      },
+      {
+        extends: "vitest.config.ts",
+        plugins: [
+          storybookTest({
+            configDir: ".storybook",
+            tags: {
+              include: ["test"],
+              exclude: ["experimental"],
+              skip: ["skip-test"]
+            }
+          })
+        ],
+        test: {
+          name: "storybook",
+          browser: {
+            enabled: true,
+            provider: "playwright",
+            instances: [{ browser: "chromium", headless: true }]
+          },
+          setupFiles: ["src/tests/integration/vitest.setup.ts"]
+        }
+      }
+    ]
   }
 });

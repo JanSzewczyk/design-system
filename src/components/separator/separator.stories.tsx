@@ -1,5 +1,5 @@
-import { type Meta, type StoryObj } from "@storybook/react";
-import { expect } from "@storybook/test";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
+import { expect } from "storybook/test";
 
 import { Separator } from "./separator";
 

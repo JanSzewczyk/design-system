@@ -1,6 +1,8 @@
 import { defaultConfig, type TagBadgeParameters } from "storybook-addon-tag-badges";
 
-import { addons } from "@storybook/manager-api";
+import { addons } from "storybook/manager-api";
+
+// import darkTheme from "./theme/dark";
 
 addons.setConfig({
   tagBadges: [
@@ -8,12 +10,13 @@ addons.setConfig({
       tags: "test-only",
       badge: {
         text: "Test ⚡", // Vitest-style lightning bolt
-        bgColor: "#729b1b", // Vitest signature green
-        fgColor: "#ffffff", // Clean white text
+        style: {
+          background: "#729b1b",
+          color: "white"
+        },
         tooltip: "Testing story - powered by Vitest spirit ⚡"
       },
       display: {
-        sidebar: ["story"],
         toolbar: true
       }
     },
@@ -21,3 +24,7 @@ addons.setConfig({
     ...defaultConfig
   ] satisfies TagBadgeParameters
 });
+
+// addons.setConfig({
+//   theme: darkTheme
+// });

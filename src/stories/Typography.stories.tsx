@@ -1,6 +1,6 @@
 import React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 const HeadingText = "Lorem ipsum dolor sit amet.";
 const SampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
