@@ -111,7 +111,7 @@
     "@hookform/resolvers": "^5.1.1",
     "@storybook/addon-docs": "^9.0.15",
     "@storybook/addon-links": "^9.0.15",
-    "@storybook/addon-vitest": "9.0.15",
+    "@storybook/addon-vitest": "9.0.17",
     "@storybook/react-vite": "^9.0.15",
     "@szum-tech/eslint-config": "^2.1.7",
     "@szum-tech/prettier-config": "^1.6.2",
@@ -130,7 +130,7 @@
     "@vitest/ui": "^3.1.4",
     "cpy-cli": "^5.0.0",
     "eslint": "^9.30.1",
-    "eslint-plugin-storybook": "9.0.15",
+    "eslint-plugin-storybook": "9.0.17",
     "playwright": "^1.53.2",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
@@ -148,7 +148,7 @@
     "vite": "^7.0.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4",
-    "zod": "^3.25.71"
+    "zod": "^4.0.5"
   },
   "peerDependencies": {
     "react": ">=19.0.0",
