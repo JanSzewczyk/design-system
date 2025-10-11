@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const badgeCva = cva(
   [
-    "text-caption inline-flex w-fit shrink-0 items-center justify-center gap-x-1 overflow-hidden whitespace-nowrap rounded border px-2 py-0.5 transition-[color,box-shadow]",
+    "text-xs inline-flex w-fit shrink-0 items-center justify-center gap-x-1 overflow-hidden whitespace-nowrap rounded border px-2 py-0.5 transition-[color,box-shadow]",
     "[&>svg]:size-3 [&>svg]:pointer-events-none",
     "focus-visible:border-ring focus-visible:ring-primary-500/50 focus-visible:ring-[3px]",
     "aria-invalid:ring-error-500/20 aria-invalid:border-ring-error-500"
