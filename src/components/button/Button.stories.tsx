@@ -1,9 +1,9 @@
 import * as React from "react";
 
+import { ArrowDownSquare, Github } from "lucide-react";
+
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { type ButtonVariantType } from "~/components";
-
-import { ArrowBottomLeftIcon, GitHubLogoIcon } from "../../icons";
 
 import { Button } from "./Button";
 
@@ -177,18 +177,18 @@ export const WithIcon: Story = {
   render: () => (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-4">
-        <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />}>
+        <Button color="error" variant="contained" startIcon={<ArrowDownSquare />}>
           LEFT ICON
         </Button>
-        <Button color="primary" endIcon={<GitHubLogoIcon />}>
+        <Button color="primary" endIcon={<Github />}>
           RIGHT ICON
         </Button>
       </div>
       <div className="flex flex-wrap gap-4">
-        <Button color="error" variant="contained" startIcon={<ArrowBottomLeftIcon />} asChild>
+        <Button color="error" variant="contained" startIcon={<ArrowDownSquare />} asChild>
           <a href="">LEFT ICON link</a>
         </Button>
-        <Button color="primary" endIcon={<GitHubLogoIcon />} asChild>
+        <Button color="primary" endIcon={<Github />} asChild>
           <a href="">RIGHT ICON link</a>
         </Button>
       </div>

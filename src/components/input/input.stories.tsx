@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
+import { Tag, Github } from "lucide-react";
 
-import { BadgeIcon, GitHubLogoIcon } from "../../icons";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 import { Input } from "./input";
 
@@ -24,8 +24,8 @@ export const Base: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<Tag className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<Github className="size-4" />} {...args} />
     </div>
   ),
   args: {}
@@ -37,8 +37,8 @@ export const Disabled: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<Tag className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<Github className="size-4" />} {...args} />
     </div>
   ),
   args: {
@@ -52,8 +52,8 @@ export const Invalid: Story = {
       <Input {...args} />
       <Input placeholder="With Placeholder" {...args} />
       <Input defaultValue="With default value" {...args} />
-      <Input defaultValue="Start Icon" startIcon={<BadgeIcon className="size-4" />} {...args} />
-      <Input defaultValue="End Icon" endIcon={<GitHubLogoIcon className="size-4" />} {...args} />
+      <Input defaultValue="Start Icon" startIcon={<Tag className="size-4" />} {...args} />
+      <Input defaultValue="End Icon" endIcon={<Github className="size-4" />} {...args} />
     </div>
   ),
   args: {

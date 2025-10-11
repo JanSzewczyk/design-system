@@ -1,9 +1,10 @@
 import * as React from "react";
 
+import { clsx } from "clsx";
+import { X } from "lucide-react";
 import { Dialog as ReactDialog } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
-import { Cross1Icon } from "@radix-ui/react-icons";
 import { type DialogContentWidth } from "~/components";
 
 import { dialogContentStyles } from "./dialog-content.styles";
@@ -21,8 +22,13 @@ export function DialogContent({ className, children, width = "md", ...props }: D
       />
       <ReactDialog.Content aria-modal="true" className={twMerge(dialogContentStyles({ width }), className)} {...props}>
         {children}
-        <ReactDialog.Close className="focus:ring-ring ring-primary-500 ring-offset-app-foreground data-[state=open]:bg-app-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
-          <Cross1Icon className="size-4" />
+        <ReactDialog.Close
+          className={clsx([
+            "data-[state=open]:bg-app-foreground absolute top-4 right-4 cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none",
+            "focus-visible:ring-primary-500/40 ring-offset-app-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
+          ])}
+        >
+          <X className="size-4" />
           <span className="sr-only">Close dialog</span>
         </ReactDialog.Close>
       </ReactDialog.Content>
