@@ -19,7 +19,7 @@
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-gray-350);
+      background: var(--color-gray-300);
     }
   }
 }
