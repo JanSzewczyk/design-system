@@ -1,8 +1,7 @@
 import * as React from "react";
 
+import { ChevronDown } from "lucide-react";
 import { Select as ReactSelect } from "radix-ui";
-
-import { CaretSortIcon } from "@radix-ui/react-icons";
 
 import { selectCva } from "./select.styles";
 
@@ -20,7 +19,7 @@ export function Select({ children, placeholder, invalid = false, ref, ...props }
       <ReactSelect.Trigger className={selectStyles} ref={ref} aria-invalid={invalid || undefined}>
         <ReactSelect.Value placeholder={placeholder} />
         <ReactSelect.Icon asChild>
-          <CaretSortIcon className="size-5 text-gray-100" />
+          <ChevronDown className="size-5 text-gray-100" />
         </ReactSelect.Icon>
       </ReactSelect.Trigger>
 

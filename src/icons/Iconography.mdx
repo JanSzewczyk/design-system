@@ -1,25 +1,10 @@
 import { Meta, IconGallery, IconItem } from "@storybook/addon-docs/blocks";
 
-import * as Icons from "@radix-ui/react-icons";
-
 import * as CustomIcons from "./index";
 
 <Meta title="Components/Iconography" />
 
 # Iconography
-
-## Icons
-
-<IconGallery>
-  {Object.keys(Icons).map((iconName) => {
-    const IconComponent = Icons[iconName];
-    return (
-      <IconItem key={iconName} name={iconName}>
-        <IconComponent className="size-5" />
-      </IconItem>
-    );
-  })}
-</IconGallery>
 
 # Custom
 

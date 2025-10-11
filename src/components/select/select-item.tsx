@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { Check } from "lucide-react";
 import { Select as ReactSelect } from "radix-ui";
 
-import { CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "~/utils";
 
 export type SelectItemProps = React.ComponentProps<typeof ReactSelect.Item>;
@@ -18,7 +18,7 @@ export function SelectItem({ children, className, ...props }: SelectItemProps) {
     >
       <ReactSelect.ItemText className="flex-1">{children}</ReactSelect.ItemText>
       <ReactSelect.ItemIndicator>
-        <CheckIcon className="size-4" />
+        <Check className="size-4" />
       </ReactSelect.ItemIndicator>
     </ReactSelect.Item>
   );
