@@ -14,3 +14,4 @@ export * from "./separator";
 export * from "./sheet";
 export * from "./textarea";
 export * from "./tooltip";
+export * from "./stepper";
