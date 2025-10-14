@@ -68,6 +68,26 @@
         "require": "./dist/utils/index.cjs"
       }
     },
+    "./hooks": {
+      "import": {
+        "types": "./dist/hooks/index.d.ts",
+        "import": "./dist/hooks/index.js"
+      },
+      "require": {
+        "types": "./dist/hooks/index.d.cts",
+        "require": "./dist/hooks/index.cjs"
+      }
+    },
+    "./contexts": {
+      "import": {
+        "types": "./dist/contexts/index.d.ts",
+        "import": "./dist/contexts/index.js"
+      },
+      "require": {
+        "types": "./dist/contexts/index.d.cts",
+        "require": "./dist/contexts/index.cjs"
+      }
+    },
     "./tailwind/*.css": "./tailwind/*.css",
     "./package.json": "./package.json"
   },
