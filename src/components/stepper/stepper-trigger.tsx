@@ -268,7 +268,7 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
       // )}
       className={cn(
         "inline-flex w-full cursor-pointer items-center gap-3 rounded text-left transition-colors duration-300 outline-none",
-        "text-gray-500 data-[state=active]:text-gray-100 data-[state=completed]:text-gray-100 data-[state=inactive]:pointer-events-none data-[state=loading]:text-gray-100",
+        "text-gray-500 data-[state=active]:text-gray-100 data-[state=completed]:text-gray-100 data-[state=loading]:text-gray-100",
         "disabled:pointer-events-none disabled:opacity-60",
         "focus-visible:ring-primary-500/50 focus-visible:z-10 focus-visible:ring-[3px]",
         className
