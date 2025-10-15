@@ -1,6 +1,9 @@
 import * as React from "react";
-import { renderHook } from "@testing-library/react";
+
 import { describe, expect, test, vi } from "vitest";
+
+import { renderHook } from "@testing-library/react";
+
 import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
 
 describe("useIsomorphicLayoutEffect", () => {
@@ -20,11 +23,14 @@ describe("useIsomorphicLayoutEffect", () => {
 
   test("should re-run effect when dependencies change", () => {
     const effectCallback = vi.fn();
-    const { rerender } = renderHook(({ count }) => {
-      useIsomorphicLayoutEffect(effectCallback, [count]);
-    }, {
-      initialProps: { count: 0 }
-    });
+    const { rerender } = renderHook(
+      ({ count }) => {
+        useIsomorphicLayoutEffect(effectCallback, [count]);
+      },
+      {
+        initialProps: { count: 0 }
+      }
+    );
 
     expect(effectCallback).toHaveBeenCalledTimes(1);
 
