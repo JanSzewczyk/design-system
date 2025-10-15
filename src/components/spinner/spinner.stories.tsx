@@ -37,19 +37,19 @@ export const Sizes: Story = {
     <div className="flex items-center gap-8">
       <div className="flex flex-col items-center gap-2">
         <Spinner className="size-4" />
-        <span className="text-gray300 text-xs">Small (16px)</span>
+        <span className="text-xs text-gray-300">Small (16px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner className="size-6" />
-        <span className="text-gray300 text-xs">Medium (24px)</span>
+        <span className="text-xs text-gray-300">Medium (24px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner className="size-8" />
-        <span className="text-gray300 text-xs">Large (32px)</span>
+        <span className="text-xs text-gray-300">Large (32px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
         <Spinner className="size-12" />
-        <span className="text-gray300 text-xs">Extra Large (48px)</span>
+        <span className="text-xs text-gray-300">Extra Large (48px)</span>
       </div>
     </div>
   ),
