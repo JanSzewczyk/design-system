@@ -1,23 +1,10 @@
-import * as React from "react";
+import type * as React from "react";
 
+import { type StepperTriggerElement , StepperDataState, type StepperOrientation } from "~/components";
 import { Direction } from "~/contexts";
 
-import { type StepperTriggerElement } from "./stepper-trigger";
 import { STEPPER_MAP_KEY_TO_FOCUS_INTENT } from "./stepper.constants";
 import { type StepperStepState } from "./stepper.store";
-import { StepperDataState, type StepperOrientation } from "./stepper.types";
-
-export function useLazyRef<T>(fn: () => T) {
-  const ref = React.useRef<T | null>(null);
-
-  if (ref.current === null) {
-    ref.current = fn();
-  }
-
-  return ref as React.RefObject<T>;
-}
-
-export const useIsomorphicLayoutEffect = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
 
 export function focusFirst(candidates: React.RefObject<StepperTriggerElement | null>[], preventScroll = false) {
   const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;

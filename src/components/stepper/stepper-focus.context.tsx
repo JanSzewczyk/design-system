@@ -1,5 +1,6 @@
 import * as React from "react";
-import { StepperTriggerElement } from "./stepper-trigger";
+
+import { type StepperTriggerElement } from "./stepper-trigger";
 
 export type StepperItemData = {
   id: string;

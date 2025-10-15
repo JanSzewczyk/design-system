@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import { Slot } from "@radix-ui/react-slot";
+import { useIsomorphicLayoutEffect } from "~/hooks";
 import { cn } from "~/utils";
 
 import { useStepperFocusContext } from "./stepper-focus.context";
@@ -10,7 +11,7 @@ import { STEPPER_ARROW_KEYS, STEPPER_TRIGGER_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
 import { type StepperNavigationDirection } from "./stepper.types";
-import { focusFirst, getDataState, getFocusIntent, getId, useIsomorphicLayoutEffect, wrapArray } from "./stepper.utils";
+import { focusFirst, getDataState, getFocusIntent, getId, wrapArray } from "./stepper.utils";
 
 export type StepperTriggerElement = React.ComponentRef<typeof StepperTrigger>;
 
