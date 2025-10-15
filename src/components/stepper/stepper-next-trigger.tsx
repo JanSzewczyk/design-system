@@ -16,12 +16,15 @@ export function StepperNextTrigger({ asChild = false, onClick, disabled, ...prop
 
   const stepKeys = Array.from(steps.keys());
   const currentIndex = value ? stepKeys.indexOf(value) : -1;
+
   const isDisabled = disabled || currentIndex >= stepKeys.length - 1;
 
   const handleClick = React.useCallback(
     async (event: React.MouseEvent<HTMLButtonElement>) => {
       onClick?.(event);
-      if (event.defaultPrevented || isDisabled) return;
+      if (event.defaultPrevented || isDisabled) {
+        return;
+      }
 
       const nextIndex = Math.min(currentIndex + 1, stepKeys.length - 1);
       const nextStepValue = stepKeys[nextIndex];

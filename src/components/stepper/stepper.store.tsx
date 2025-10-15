@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { type StepperNavigationDirection } from "~/components";
+
 import { STEPPER_ROOT_NAME } from "./stepper.constants";
-import { type StepperNavigationDirection } from "./stepper.types";
 
 export type StepperStepState = {
   value: string;
@@ -82,6 +83,7 @@ export function createStepperStore(
     addStep: (newStep) => {
       const state = stateRef.current;
       if (state) {
+        state.steps = new Map(state.steps);
         state.steps.set(newStep.value, newStep);
         onValueAdd?.(newStep.value);
         store.notify();
@@ -90,6 +92,7 @@ export function createStepperStore(
     removeStep: (value) => {
       const state = stateRef.current;
       if (state) {
+        state.steps = new Map(state.steps);
         state.steps.delete(value);
         onValueRemove?.(value);
         store.notify();
@@ -101,6 +104,7 @@ export function createStepperStore(
         const step = state.steps.get(value);
         if (step) {
           const updatedStep: StepperStepState = { ...step, completed, disabled, loading };
+          state.steps = new Map(state.steps);
           state.steps.set(value, updatedStep);
 
           if (completed !== step.completed) {
@@ -136,7 +140,7 @@ export function useStepperStoreContext(consumerName: string) {
 export function useStepperStore<T>(selector: (state: StepperStoreState) => T): T {
   const store = useStepperStoreContext("useStore");
 
-  const getSnapshot = React.useCallback(() => selector(store.getState()), [store, selector]);
+  const getSnapshot = React.useCallback(() => selector(store.getState()), [selector, store]);
 
   return React.useSyncExternalStore(store.subscribe, getSnapshot, getSnapshot);
 }
