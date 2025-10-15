@@ -101,7 +101,7 @@ export function Stepper({
           data-slot="stepper"
           dir={dir}
           {...rootProps}
-          className={cn("w-full space-y-2", className)}
+          className={cn("flex w-full flex-col gap-4 data-[orientation=vertical]:flex-row", className)}
         />
       </StepperContext.Provider>
     </StepperStoreContext.Provider>
