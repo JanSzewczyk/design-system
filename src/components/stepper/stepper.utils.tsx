@@ -1,6 +1,6 @@
 import type * as React from "react";
 
-import { type StepperTriggerElement , StepperDataState, type StepperOrientation } from "~/components";
+import { type StepperTriggerElement, StepperDataState, type StepperOrientation } from "~/components";
 import { Direction } from "~/contexts";
 
 import { STEPPER_MAP_KEY_TO_FOCUS_INTENT } from "./stepper.constants";
