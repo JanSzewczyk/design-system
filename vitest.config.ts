@@ -40,9 +40,9 @@ export default defineConfig({
       {
         extends: "vitest.config.ts",
         test: {
-          include: ["**\/*.{test,spec}.{ts,js}"],
+          include: ["**\/*.{test,spec}.{ts,js,tsx,jsx}"],
           name: "unit",
-          environment: "node",
+          environment: "happy-dom",
           setupFiles: ["src/tests/unit/vitest.setup.ts"]
         }
       },
