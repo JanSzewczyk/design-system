@@ -1,5 +1,8 @@
 import * as React from "react";
 
+/**
+ * @deprecated
+ */
 export function LoadingIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

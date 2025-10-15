@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { Loader } from "lucide-react";
-
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
+import { Spinner } from "~/components";
 
 import { Button } from "../button";
 
@@ -313,11 +312,7 @@ export const WithLoadingState: Story = {
     const [step, setStep] = React.useState("step2");
 
     return (
-      <Stepper
-        value={step}
-        onValueChange={setStep}
-        indicators={{ loading: <Loader className="size-4 animate-spin" /> }}
-      >
+      <Stepper value={step} onValueChange={setStep} indicators={{ loading: <Spinner /> }}>
         <StepperNav>
           <StepperItem value="step1" completed>
             <StepperTrigger>
@@ -505,9 +500,7 @@ export const WithValidation: Story = {
 
     const handleValidate = React.useCallback(
       async (value: string, direction: string) => {
-        console.log("Validating step:", value, "in direction:", direction);
         if (value === "step2" && direction === "next") {
-          console.log("Validating form...", formValid);
           return formValid;
         }
         return true;
