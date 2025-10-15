@@ -1,13 +1,14 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
+import { useIsomorphicLayoutEffect } from "~/hooks";
 import { cn } from "~/utils";
 
 import { StepperItemContext, type StepperItemContextValue } from "./stepper-item.context";
 import { STEPPER_ITEM_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
-import { getDataState, useIsomorphicLayoutEffect } from "./stepper.utils";
+import { getDataState } from "./stepper.utils";
 
 export type StepperItemProps = React.ComponentProps<"div"> & {
   asChild?: boolean;

@@ -1,18 +1,18 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { type Direction, useDirection } from "~/contexts";
-import { cn } from "~/utils";
-
-import { StepperContext, type StepperContextValue } from "./stepper.context";
-import { createStepperStore, StepperStoreContext, type StepperStoreState } from "./stepper.store";
 import {
   type StepIndicators,
   type StepperActivationMode,
   type StepperNavigationDirection,
   type StepperOrientation
-} from "./stepper.types";
-import { useIsomorphicLayoutEffect, useLazyRef } from "./stepper.utils";
+} from "~/components";
+import { type Direction, useDirection } from "~/contexts";
+import { useIsomorphicLayoutEffect, useLazyRef } from "~/hooks";
+import { cn } from "~/utils";
+
+import { StepperContext, type StepperContextValue } from "./stepper.context";
+import { createStepperStore, StepperStoreContext, type StepperStoreState } from "./stepper.store";
 
 export type StepperProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
@@ -101,7 +101,7 @@ export function Stepper({
           data-slot="stepper"
           dir={dir}
           {...rootProps}
-          className={cn("w-full", className)}
+          className={cn("w-full space-y-2", className)}
         />
       </StepperContext.Provider>
     </StepperStoreContext.Provider>

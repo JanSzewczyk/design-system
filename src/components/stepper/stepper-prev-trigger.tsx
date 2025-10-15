@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
+
 import { STEPPER_PREV_TRIGGER_NAME } from "./stepper.constants";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
 

@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { Loader } from "lucide-react";
+
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 
@@ -22,7 +24,7 @@ import {
 const meta = {
   title: "Components/Stepper",
   component: Stepper,
-  tags: ["autodocs"]
+  tags: ["autodocs", "new"]
 } satisfies Meta<typeof Stepper>;
 export default meta;
 
@@ -33,7 +35,7 @@ export const Default: Story = {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} className="w-full">
+      <Stepper value={step} onValueChange={setStep}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -64,7 +66,7 @@ export const Default: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
@@ -124,78 +126,76 @@ export const VerticalOrientation: Story = {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} orientation="vertical" className="w-full">
-        <div className="flex gap-8">
-          <StepperNav>
-            <StepperItem value="step1">
-              <StepperTrigger>
-                <StepperIndicator />
-                <div>
-                  <StepperTitle>Step 1</StepperTitle>
-                  <StepperDescription>Basic Information</StepperDescription>
-                </div>
-              </StepperTrigger>
-            </StepperItem>
-            <StepperItem value="step2">
-              <StepperTrigger>
-                <StepperIndicator />
-                <div>
-                  <StepperTitle>Step 2</StepperTitle>
-                  <StepperDescription>Details</StepperDescription>
-                </div>
-              </StepperTrigger>
-            </StepperItem>
-            <StepperItem value="step3">
-              <StepperTrigger>
-                <StepperIndicator />
-                <div>
-                  <StepperTitle>Step 3</StepperTitle>
-                  <StepperDescription>Review</StepperDescription>
-                </div>
-              </StepperTrigger>
-            </StepperItem>
-          </StepperNav>
+      <Stepper value={step} onValueChange={setStep} orientation="vertical">
+        <StepperNav>
+          <StepperItem value="step1">
+            <StepperTrigger>
+              <StepperIndicator />
+              <div>
+                <StepperTitle>Step 1</StepperTitle>
+                <StepperDescription>Basic Information</StepperDescription>
+              </div>
+            </StepperTrigger>
+          </StepperItem>
+          <StepperItem value="step2">
+            <StepperTrigger>
+              <StepperIndicator />
+              <div>
+                <StepperTitle>Step 2</StepperTitle>
+                <StepperDescription>Details</StepperDescription>
+              </div>
+            </StepperTrigger>
+          </StepperItem>
+          <StepperItem value="step3">
+            <StepperTrigger>
+              <StepperIndicator />
+              <div>
+                <StepperTitle>Step 3</StepperTitle>
+                <StepperDescription>Review</StepperDescription>
+              </div>
+            </StepperTrigger>
+          </StepperItem>
+        </StepperNav>
 
-          <StepperPanel className="flex-1">
-            <StepperContent value="step1">
-              <div className="rounded-lg border p-6">
-                <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
-                <p className="mb-4 text-gray-600">Enter your basic information.</p>
+        <StepperPanel>
+          <StepperContent value="step1">
+            <div className="rounded-lg border p-6">
+              <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
+              <p className="mb-4 text-gray-600">Enter your basic information.</p>
+              <StepperNextTrigger asChild>
+                <Button variant="contained">Next</Button>
+              </StepperNextTrigger>
+            </div>
+          </StepperContent>
+
+          <StepperContent value="step2">
+            <div className="rounded-lg border p-6">
+              <h3 className="mb-4 text-lg font-semibold">Step 2: Details</h3>
+              <p className="mb-4 text-gray-600">Provide additional details.</p>
+              <div className="flex gap-2">
+                <StepperPrevTrigger asChild>
+                  <Button variant="outlined">Previous</Button>
+                </StepperPrevTrigger>
                 <StepperNextTrigger asChild>
                   <Button variant="contained">Next</Button>
                 </StepperNextTrigger>
               </div>
-            </StepperContent>
+            </div>
+          </StepperContent>
 
-            <StepperContent value="step2">
-              <div className="rounded-lg border p-6">
-                <h3 className="mb-4 text-lg font-semibold">Step 2: Details</h3>
-                <p className="mb-4 text-gray-600">Provide additional details.</p>
-                <div className="flex gap-2">
-                  <StepperPrevTrigger asChild>
-                    <Button variant="outlined">Previous</Button>
-                  </StepperPrevTrigger>
-                  <StepperNextTrigger asChild>
-                    <Button variant="contained">Next</Button>
-                  </StepperNextTrigger>
-                </div>
+          <StepperContent value="step3">
+            <div className="rounded-lg border p-6">
+              <h3 className="mb-4 text-lg font-semibold">Step 3: Review</h3>
+              <p className="mb-4 text-gray-600">Review and submit.</p>
+              <div className="flex gap-2">
+                <StepperPrevTrigger asChild>
+                  <Button variant="outlined">Previous</Button>
+                </StepperPrevTrigger>
+                <Button variant="contained">Submit</Button>
               </div>
-            </StepperContent>
-
-            <StepperContent value="step3">
-              <div className="rounded-lg border p-6">
-                <h3 className="mb-4 text-lg font-semibold">Step 3: Review</h3>
-                <p className="mb-4 text-gray-600">Review and submit.</p>
-                <div className="flex gap-2">
-                  <StepperPrevTrigger asChild>
-                    <Button variant="outlined">Previous</Button>
-                  </StepperPrevTrigger>
-                  <Button variant="contained">Submit</Button>
-                </div>
-              </div>
-            </StepperContent>
-          </StepperPanel>
-        </div>
+            </div>
+          </StepperContent>
+        </StepperPanel>
       </Stepper>
     );
   }
@@ -206,7 +206,7 @@ export const WithCompletedSteps: Story = {
     const [step, setStep] = React.useState("step2");
 
     return (
-      <Stepper value={step} onValueChange={setStep} className="w-full">
+      <Stepper value={step} onValueChange={setStep}>
         <StepperNav>
           <StepperItem value="step1" completed>
             <StepperTrigger>
@@ -237,7 +237,7 @@ export const WithCompletedSteps: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
@@ -264,7 +264,7 @@ export const WithDisabledSteps: Story = {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} className="w-full">
+      <Stepper value={step} onValueChange={setStep}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -295,7 +295,7 @@ export const WithDisabledSteps: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Only Step 1 is Available</h3>
@@ -313,7 +313,11 @@ export const WithLoadingState: Story = {
     const [step, setStep] = React.useState("step2");
 
     return (
-      <Stepper value={step} onValueChange={setStep} className="w-full">
+      <Stepper
+        value={step}
+        onValueChange={setStep}
+        indicators={{ loading: <Loader className="size-4 animate-spin" /> }}
+      >
         <StepperNav>
           <StepperItem value="step1" completed>
             <StepperTrigger>
@@ -344,7 +348,7 @@ export const WithLoadingState: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
@@ -372,7 +376,7 @@ export const ManualActivation: Story = {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} activationMode="manual" className="w-full">
+      <Stepper value={step} onValueChange={setStep} activationMode="manual">
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -403,7 +407,7 @@ export const ManualActivation: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Manual Activation Mode</h3>
@@ -436,7 +440,6 @@ export const WithCustomIndicators: Story = {
       <Stepper
         value={step}
         onValueChange={setStep}
-        className="w-full"
         indicators={{
           active: <span className="text-xl">→</span>,
           completed: <span className="text-xl">✓</span>,
@@ -473,7 +476,7 @@ export const WithCustomIndicators: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
@@ -513,7 +516,7 @@ export const WithValidation: Story = {
     );
 
     return (
-      <Stepper value={step} onValueChange={setStep} onValidate={handleValidate} className="w-full">
+      <Stepper value={step} onValueChange={setStep} onValidate={handleValidate}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -535,7 +538,7 @@ export const WithValidation: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Validation Example</h3>
@@ -565,7 +568,7 @@ export const InteractiveNavigation: Story = {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} className="w-full">
+      <Stepper value={step} onValueChange={setStep}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -596,7 +599,7 @@ export const InteractiveNavigation: Story = {
           </StepperItem>
         </StepperNav>
 
-        <StepperPanel className="mt-8">
+        <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 1: Interactive Navigation</h3>
