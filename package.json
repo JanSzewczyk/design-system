@@ -122,7 +122,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.545.0",
+    "lucide-react": "^0.546.0",
     "radix-ui": "^1.4.2",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7"
@@ -159,7 +159,7 @@
     "react-docgen-typescript": "^2.4.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.61.1",
-    "semantic-release": "^24.2.7",
+    "semantic-release": "^25.0.0",
     "serve": "^14.2.4",
     "storybook": "^9.0.18",
     "storybook-addon-tag-badges": "^2.0.1",
