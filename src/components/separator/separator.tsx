@@ -9,6 +9,7 @@ export type SeparatorProps = React.ComponentProps<typeof ReactSeparator.Root>;
 export function Separator({ className, orientation = "horizontal", decorative = false, ...props }: SeparatorProps) {
   return (
     <ReactSeparator.Root
+      data-slot="separator"
       decorative={decorative}
       orientation={orientation}
       aria-orientation={orientation}
