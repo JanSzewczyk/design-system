@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import { ShieldAlertIcon } from "lucide-react";
+
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { expect } from "storybook/test";
 import { ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader } from "~/components";
 import { Avatar, AvatarFallback } from "~/components/avatar";
 import { Button } from "~/components/button";
@@ -56,7 +58,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "outline", "muted"],
+      options: ["default", "outline"],
       description: "Visual style variant of the item"
     },
     size: {
@@ -65,7 +67,6 @@ const meta = {
       description: "Size of the item padding"
     }
   },
-  args: {},
   tags: ["autodocs", "new"]
 } satisfies Meta<typeof Item>;
 export default meta;
@@ -131,13 +132,32 @@ export const WithMedia: Story = {
   }
 };
 
+export const WithMediaIcon: Story = {
+  render: (args) => (
+    <Item variant="outlined" {...args}>
+      <ItemMedia variant="icon">
+        <ShieldAlertIcon />
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>Security Alert</ItemTitle>
+        <ItemDescription>New login detected from unknown device.</ItemDescription>
+      </ItemContent>
+      <ItemActions>
+        <Button size="sm" variant="outlined">
+          Review
+        </Button>
+      </ItemActions>
+    </Item>
+  )
+};
+
 /**
  * Item with action buttons on the right side.
  * Demonstrates using ItemActions to add interactive elements to items.
  */
 export const WithActions: Story = {
   render: (args) => (
-    <Item {...args} variant="outline">
+    <Item {...args} variant="outlined">
       <ItemContent>
         <ItemTitle>Project Update</ItemTitle>
         <ItemDescription>New features have been deployed to production.</ItemDescription>
@@ -214,7 +234,7 @@ export const Complete: Story = {
  */
 export const WithHeader: Story = {
   render: (args) => (
-    <Item {...args} variant="outline">
+    <Item {...args} variant="outlined">
       <ItemContent>
         <ItemHeader>
           <ItemTitle>Meeting Invitation</ItemTitle>
@@ -292,7 +312,7 @@ export const Variants: Story = {
           <ItemDescription>This is the default item variant.</ItemDescription>
         </ItemContent>
       </Item>
-      <Item variant="outline">
+      <Item variant="outlined">
         <ItemContent>
           <ItemTitle>Outline Variant</ItemTitle>
           <ItemDescription>This item has an outline border.</ItemDescription>
@@ -318,13 +338,13 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: () => (
     <ItemGroup className="gap-4">
-      <Item size="default" variant="outline">
+      <Item size="default" variant="outlined">
         <ItemContent>
           <ItemTitle>Default Size</ItemTitle>
           <ItemDescription>This item uses the default size with standard padding.</ItemDescription>
         </ItemContent>
       </Item>
-      <Item size="sm" variant="outline">
+      <Item size="sm" variant="outlined">
         <ItemContent>
           <ItemTitle>Small Size</ItemTitle>
           <ItemDescription>This item uses smaller padding for compact layouts.</ItemDescription>
@@ -350,7 +370,7 @@ export const Sizes: Story = {
 export const NotificationList: Story = {
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-2">
-      <Item variant="outline">
+      <Item variant="outlined">
         <ItemMedia>
           <Avatar>
             <AvatarFallback>JD</AvatarFallback>
@@ -364,7 +384,7 @@ export const NotificationList: Story = {
           </ItemFooter>
         </ItemContent>
       </Item>
-      <Item variant="outline">
+      <Item variant="outlined">
         <ItemMedia>
           <Avatar>
             <AvatarFallback>SB</AvatarFallback>
@@ -378,7 +398,7 @@ export const NotificationList: Story = {
           </ItemFooter>
         </ItemContent>
       </Item>
-      <Item variant="outline">
+      <Item variant="outlined">
         <ItemMedia>
           <Avatar>
             <AvatarFallback>TW</AvatarFallback>
