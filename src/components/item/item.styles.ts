@@ -10,7 +10,7 @@ export const itemCva = cva(
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border-gray-800"
+        outlined: "border-gray-800"
       },
       size: {
         default: "p-4 gap-4 ",
