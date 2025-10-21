@@ -1,12 +1,11 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { type ButtonColorType, type ButtonSizeType, type ButtonVariantType } from "~/components";
-import { LoadingIcon } from "~/icons";
+import { type ButtonColorType, type ButtonSizeType, type ButtonVariantType, Spinner } from "~/components";
 
 import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
 
-type Props = {
+export type ButtonProps = React.ComponentProps<"button"> & {
   /**
    * Defines button full width
    */
@@ -51,10 +50,6 @@ type Props = {
   asChild?: boolean;
 };
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  React.RefAttributes<HTMLButtonElement> &
-  Props;
-
 export function Button({
   asChild = false,
   variant = "text",
@@ -62,19 +57,14 @@ export function Button({
   disabled = false,
   fullWidth = false,
   loadingPosition = "start",
-  ref,
+  children,
+  type = "button",
+  loading = false,
+  size = "md",
+  endIcon,
+  startIcon,
   ...props
 }: ButtonProps) {
-  const {
-    children,
-    type = "button",
-    loading = false,
-    size = "md",
-    endIcon,
-    startIcon,
-    ...rest
-  } = { ...props, loadingPosition };
-
   const Comp = asChild ? Slot : "button";
 
   const buttonStyles = buttonCva({ fullWidth, size, variant, color });
@@ -83,17 +73,25 @@ export function Button({
 
   return (
     <Comp
-      {...(asChild ? props : rest)}
+      data-slot="button"
       aria-disabled={isDisabled || undefined}
       className={buttonStyles}
       data-state={loading ? "loading" : undefined}
       disabled={isDisabled}
-      ref={ref}
       role={Comp !== "button" ? "button" : undefined}
       tabIndex={isDisabled ? -1 : 0}
       type={Comp === "button" ? type : undefined}
+      {...props}
     >
-      {asChild ? <ButtonContent>{children}</ButtonContent> : <ButtonContent {...props} />}
+      <ButtonContent
+        loading={loading}
+        size={size}
+        loadingPosition={loadingPosition}
+        startIcon={startIcon}
+        endIcon={endIcon}
+      >
+        {children}
+      </ButtonContent>
     </Comp>
   );
 }
@@ -108,12 +106,12 @@ function ButtonContent({
   ...props
 }: Partial<ButtonProps>) {
   const isStartLoading = loading && loadingPosition === "start";
-  const StartIcon = isStartLoading ? <LoadingIcon aria-label="Loading" /> : startIcon || null;
+  const StartIcon = isStartLoading ? <Spinner aria-label="Loading" /> : startIcon || null;
   const startIconStyles = iconCva({ size, loading: isStartLoading });
   const startIconContainerStyles = iconContainerCva({ size, site: "left" });
 
   const isEndLoading = loading && loadingPosition === "end";
-  const EndIcon = isEndLoading ? <LoadingIcon aria-label="Loading" /> : endIcon || null;
+  const EndIcon = isEndLoading ? <Spinner aria-label="Loading" /> : endIcon || null;
   const endIconStyles = iconCva({ size, loading: isEndLoading });
   const endIconContainerStyles = iconContainerCva({ size, site: "right" });
 
