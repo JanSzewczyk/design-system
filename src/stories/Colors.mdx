@@ -4,117 +4,153 @@ import { ColorItem, ColorPalette, Meta, Title } from "@storybook/addon-docs/bloc
 
 <Title>Color Palette</Title>
 
-## Constant Styles
+## Theme Colors
+
+The design system uses semantic color tokens that adapt to light and dark modes. All colors are defined using OKLCH
+color space for better perceptual uniformity.
 
 <ColorPalette>
   <ColorItem
-    title="Base Colors"
-    subtitle="--color"
+    title="Background & Foreground"
+    subtitle="Base application colors"
     colors={{
-      white: "var(--color-white)",
-      black: "var(--color-black)"
-    }}
-  />
-</ColorPalette>
-
-## Theme
-
-<ColorPalette>
-  <ColorItem
-    title="Gray"
-    subtitle="--color-gray"
-    colors={{
-      "50": "var(--color-gray-50)",
-      "100": "var(--color-gray-100)",
-      "200": "var(--color-gray-200)",
-      "300": "var(--color-gray-300)",
-      "400": "var(--color-gray-400)",
-      "500": "var(--color-gray-500)",
-      "600": "var(--color-gray-600)",
-      "700": "var(--color-gray-700)",
-      "800": "var(--color-gray-800)",
-      "900": "var(--color-gray-900)",
-      "950": "var(--color-gray-950)"
+      background: "var(--color-background)",
+      foreground: "var(--color-foreground)"
     }}
   />
   <ColorItem
     title="Primary"
-    subtitle="--color-primary"
+    subtitle="Primary brand colors"
     colors={{
-      "50": "var(--color-primary-50)",
-      "100": "var(--color-primary-100)",
-      "200": "var(--color-primary-200)",
-      "300": "var(--color-primary-300)",
-      "color-primary-400": "var(--color-primary-400)",
-      "color-primary-500": "var(--color-primary-500)",
-      "color-primary-600": "var(--color-primary-600)",
-      "color-primary-700": "var(--color-primary-700)",
-      "color-primary-800": "var(--color-primary-800)",
-      "color-primary-900": "var(--color-primary-900)",
-      "color-primary-950": "var(--color-primary-950)"
+      primary: "var(--color-primary)",
+      "primary-foreground": "var(--color-primary-foreground)"
+    }}
+  />
+  <ColorItem
+    title="Secondary"
+    subtitle="Secondary colors"
+    colors={{
+      secondary: "var(--color-secondary)",
+      "secondary-foreground": "var(--color-secondary-foreground)"
+    }}
+  />
+  <ColorItem
+    title="Muted"
+    subtitle="Muted/subdued colors"
+    colors={{
+      muted: "var(--color-muted)",
+      "muted-foreground": "var(--color-muted-foreground)"
+    }}
+  />
+  <ColorItem
+    title="Accent"
+    subtitle="Accent colors"
+    colors={{
+      accent: "var(--color-accent)",
+      "accent-foreground": "var(--color-accent-foreground)"
     }}
   />
   <ColorItem
     title="Success"
-    subtitle="--color-success"
+    subtitle="Success colors"
     colors={{
-      "50": "var(--color-success-50)",
-      "100": "var(--color-success-100)",
-      "200": "var(--color-success-200)",
-      "300": "var(--color-success-300)",
-      "400": "var(--color-success-400)",
-      "500": "var(--color-success-500)",
-      "600": "var(--color-success-600)",
-      "700": "var(--color-success-700)",
-      "800": "var(--color-success-800)",
-      "900": "var(--color-success-900)",
-      "950": "var(--color-success-950)"
+      success: "var(--color-success)",
+      "success-foreground": "var(--color-success-foreground)"
     }}
   />
   <ColorItem
     title="Warning"
-    subtitle="--color-warning"
+    subtitle="Warning colors"
     colors={{
-      "50": "var(--color-warning-50)",
-      "100": "var(--color-warning-100)",
-      "200": "var(--color-warning-200)",
-      "300": "var(--color-warning-300)",
-      "400": "var(--color-warning-400)",
-      "500": "var(--color-warning-500)",
-      "600": "var(--color-warning-600)",
-      "700": "var(--color-warning-700)",
-      "800": "var(--color-warning-800)",
-      "900": "var(--color-warning-900)",
-      "950": "var(--color-warning-950)"
+      warning: "var(--color-warning)",
+      "warning-foreground": "var(--color-warning-foreground)"
     }}
   />
   <ColorItem
     title="Error"
-    subtitle="--color-error"
+    subtitle="Error actions"
     colors={{
-      "50": "var(--color-error-50)",
-      "100": "var(--color-error-100)",
-      "200": "var(--color-error-200)",
-      "300": "var(--color-error-300)",
-      "400": "var(--color-error-400)",
-      "500": "var(--color-error-500)",
-      "600": "var(--color-error-600)",
-      "700": "var(--color-error-700)",
-      "800": "var(--color-error-800)",
-      "900": "var(--color-error-900)",
-      "950": "var(--color-error-950)"
+      error: "var(--color-error)"
     }}
   />
+
+</ColorPalette>
+
+## Chart Colors
+
+<ColorPalette>
   <ColorItem
-    title="Background"
-    subtitle="--color"
+    title="Charts"
+    subtitle="Data visualization colors"
     colors={{
-      "app-foreground": "var(--color-app-foreground)",
-      "app-background": "var(--color-app-background)",
-      "background-primary": "var(--color-background-primary)",
-      "background-success": "var(--background-color-success)",
-      "background-warning": "var(--background-color-warning)",
-      "background-error": "var(--background-color-error)"
+      "chart-1": "var(--color-chart-1)",
+      "chart-2": "var(--color-chart-2)",
+      "chart-3": "var(--color-chart-3)",
+      "chart-4": "var(--color-chart-4)",
+      "chart-5": "var(--color-chart-5)"
     }}
   />
 </ColorPalette>
+
+## Component Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Sidebar"
+    subtitle="Sidebar component colors"
+    colors={{
+      sidebar: "var(--color-sidebar)",
+      "sidebar-foreground": "var(--color-sidebar-foreground)",
+      "sidebar-primary": "var(--color-sidebar-primary)",
+      "sidebar-primary-foreground": "var(--color-sidebar-primary-foreground)",
+      "sidebar-accent": "var(--color-sidebar-accent)",
+      "sidebar-accent-foreground": "var(--color-sidebar-accent-foreground)",
+      "sidebar-border": "var(--color-sidebar-border)",
+      "sidebar-ring": "var(--color-sidebar-ring)"
+    }}
+  />
+  <ColorItem
+    title="Card"
+    subtitle="Card colors"
+    colors={{
+      card: "var(--color-card)",
+      "card-foreground": "var(--color-card-foreground)"
+    }}
+  />
+  <ColorItem
+    title="Popover"
+    subtitle="Popover colors"
+    colors={{
+      popover: "var(--color-popover)",
+      "popover-foreground": "var(--color-popover-foreground)"
+    }}
+  />
+  <ColorItem
+    title="Border & Input"
+    subtitle="Form elements"
+    colors={{
+      border: "var(--color-border)",
+      input: "var(--color-input)",
+      ring: "var(--color-ring)"
+    }}
+  />
+</ColorPalette>
+
+## Usage
+
+Colors can be used with Tailwind utilities:
+
+```tsx
+// Background colors
+<div className="bg-background text-foreground" />
+<div className="bg-primary text-primary-foreground" />
+<div className="bg-destructive" />
+
+// Border colors
+<div className="border border-border" />
+<input className="border-input ring-ring" />
+
+// Chart colors
+<div className="bg-chart-1" />
+<div className="text-chart-2" />
+```
