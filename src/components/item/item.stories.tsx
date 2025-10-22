@@ -1,90 +1,64 @@
 import * as React from "react";
 
-import { ShieldAlertIcon } from "lucide-react";
+import { BadgeCheckIcon, ChevronRightIcon, ExternalLinkIcon, Plus, PlusIcon, ShieldAlertIcon } from "lucide-react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
-import { ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader } from "~/components";
-import { Avatar, AvatarFallback } from "~/components/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemGroup,
+  ItemHeader,
+  ItemSeparator
+} from "~/components";
 import { Button } from "~/components/button";
 
 import { Item } from "./item";
 import { ItemMedia } from "./item-media";
 import { ItemTitle } from "./item-title";
 
-/**
- * The Item component is a versatile flex container for displaying structured content.
- * It supports multiple variants and sizes, and is composed of several sub-components
- * that can be used together to create rich, interactive list items.
- *
- * ## Features
- * - **Flexible Layout**: Supports media, content, and action areas
- * - **Multiple Variants**: Default, outline, and muted styles
- * - **Size Options**: Default and small (sm) sizes
- * - **Composable**: Built from smaller sub-components for maximum flexibility
- * - **Accessible**: Built with semantic HTML and proper ARIA attributes
- *
- * ## Sub-Components
- * - `ItemMedia`: Display icons, images, or avatars on the left side
- * - `ItemContent`: Wrapper for title and description content (provides flex-1 for proper spacing)
- * - `ItemTitle`: Display the item title as an h4 heading
- * - `ItemDescription`: Show additional description text with appropriate text styles
- * - `ItemActions`: Container for interactive elements like buttons (positioned on the right)
- * - `ItemHeader`: Optional header section for complex layouts with title and actions side-by-side
- * - `ItemFooter`: Optional footer section for metadata like timestamps or tags
- *
- * ## Usage Guidelines
- * - Use **Item** for general content display in lists, feeds, notifications, or card-like structures
- * - For form inputs and controls, use the **Field** component instead
- * - Combine sub-components to create flexible layouts that fit your design needs
- * - The `variant` prop controls the visual style (default, outline, muted)
- * - The `size` prop controls padding (default, sm for compact layouts)
- *
- * ## Common Patterns
- * - **Simple List Items**: Item + ItemContent + ItemTitle + ItemDescription
- * - **User Lists**: Item + ItemMedia (Avatar) + ItemContent
- * - **Notifications**: Item + ItemMedia + ItemContent + ItemFooter (timestamp)
- * - **Actions**: Item + ItemContent + ItemActions (buttons)
- * - **Complex Layouts**: Item + ItemContent + ItemHeader + ItemFooter
- *
- * ## Accessibility
- * - Uses semantic HTML elements (h4 for titles, p for descriptions)
- * - Supports all standard HTML div attributes
- * - Can be extended with ARIA attributes as needed
- */
 const meta = {
   title: "Components/Item",
   component: Item,
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "outline"],
-      description: "Visual style variant of the item"
-    },
-    size: {
-      control: "select",
-      options: ["default", "sm"],
-      description: "Size of the item padding"
-    }
-  },
   tags: ["autodocs", "new"]
 } satisfies Meta<typeof Item>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-/**
- * The default Item with basic title and description.
- * Demonstrates the simplest usage with just content, title, and description.
- */
-export const Default: Story = {
-  render: (args) => (
-    <Item {...args}>
-      <ItemContent>
-        <ItemTitle>Basic Item</ItemTitle>
-        <ItemDescription>A simple item with title and description.</ItemDescription>
-      </ItemContent>
-    </Item>
+export const Example: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-6">
+      <Item variant="outline">
+        <ItemContent>
+          <ItemTitle>Basic Item</ItemTitle>
+          <ItemDescription>A simple item with title and description.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Action
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item variant="outline" size="sm" asChild>
+        <a href="#">
+          <ItemMedia>
+            <BadgeCheckIcon className="size-5" />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>Your profile has been verified.</ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <ChevronRightIcon className="size-4" />
+          </ItemActions>
+        </a>
+      </Item>
+    </div>
   ),
   play: async ({ canvas }) => {
     // Test that title renders as h4 element
@@ -103,356 +77,325 @@ export const Default: Story = {
   }
 };
 
-/**
- * Item with an avatar/icon in the media section.
- * Demonstrates using ItemMedia with an Avatar component for user lists or contact cards.
- */
-export const WithMedia: Story = {
-  render: (args) => (
-    <Item {...args}>
-      <ItemMedia>
-        <Avatar>
-          <AvatarFallback>JD</AvatarFallback>
-        </Avatar>
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>John Doe</ItemTitle>
-        <ItemDescription>Software Engineer at Acme Corp</ItemDescription>
-      </ItemContent>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    // Test that all content is visible
-    await expect(canvas.getByText("John Doe")).toBeVisible();
-    await expect(canvas.getByText("Software Engineer at Acme Corp")).toBeVisible();
-
-    // Test that avatar fallback is rendered
-    const avatarFallback = canvas.getByText("JD");
-    await expect(avatarFallback).toBeVisible();
-  }
-};
-
-export const WithMediaIcon: Story = {
-  render: (args) => (
-    <Item variant="outlined" {...args}>
-      <ItemMedia variant="icon">
-        <ShieldAlertIcon />
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>Security Alert</ItemTitle>
-        <ItemDescription>New login detected from unknown device.</ItemDescription>
-      </ItemContent>
-      <ItemActions>
-        <Button size="sm" variant="outlined">
-          Review
-        </Button>
-      </ItemActions>
-    </Item>
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-6">
+      <Item>
+        <ItemContent>
+          <ItemTitle>Default Variant</ItemTitle>
+          <ItemDescription>Standard styling with subtle background and borders.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Open
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item variant="outline">
+        <ItemContent>
+          <ItemTitle>Outline Variant</ItemTitle>
+          <ItemDescription>Outlined style with clear borders and transparent background.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Open
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item variant="muted">
+        <ItemContent>
+          <ItemTitle>Muted Variant</ItemTitle>
+          <ItemDescription>Subdued appearance with muted colors for secondary content.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Open
+          </Button>
+        </ItemActions>
+      </Item>
+    </div>
   )
 };
 
-/**
- * Item with action buttons on the right side.
- * Demonstrates using ItemActions to add interactive elements to items.
- */
-export const WithActions: Story = {
-  render: (args) => (
-    <Item {...args} variant="outlined">
-      <ItemContent>
-        <ItemTitle>Project Update</ItemTitle>
-        <ItemDescription>New features have been deployed to production.</ItemDescription>
-      </ItemContent>
-      <ItemActions>
-        <Button variant="outlined" size="sm">
-          View
-        </Button>
-      </ItemActions>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    // Test that content is rendered
-    await expect(canvas.getByText("Project Update")).toBeVisible();
-    await expect(canvas.getByText("New features have been deployed to production.")).toBeVisible();
-
-    // Test that action button is rendered and accessible
-    const viewButton = canvas.getByRole("button", { name: /view/i });
-    await expect(viewButton).toBeVisible();
-    await expect(viewButton).toBeEnabled();
-  }
-};
-
-/**
- * Complete item with media, content, and actions.
- * Demonstrates a full-featured item combining all main sub-components for rich notifications or alerts.
- */
-export const Complete: Story = {
-  render: (args) => (
-    <Item {...args}>
-      <ItemMedia>
-        <Avatar>
-          <AvatarFallback>SA</AvatarFallback>
-        </Avatar>
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>System Alert</ItemTitle>
-        <ItemDescription>Your password will expire in 7 days. Please update it.</ItemDescription>
-      </ItemContent>
-      <ItemActions>
-        <Button variant="contained" size="sm">
-          Update
-        </Button>
-        <Button variant="text" size="sm">
-          Dismiss
-        </Button>
-      </ItemActions>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    // Test that title and description are rendered
-    await expect(canvas.getByText("System Alert")).toBeVisible();
-    await expect(canvas.getByText("Your password will expire in 7 days. Please update it.")).toBeVisible();
-
-    // Test that avatar is rendered
-    await expect(canvas.getByText("SA")).toBeVisible();
-
-    // Test that both action buttons are rendered and accessible
-    const updateButton = canvas.getByRole("button", { name: /update/i });
-    const dismissButton = canvas.getByRole("button", { name: /dismiss/i });
-
-    await expect(updateButton).toBeVisible();
-    await expect(dismissButton).toBeVisible();
-
-    // Test that both buttons are enabled
-    await expect(updateButton).toBeEnabled();
-    await expect(dismissButton).toBeEnabled();
-  }
-};
-
-/**
- * Item with header section for more complex layouts.
- * Demonstrates using ItemHeader to place title and actions side-by-side in a horizontal layout.
- */
-export const WithHeader: Story = {
-  render: (args) => (
-    <Item {...args} variant="outlined">
-      <ItemContent>
-        <ItemHeader>
-          <ItemTitle>Meeting Invitation</ItemTitle>
+export const Size: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-6">
+      <Item variant="outline">
+        <ItemContent>
+          <ItemTitle>Basic Item</ItemTitle>
+          <ItemDescription>A simple item with title and description.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button variant="outline" size="sm">
+            Action
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item variant="outline" size="sm" asChild>
+        <a href="#">
+          <ItemMedia>
+            <BadgeCheckIcon className="size-5" />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>Your profile has been verified.</ItemTitle>
+          </ItemContent>
           <ItemActions>
-            <Button variant="text" size="sm">
-              Accept
-            </Button>
-            <Button variant="text" size="sm">
-              Decline
-            </Button>
+            <ChevronRightIcon className="size-4" />
           </ItemActions>
-        </ItemHeader>
-        <ItemDescription>Team sync meeting scheduled for tomorrow at 10:00 AM.</ItemDescription>
-      </ItemContent>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    // Test that title is rendered
-    await expect(canvas.getByText("Meeting Invitation")).toBeVisible();
-
-    // Test that description is rendered
-    await expect(canvas.getByText("Team sync meeting scheduled for tomorrow at 10:00 AM.")).toBeVisible();
-
-    // Test that both action buttons in the header are rendered
-    const acceptButton = canvas.getByRole("button", { name: /accept/i });
-    const declineButton = canvas.getByRole("button", { name: /decline/i });
-
-    await expect(acceptButton).toBeVisible();
-    await expect(declineButton).toBeVisible();
-  }
-};
-
-/**
- * Item with footer section for additional content.
- * Demonstrates using ItemFooter to add metadata like timestamps, tags, or secondary information.
- */
-export const WithFooter: Story = {
-  render: (args) => (
-    <Item {...args}>
-      <ItemContent>
-        <ItemTitle>File Upload Complete</ItemTitle>
-        <ItemDescription>document.pdf has been successfully uploaded.</ItemDescription>
-        <ItemFooter>
-          <span className="text-body-2 text-gray-600">2 minutes ago</span>
-        </ItemFooter>
-      </ItemContent>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    // Test that title and description are rendered
-    await expect(canvas.getByText("File Upload Complete")).toBeVisible();
-    await expect(canvas.getByText("document.pdf has been successfully uploaded.")).toBeVisible();
-
-    // Test that footer timestamp is rendered
-    const timestamp = canvas.getByText("2 minutes ago");
-    await expect(timestamp).toBeVisible();
-    await expect(timestamp).toBeVisible();
-
-    // Test that the timestamp has correct styling classes
-    await expect(timestamp).toHaveClass("text-body-2");
-    await expect(timestamp).toHaveClass("text-gray-600");
-  }
-};
-
-/**
- * Demonstrates all available variants: default, outline, and muted.
- * Shows how different variants can be used for visual hierarchy and emphasis.
- */
-export const Variants: Story = {
-  render: () => (
-    <ItemGroup>
-      <Item variant="default">
-        <ItemContent>
-          <ItemTitle>Default Variant</ItemTitle>
-          <ItemDescription>This is the default item variant.</ItemDescription>
-        </ItemContent>
-      </Item>
-      <Item variant="outlined">
-        <ItemContent>
-          <ItemTitle>Outline Variant</ItemTitle>
-          <ItemDescription>This item has an outline border.</ItemDescription>
-        </ItemContent>
-      </Item>
-    </ItemGroup>
-  ),
-  play: async ({ canvas }) => {
-    // Test that all variants are rendered
-    await expect(canvas.getByText("Default Variant")).toBeVisible();
-    await expect(canvas.getByText("Outline Variant")).toBeVisible();
-
-    // Test that all descriptions are visible
-    await expect(canvas.getByText("This is the default item variant.")).toBeVisible();
-    await expect(canvas.getByText("This item has an outline border.")).toBeVisible();
-  }
-};
-
-/**
- * Demonstrates size options: default and small (sm).
- * Shows how to use different sizes for various layout densities and use cases.
- */
-export const Sizes: Story = {
-  render: () => (
-    <ItemGroup className="gap-4">
-      <Item size="default" variant="outlined">
-        <ItemContent>
-          <ItemTitle>Default Size</ItemTitle>
-          <ItemDescription>This item uses the default size with standard padding.</ItemDescription>
-        </ItemContent>
-      </Item>
-      <Item size="sm" variant="outlined">
-        <ItemContent>
-          <ItemTitle>Small Size</ItemTitle>
-          <ItemDescription>This item uses smaller padding for compact layouts.</ItemDescription>
-        </ItemContent>
-      </Item>
-    </ItemGroup>
-  ),
-  play: async ({ canvas }) => {
-    // Test that both size variants are rendered
-    await expect(canvas.getByText("Default Size")).toBeVisible();
-    await expect(canvas.getByText("Small Size")).toBeVisible();
-
-    // Test that descriptions are visible
-    await expect(canvas.getByText("This item uses the default size with standard padding.")).toBeVisible();
-    await expect(canvas.getByText("This item uses smaller padding for compact layouts.")).toBeVisible();
-  }
-};
-
-/**
- * Example of a notification list using Item components.
- * Demonstrates a real-world use case with multiple items in a feed or notification center.
- */
-export const NotificationList: Story = {
-  render: () => (
-    <div className="flex w-full max-w-md flex-col gap-2">
-      <Item variant="outlined">
-        <ItemMedia>
-          <Avatar>
-            <AvatarFallback>JD</AvatarFallback>
-          </Avatar>
-        </ItemMedia>
-        <ItemContent>
-          <ItemTitle>John Doe mentioned you</ItemTitle>
-          <ItemDescription>Can you review the PR when you get a chance?</ItemDescription>
-          <ItemFooter>
-            <span className="text-body-3 text-gray-600">5 minutes ago</span>
-          </ItemFooter>
-        </ItemContent>
-      </Item>
-      <Item variant="outlined">
-        <ItemMedia>
-          <Avatar>
-            <AvatarFallback>SB</AvatarFallback>
-          </Avatar>
-        </ItemMedia>
-        <ItemContent>
-          <ItemTitle>Sarah Brown commented</ItemTitle>
-          <ItemDescription>Great work on the new feature!</ItemDescription>
-          <ItemFooter>
-            <span className="text-body-3 text-gray-600">1 hour ago</span>
-          </ItemFooter>
-        </ItemContent>
-      </Item>
-      <Item variant="outlined">
-        <ItemMedia>
-          <Avatar>
-            <AvatarFallback>TW</AvatarFallback>
-          </Avatar>
-        </ItemMedia>
-        <ItemContent>
-          <ItemTitle>Tom Wilson assigned you</ItemTitle>
-          <ItemDescription>You have been assigned to task #1234</ItemDescription>
-          <ItemFooter>
-            <span className="text-body-3 text-gray-600">3 hours ago</span>
-          </ItemFooter>
-        </ItemContent>
+        </a>
       </Item>
     </div>
-  ),
-  play: async ({ canvas }) => {
-    // Test that all notification titles are rendered
-    await expect(canvas.getByText("John Doe mentioned you")).toBeVisible();
-    await expect(canvas.getByText("Sarah Brown commented")).toBeVisible();
-    await expect(canvas.getByText("Tom Wilson assigned you")).toBeVisible();
-
-    // Test that all descriptions are visible
-    await expect(canvas.getByText("Can you review the PR when you get a chance?")).toBeVisible();
-    await expect(canvas.getByText("Great work on the new feature!")).toBeVisible();
-    await expect(canvas.getByText("You have been assigned to task #1234")).toBeVisible();
-
-    // Test that all avatars are rendered
-    await expect(canvas.getByText("JD")).toBeVisible();
-    await expect(canvas.getByText("SB")).toBeVisible();
-    await expect(canvas.getByText("TW")).toBeVisible();
-
-    // Test that all timestamps are rendered
-    await expect(canvas.getByText("5 minutes ago")).toBeVisible();
-    await expect(canvas.getByText("1 hour ago")).toBeVisible();
-    await expect(canvas.getByText("3 hours ago")).toBeVisible();
-  }
+  )
 };
 
-/**
- * Example with custom className applied.
- */
-export const CustomClassName: Story = {
-  tags: ["test-only"],
+export const Icon: Story = {
   render: () => (
-    <Item className="hover:bg-gray-800" data-testid="custom-item">
-      <ItemContent>
-        <ItemTitle>Custom Styled Item</ItemTitle>
-        <ItemDescription>This item has custom hover styles applied.</ItemDescription>
-      </ItemContent>
-    </Item>
-  ),
-  play: async ({ canvas }) => {
-    const item = canvas.getByTestId("custom-item");
-    await expect(item).toBeInTheDocument();
-    await expect(item).toHaveClass("hover:bg-gray-800");
+    <div className="flex w-full max-w-lg flex-col gap-6">
+      <Item variant="outline">
+        <ItemMedia variant="icon">
+          <ShieldAlertIcon />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Security Alert</ItemTitle>
+          <ItemDescription>New login detected from unknown device.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button size="sm" variant="outline">
+            Review
+          </Button>
+        </ItemActions>
+      </Item>
+    </div>
+  )
+};
+
+export const AvatarStory: Story = {
+  name: "Avatar",
+  render: () => (
+    <div className="flex w-full max-w-lg flex-col gap-6">
+      <Item variant="outline">
+        <ItemMedia>
+          <Avatar className="size-10">
+            <AvatarImage src="https://github.com/evilrabbit.png" />
+            <AvatarFallback>ER</AvatarFallback>
+          </Avatar>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>Evil Rabbit</ItemTitle>
+          <ItemDescription>Last seen 5 months ago</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button size="icon-sm" variant="outline" className="rounded-full" aria-label="Invite">
+            <Plus />
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item variant="outline">
+        <ItemMedia>
+          <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+            <Avatar className="hidden sm:flex">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <Avatar className="hidden sm:flex">
+              <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+              <AvatarFallback>LR</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+              <AvatarFallback>ER</AvatarFallback>
+            </Avatar>
+          </div>
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>No Team Members</ItemTitle>
+          <ItemDescription>Invite your team to collaborate on this project.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button size="sm" variant="outline">
+            Invite
+          </Button>
+        </ItemActions>
+      </Item>
+    </div>
+  )
+};
+
+const music = [
+  {
+    title: "Midnight City Lights",
+    artist: "Neon Dreams",
+    album: "Electric Nights",
+    duration: "3:45"
+  },
+  {
+    title: "Coffee Shop Conversations",
+    artist: "The Morning Brew",
+    album: "Urban Stories",
+    duration: "4:05"
+  },
+  {
+    title: "Digital Rain",
+    artist: "Cyber Symphony",
+    album: "Binary Beats",
+    duration: "3:30"
   }
+];
+
+export const Image: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-6">
+      <ItemGroup className="gap-4">
+        {music.map((song) => (
+          <Item key={song.title} variant="outline" asChild role="listitem">
+            <a href="#">
+              <ItemMedia variant="image">
+                <img
+                  src={`https://avatar.vercel.sh/${song.title}`}
+                  alt={song.title}
+                  width={32}
+                  height={32}
+                  className="object-cover grayscale"
+                />
+              </ItemMedia>
+              <ItemContent>
+                <ItemTitle className="line-clamp-1">
+                  {song.title} - <span className="text-muted-foreground">{song.album}</span>
+                </ItemTitle>
+                <ItemDescription>{song.artist}</ItemDescription>
+              </ItemContent>
+              <ItemContent className="flex-none text-center">
+                <ItemDescription>{song.duration}</ItemDescription>
+              </ItemContent>
+            </a>
+          </Item>
+        ))}
+      </ItemGroup>
+    </div>
+  )
+};
+
+const people = [
+  {
+    username: "shadcn",
+    avatar: "https://github.com/shadcn.png",
+    email: "shadcn@vercel.com"
+  },
+  {
+    username: "maxleiter",
+    avatar: "https://github.com/maxleiter.png",
+    email: "maxleiter@vercel.com"
+  },
+  {
+    username: "evilrabbit",
+    avatar: "https://github.com/evilrabbit.png",
+    email: "evilrabbit@vercel.com"
+  }
+];
+
+export const Group: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-6">
+      <ItemGroup>
+        {people.map((person, index) => (
+          <React.Fragment key={person.username}>
+            <Item>
+              <ItemMedia>
+                <Avatar>
+                  <AvatarImage src={person.avatar} className="grayscale" />
+                  <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
+                </Avatar>
+              </ItemMedia>
+              <ItemContent className="gap-1">
+                <ItemTitle>{person.username}</ItemTitle>
+                <ItemDescription>{person.email}</ItemDescription>
+              </ItemContent>
+              <ItemActions>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <PlusIcon />
+                </Button>
+              </ItemActions>
+            </Item>
+            {index !== people.length - 1 && <ItemSeparator />}
+          </React.Fragment>
+        ))}
+      </ItemGroup>
+    </div>
+  )
+};
+
+const models = [
+  {
+    name: "v0-1.5-sm",
+    description: "Everyday tasks and UI generation.",
+    image: "https://images.unsplash.com/photo-1650804068570-7fb2e3dbf888?q=80&w=640&auto=format&fit=crop",
+    credit: "Valeria Reverdo on Unsplash"
+  },
+  {
+    name: "v0-1.5-lg",
+    description: "Advanced thinking or reasoning.",
+    image: "https://images.unsplash.com/photo-1610280777472-54133d004c8c?q=80&w=640&auto=format&fit=crop",
+    credit: "Michael Oeser on Unsplash"
+  },
+  {
+    name: "v0-2.0-mini",
+    description: "Open Source model for everyone.",
+    image: "https://images.unsplash.com/photo-1602146057681-08560aee8cde?q=80&w=640&auto=format&fit=crop",
+    credit: "Cherry Laithang on Unsplash"
+  }
+];
+
+export const Header: Story = {
+  render: () => (
+    <div className="flex w-full max-w-xl flex-col gap-6">
+      <ItemGroup className="grid grid-cols-3 gap-4">
+        {models.map((model) => (
+          <Item key={model.name} variant="outline">
+            <ItemHeader>
+              <img
+                src={model.image}
+                alt={model.name}
+                width={128}
+                height={128}
+                className="aspect-square w-full rounded-sm object-cover"
+              />
+            </ItemHeader>
+            <ItemContent>
+              <ItemTitle>{model.name}</ItemTitle>
+              <ItemDescription>{model.description}</ItemDescription>
+            </ItemContent>
+          </Item>
+        ))}
+      </ItemGroup>
+    </div>
+  )
+};
+
+export const Link: Story = {
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-4">
+      <Item asChild>
+        <a href="#">
+          <ItemContent>
+            <ItemTitle>Visit our documentation</ItemTitle>
+            <ItemDescription>Learn how to get started with our components.</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <ChevronRightIcon className="size-4" />
+          </ItemActions>
+        </a>
+      </Item>
+      <Item variant="outline" asChild>
+        <a href="#" target="_blank" rel="noopener noreferrer">
+          <ItemContent>
+            <ItemTitle>External resource</ItemTitle>
+            <ItemDescription>Opens in a new tab with security attributes.</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <ExternalLinkIcon className="size-4" />
+          </ItemActions>
+        </a>
+      </Item>
+    </div>
+  )
 };

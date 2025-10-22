@@ -4,7 +4,7 @@ import { cn } from "~/utils";
 
 export type ItemContentProps = React.ComponentProps<"div">;
 
-export function ItemContent({ className, ...props }: ItemContentProps) {
+export function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="item-content"
