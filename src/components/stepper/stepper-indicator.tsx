@@ -36,9 +36,9 @@ export function StepperIndicator({ className, children, asChild, ref, ...props }
       dir={dir}
       ref={ref}
       className={cn(
-        "bg-app-foreground relative flex size-6 shrink-0 items-center justify-center self-end overflow-hidden rounded-t border-x border-t border-gray-800 text-xs transition-colors duration-500",
-        "data-[state=completed]:bg-success-500/50 data-[state=completed]:border-success-500",
-        "data-[state=active]:bg-primary-500/50 data-[state=active]:border-primary-500",
+        "bg-muted border-border text-muted-foreground relative flex size-6 shrink-0 items-center justify-center self-end overflow-hidden rounded-t border-x border-t text-xs transition-colors duration-500",
+        "data-[state=completed]:bg-success/50 data-[state=completed]:border-success data-[state=completed]:text-success-foreground",
+        "data-[state=active]:bg-primary/50 data-[state=active]:border-primary data-[state=active]:text-primary-foreground",
         className
       )}
       {...props}

@@ -71,7 +71,7 @@ export const Default: Story = {
               <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
               <p className="mb-4 text-gray-600">Enter your basic information to get started.</p>
               <StepperNextTrigger asChild>
-                <Button variant="contained">Next</Button>
+                <Button>Next</Button>
               </StepperNextTrigger>
             </div>
           </StepperContent>
@@ -82,10 +82,10 @@ export const Default: Story = {
               <p className="mb-4 text-gray-600">Provide additional details about yourself.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
-                  <Button variant="outlined">Previous</Button>
+                  <Button>Previous</Button>
                 </StepperPrevTrigger>
                 <StepperNextTrigger asChild>
-                  <Button variant="contained">Next</Button>
+                  <Button>Next</Button>
                 </StepperNextTrigger>
               </div>
             </div>
@@ -97,9 +97,9 @@ export const Default: Story = {
               <p className="mb-4 text-gray-600">Review your information and submit.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
-                  <Button variant="outlined">Previous</Button>
+                  <Button>Previous</Button>
                 </StepperPrevTrigger>
-                <Button variant="contained">Submit</Button>
+                <Button>Submit</Button>
               </div>
             </div>
           </StepperContent>
@@ -107,9 +107,7 @@ export const Default: Story = {
       </Stepper>
     );
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
+  play: async ({ canvas }) => {
     // Check if all steps are rendered
     await expect(canvas.getByText("Step 1")).toBeInTheDocument();
     await expect(canvas.getByText("Step 2")).toBeInTheDocument();
@@ -162,7 +160,7 @@ export const VerticalOrientation: Story = {
               <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
               <p className="mb-4 text-gray-600">Enter your basic information.</p>
               <StepperNextTrigger asChild>
-                <Button variant="contained">Next</Button>
+                <Button>Next</Button>
               </StepperNextTrigger>
             </div>
           </StepperContent>
@@ -173,10 +171,10 @@ export const VerticalOrientation: Story = {
               <p className="mb-4 text-gray-600">Provide additional details.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
-                  <Button variant="outlined">Previous</Button>
+                  <Button>Previous</Button>
                 </StepperPrevTrigger>
                 <StepperNextTrigger asChild>
-                  <Button variant="contained">Next</Button>
+                  <Button>Next</Button>
                 </StepperNextTrigger>
               </div>
             </div>
@@ -188,9 +186,9 @@ export const VerticalOrientation: Story = {
               <p className="mb-4 text-gray-600">Review and submit.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
-                  <Button variant="outlined">Previous</Button>
+                  <Button>Previous</Button>
                 </StepperPrevTrigger>
-                <Button variant="contained">Submit</Button>
+                <Button>Submit</Button>
               </div>
             </div>
           </StepperContent>
@@ -540,7 +538,7 @@ export const WithValidation: Story = {
                 <span>Check this to enable next step</span>
               </label>
               <StepperNextTrigger asChild>
-                <Button variant="contained">Next</Button>
+                <Button>Next</Button>
               </StepperNextTrigger>
             </div>
           </StepperContent>
@@ -618,9 +616,7 @@ export const InteractiveNavigation: Story = {
       </Stepper>
     );
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
+  play: async ({ canvas }) => {
     // Verify initial state
     await expect(canvas.getByText("Step 1: Interactive Navigation")).toBeInTheDocument();
 
