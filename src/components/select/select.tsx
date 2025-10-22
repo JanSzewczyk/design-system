@@ -1,36 +1,82 @@
 import * as React from "react";
 
-import { ChevronDown } from "lucide-react";
-import { Select as ReactSelect } from "radix-ui";
+import { ChevronDownIcon } from "lucide-react";
+import { Select as SelectPrimitive } from "radix-ui";
 
-import { selectCva } from "./select.styles";
+import { cn } from "~/utils";
 
-export type SelectProps = ReactSelect.SelectProps & {
-  ref?: React.ComponentProps<typeof ReactSelect.Trigger>["ref"];
-  placeholder?: React.ReactNode;
-  invalid?: boolean;
-};
+export type SelectProps = React.ComponentProps<typeof SelectPrimitive.Root> &
+  React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+    size?: "sm" | "default";
+    invalid?: boolean;
+    placeholder?: React.ReactNode;
+  };
 
-export function Select({ children, placeholder, invalid = false, ref, ...props }: SelectProps) {
-  const selectStyles = selectCva({ invalid });
+export function Select({
+  children,
+  disabled,
+  defaultOpen,
+  defaultValue,
+  value,
+  dir,
+  open,
+  form,
+  name,
+  onOpenChange,
+  onValueChange,
+  required,
+  autoComplete,
+  // value props
+  placeholder,
+  // trigger props
+  className,
+  size = "default",
+  invalid = false,
+  ...triggerProps
+}: SelectProps) {
+  const rootProps = {
+    children,
+    disabled,
+    defaultOpen,
+    defaultValue,
+    value,
+    dir,
+    open,
+    form,
+    name,
+    onOpenChange,
+    onValueChange,
+    required,
+    autoComplete
+  };
 
   return (
-    <ReactSelect.Root {...props}>
-      <ReactSelect.Trigger className={selectStyles} ref={ref} aria-invalid={invalid || undefined}>
-        <ReactSelect.Value placeholder={placeholder} />
-        <ReactSelect.Icon asChild>
-          <ChevronDown className="size-5 text-gray-100" />
-        </ReactSelect.Icon>
-      </ReactSelect.Trigger>
+    <SelectPrimitive.Root data-slot="select" {...rootProps}>
+      <SelectPrimitive.Trigger
+        data-slot="select-trigger"
+        aria-invalid={triggerProps["aria-invalid"] || invalid ? true : undefined}
+        data-size={size}
+        className={cn(
+          "border-input dark:bg-input/30 dark:hover:bg-input/50 flex w-full items-center justify-between gap-2 rounded border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none",
+          "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          "aria-invalid:ring-error/20 dark:aria-invalid:ring-error/40 aria-invalid:border-error",
+          "data-[size=default]:h-9 data-[size=sm]:h-8",
+          "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+          "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "data-[placeholder]:text-muted-foreground",
 
-      <ReactSelect.Portal>
-        <ReactSelect.Content
-          sideOffset={4}
-          className="bg-app-foreground z-50 w-full overflow-hidden border border-gray-800 py-1"
-        >
-          <ReactSelect.Viewport>{children}</ReactSelect.Viewport>
-        </ReactSelect.Content>
-      </ReactSelect.Portal>
-    </ReactSelect.Root>
+          className
+        )}
+        {...triggerProps}
+      >
+        <SelectPrimitive.Value data-slot="select-value" placeholder={placeholder} />
+        <SelectPrimitive.Icon asChild>
+          <ChevronDownIcon className="size-4 opacity-50" />
+        </SelectPrimitive.Icon>
+      </SelectPrimitive.Trigger>
+
+      {children}
+    </SelectPrimitive.Root>
   );
 }
