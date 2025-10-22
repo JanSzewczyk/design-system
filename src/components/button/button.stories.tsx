@@ -28,7 +28,7 @@ export const Variants: Story = {
       <Button variant="outline">Outline</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="link">Link</Button>
-      <Button variant="destructive">Destructive</Button>
+      <Button variant="error">Error</Button>
     </div>
   )
 };
@@ -51,8 +51,8 @@ export const Disabled: Story = {
       <Button variant="link" disabled>
         Link
       </Button>
-      <Button variant="destructive" disabled>
-        Destructive
+      <Button variant="error" disabled>
+        Error
       </Button>
     </div>
   )
