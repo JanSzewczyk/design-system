@@ -1,6 +1,6 @@
 import { type VariantProps } from "class-variance-authority";
 
-import { type buttonVariants } from "./Button.styles";
+import { type buttonVariants } from "./button.styles";
 
 type ButtonCvaProps = VariantProps<typeof buttonVariants>;
 

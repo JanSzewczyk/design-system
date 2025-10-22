@@ -4,7 +4,7 @@ import { ArrowDownSquare, ArrowUpRightIcon } from "lucide-react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 
-import { Button } from "./Button";
+import { Button } from "./button";
 
 const meta = {
   title: "Components/Button",
@@ -14,7 +14,7 @@ const meta = {
       control: "text"
     }
   },
-  tags: ["autodocs"]
+  tags: ["autodocs", "beta"]
 } satisfies Meta<typeof Button>;
 export default meta;
 

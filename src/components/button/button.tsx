@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
 import { type ButtonSizeType, type ButtonVariantType, Spinner } from "~/components";
-
-import { buttonVariants } from "./Button.styles";
 import { cn } from "~/utils";
+
+import { buttonVariants } from "./button.styles";
 
 export type ButtonProps = React.ComponentProps<"button"> & {
   /**
@@ -66,8 +66,6 @@ export function Button({
 
   const isDisabled = disabled || loading;
   const loadingPosition = size?.startsWith("icon") ? "center" : loadingPositionProp;
-
-  console.log(isDisabled);
 
   return (
     <Comp
