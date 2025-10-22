@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { ArrowDownSquare, Github } from "lucide-react";
+import { ArrowDownSquare, ArrowUpRightIcon } from "lucide-react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { type ButtonVariantType } from "~/components";
 
 import { Button } from "./Button";
 
@@ -21,142 +20,67 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: ({ children, ...args }) => <Button {...args}>{children}</Button>,
-  args: {
-    children: "Label"
-  },
-  parameters: { pseudo: { hover: true } }
-};
-
-export const Basic: Story = {
-  render: (args) => (
-    <div className="flex gap-4">
-      <Button variant="text" {...args}>
-        TEXT
-      </Button>
-      <Button variant="contained" {...args}>
-        CONTAINED
-      </Button>
-      <Button variant="outlined" {...args}>
-        OUTLINED
-      </Button>
+export const Variants: Story = {
+  render: () => (
+    <div className="flex flex-col items-start gap-8 sm:flex-row">
+      <Button variant="default">Default</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="outline">Outline</Button>
+      <Button variant="ghost">Ghost</Button>
+      <Button variant="link">Link</Button>
+      <Button variant="destructive">Destructive</Button>
     </div>
   )
 };
 
-export const Text: Story = {
-  render: (args) => (
-    <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
-        DISABLED
-      </Button>
-      <Button asChild {...args}>
-        <a href="">LINK</a>
-      </Button>
-      <Button asChild disabled {...args}>
-        <a href="">LINK DISABLED</a>
-      </Button>
-    </div>
-  ),
-  args: {}
-};
-
-export const Outlined: Story = {
-  render: (args) => (
-    <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
-        DISABLED
-      </Button>
-      <Button asChild {...args}>
-        <a href="">LINK</a>
-      </Button>
-      <Button asChild disabled {...args}>
-        <a href="">LINK DISABLED</a>
-      </Button>
-    </div>
-  ),
-  args: {
-    variant: "outlined"
-  }
-};
-
-export const Contained: Story = {
-  render: (args) => (
-    <div className="flex gap-4">
-      <Button {...args}>PRIMARY</Button>
-      <Button {...args} disabled>
-        DISABLED
-      </Button>
-      <Button asChild {...args}>
-        <a href="">LINK</a>
-      </Button>
-      <Button asChild disabled {...args}>
-        <a href="">LINK DISABLED</a>
-      </Button>
-    </div>
-  ),
-  args: {
-    variant: "contained"
-  }
-};
-
-export const Color: Story = {
+export const Disabled: Story = {
   render: () => (
-    <div className="space-y-4">
-      {["text", "outlined", "contained"].map((variant) => (
-        <div key={variant} className="flex flex-wrap gap-4">
-          <Button color="neutral" variant={variant as ButtonVariantType}>
-            NEUTRAL
-          </Button>
-          <Button color="primary" variant={variant as ButtonVariantType}>
-            PRIMARY
-          </Button>
-          <Button color="success" variant={variant as ButtonVariantType}>
-            SUCCESS
-          </Button>
-          <Button color="warning" variant={variant as ButtonVariantType}>
-            WARNING
-          </Button>
-          <Button color="error" variant={variant as ButtonVariantType}>
-            ERROR
-          </Button>
-        </div>
-      ))}
+    <div className="flex flex-col items-start gap-8 sm:flex-row">
+      <Button variant="default" disabled>
+        Default
+      </Button>
+      <Button variant="secondary" disabled>
+        Secondary
+      </Button>
+      <Button variant="outline" disabled>
+        Outline
+      </Button>
+      <Button variant="ghost" disabled>
+        Ghost
+      </Button>
+      <Button variant="link" disabled>
+        Link
+      </Button>
+      <Button variant="destructive" disabled>
+        Destructive
+      </Button>
     </div>
   )
 };
 
 export const Sizes: Story = {
-  render: (args) => (
-    <div className="space-y-4">
-      <div className="flex flex-row items-center gap-x-4">
-        <Button variant="text" size="sm" {...args}>
-          SMALL
+  render: () => (
+    <div className="flex flex-col items-start gap-8 sm:flex-row">
+      <div className="flex items-start gap-2">
+        <Button size="sm" variant="outline">
+          Small
         </Button>
-        <Button variant="text">MEDIUM</Button>
-        <Button size="lg" {...args}>
-          LARGE
-        </Button>
-      </div>
-      <div className="flex flex-row items-center gap-x-4">
-        <Button size="sm" variant="outlined">
-          SMALL
-        </Button>
-        <Button variant="outlined">MEDIUM</Button>
-        <Button size="lg" variant="outlined">
-          LARGE
+        <Button size="icon-sm" aria-label="Submit" variant="outline">
+          <ArrowUpRightIcon />
         </Button>
       </div>
-      <div className="flex flex-row items-center gap-x-4">
-        <Button size="sm" variant="contained">
-          SMALL
+      <div className="flex items-start gap-2">
+        <Button variant="outline">Default</Button>
+        <Button size="icon" aria-label="Submit" variant="outline">
+          <ArrowUpRightIcon />
         </Button>
-        <Button variant="contained">MEDIUM</Button>
-        <Button size="lg" variant="contained">
-          LARGE
+      </div>
+      <div className="flex items-start gap-2">
+        <Button variant="outline" size="lg">
+          Large
+        </Button>
+        <Button size="icon-lg" aria-label="Submit" variant="outline">
+          <ArrowUpRightIcon />
         </Button>
       </div>
     </div>
@@ -166,32 +90,16 @@ export const Sizes: Story = {
 export const FullWidth: Story = {
   render: () => (
     <div className="w-52">
-      <Button fullWidth variant="contained">
-        FULL WIDTH
-      </Button>
+      <Button fullWidth>FULL WIDTH</Button>
     </div>
   )
 };
 
 export const WithIcon: Story = {
   render: () => (
-    <div className="space-y-4">
-      <div className="flex flex-wrap gap-4">
-        <Button color="error" variant="contained" startIcon={<ArrowDownSquare />}>
-          LEFT ICON
-        </Button>
-        <Button color="primary" endIcon={<Github />}>
-          RIGHT ICON
-        </Button>
-      </div>
-      <div className="flex flex-wrap gap-4">
-        <Button color="error" variant="contained" startIcon={<ArrowDownSquare />} asChild>
-          <a href="">LEFT ICON link</a>
-        </Button>
-        <Button color="primary" endIcon={<Github />} asChild>
-          <a href="">RIGHT ICON link</a>
-        </Button>
-      </div>
+    <div className="flex flex-wrap gap-4">
+      <Button startIcon={<ArrowDownSquare />}>LEFT ICON</Button>
+      <Button endIcon={<ArrowDownSquare />}>RIGHT ICON</Button>
     </div>
   )
 };
@@ -199,11 +107,37 @@ export const WithIcon: Story = {
 export const Loading: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button color="error" variant="contained" loading>
+      <Button variant="outline" loading>
         LEFT LOADING
       </Button>
-      <Button color="primary" loading loadingPosition="end">
+      <Button loading loadingPosition="end">
         RIGHT LOADING
+      </Button>
+      <Button size="icon" loading>
+        <ArrowUpRightIcon />
+      </Button>
+    </div>
+  )
+};
+
+export const AsLink: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Button asChild>
+        <a href="">Icon button</a>
+      </Button>
+      <Button asChild disabled>
+        <a href="">Icon button - disabled</a>
+      </Button>
+      <Button size="icon" asChild>
+        <a href="">
+          <ArrowUpRightIcon />
+        </a>
+      </Button>
+      <Button size="icon" asChild disabled>
+        <a href="">
+          <ArrowUpRightIcon />
+        </a>
       </Button>
     </div>
   )
