@@ -7,7 +7,7 @@ import { Select, SelectItem, SelectContent, SelectGroup, SelectLabel } from ".";
 const meta = {
   title: "Components/Select",
   component: Select,
-  tags: ["autodocs"],
+  tags: ["autodocs", "beta"],
   decorators: [(story) => <div className="max-w-md">{story()}</div>]
 } satisfies Meta<typeof Select>;
 export default meta;
