@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
 import { type ItemSizeType, type ItemVariantType } from "~/components";
-import { itemCva } from "~/components/item/item.styles";
+import { itemVariants } from "~/components/item/item.styles";
 import { cn } from "~/utils";
 
 export type ItemProps = React.ComponentProps<"div"> & {
@@ -18,7 +18,7 @@ export function Item({ className, variant = "default", size = "default", asChild
       data-slot="item"
       data-variant={variant}
       data-size={size}
-      className={cn(itemCva({ variant, size }), className)}
+      className={cn(itemVariants({ variant, size, className }))}
       {...props}
     />
   );
