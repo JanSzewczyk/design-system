@@ -158,7 +158,6 @@
     "react-docgen": "^8.0.0",
     "react-docgen-typescript": "^2.4.0",
     "react-dom": "^19.1.0",
-    "react-hook-form": "^7.61.1",
     "semantic-release": "^24.2.7",
     "serve": "^14.2.4",
     "storybook": "^9.0.18",
@@ -174,7 +173,6 @@
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0",
-    "react-hook-form": "^7.56.4",
     "tailwindcss": ">=4"
   },
   "engines": {
