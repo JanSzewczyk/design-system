@@ -68,7 +68,7 @@ export function StepperItem({
         data-slot="stepper-item"
         dir={dir}
         className={cn(
-          "group/step flex flex-1 flex-col justify-end",
+          "group/step flex flex-1 flex-col justify-end data-[disabled]:opacity-50",
           "",
           // "group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col",
           className
@@ -79,8 +79,8 @@ export function StepperItem({
         <div
           data-state={dataState}
           className={cn(
-            "h-1 w-full bg-gray-800 transition-colors duration-500",
-            "data-[state=active]:bg-primary-500 data-[state=completed]:bg-success-500"
+            "bg-border h-1 w-full transition-colors duration-500",
+            "data-[state=active]:bg-primary data-[state=completed]:bg-success"
           )}
         />
       </StepperItemPrimitive>
