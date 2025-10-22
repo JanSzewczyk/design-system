@@ -1,11 +1,13 @@
 import * as React from "react";
 
-import { Avatar as ReactAvatar } from "radix-ui";
+import { Avatar as AvatarPrimitive } from "radix-ui";
 
 import { cn } from "~/utils";
 
-export type AvatarImageProps = React.ComponentProps<typeof ReactAvatar.Image>;
+export type AvatarImageProps = React.ComponentProps<typeof AvatarPrimitive.Image>;
 
-export function AvatarImage({ className, ref, ...props }: AvatarImageProps) {
-  return <ReactAvatar.Image ref={ref} className={cn("aspect-square h-full w-full", className)} {...props} />;
+export function AvatarImage({ className, ...props }: AvatarImageProps) {
+  return (
+    <AvatarPrimitive.Image data-slot="avatar-image" className={cn("aspect-square size-full", className)} {...props} />
+  );
 }
