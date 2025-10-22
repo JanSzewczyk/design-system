@@ -5,7 +5,6 @@ export * from "./button";
 export * from "./card";
 export * from "./dialog";
 export * from "./header";
-export * from "./helper-text";
 export * from "./input";
 export * from "./item";
 export * from "./label";
