@@ -1,25 +1,30 @@
 import * as React from "react";
 
-import { Check } from "lucide-react";
-import { Select as ReactSelect } from "radix-ui";
+import { CheckIcon } from "lucide-react";
+import { Select as SelectPrimitive } from "radix-ui";
 
 import { cn } from "~/utils";
 
-export type SelectItemProps = React.ComponentProps<typeof ReactSelect.Item>;
+export type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>;
 
-export function SelectItem({ children, className, ...props }: SelectItemProps) {
+export function SelectItem({ className, children, ...props }: SelectItemProps) {
   return (
-    <ReactSelect.Item
+    <SelectPrimitive.Item
+      data-slot="select-item"
       className={cn(
-        "text-body-2 data-[state=checked]:bg-primary-500 data-[state=checked]:text-app-foreground flex w-full flex-row items-center justify-between px-3 py-2 text-gray-100 select-none data-[disabled]:pointer-events-none data-[highlighted]:bg-gray-900 data-[highlighted]:outline-none data-[state=checked]:outline-none",
+        "focus:bg-accent focus:text-accent-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
     >
-      <ReactSelect.ItemText className="flex-1">{children}</ReactSelect.ItemText>
-      <ReactSelect.ItemIndicator>
-        <Check className="size-4" />
-      </ReactSelect.ItemIndicator>
-    </ReactSelect.Item>
+      <span className="absolute right-2 flex size-3.5 items-center justify-center">
+        <SelectPrimitive.ItemIndicator>
+          <CheckIcon className="size-4" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
   );
 }

@@ -2,83 +2,91 @@ import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 
-import { Select } from "./select";
-import { SelectItem } from "./select-item";
+import { Select, SelectItem, SelectContent, SelectGroup, SelectLabel } from ".";
 
 const meta = {
   title: "Components/Select",
   component: Select,
   tags: ["autodocs"],
-  decorators: [(Story) => <div className="w-52">{Story()}</div>]
+  decorators: [(story) => <div className="max-w-md">{story()}</div>]
 } satisfies Meta<typeof Select>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-  render: (args) => (
-    <Select {...args}>
-      <SelectItem value="beef">Beef</SelectItem>
-      <SelectItem value="chicken">Chicken</SelectItem>
-      <SelectItem value="lamb">Lamb</SelectItem>
-      <SelectItem value="pork">Pork</SelectItem>
-    </Select>
-  )
-};
-
-export const Placeholder: Story = {
-  args: {
-    placeholder: "Placeholder"
-  },
-  render: (args) => (
-    <Select {...args}>
-      <SelectItem value="beef">Beef</SelectItem>
-      <SelectItem value="chicken">Chicken</SelectItem>
-      <SelectItem value="lamb">Lamb</SelectItem>
-      <SelectItem value="pork">Pork</SelectItem>
+export const Example: Story = {
+  render: () => (
+    <Select placeholder="Select a fruit">
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectGroup>
+      </SelectContent>
     </Select>
   )
 };
 
 export const DefaultValue: Story = {
-  args: {
-    defaultValue: "chicken"
-  },
-  render: (args) => (
-    <Select {...args}>
-      <SelectItem value="beef">Beef</SelectItem>
-      <SelectItem value="chicken">Chicken</SelectItem>
-      <SelectItem value="lamb">Lamb</SelectItem>
-      <SelectItem value="pork">Pork</SelectItem>
+  render: () => (
+    <Select defaultValue="apple" placeholder="Select a fruit">
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectGroup>
+      </SelectContent>
     </Select>
   )
 };
 
 export const Disabled: Story = {
-  args: {
-    disabled: true
-  },
-  render: (args) => (
-    <Select {...args}>
-      <SelectItem value="beef">Beef</SelectItem>
-      <SelectItem value="chicken">Chicken</SelectItem>
-      <SelectItem value="lamb">Lamb</SelectItem>
-      <SelectItem value="pork">Pork</SelectItem>
+  render: () => (
+    <Select disabled defaultValue="apple" placeholder="Select a fruit">
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectGroup>
+      </SelectContent>
     </Select>
   )
 };
 
 export const Invalid: Story = {
-  args: {
-    invalid: true
-  },
-  render: (args) => (
-    <Select {...args}>
-      <SelectItem value="beef">Beef</SelectItem>
-      <SelectItem value="chicken">Chicken</SelectItem>
-      <SelectItem value="lamb">Lamb</SelectItem>
-      <SelectItem value="pork">Pork</SelectItem>
+  render: () => (
+    <Select invalid defaultValue="apple" placeholder="Select a fruit">
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+          <SelectItem value="blueberry">Blueberry</SelectItem>
+          <SelectItem value="grapes">Grapes</SelectItem>
+          <SelectItem value="pineapple">Pineapple</SelectItem>
+        </SelectGroup>
+      </SelectContent>
     </Select>
+  )
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-col items-start gap-8 sm:flex-row">
+      <Select size="sm" placeholder="Small"></Select>
+      <Select size="default" placeholder="Default"></Select>
+    </div>
   )
 };
