@@ -2,21 +2,16 @@ import * as React from "react";
 
 import { Avatar as ReactAvatar } from "radix-ui";
 
-import { type AvatarSizeType } from "~/components";
 import { cn } from "~/utils";
 
-import { avatarCva } from "./avatar.styles";
+export type AvatarProps = React.ComponentProps<typeof ReactAvatar.Root>;
 
-export type AvatarProps = ReactAvatar.AvatarProps &
-  React.RefAttributes<HTMLSpanElement> & {
-    /**
-     * Defines avatar size
-     */
-    size?: AvatarSizeType;
-  };
-
-export function Avatar({ className, size = "md", ref, ...props }: AvatarProps) {
-  const avatarStyles = avatarCva({ size });
-
-  return <ReactAvatar.Root ref={ref} className={cn(avatarStyles, className)} {...props} />;
+export function Avatar({ className, ...props }: AvatarProps) {
+  return (
+    <ReactAvatar.Root
+      data-slot="avatar"
+      className={cn("relative flex size-8 shrink-0 overflow-hidden rounded", className)}
+      {...props}
+    />
+  );
 }

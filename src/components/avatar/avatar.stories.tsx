@@ -33,7 +33,7 @@ export const Fallback: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="mb-4 flex flex-row items-center gap-x-4">
-      <Avatar size="sm">
+      <Avatar className="size-4">
         <AvatarImage src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg" />
         <AvatarFallback>ML</AvatarFallback>
       </Avatar>
@@ -41,7 +41,7 @@ export const Sizes: Story = {
         <AvatarImage src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg" />
         <AvatarFallback>ML</AvatarFallback>
       </Avatar>
-      <Avatar size="lg">
+      <Avatar className="size-10">
         <AvatarImage src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg" />
         <AvatarFallback>ML</AvatarFallback>
       </Avatar>
