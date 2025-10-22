@@ -1,45 +1,56 @@
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { Input, Label, Button } from "~/components";
 
-import { Button } from "../button";
-
-import { Card } from "./card";
-import { CardContent } from "./card-content";
-import { CardDescription } from "./card-description";
-import { CardFooter } from "./card-footer";
-import { CardHeader } from "./card-header";
-import { CardTitle } from "./card-title";
+import { Card, CardDescription, CardHeader, CardContent, CardFooter, CardTitle, CardAction } from ".";
 
 const meta = {
   title: "Components/Card",
   component: Card,
-  // subcomponents: { CardTitle, CardHeader, CardDescription, CardContent, CardFooter },
-  decorators: [(Story) => <div className="w-128">{Story()}</div>]
+  subcomponents: { CardDescription, CardHeader, CardContent, CardFooter, CardTitle, CardAction },
+  decorators: [(Story) => <div className="max-w-lg">{Story()}</div>],
+  tags: ["beta"]
 } satisfies Meta<typeof Card>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Example: Story = {
   render: () => (
-    <Card>
+    <Card className="w-full max-w-sm">
       <CardHeader>
-        <CardTitle>Card header title</CardTitle>
-        <CardDescription>Card header description.</CardDescription>
+        <CardTitle>Login to your account</CardTitle>
+        <CardDescription>Enter your email below to login to your account</CardDescription>
+        <CardAction>
+          <Button variant="link">Sign Up</Button>
+        </CardAction>
       </CardHeader>
       <CardContent>
-        Card content.
-        <br />
-        <strong>Some info </strong>
+        <form>
+          <div className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="m@example.com" required />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                <a href="#" className="ml-auto inline-block text-sm underline-offset-4 hover:underline">
+                  Forgot your password?
+                </a>
+              </div>
+              <Input id="password" type="password" required />
+            </div>
+          </div>
+        </form>
       </CardContent>
-      <CardFooter>
-        <Button>Sign in with Google</Button>
+      <CardFooter className="flex-col gap-2">
+        <Button type="submit" className="w-full">
+          Login
+        </Button>
+        <Button variant="outline" className="w-full">
+          Login with Google
+        </Button>
       </CardFooter>
     </Card>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("heading", { name: /card header title/i })).toBeInTheDocument();
-    await expect(canvas.getByText(/card header description./i)).toBeInTheDocument();
-  }
+  )
 };
