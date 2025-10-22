@@ -4,3 +4,4 @@ export * from "./card-title";
 export * from "./card-description";
 export * from "./card-content";
 export * from "./card-footer";
+export * from "./card-action";
