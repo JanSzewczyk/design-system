@@ -127,17 +127,17 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
       isMouseClickRef.current = false;
     },
     [
+      triggerProps,
       focusContext,
       triggerId,
-      activationMode,
       isActive,
       isDisabled,
+      activationMode,
       context.nonInteractive,
-      store,
-      itemValue,
-      value,
       steps,
-      triggerProps.onFocus
+      value,
+      itemValue,
+      store
     ]
   );
 

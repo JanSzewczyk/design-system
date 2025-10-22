@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent } from "storybook/test";
 import { Spinner } from "~/components";
 
 import { Button } from "../button";
