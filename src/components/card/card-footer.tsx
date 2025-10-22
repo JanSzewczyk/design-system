@@ -2,8 +2,10 @@ import * as React from "react";
 
 import { cn } from "~/utils";
 
-export type CardFooterProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+export type CardFooterProps = React.ComponentProps<"div">;
 
 export function CardFooter({ className, ...props }: CardFooterProps) {
-  return <div className={cn("flex items-center p-6 pt-0", className)} {...props} />;
+  return (
+    <div data-slot="card-footer" className={cn("flex items-center px-6 [.border-t]:pt-6", className)} {...props} />
+  );
 }

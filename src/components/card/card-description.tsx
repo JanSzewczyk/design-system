@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { cn } from "~/utils";
 
-export type CardDescriptionProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+export type CardDescriptionProps = React.ComponentProps<"div">;
 
 export function CardDescription({ className, ...props }: CardDescriptionProps) {
-  return <p className={cn("text-body-2 text-gray-300", className)} {...props} />;
+  return <div data-slot="card-description" className={cn("text-muted-foreground text-sm", className)} {...props} />;
 }
