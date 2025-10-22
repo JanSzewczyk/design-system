@@ -40,7 +40,7 @@ export const Example: Story = {
         </Field>
         <Field>
           <FieldLabel htmlFor="username">Username</FieldLabel>
-          <Input id="username" autoComplete="off" aria-invalid />
+          <Input id="username" autoComplete="off" invalid />
           <FieldError>Choose another username.</FieldError>
         </Field>
         {/*<Field orientation="horizontal">*/}
@@ -190,7 +190,7 @@ export const ErrorDeduplication: Story = {
     <Field>
       <FieldLabel htmlFor="password">Password</FieldLabel>
       <FieldContent>
-        <Input id="password" type="password" placeholder="••••••••" />
+        <Input id="password" type="password" placeholder="••••••••" invalid />
         <FieldError
           errors={[
             { message: "Password is required" },
