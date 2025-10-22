@@ -1,19 +1,16 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { type ButtonColorType, type ButtonSizeType, type ButtonVariantType, Spinner } from "~/components";
+import { type ButtonSizeType, type ButtonVariantType, Spinner } from "~/components";
 
-import { buttonCva, iconContainerCva, iconCva } from "./Button.styles";
+import { buttonVariants } from "./Button.styles";
+import { cn } from "~/utils";
 
 export type ButtonProps = React.ComponentProps<"button"> & {
   /**
    * Defines button full width
    */
   fullWidth?: boolean;
-  /**
-   * Defines button color
-   */
-  color?: ButtonColorType;
   /**
    * Defines button variant
    */
@@ -45,42 +42,45 @@ export type ButtonProps = React.ComponentProps<"button"> & {
   /**
    * Defines is position of loading icon
    */
-  loadingPosition?: "start" | "end";
+  loadingPosition?: "start" | "end" | "center";
 
   asChild?: boolean;
 };
 
 export function Button({
   asChild = false,
-  variant = "text",
-  color = "primary",
+  variant = "default",
   disabled = false,
   fullWidth = false,
-  loadingPosition = "start",
+  loadingPosition: loadingPositionProp = "start",
   children,
   type = "button",
   loading = false,
-  size = "md",
+  size = "default",
   endIcon,
   startIcon,
+  className,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
-  const buttonStyles = buttonCva({ fullWidth, size, variant, color });
-
   const isDisabled = disabled || loading;
+  const loadingPosition = size?.startsWith("icon") ? "center" : loadingPositionProp;
+
+  console.log(isDisabled);
 
   return (
     <Comp
       data-slot="button"
       aria-disabled={isDisabled || undefined}
-      className={buttonStyles}
+      className={cn(buttonVariants({ fullWidth, size, variant }), className)}
       data-state={loading ? "loading" : undefined}
       disabled={isDisabled}
       role={Comp !== "button" ? "button" : undefined}
       tabIndex={isDisabled ? -1 : 0}
       type={Comp === "button" ? type : undefined}
+      data-size={size}
+      data-variant={variant}
       {...props}
     >
       <ButtonContent
@@ -89,6 +89,7 @@ export function Button({
         loadingPosition={loadingPosition}
         startIcon={startIcon}
         endIcon={endIcon}
+        asChild={asChild}
       >
         {children}
       </ButtonContent>
@@ -99,49 +100,39 @@ export function Button({
 function ButtonContent({
   children,
   loading = false,
-  size = "md",
   loadingPosition = "start",
   startIcon,
+  asChild,
   endIcon,
   ...props
 }: Partial<ButtonProps>) {
   const isStartLoading = loading && loadingPosition === "start";
   const StartIcon = isStartLoading ? <Spinner aria-label="Loading" /> : startIcon || null;
-  const startIconStyles = iconCva({ size, loading: isStartLoading });
-  const startIconContainerStyles = iconContainerCva({ size, site: "left" });
 
   const isEndLoading = loading && loadingPosition === "end";
   const EndIcon = isEndLoading ? <Spinner aria-label="Loading" /> : endIcon || null;
-  const endIconStyles = iconCva({ size, loading: isEndLoading });
-  const endIconContainerStyles = iconContainerCva({ size, site: "right" });
 
-  const LeadingIcon = StartIcon ? (
-    <span className={startIconContainerStyles} role={isStartLoading ? "progressbar" : undefined}>
-      {React.cloneElement(StartIcon, { className: startIconStyles })}
-    </span>
-  ) : null;
+  const isCenterLoading = loading && loadingPosition === "center";
 
-  const TrailingIcon = EndIcon ? (
-    <span className={endIconContainerStyles} role={isEndLoading ? "progressbar" : undefined}>
-      {React.cloneElement(EndIcon, { className: endIconStyles })}
-    </span>
-  ) : null;
-
-  return React.isValidElement(children) ? (
+  return asChild && React.isValidElement(children) ? (
     React.cloneElement(
       children as React.ReactElement,
       props,
       <React.Fragment>
-        {LeadingIcon}
-        {React.isValidElement<React.PropsWithChildren>(children) ? children.props?.children : null}
-        {TrailingIcon}
+        {StartIcon}
+        {isCenterLoading ? (
+          <Spinner aria-label="Loading" />
+        ) : React.isValidElement<React.PropsWithChildren>(children) ? (
+          children.props?.children
+        ) : null}
+        {EndIcon}
       </React.Fragment>
     )
   ) : (
     <React.Fragment>
-      {LeadingIcon}
-      {children}
-      {TrailingIcon}
+      {StartIcon}
+      {isCenterLoading ? <Spinner aria-label="Loading" /> : children}
+      {EndIcon}
     </React.Fragment>
   );
 }
