@@ -1,6 +1,7 @@
 import React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
+import { cn } from "~/utils";
 
 const HeadingText = "Lorem ipsum dolor sit amet.";
 const SampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
@@ -12,11 +13,13 @@ function TypographyStories({ classes, text = SampleText }: { classes: Array<stri
         <React.Fragment key={className}>
           <div className="flex items-center">
             <div>
-              <div className="text-subtitle-1 text-gray-200">Class Name:</div>
-              <code className="font-code text-body-1 whitespace-nowrap">{className}</code>
+              <div className="typography-large">Class Name:</div>
+              <code className="font-code typography-inline-code text-muted-foreground whitespace-nowrap">
+                {className}
+              </code>
             </div>
           </div>
-          <div className={className}>{text}</div>
+          <div className={cn("inline-flex", className)}>{text}</div>
         </React.Fragment>
       ))}
     </div>
@@ -31,25 +34,21 @@ export default meta;
 type Story = StoryObj;
 
 const headingClassNames = [
-  "text-heading-1",
-  "text-heading-2",
-  "text-heading-3",
-  "text-heading-4",
-  "text-heading-5",
-  "text-heading-6",
-  "text-subtitle-1",
-  "text-subtitle-2"
+  "typography-heading-1",
+  "typography-heading-2",
+  "typography-heading-3",
+  "typography-heading-4"
 ];
 export const Heading: Story = {
   render: () => <TypographyStories classes={headingClassNames} text={HeadingText} />
 };
 
-const bodyClassNames = ["text-body-1", "text-body-2"];
+const bodyClassNames = ["typography-paragraph", "typography-blockquote", "typography-inline-code", "typography-lead"];
 export const Body: Story = {
   render: () => <TypographyStories classes={bodyClassNames} />
 };
 
-const otherClassNames = ["text-button", "text-caption", "text-overline"];
+const otherClassNames = ["typography-large", "typography-small", "typography-muted"];
 export const Other: Story = {
   render: () => <TypographyStories classes={otherClassNames} />
 };
