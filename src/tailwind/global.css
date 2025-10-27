@@ -16,12 +16,13 @@
   body {
     @apply bg-background font-poppins text-foreground antialiased;
   }
+}
 
-  @utility container {
-    @apply mx-auto max-w-7xl px-8 sm:px-16;
-  }
-  @utility container-* {
-    max-width: --value(--container-*);
-    @apply mx-auto;
-  }
+@utility container {
+  @apply mx-auto max-w-7xl px-8 sm:px-16;
+}
+
+@utility container-* {
+  max-width: --value(--container-*);
+  @apply mx-auto;
 }
