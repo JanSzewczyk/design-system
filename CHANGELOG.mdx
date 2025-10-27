@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/JanSzewczyk/design-system/compare/v2.7.0...v3.0.0) (2025-10-27)
+
+### ⚠ BREAKING CHANGES
+
+* **typography:** Redesign whole system
+
+### Features
+
+* **button:** sync button styles ([27042b1](https://github.com/JanSzewczyk/design-system/commit/27042b1caee3a62033d614d5c3e781cfec73c4af))
+* **css:** update theme colors ([f9f1861](https://github.com/JanSzewczyk/design-system/commit/f9f1861c43f47aa5b6a447dce43de5b0637c9edd))
+* **field:** add new Field component ([8c8ec58](https://github.com/JanSzewczyk/design-system/commit/8c8ec5828df6dac0b5529d015e8ce0442508604f))
+* **label:** add `data-slot` attribute and update styles ([a018bcb](https://github.com/JanSzewczyk/design-system/commit/a018bcbd2e3ee4edd50bf7ee29457990ad0ed23d))
+* **typography:** update typography ([8516352](https://github.com/JanSzewczyk/design-system/commit/85163526f52a27cbeb001bb44454167406cc50b9))
+
+### Miscellaneous Chores
+
+* **avatar:** remove `size` prop, refactor styles, and update subcomponents ([c27b6b4](https://github.com/JanSzewczyk/design-system/commit/c27b6b4206d02d1a71c24e2a45512c1a0e90ef11))
+* **button:** clean up console logs, improve imports, and update `button.stories` metadata ([73ac246](https://github.com/JanSzewczyk/design-system/commit/73ac2466c11fa301e5d980fd6db88bb93f1b5742))
+* **card:** refactor components and update stories ([c05e31e](https://github.com/JanSzewczyk/design-system/commit/c05e31e5bd00e38349039302c060ef6ea186cda6))
+* **checkbox:** add new checkbox component with styles and stories ([0e5a9ee](https://github.com/JanSzewczyk/design-system/commit/0e5a9eefa689467f8bce4450c4228dc4a8d9a078))
+* **checkbox:** export checkbox component and update separator stories for aria attributes ([b88dc38](https://github.com/JanSzewczyk/design-system/commit/b88dc3838026afffdeadc4f55b04027fcbb472f5))
+* **claude:** init Claude ([f6d0e52](https://github.com/JanSzewczyk/design-system/commit/f6d0e52cecc5da699cc192859fca95390d005f3e))
+* **dialog:** simplify button variants in dialog and alert dialog stories ([5af9d5b](https://github.com/JanSzewczyk/design-system/commit/5af9d5b87fcb345c50869d862023bb993815272d))
+* **docs:** update CLAUDE.md with Playwright installation instructions and build process details ([d536f8a](https://github.com/JanSzewczyk/design-system/commit/d536f8ab07d914b1876d9ebf0bdcee090fe2d1f5))
+* **form:** remove `Form` component and related subcomponents ([5a8326d](https://github.com/JanSzewczyk/design-system/commit/5a8326d721c3ffed9ac4d428d4447dd5223d1ffc))
+* **helper-text:** remove component and related files ([2f5fcc6](https://github.com/JanSzewczyk/design-system/commit/2f5fcc6e3e8d6f1059adf03f84838c76fe91fcfd))
+* **input:** remove styles, refactor component, and update stories ([b1f2683](https://github.com/JanSzewczyk/design-system/commit/b1f268347f81ff185b49459fb17483e9e177a661))
+* **item:** refactor stories, styles, and metadata ([ea2f7fb](https://github.com/JanSzewczyk/design-system/commit/ea2f7fb539401fe168de06d0f64f3114ca02176b))
+* **label:** add "beta" tag to Storybook metadata ([29358bc](https://github.com/JanSzewczyk/design-system/commit/29358bc2adfd9c70636980b22c62c2ad9d0fb62f))
+* remove `package-lock.json` file to align with yarn dependency management usage ([c34e798](https://github.com/JanSzewczyk/design-system/commit/c34e7985538033d541e5bc3f108ef46ead6f2d4f))
+* **select:** remove styles, refactor components, and update stories ([feecb5a](https://github.com/JanSzewczyk/design-system/commit/feecb5aa0a6893666e966e5ccf693e3f0245b6d6))
+* **stepper:** clean up imports and adjust dependencies in callback ([c361a97](https://github.com/JanSzewczyk/design-system/commit/c361a97faacab9948e77eff0f2770eea09d49f21))
+* **stepper:** refactor styles, improve class consistency, and update stories ([99bb20b](https://github.com/JanSzewczyk/design-system/commit/99bb20bef5845d4db6ce7f4d028db49413b02268))
+* **textarea:** remove styles, refactor component, and update stories ([ae9670b](https://github.com/JanSzewczyk/design-system/commit/ae9670bfea1bb496fe508323bdd6988d89c3d310))
+* **textarea:** remove styles, refactor component, and update stories ([1046565](https://github.com/JanSzewczyk/design-system/commit/1046565557d1172c17166bc19159c57b44a7aa7f))
+
+### Code Refactoring
+
+* **button:** rename `destructive` variant to `error` and update styles ([0c99ddb](https://github.com/JanSzewczyk/design-system/commit/0c99ddb55d3f83002568eb021e1a1874c9717b61))
+* **button:** replace `LoadingIcon` with `Spinner` and update props handling ([3e6b27d](https://github.com/JanSzewczyk/design-system/commit/3e6b27d0479c205b23e6fb3ca3db7f19618ad5c7))
+
+### Build System
+
+* **deps-dev:** bump vite in the npm_and_yarn group across 1 directory ([218b853](https://github.com/JanSzewczyk/design-system/commit/218b853cdbd8f0ad31ebd4d0c49117202e4ffe66))
+* **deps:** bump actions/setup-node in the github-dependencies group ([3d27b3a](https://github.com/JanSzewczyk/design-system/commit/3d27b3a6a7ba473f41d8fa3b9920fe431c30978c))
+* **deps:** bump the design-system-dependencies group across 1 directory with 21 updates ([6d3e0a4](https://github.com/JanSzewczyk/design-system/commit/6d3e0a4a4d987e81641610cfbdded0ae94d29eca))
+
+# 📓 Changelog
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [2.7.0](https://github.com/JanSzewczyk/design-system/compare/v2.6.0...v2.7.0) (2025-10-19)
 
 ### Features
