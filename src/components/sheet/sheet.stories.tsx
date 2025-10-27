@@ -67,9 +67,7 @@ export const Side: Story = {
       {SHEET_SIDES.map((side) => (
         <Sheet key={side}>
           <SheetTrigger asChild>
-            <Button variant="outlined" color="neutral">
-              {side}
-            </Button>
+            <Button color="neutral">{side}</Button>
           </SheetTrigger>
           <SheetContent side={side}>
             <SheetHeader>
@@ -79,9 +77,7 @@ export const Side: Story = {
             <div className="grid gap-4 py-4">Some content</div>
             <SheetFooter>
               <SheetClose asChild>
-                <Button type="submit" variant="contained">
-                  Save changes
-                </Button>
+                <Button type="submit">Save changes</Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
@@ -107,7 +103,7 @@ export const WithCloseButton: Story = {
         <div className="py-6">Sheet content goes here</div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="contained">Close Sheet</Button>
+            <Button>Close Sheet</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

@@ -4,9 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**@szum-tech/design-system** is a React component library built on Tailwind CSS 4+ and Radix UI primitives. It provides a comprehensive design system with light/dark theme support, type-safe components using CVA (class-variance-authority), and modular exports for optimal tree-shaking.
+**@szum-tech/design-system** is a React component library built on Tailwind CSS 4+ and Radix UI primitives. It provides
+a comprehensive design system with light/dark theme support, type-safe components using CVA (class-variance-authority),
+and modular exports for optimal tree-shaking.
 
 **Key Technologies:**
+
 - React 19+ with TypeScript (strict mode)
 - Tailwind CSS 4+ with OKLCH color space
 - Radix UI for accessible primitives
@@ -18,6 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Essential Commands
 
 ### Development
+
 ```bash
 npm run storybook:dev    # Start Storybook on port 6006
 npm run test:watch       # Run tests in watch mode
@@ -25,6 +29,7 @@ npm run test:ui          # Run tests with interactive UI
 ```
 
 ### Validation (run before committing)
+
 ```bash
 npm run type-check       # TypeScript type checking
 npm run lint             # ESLint checking
@@ -34,6 +39,7 @@ npm run build            # Build library (tsup + CSS copy + post-build)
 ```
 
 ### Testing
+
 ```bash
 npm test                 # Run all tests
 npm run test:unit        # Unit tests only (happy-dom)
@@ -43,6 +49,7 @@ npx playwright install --with-deps  # Install Playwright browsers (required for 
 ```
 
 ### Fixes
+
 ```bash
 npm run lint:fix         # Auto-fix ESLint issues
 npm run prettier:write   # Auto-format code
@@ -66,6 +73,7 @@ component-name/
 **Key Patterns:**
 
 1. **CVA for Variants**: All component styling uses class-variance-authority for type-safe variants
+
    ```typescript
    // In ComponentName.styles.ts
    export const componentVariants = cva("base-classes", {
@@ -82,11 +90,13 @@ component-name/
    ```
 
 2. **Data Slot Attributes**: Components use `data-slot` attributes for CSS targeting and testing
+
    ```typescript
    <button data-slot="button">...</button>
    ```
 
 3. **Radix UI Slot Pattern**: Components support `asChild` prop for polymorphic rendering
+
    ```typescript
    <Button asChild><a href="...">Link Button</a></Button>
    ```
@@ -100,6 +110,7 @@ component-name/
 ### Styling System
 
 **Color System** (`src/tailwind/palette.css`):
+
 - Uses **OKLCH color space** for perceptually uniform colors
 - Light theme in `:root`, dark theme in `.dark` selector
 - CSS Custom Properties pattern:
@@ -114,6 +125,7 @@ component-name/
   ```
 
 **CSS Files** (`src/tailwind/`):
+
 - `global.css` - Base styles, imports all other CSS files
 - `palette.css` - Color variables (light/dark themes)
 - `typography.css` - Typography tokens (Poppins, JetBrains Mono)
@@ -121,6 +133,7 @@ component-name/
 - `scroll.css` - Scrollbar customization
 
 **Theme Architecture:**
+
 - Two-theme system activated by `.dark` class on root element
 - OKLCH provides better perceptual uniformity than RGB/HSL
 - All colors defined as CSS Custom Properties for dynamic theming
@@ -131,13 +144,13 @@ The library uses **conditional exports** for fine-grained imports:
 
 ```json
 {
-  ".": "./dist/components/index.js",           // All components
+  ".": "./dist/components/index.js", // All components
   "./componnents/*": "./dist/components/*/index.js", // Individual components (NOTE: typo in package.json)
-  "./icons": "./dist/icons/index.js",          // Icon collection
-  "./utils": "./dist/utils/index.js",          // Utility functions
-  "./hooks": "./dist/hooks/index.js",          // Custom hooks
-  "./contexts": "./dist/contexts/index.js",    // Context providers
-  "./tailwind/*.css": "./tailwind/*.css"       // CSS files (root level)
+  "./icons": "./dist/icons/index.js", // Icon collection
+  "./utils": "./dist/utils/index.js", // Utility functions
+  "./hooks": "./dist/hooks/index.js", // Custom hooks
+  "./contexts": "./dist/contexts/index.js", // Context providers
+  "./tailwind/*.css": "./tailwind/*.css" // CSS files (root level)
 }
 ```
 
@@ -165,6 +178,7 @@ The library uses **conditional exports** for fine-grained imports:
 1. **Create component directory** in `src/components/component-name/`
 
 2. **Define types** (`ComponentName.types.ts`):
+
    ```typescript
    import { VariantProps } from "class-variance-authority";
    import { componentVariants } from "./ComponentName.styles";
@@ -179,19 +193,27 @@ The library uses **conditional exports** for fine-grained imports:
    ```
 
 3. **Define styles** (`ComponentName.styles.ts`):
+
    ```typescript
    import { cva } from "class-variance-authority";
 
    export const componentVariants = cva("base-classes", {
      variants: {
-       variant: { /* ... */ },
-       size: { /* ... */ }
+       variant: {
+         /* ... */
+       },
+       size: {
+         /* ... */
+       }
      },
-     defaultVariants: { /* ... */ }
+     defaultVariants: {
+       /* ... */
+     }
    });
    ```
 
 4. **Implement component** (`ComponentName.tsx`):
+
    ```typescript
    import { cn } from "~/utils";
    import { componentVariants } from "./ComponentName.styles";
@@ -209,6 +231,7 @@ The library uses **conditional exports** for fine-grained imports:
    ```
 
 5. **Create stories** (`ComponentName.stories.tsx`):
+
    ```typescript
    import type { Meta, StoryObj } from "@storybook/react";
    import { ComponentName } from "./ComponentName";
@@ -217,18 +240,23 @@ The library uses **conditional exports** for fine-grained imports:
      title: "Components/ComponentName",
      component: ComponentName,
      tags: ["autodocs"],
-     argTypes: { /* ... */ }
+     argTypes: {
+       /* ... */
+     }
    } satisfies Meta<typeof ComponentName>;
 
    export default meta;
    type Story = StoryObj<typeof meta>;
 
    export const Default: Story = {
-     args: { /* ... */ }
+     args: {
+       /* ... */
+     }
    };
    ```
 
 6. **Export from barrel** (`index.tsx`):
+
    ```typescript
    export * from "./ComponentName";
    export * from "./ComponentName.types";
@@ -242,6 +270,7 @@ The library uses **conditional exports** for fine-grained imports:
 ### Form Components
 
 Components that integrate with react-hook-form should:
+
 - Accept a `name` prop for form registration
 - Support validation through react-hook-form's validation context
 - Use the `Form` component wrapper (wraps `FormProvider`)
@@ -250,6 +279,7 @@ Components that integrate with react-hook-form should:
 ### Composite Components
 
 For components with sub-components (like Field, Dialog, Sheet):
+
 - Use compound component pattern
 - Each sub-component should be independently importable
 - Share context between parent and children when needed
@@ -258,6 +288,7 @@ For components with sub-components (like Field, Dialog, Sheet):
 ### Complex Stateful Components
 
 For complex components with shared state (like Stepper):
+
 - Use context providers to share state between sub-components
 - Create separate context files (e.g., `stepper.context.tsx`, `stepper-item.context.tsx`, `stepper-focus.context.tsx`)
 - Use a store pattern (`stepper.store.tsx`) for state management when needed
@@ -267,12 +298,15 @@ For complex components with shared state (like Stepper):
 ## Build Process
 
 **Build Pipeline:**
+
 1. **tsup** bundles components, utils, hooks, contexts, icons separately
 2. CSS files copied from `src/tailwind/` to `tailwind/` (root level)
-3. Post-build script (`src/scripts/post-build.js`) adds `"use client"` directive to component entry files (Next.js compatibility)
+3. Post-build script (`src/scripts/post-build.js`) adds `"use client"` directive to component entry files (Next.js
+   compatibility)
 4. Outputs: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
 
 **Output Structure:**
+
 ```
 dist/
 ├── components/        # Individual component bundles
@@ -303,12 +337,14 @@ tailwind/              # CSS files (root level, not in dist/)
 ## Storybook
 
 **Key Features:**
+
 - Auto-generated documentation with `tags: ["autodocs"]`
 - Dark mode support via `storybook-dark-mode` addon
 - Tag-based organization (use "test", "experimental" tags)
 - Vitest integration for story-based testing
 
 **Story Organization:**
+
 - Prefix: "Components/", "Icons/", etc.
 - Use `satisfies Meta<typeof Component>` for type safety
 - Export default meta and individual story objects
@@ -316,6 +352,7 @@ tailwind/              # CSS files (root level, not in dist/)
 ## CI/CD
 
 **PR Checks** (`.github/workflows/pr-check.yml`):
+
 - TypeScript type checking
 - Prettier formatting validation
 - ESLint with SARIF output
@@ -325,6 +362,7 @@ tailwind/              # CSS files (root level, not in dist/)
 - Dependency review
 
 **Publishing:**
+
 - Automated via semantic-release on main branch
 - Version bumps based on conventional commits
 - Generates changelog automatically
@@ -332,6 +370,7 @@ tailwind/              # CSS files (root level, not in dist/)
 ## Path Aliases
 
 Use the `~/*` alias for internal imports:
+
 ```typescript
 import { cn } from "~/utils";
 import { Button } from "~/components/button";
@@ -348,6 +387,7 @@ When adding new colors to `src/tailwind/palette.css`:
 5. Ensure sufficient contrast between color and foreground (WCAG AA minimum)
 
 Example:
+
 ```css
 :root {
   --new-color: oklch(0.5 0.15 250);
@@ -372,11 +412,13 @@ Example:
 ## Consumer Usage
 
 **Installation:**
+
 ```bash
 npm install tailwindcss @szum-tech/design-system
 ```
 
 **CSS Setup (consumer's CSS file):**
+
 ```css
 @import "tailwindcss";
 @import "@szum-tech/design-system/tailwind/global.css";
@@ -384,11 +426,13 @@ npm install tailwindcss @szum-tech/design-system
 ```
 
 **Component Import:**
+
 ```typescript
 import { Button } from "@szum-tech/design-system";
 ```
 
 **Icon Import:**
+
 ```typescript
 import { GoogleLogoIcon } from "@szum-tech/design-system/icons";
 ```
