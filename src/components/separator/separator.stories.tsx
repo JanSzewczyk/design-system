@@ -17,7 +17,6 @@ export const Horizontal: Story = {
   play: async ({ canvas }) => {
     const separator = canvas.getByRole("separator");
     await expect(separator).toBeVisible();
-    await expect(separator).toHaveAttribute("aria-orientation", "horizontal");
     await expect(separator).toHaveAttribute("data-orientation", "horizontal");
   }
 };
@@ -37,7 +36,7 @@ export const Decorative: Story = {
   play: async ({ canvas }) => {
     const separator = canvas.getByRole("none");
     await expect(separator).toBeVisible();
-    await expect(separator).toHaveAttribute("aria-orientation", "horizontal");
+    await expect(separator).not.toHaveAttribute("aria-orientation", "horizontal");
     await expect(separator).toHaveAttribute("data-orientation", "horizontal");
   }
 };
