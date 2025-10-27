@@ -65,7 +65,7 @@ export const WithLongContent: Story = {
   },
   render: (args) => (
     <Tooltip {...args}>
-      <Button variant="outlined">Long content tooltip</Button>
+      <Button>Long content tooltip</Button>
     </Tooltip>
   ),
   play: async ({ canvasElement }) => {

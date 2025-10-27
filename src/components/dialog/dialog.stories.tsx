@@ -37,11 +37,9 @@ const BasicDialogContent = () => (
     </div>
     <DialogFooter>
       <DialogClose asChild>
-        <Button variant="outlined" color="neutral">
-          Cancel
-        </Button>
+        <Button color="neutral">Cancel</Button>
       </DialogClose>
-      <Button variant="contained">Confirm</Button>
+      <Button>Confirm</Button>
     </DialogFooter>
   </DialogContent>
 );
@@ -77,9 +75,7 @@ export const Width: Story = {
       {DIALOGS_WIDTHS.map((width) => (
         <Dialog key={width}>
           <DialogTrigger asChild>
-            <Button variant="outlined" color="neutral">
-              {width}
-            </Button>
+            <Button color="neutral">{width}</Button>
           </DialogTrigger>
           <DialogContent width={width}>
             <DialogHeader>
@@ -91,11 +87,9 @@ export const Width: Story = {
             </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outlined" color="neutral">
-                  Cancel
-                </Button>
+                <Button color="neutral">Cancel</Button>
               </DialogClose>
-              <Button variant="contained">Confirm</Button>
+              <Button>Confirm</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -257,7 +251,7 @@ export const DialogFocusManagement: Story = {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button type="button" variant="outlined" color="neutral">
+              <Button type="button" color="neutral">
                 Close
               </Button>
             </DialogClose>
@@ -370,13 +364,11 @@ export const DialogWithForm: Story = {
         </form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="outlined" color="neutral">
+            <Button type="button" color="neutral">
               Cancel
             </Button>
           </DialogClose>
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
