@@ -2,7 +2,8 @@ import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
-import { Input, Label, Select, SelectItem, Textarea } from "~/components";
+import { Button, Input, Label, Select, SelectContent, SelectItem, Textarea } from "~/components";
+import { Checkbox } from "~/components/checkbox";
 
 import {
   Field,
@@ -29,26 +30,94 @@ type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
   render: () => (
-    <FieldSet>
-      <FieldLegend>Profile</FieldLegend>
-      <FieldDescription>This appears on invoices and emails.</FieldDescription>
+    <form>
       <FieldGroup>
-        <Field>
-          <FieldLabel htmlFor="name">Full name</FieldLabel>
-          <Input id="name" autoComplete="off" placeholder="Evil Rabbit" />
-          <FieldDescription>This appears on invoices and emails.</FieldDescription>
+        <FieldSet>
+          <FieldLegend>Payment Method</FieldLegend>
+          <FieldDescription>All transactions are secure and encrypted</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-card-name-43j">Name on Card</FieldLabel>
+              <Input id="checkout-7j9-card-name-43j" placeholder="Evil Rabbit" required />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-card-number-uw1">Card Number</FieldLabel>
+              <Input id="checkout-7j9-card-number-uw1" placeholder="1234 5678 9012 3456" required />
+              <FieldDescription>Enter your 16-digit card number</FieldDescription>
+            </Field>
+            <div className="grid grid-cols-3 gap-4">
+              <Field>
+                <FieldLabel htmlFor="checkout-exp-month-ts6">Month</FieldLabel>
+                <Select defaultValue="" id="checkout-exp-month-ts6" placeholder="MM">
+                  <SelectContent>
+                    <SelectItem value="01">01</SelectItem>
+                    <SelectItem value="02">02</SelectItem>
+                    <SelectItem value="03">03</SelectItem>
+                    <SelectItem value="04">04</SelectItem>
+                    <SelectItem value="05">05</SelectItem>
+                    <SelectItem value="06">06</SelectItem>
+                    <SelectItem value="07">07</SelectItem>
+                    <SelectItem value="08">08</SelectItem>
+                    <SelectItem value="09">09</SelectItem>
+                    <SelectItem value="10">10</SelectItem>
+                    <SelectItem value="11">11</SelectItem>
+                    <SelectItem value="12">12</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="checkout-7j9-exp-year-f59">Year</FieldLabel>
+                <Select id="checkout-7j9-exp-year-f59" placeholder="YYYY">
+                  <SelectContent>
+                    <SelectItem value="2024">2024</SelectItem>
+                    <SelectItem value="2025">2025</SelectItem>
+                    <SelectItem value="2026">2026</SelectItem>
+                    <SelectItem value="2027">2027</SelectItem>
+                    <SelectItem value="2028">2028</SelectItem>
+                    <SelectItem value="2029">2029</SelectItem>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="checkout-7j9-cvv">CVV</FieldLabel>
+                <Input id="checkout-7j9-cvv" placeholder="123" required />
+              </Field>
+            </div>
+          </FieldGroup>
+        </FieldSet>
+        <FieldSeparator />
+        <FieldSet>
+          <FieldLegend>Billing Address</FieldLegend>
+          <FieldDescription>The billing address associated with your payment method</FieldDescription>
+          <FieldGroup>
+            <Field orientation="horizontal">
+              <Checkbox id="checkout-7j9-same-as-shipping-wgm" defaultChecked />
+              <FieldLabel htmlFor="checkout-7j9-same-as-shipping-wgm" className="font-normal">
+                Same as shipping address
+              </FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+        <FieldSet>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="checkout-7j9-optional-comments">Comments</FieldLabel>
+              <Textarea
+                id="checkout-7j9-optional-comments"
+                placeholder="Add any additional comments"
+                className="resize-none"
+              />
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+        <Field orientation="horizontal">
+          <Button type="submit">Submit</Button>
+          <Button variant="outline" type="button">
+            Cancel
+          </Button>
         </Field>
-        <Field>
-          <FieldLabel htmlFor="username">Username</FieldLabel>
-          <Input id="username" autoComplete="off" invalid />
-          <FieldError>Choose another username.</FieldError>
-        </Field>
-        {/*<Field orientation="horizontal">*/}
-        {/*  <Switch id="newsletter" />*/}
-        {/*  <FieldLabel htmlFor="newsletter">Subscribe to the newsletter</FieldLabel>*/}
-        {/*</Field>*/}
       </FieldGroup>
-    </FieldSet>
+    </form>
   )
 };
 
@@ -93,14 +162,16 @@ export const SelectStory: Story = {
     <Field>
       <FieldLabel>Department</FieldLabel>
       <Select placeholder="Choose department">
-        <SelectItem value="engineering">Engineering</SelectItem>
-        <SelectItem value="design">Design</SelectItem>
-        <SelectItem value="marketing">Marketing</SelectItem>
-        <SelectItem value="sales">Sales</SelectItem>
-        <SelectItem value="support">Customer Support</SelectItem>
-        <SelectItem value="hr">Human Resources</SelectItem>
-        <SelectItem value="finance">Finance</SelectItem>
-        <SelectItem value="operations">Operations</SelectItem>
+        <SelectContent>
+          <SelectItem value="engineering">Engineering</SelectItem>
+          <SelectItem value="design">Design</SelectItem>
+          <SelectItem value="marketing">Marketing</SelectItem>
+          <SelectItem value="sales">Sales</SelectItem>
+          <SelectItem value="support">Customer Support</SelectItem>
+          <SelectItem value="hr">Human Resources</SelectItem>
+          <SelectItem value="finance">Finance</SelectItem>
+          <SelectItem value="operations">Operations</SelectItem>
+        </SelectContent>
       </Select>
       <FieldDescription>Select your department or area of work.</FieldDescription>
     </Field>
@@ -130,6 +201,84 @@ export const FieldsetStory: Story = {
         </div>
       </FieldGroup>
     </FieldSet>
+  )
+};
+
+export const CheckboxStory: Story = {
+  name: "Checkbox",
+  render: () => (
+    <FieldGroup>
+      <FieldSet>
+        <FieldLegend variant="label">Show these items on the desktop</FieldLegend>
+        <FieldDescription>Select the items you want to show on the desktop.</FieldDescription>
+        <FieldGroup className="gap-3">
+          <Field orientation="horizontal">
+            <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
+            <FieldLabel htmlFor="finder-pref-9k2-hard-disks-ljj" className="font-normal" defaultChecked>
+              Hard disks
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal">
+            <Checkbox id="finder-pref-9k2-external-disks-1yg" />
+            <FieldLabel htmlFor="finder-pref-9k2-external-disks-1yg" className="font-normal">
+              External disks
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal">
+            <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
+            <FieldLabel htmlFor="finder-pref-9k2-cds-dvds-fzt" className="font-normal">
+              CDs, DVDs, and iPods
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal">
+            <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
+            <FieldLabel htmlFor="finder-pref-9k2-connected-servers-6l2" className="font-normal">
+              Connected servers
+            </FieldLabel>
+          </Field>
+        </FieldGroup>
+      </FieldSet>
+      <FieldSeparator />
+      <Field orientation="horizontal">
+        <Checkbox id="finder-pref-9k2-sync-folders-nep" defaultChecked />
+        <FieldContent>
+          <FieldLabel htmlFor="finder-pref-9k2-sync-folders-nep">Sync Desktop & Documents folders</FieldLabel>
+          <FieldDescription>
+            Your Desktop & Documents folders are being synced with iCloud Drive. You can access them from other devices.
+          </FieldDescription>
+        </FieldContent>
+      </Field>
+    </FieldGroup>
+  )
+};
+
+export const ChoiceCard: Story = {
+  name: "Choice Card - Checkboxes",
+  render: () => (
+    <FieldGroup>
+      <FieldSet>
+        <FieldLabel htmlFor="compute-environment-p8w">Compute Environment</FieldLabel>
+        <FieldDescription>Select the compute environment for your cluster.</FieldDescription>
+        <FieldLabel htmlFor="kubernetes-r2h">
+          <Field orientation="horizontal">
+            <FieldContent>
+              <FieldTitle>Kubernetes</FieldTitle>
+              <FieldDescription>Run GPU workloads on a K8s configured cluster.</FieldDescription>
+            </FieldContent>
+            <Checkbox value="kubernetes" id="kubernetes-r2h" />
+          </Field>
+        </FieldLabel>
+        <FieldLabel htmlFor="vm-z4k">
+          <Field orientation="horizontal">
+            <FieldContent>
+              <FieldTitle>Virtual Machine</FieldTitle>
+              <FieldDescription>Access a VM configured cluster to run GPU workloads.</FieldDescription>
+            </FieldContent>
+            <Checkbox value="vm" id="vm-z4k" />
+          </Field>
+        </FieldLabel>
+      </FieldSet>
+    </FieldGroup>
   )
 };
 

@@ -39,6 +39,7 @@ npm test                 # Run all tests
 npm run test:unit        # Unit tests only (happy-dom)
 npm run test:storybook   # Storybook integration tests (Playwright)
 npm run test:coverage    # Generate coverage report
+npx playwright install --with-deps  # Install Playwright browsers (required for integration tests)
 ```
 
 ### Fixes
@@ -130,13 +131,13 @@ The library uses **conditional exports** for fine-grained imports:
 
 ```json
 {
-  ".": "./dist/index.js",                    // All components
-  "./components/*": "./dist/components/*.js", // Individual components
-  "./icons": "./dist/icons/index.js",        // Icon collection
-  "./utils": "./dist/utils/index.js",        // Utility functions
-  "./hooks": "./dist/hooks/index.js",        // Custom hooks
-  "./contexts": "./dist/contexts/index.js",  // Context providers
-  "./tailwind/*.css": "./dist/tailwind/*.css" // CSS files
+  ".": "./dist/components/index.js",           // All components
+  "./componnents/*": "./dist/components/*/index.js", // Individual components (NOTE: typo in package.json)
+  "./icons": "./dist/icons/index.js",          // Icon collection
+  "./utils": "./dist/utils/index.js",          // Utility functions
+  "./hooks": "./dist/hooks/index.js",          // Custom hooks
+  "./contexts": "./dist/contexts/index.js",    // Context providers
+  "./tailwind/*.css": "./tailwind/*.css"       // CSS files (root level)
 }
 ```
 
@@ -248,32 +249,46 @@ Components that integrate with react-hook-form should:
 
 ### Composite Components
 
-For components with sub-components (like Field):
+For components with sub-components (like Field, Dialog, Sheet):
 - Use compound component pattern
 - Each sub-component should be independently importable
 - Share context between parent and children when needed
 - Use consistent `data-slot` attributes across sub-components
 
+### Complex Stateful Components
+
+For complex components with shared state (like Stepper):
+- Use context providers to share state between sub-components
+- Create separate context files (e.g., `stepper.context.tsx`, `stepper-item.context.tsx`, `stepper-focus.context.tsx`)
+- Use a store pattern (`stepper.store.tsx`) for state management when needed
+- Keep business logic in utility files (`stepper.utils.tsx`)
+- Define constants in separate files (`stepper.constants.ts`)
+
 ## Build Process
 
 **Build Pipeline:**
 1. **tsup** bundles components, utils, hooks, contexts, icons separately
-2. CSS files copied to `dist/tailwind/`
-3. Post-build script adds `"use client"` directive to component entry files (Next.js compatibility)
+2. CSS files copied from `src/tailwind/` to `tailwind/` (root level)
+3. Post-build script (`src/scripts/post-build.js`) adds `"use client"` directive to component entry files (Next.js compatibility)
 4. Outputs: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
 
 **Output Structure:**
 ```
 dist/
-├── index.js           # Main ESM entry
-├── index.cjs          # Main CJS entry
-├── index.d.ts         # Type declarations
 ├── components/        # Individual component bundles
+│   ├── index.js       # Main ESM components entry (with "use client" directive)
+│   ├── index.cjs      # Main CJS components entry (with "use client" directive)
+│   └── */index.{js,cjs,d.ts}  # Individual component bundles
 ├── icons/
 ├── utils/
 ├── hooks/
-├── contexts/
-└── tailwind/          # CSS files
+└── contexts/
+tailwind/              # CSS files (root level, not in dist/)
+├── global.css
+├── palette.css
+├── typography.css
+├── animation.css
+└── scroll.css
 ```
 
 ## TypeScript Configuration
