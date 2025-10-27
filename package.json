@@ -147,6 +147,7 @@
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.4",
     "@vitest/browser": "^4.0.3",
+    "@vitest/browser-playwright": "^4.0.3",
     "@vitest/coverage-v8": "^4.0.3",
     "@vitest/ui": "^4.0.3",
     "cpy-cli": "^6.0.0",
