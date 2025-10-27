@@ -7,7 +7,12 @@ import fs from "fs/promises";
 import { updateFilesWithText } from "./post-build.js";
 
 // Mock fs module
-vi.mock("fs/promises");
+vi.mock("fs/promises", () => ({
+  default: {
+    readFile: vi.fn(),
+    writeFile: vi.fn()
+  }
+}));
 
 describe("post-build script", () => {
   beforeEach(() => {
@@ -28,8 +33,8 @@ describe("post-build script", () => {
       const expectedContent = '"use client";\n\nexport { Button } from "./button";';
       const filePath = "dist/components/index.js";
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText([filePath], '"use client";\n\n');
@@ -46,8 +51,8 @@ describe("post-build script", () => {
       const expectedContent = '"use client";\n\nexport { Button } from "./button";';
       const filePaths = ["dist/components/index.js", "dist/components/index.cjs"];
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(null);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue();
 
       // Act
       await updateFilesWithText(filePaths, '"use client";\n\n');
@@ -69,8 +74,8 @@ describe("post-build script", () => {
       const expectedContent = '"use client";\n\n';
       const filePath = "dist/components/index.js";
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText([filePath], '"use client";\n\n');
@@ -95,8 +100,8 @@ export { Input } from "./input";`;
 
       const filePath = "dist/components/index.js";
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText([filePath], '"use client";\n\n');
@@ -110,7 +115,7 @@ export { Input } from "./input";`;
       const filePath = "nonexistent/file.js";
       const readError = new Error("ENOENT: no such file or directory");
 
-      (fs.readFile as Mock).mockRejectedValue(readError);
+      vi.mocked(fs.readFile).mockRejectedValue(readError);
 
       // Act
       await updateFilesWithText([filePath], '"use client";\n\n');
@@ -127,8 +132,8 @@ export { Input } from "./input";`;
       const mockFileContent = 'export { Button } from "./button";';
       const writeError = new Error("EACCES: permission denied");
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockRejectedValue(writeError);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockRejectedValue(writeError);
 
       // Act
       await updateFilesWithText([filePath], '"use client";\n\n');
@@ -145,12 +150,12 @@ export { Input } from "./input";`;
       const mockFileContent = 'export { Button } from "./button";';
       const readError = new Error("ENOENT: no such file or directory");
 
-      (fs.readFile as Mock)
+      vi.mocked(fs.readFile)
         .mockResolvedValueOnce(mockFileContent) // First file succeeds
         .mockRejectedValueOnce(readError) // Second file fails
         .mockResolvedValueOnce(mockFileContent); // Third file succeeds
 
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText(filePaths, '"use client";\n\n');
@@ -169,8 +174,8 @@ export { Input } from "./input";`;
       const expectedContent = '/* Custom header */\nexport { Button } from "./button";';
       const filePath = "dist/components/index.js";
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText([filePath], customText);
@@ -195,8 +200,8 @@ export { Input } from "./input";`;
       const mockFileContent = 'export { Button } from "./button";';
       const filePath = "dist/components/index.js";
 
-      (fs.readFile as Mock).mockResolvedValue(mockFileContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValue(mockFileContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText([filePath], "");
@@ -229,8 +234,8 @@ exports.Button = void 0;`;
 
       const filePaths = ["dist/components/index.js", "dist/components/index.cjs"];
 
-      (fs.readFile as Mock).mockResolvedValueOnce(jsContent).mockResolvedValueOnce(cjsContent);
-      (fs.writeFile as Mock).mockResolvedValue(undefined);
+      vi.mocked(fs.readFile).mockResolvedValueOnce(jsContent).mockResolvedValueOnce(cjsContent);
+      vi.mocked(fs.writeFile).mockResolvedValue(undefined);
 
       // Act
       await updateFilesWithText(filePaths, '"use client";\n\n');
@@ -312,13 +317,13 @@ export { Button } from "./button";`;
       let readOrder: Array<string> = [];
       let writeOrder: Array<string> = [];
 
-      (fs.readFile as Mock).mockImplementation((path) => {
-        readOrder.push(path);
+      vi.mocked(fs.readFile).mockImplementation((path) => {
+        readOrder.push(path as string);
         return Promise.resolve(mockContent);
       });
 
-      (fs.writeFile as Mock).mockImplementation((path) => {
-        writeOrder.push(path);
+      vi.mocked(fs.writeFile).mockImplementation((path) => {
+        writeOrder.push(path as string);
         return Promise.resolve();
       });
 

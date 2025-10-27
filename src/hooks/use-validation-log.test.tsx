@@ -1,11 +1,11 @@
-import { describe, expect, test, vi, beforeEach, afterEach } from "vitest";
+import { describe, expect, test, vi, beforeEach, afterEach, type Mock } from "vitest";
 
 import { renderHook } from "@testing-library/react";
 
 import { useValidationLog } from "./use-validation-log";
 
 describe("useValidationLog", () => {
-  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
+  let consoleErrorSpy: Mock;
 
   beforeEach(() => {
     consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
