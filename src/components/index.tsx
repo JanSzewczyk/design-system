@@ -16,3 +16,4 @@ export * from "./tooltip";
 export * from "./stepper";
 export * from "./spinner";
 export * from "./field";
+export * from "./checkbox";
