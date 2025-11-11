@@ -18,3 +18,4 @@ export * from "./stepper";
 export * from "./textarea";
 export * from "./toaster";
 export * from "./tooltip";
+export * from "./radio-group";
