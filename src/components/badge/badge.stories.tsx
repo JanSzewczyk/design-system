@@ -9,7 +9,7 @@ import { Badge } from "~/components";
 const meta = {
   title: "Components/Badge",
   component: Badge,
-  tags: ["autodocs", "test"]
+  tags: ["autodocs", "beta"]
 } satisfies Meta<typeof Badge>;
 export default meta;
 

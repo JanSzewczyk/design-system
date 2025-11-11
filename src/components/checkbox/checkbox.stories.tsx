@@ -31,7 +31,7 @@ const meta = {
       description: "The name of the checkbox (used in form submission)"
     }
   },
-  tags: ["autodocs"]
+  tags: ["autodocs", "new"]
 } satisfies Meta<typeof Checkbox>;
 export default meta;
 
