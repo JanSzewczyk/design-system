@@ -119,6 +119,12 @@
     "test:watch": "vitest --watch",
     "type-check": "tsc --noEmit"
   },
+  "overrides": {
+    "@storybook-community/storybook-dark-mode": {
+      "storybook": "^10.0.6",
+      "@storybook/addon-docs": "^10.0.6"
+    }
+  },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -133,6 +139,7 @@
     "@storybook/addon-docs": "^10.0.6",
     "@storybook/addon-links": "^10.0.6",
     "@storybook/addon-vitest": "^10.0.6",
+    "@storybook/builder-vite": "^10.0.6",
     "@storybook/react-vite": "^10.0.6",
     "@szum-tech/eslint-config": "^2.1.7",
     "@szum-tech/prettier-config": "^1.6.2",
@@ -159,7 +166,7 @@
     "react-docgen": "^8.0.0",
     "react-docgen-typescript": "^2.4.0",
     "react-dom": "^19.1.0",
-    "semantic-release": "^25.0.1",
+    "semantic-release": "^24.2.9",
     "serve": "^14.2.4",
     "storybook": "^10.0.6",
     "storybook-addon-tag-badges": "^3.0.2",
