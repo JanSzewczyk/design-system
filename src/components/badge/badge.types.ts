@@ -1,8 +1,7 @@
 import { type VariantProps } from "class-variance-authority";
 
-import { type badgeCva } from "./badge.styles";
+import { type badgeVariants } from "./badge.styles";
 
-type BadgeCvaProps = VariantProps<typeof badgeCva>;
+type BadgeVariantsProps = VariantProps<typeof badgeVariants>;
 
-export type BadgeColorType = NonNullable<BadgeCvaProps["color"]>;
-export type BadgeVariantType = NonNullable<BadgeCvaProps["variant"]>;
+export type BadgeVariant = NonNullable<BadgeVariantsProps["variant"]>;
