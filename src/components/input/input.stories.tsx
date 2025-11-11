@@ -40,6 +40,6 @@ export const Invalid: Story = {
     type: "email",
     placeholder: "Email",
     invalid: true,
-    value: "incorrect@email.com"
+    defaultValue: "incorrect@email.com"
   }
 };
