@@ -1,193 +1,215 @@
 import * as React from "react";
 
+import { BadgeCheckIcon, ShieldCheckIcon, StarIcon, XIcon } from "lucide-react";
+
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
-import { Badge, type BadgeVariantType } from "~/components";
+import { expect, userEvent, within } from "storybook/test";
+import { Badge } from "~/components";
 
 const meta = {
   title: "Components/Badge",
   component: Badge,
-  argTypes: {
-    children: {
-      control: "text"
-    }
-  },
   tags: ["autodocs", "test"]
 } satisfies Meta<typeof Badge>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: ({ children, ...args }) => <Badge {...args}>{children}</Badge>,
-  args: {
-    children: "Badge"
-  },
-  play: async ({ canvas }) => {
-    // Test that the badge renders with correct content
-    const badge = canvas.getByText("Badge");
-    await expect(badge).toBeVisible();
-
-    // Test that it's a span element
-    await expect(badge.tagName).toBe("SPAN");
-  }
+export const Example: Story = {
+  render: () => (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex w-full flex-wrap gap-2">
+        <Badge>Badge</Badge>
+        <Badge variant="secondary">Secondary</Badge>
+        <Badge variant="error">Destructive</Badge>
+        <Badge variant="outline">Outline</Badge>
+      </div>
+      <div className="flex w-full flex-wrap gap-2">
+        <Badge variant="secondary" className="bg-success text-success-foreground">
+          <BadgeCheckIcon />
+          Verified
+        </Badge>
+        <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>
+        <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="error">
+          99
+        </Badge>
+        <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">
+          20+
+        </Badge>
+      </div>
+    </div>
+  )
 };
 
 export const Variants: Story = {
-  render: (args) => (
-    <div className="flex gap-4">
-      <Badge {...args}>Contained</Badge>
-      <Badge variant="outlined" {...args}>
-        Outlined
-      </Badge>
-    </div>
-  ),
-  play: async ({ canvas }) => {
-    // Test all variant badges are rendered
-    await expect(canvas.getByText("Contained")).toBeVisible();
-    await expect(canvas.getByText("Outlined")).toBeVisible();
-  }
-};
-
-export const Colors: Story = {
   render: () => (
-    <div className="space-y-4">
-      {["contained", "outlined"].map((variant) => (
-        <div key={variant} className="flex flex-wrap gap-4">
-          <Badge color="neutral" variant={variant as BadgeVariantType}>
-            Neutral
-          </Badge>
-          <Badge color="primary" variant={variant as BadgeVariantType}>
-            Primary
-          </Badge>
-          <Badge color="success" variant={variant as BadgeVariantType}>
-            Success
-          </Badge>
-          <Badge color="warning" variant={variant as BadgeVariantType}>
-            Warning
-          </Badge>
-          <Badge color="error" variant={variant as BadgeVariantType}>
-            Error
-          </Badge>
-        </div>
-      ))}
+    <div className="flex flex-col items-start gap-8 sm:flex-row">
+      <Badge variant="default">Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="error">Error</Badge>
+      <Badge variant="outline">Outline</Badge>
     </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Test that all colors render (3 variants × 5 colors = 15 badges)
-    const neutralBadges = canvas.getAllByText("Neutral");
-    const primaryBadges = canvas.getAllByText("Primary");
-    const successBadges = canvas.getAllByText("Success");
-    const warningBadges = canvas.getAllByText("Warning");
-    const errorBadges = canvas.getAllByText("Error");
-
-    await expect(neutralBadges).toHaveLength(2);
-    await expect(primaryBadges).toHaveLength(2);
-    await expect(successBadges).toHaveLength(2);
-    await expect(warningBadges).toHaveLength(2);
-    await expect(errorBadges).toHaveLength(2);
-  }
+  )
 };
 
-export const ContainedVariant: Story = {
+export const WithIcons: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Badge color="neutral">Neutral</Badge>
-      <Badge color="primary">Primary</Badge>
-      <Badge color="success">Success</Badge>
-      <Badge color="warning">Warning</Badge>
-      <Badge color="error">Error</Badge>
-    </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Test contained variant with all colors
-    await expect(canvas.getByText("Neutral")).toBeVisible();
-    await expect(canvas.getByText("Primary")).toBeVisible();
-    await expect(canvas.getByText("Success")).toBeVisible();
-    await expect(canvas.getByText("Warning")).toBeVisible();
-    await expect(canvas.getByText("Error")).toBeVisible();
-  }
-};
-
-export const OutlinedVariant: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Badge color="neutral" variant="outlined">
-        Neutral
+      <Badge variant="default">
+        <BadgeCheckIcon />
+        Verified
       </Badge>
-      <Badge color="primary" variant="outlined">
-        Primary
+      <Badge variant="secondary">
+        <StarIcon />
+        Featured
       </Badge>
-      <Badge color="success" variant="outlined">
-        Success
-      </Badge>
-      <Badge color="warning" variant="outlined">
-        Warning
-      </Badge>
-      <Badge color="error" variant="outlined">
+      <Badge variant="error">
+        <XIcon />
         Error
       </Badge>
+      <Badge variant="outline">
+        <ShieldCheckIcon />
+        Protected
+      </Badge>
+    </div>
+  )
+};
+
+export const CustomStyles: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge variant="secondary" className="bg-success text-success-foreground">
+        <BadgeCheckIcon />
+        Custom Success
+      </Badge>
+      <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">8</Badge>
+      <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="error">
+        99
+      </Badge>
+      <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">
+        20+
+      </Badge>
+      <Badge className="rounded-sm tracking-wider uppercase" variant="outline">
+        New
+      </Badge>
+    </div>
+  )
+};
+
+export const NotificationBadges: Story = {
+  render: () => (
+    <div className="flex flex-wrap items-center gap-8">
+      <div className="relative">
+        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Messages</button>
+        <Badge className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">3</Badge>
+      </div>
+      <div className="relative">
+        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Notifications</button>
+        <Badge
+          variant="error"
+          className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
+        >
+          99+
+        </Badge>
+      </div>
+      <div className="relative">
+        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Updates</button>
+        <Badge className="border-background absolute -top-1 -right-1 size-2 rounded-full border-2 p-0" />
+      </div>
+    </div>
+  )
+};
+
+export const AsLink: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge asChild>
+        <a href="#default">Clickable Default</a>
+      </Badge>
+      <Badge variant="secondary" asChild>
+        <a href="#secondary">Clickable Secondary</a>
+      </Badge>
+      <Badge variant="outline" asChild>
+        <a href="#outline">Clickable Outline</a>
+      </Badge>
+      <Badge variant="error" asChild>
+        <a href="#error">Clickable Error</a>
+      </Badge>
     </div>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    // Test outlined variant with all colors
-    const badges = canvas.getAllByText(/Neutral|Primary|Success|Warning|Error/);
-    await expect(badges).toHaveLength(5);
+    await step("Badges render as links", async () => {
+      const defaultLink = canvas.getByRole("link", { name: /clickable default/i });
+      const secondaryLink = canvas.getByRole("link", { name: /clickable secondary/i });
+      const outlineLink = canvas.getByRole("link", { name: /clickable outline/i });
+      const errorLink = canvas.getByRole("link", { name: /clickable error/i });
 
-    for (const badge of badges) {
-      await expect(badge).toBeVisible();
-    }
+      await expect(defaultLink).toBeVisible();
+      await expect(secondaryLink).toBeVisible();
+      await expect(outlineLink).toBeVisible();
+      await expect(errorLink).toBeVisible();
+
+      await expect(defaultLink).toHaveAttribute("href", "#default");
+      await expect(secondaryLink).toHaveAttribute("href", "#secondary");
+      await expect(outlineLink).toHaveAttribute("href", "#outline");
+      await expect(errorLink).toHaveAttribute("href", "#error");
+    });
   }
 };
 
-export const CustomClassName: Story = {
-  tags: ["test-only"],
+export const DataAttributes: Story = {
   render: () => (
-    <Badge className="rounded-full" data-testid="custom-badge">
-      Custom
-    </Badge>
+    <div className="flex flex-wrap gap-4">
+      <Badge>Check data-slot</Badge>
+    </div>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-
-    // Test that custom className is applied
-    const badge = canvas.getByTestId("custom-badge");
-    await expect(badge).toBeVisible();
-    await expect(badge).toHaveClass("rounded-full");
+  play: async ({ canvas, step }) => {
+    await step("Badge has correct data-slot attribute", async () => {
+      const badge = canvas.getByText("Check data-slot");
+      await expect(badge).toHaveAttribute("data-slot", "badge");
+    });
   }
 };
 
-export const WithCustomProps: Story = {
+export const InteractionTest: Story = {
   tags: ["test-only"],
   render: () => (
-    <Badge onClick={() => {}} role="status" aria-label="Badge status" data-testid="clickable-badge">
-      Clickable
-    </Badge>
+    <div className="flex flex-wrap gap-4">
+      <Badge variant="default">Default Badge</Badge>
+      <Badge variant="secondary">Secondary Badge</Badge>
+      <Badge variant="error">Error Badge</Badge>
+      <Badge variant="outline">Outline Badge</Badge>
+      <Badge asChild>
+        <button type="button">Clickable Badge</button>
+      </Badge>
+    </div>
   ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+  play: async ({ canvas, step }) => {
+    await step("All badge variants are rendered", async () => {
+      const defaultBadge = canvas.getByText("Default Badge");
+      const secondaryBadge = canvas.getByText("Secondary Badge");
+      const errorBadge = canvas.getByText("Error Badge");
+      const outlineBadge = canvas.getByText("Outline Badge");
 
-    // Test that custom props are applied
-    const badge = canvas.getByTestId("clickable-badge");
-    await expect(badge).toBeVisible();
-    await expect(badge).toHaveAttribute("role", "status");
-    await expect(badge).toHaveAttribute("aria-label", "Badge status");
+      await expect(defaultBadge).toBeVisible();
+      await expect(secondaryBadge).toBeVisible();
+      await expect(errorBadge).toBeVisible();
+      await expect(outlineBadge).toBeVisible();
+
+      await expect(defaultBadge).toHaveAttribute("data-slot", "badge");
+      await expect(secondaryBadge).toHaveAttribute("data-slot", "badge");
+      await expect(errorBadge).toHaveAttribute("data-slot", "badge");
+      await expect(outlineBadge).toHaveAttribute("data-slot", "badge");
+    });
+
+    await step("Badge with asChild renders as button and is clickable", async () => {
+      const clickableBadge = canvas.getByRole("button", { name: "Clickable Badge" });
+      await expect(clickableBadge).toBeVisible();
+      await expect(clickableBadge).toHaveAttribute("data-slot", "badge");
+
+      await userEvent.click(clickableBadge);
+    });
   }
-};
-
-export const AsButton: Story = {
-  tags: ["test-only"],
-  render: () => (
-    <Badge asChild>
-      <button type="button" className="cursor-copy" onClick={() => console.log("Clicked!")}>
-        Clickable
-      </button>
-    </Badge>
-  )
 };
