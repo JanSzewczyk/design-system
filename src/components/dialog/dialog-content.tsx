@@ -17,14 +17,14 @@ export function DialogContent({ className, children, width = "md", ...props }: D
   return (
     <ReactDialog.Portal>
       <ReactDialog.Overlay
-        className="bg-app-background/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 backdrop-blur-xs"
+        className="bg-app-background/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 backdrop-blur-xs fixed inset-0 z-50"
         {...props}
       />
       <ReactDialog.Content aria-modal="true" className={twMerge(dialogContentStyles({ width }), className)} {...props}>
         {children}
         <ReactDialog.Close
           className={clsx([
-            "data-[state=open]:bg-app-foreground absolute top-4 right-4 cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none",
+            "data-[state=open]:bg-app-foreground absolute right-4 top-4 cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none",
             "focus-visible:ring-primary-500/40 ring-offset-app-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
           ])}
         >
