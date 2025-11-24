@@ -64,18 +64,20 @@ Each component follows a consistent pattern:
 ```
 component-name/
 ├── index.tsx                    # Barrel export
-├── ComponentName.tsx            # Main component implementation
-├── ComponentName.types.ts       # TypeScript type definitions
-├── ComponentName.styles.ts      # CVA variant definitions
-└── ComponentName.stories.tsx    # Storybook stories
+├── component-name.tsx           # Main component implementation
+├── component-name.types.ts      # TypeScript type definitions
+├── component-name.styles.ts     # CVA variant definitions
+└── component-name.stories.tsx   # Storybook stories
 ```
+
+**IMPORTANT:** All file names use lowercase with hyphens (kebab-case), while the exported component name uses PascalCase.
 
 **Key Patterns:**
 
 1. **CVA for Variants**: All component styling uses class-variance-authority for type-safe variants
 
    ```typescript
-   // In ComponentName.styles.ts
+   // In component-name.styles.ts
    export const componentVariants = cva("base-classes", {
      variants: {
        variant: { primary: "...", secondary: "..." },
@@ -84,7 +86,7 @@ component-name/
      defaultVariants: { variant: "primary", size: "md" }
    });
 
-   // In ComponentName.types.ts
+   // In component-name.types.ts
    type ComponentCvaProps = VariantProps<typeof componentVariants>;
    export type ComponentVariantType = NonNullable<ComponentCvaProps["variant"]>;
    ```
@@ -177,11 +179,11 @@ The library uses **conditional exports** for fine-grained imports:
 
 1. **Create component directory** in `src/components/component-name/`
 
-2. **Define types** (`ComponentName.types.ts`):
+2. **Define types** (`component-name.types.ts`):
 
    ```typescript
    import { VariantProps } from "class-variance-authority";
-   import { componentVariants } from "./ComponentName.styles";
+   import { componentVariants } from "./component-name.styles";
 
    type ComponentCvaProps = VariantProps<typeof componentVariants>;
    export type ComponentVariantType = NonNullable<ComponentCvaProps["variant"]>;
@@ -192,7 +194,7 @@ The library uses **conditional exports** for fine-grained imports:
    }
    ```
 
-3. **Define styles** (`ComponentName.styles.ts`):
+3. **Define styles** (`component-name.styles.ts`):
 
    ```typescript
    import { cva } from "class-variance-authority";
@@ -212,12 +214,12 @@ The library uses **conditional exports** for fine-grained imports:
    });
    ```
 
-4. **Implement component** (`ComponentName.tsx`):
+4. **Implement component** (`component-name.tsx`):
 
    ```typescript
    import { cn } from "~/utils";
-   import { componentVariants } from "./ComponentName.styles";
-   import type { ComponentProps } from "./ComponentName.types";
+   import { componentVariants } from "./component-name.styles";
+   import type { ComponentProps } from "./component-name.types";
 
    export function ComponentName({ variant, className, ...props }: ComponentProps) {
      return (
@@ -230,11 +232,11 @@ The library uses **conditional exports** for fine-grained imports:
    }
    ```
 
-5. **Create stories** (`ComponentName.stories.tsx`):
+5. **Create stories** (`component-name.stories.tsx`):
 
    ```typescript
    import type { Meta, StoryObj } from "@storybook/react";
-   import { ComponentName } from "./ComponentName";
+   import { ComponentName } from "./component-name";
 
    const meta = {
      title: "Components/ComponentName",
@@ -258,8 +260,8 @@ The library uses **conditional exports** for fine-grained imports:
 6. **Export from barrel** (`index.tsx`):
 
    ```typescript
-   export * from "./ComponentName";
-   export * from "./ComponentName.types";
+   export * from "./component-name";
+   export * from "./component-name.types";
    ```
 
 7. **Add to main exports** (`src/components/index.tsx`):
