@@ -26,9 +26,7 @@ export default defineConfig({
     "class-variance-authority",
     "radix-ui",
     "@radix-ui/react-slot",
-    "react-hook-form",
     "tailwind-merge",
-    "clx",
-    "@radix-ui/react-icons"
+    "clx"
   ]
 });
