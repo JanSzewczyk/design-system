@@ -89,7 +89,7 @@ export const CustomStyles: Story = {
       <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">
         20+
       </Badge>
-      <Badge className="rounded-sm tracking-wider uppercase" variant="outline">
+      <Badge className="rounded-sm uppercase tracking-wider" variant="outline">
         New
       </Badge>
     </div>
@@ -101,20 +101,20 @@ export const NotificationBadges: Story = {
     <div className="flex flex-wrap items-center gap-8">
       <div className="relative">
         <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Messages</button>
-        <Badge className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">3</Badge>
+        <Badge className="absolute -right-2 -top-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">3</Badge>
       </div>
       <div className="relative">
         <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Notifications</button>
         <Badge
           variant="error"
-          className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
+          className="absolute -right-2 -top-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
         >
           99+
         </Badge>
       </div>
       <div className="relative">
         <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Updates</button>
-        <Badge className="border-background absolute -top-1 -right-1 size-2 rounded-full border-2 p-0" />
+        <Badge className="border-background absolute -right-1 -top-1 size-2 rounded-full border-2 p-0" />
       </div>
     </div>
   )
