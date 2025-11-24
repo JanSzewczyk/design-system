@@ -160,7 +160,7 @@
     "react-docgen": "^8.0.0",
     "react-docgen-typescript": "^2.4.0",
     "react-dom": "^19.1.0",
-    "semantic-release": "^24.2.9",
+    "semantic-release": "^25.0.2",
     "serve": "^14.2.4",
     "storybook": "^10.0.8",
     "storybook-addon-tag-badges": "^3.0.2",
