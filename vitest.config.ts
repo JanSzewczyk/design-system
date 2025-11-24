@@ -1,18 +1,14 @@
-import { defineConfig } from "vite";
-import tsConfigPaths from "vite-tsconfig-paths";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
-import react from "@vitejs/plugin-react";
 import { playwright } from "@vitest/browser-playwright";
-
-const reporters = process.env.CI ? ["dot", "github-actions"] : ["default"];
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [react(), tsConfigPaths()],
   test: {
-    globals: true,
-    reporters,
+    reporters: process.env.CI ? ["dot", "github-actions"] : ["tree"],
     coverage: {
+      provider: "v8",
       include: ["**"],
       exclude: [
         "coverage/**",
@@ -34,21 +30,20 @@ export default defineConfig({
         "**\/*.{types,styles}.?(c|m)[jt]s?(x)"
       ],
       reporter: ["text", "html", "json-summary", "json"],
-      reportOnFailure: true,
-      provider: "v8"
+      reportOnFailure: true
     },
     projects: [
       {
-        extends: "vitest.config.ts",
+        plugins: [tsconfigPaths()],
         test: {
-          include: ["**\/*.{test,spec}.{ts,js,tsx,jsx}"],
           name: "unit",
+          globals: true,
+          include: ["**\/*.{test,spec}.{ts,js,tsx,jsx}"],
           environment: "happy-dom",
           setupFiles: ["src/tests/unit/vitest.setup.ts"]
         }
       },
       {
-        extends: "vitest.config.ts",
         plugins: [
           storybookTest({
             configDir: ".storybook",
@@ -61,10 +56,16 @@ export default defineConfig({
         ],
         test: {
           name: "storybook",
+          exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**"],
           browser: {
             enabled: true,
             provider: playwright(),
-            instances: [{ browser: "chromium", headless: true }]
+            instances: [
+              {
+                browser: "chromium",
+                headless: true
+              }
+            ]
           },
           setupFiles: ["src/tests/integration/vitest.setup.ts"]
         }
