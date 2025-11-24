@@ -147,7 +147,7 @@ The library uses **conditional exports** for fine-grained imports:
 ```json
 {
   ".": "./dist/components/index.js", // All components
-  "./componnents/*": "./dist/components/*/index.js", // Individual components (NOTE: typo in package.json)
+  "./components/*": "./dist/components/*/index.js", // Individual components
   "./icons": "./dist/icons/index.js", // Icon collection
   "./utils": "./dist/utils/index.js", // Utility functions
   "./hooks": "./dist/hooks/index.js", // Custom hooks
