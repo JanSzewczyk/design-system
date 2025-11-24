@@ -11,7 +11,6 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
-  ItemFooter,
   ItemGroup,
   ItemHeader,
   ItemSeparator
