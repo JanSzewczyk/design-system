@@ -15,12 +15,11 @@ const tags: PresetValue<TagsOptions | undefined> = {
 export default {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    "@storybook/addon-links",
+    "@storybook/addon-a11y",
     "@storybook/addon-vitest",
-    "storybook-addon-tag-badges",
     "@storybook/addon-docs",
     "@storybook-community/storybook-dark-mode",
-    "@storybook/addon-a11y"
+    "storybook-addon-tag-badges"
   ],
   framework: "@storybook/react-vite",
   core: {

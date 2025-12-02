@@ -9,26 +9,7 @@ export default defineConfig({
     reporters: process.env.CI ? ["dot", "github-actions"] : ["tree"],
     coverage: {
       provider: "v8",
-      include: ["**"],
-      exclude: [
-        "coverage/**",
-        "dist/**",
-        "**\/[.]**",
-        "packages/*\/test?(s)/**",
-        "**\/*.d.ts",
-        "**\/ virtual:*",
-        "**\/__x00__*",
-        "**\/\x00*",
-        "cypress/**",
-        "**\/test?(s)/**",
-        "test?(-*).?(c|m)[jt]s?(x)",
-        "**\/*{.,-}{test,spec}?(-d).?(c|m)[jt]s?(x)",
-        "**\/__tests__/**",
-        "**\/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build,prettier,release,postcss,eslint}.config.*",
-        "**\/vitest.{workspace,projects}.[jt]s?(on)",
-        "**\/.{eslint,mocha,prettier}rc.{?(c|m)js,yml}",
-        "**\/*.{types,styles}.?(c|m)[jt]s?(x)"
-      ],
+      include: ["src/**/*.{ts,tsx}"],
       reporter: ["text", "html", "json-summary", "json"],
       reportOnFailure: true
     },
@@ -44,16 +25,7 @@ export default defineConfig({
         }
       },
       {
-        plugins: [
-          storybookTest({
-            configDir: ".storybook",
-            tags: {
-              include: ["test"],
-              exclude: ["experimental"],
-              skip: ["skip-test"]
-            }
-          })
-        ],
+        plugins: [storybookTest()],
         test: {
           name: "storybook",
           exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**"],

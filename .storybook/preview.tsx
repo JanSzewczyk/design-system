@@ -35,7 +35,7 @@ export default {
       }
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
-    backgrounds: { disable: true },
+    backgrounds: { disabled: true },
     controls: {
       matchers: {
         color: /(background|color)$/i,

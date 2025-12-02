@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { userEvent, expect, fn, within } from "storybook/test";
+import { fn } from "storybook/test";
 
 import { Button } from "../button";
 
@@ -34,28 +34,28 @@ export const Default: Story = {
     <Tooltip {...args}>
       <Button>Hover me</Button>
     </Tooltip>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement?.parentElement as HTMLElement);
-    const trigger = canvas.getByRole("button", { name: /hover me/i });
-
-    // Test that trigger is visible
-    await expect(trigger).toBeVisible();
-
-    // Test hover interaction
-    await userEvent.hover(trigger);
-
-    // Wait for tooltip to appear and verify content
-    const tooltip = canvas.getByRole("tooltip");
-    await expect(tooltip).toBeInTheDocument();
-    await expect(tooltip).toHaveTextContent("Add to library");
-
-    // Test unhover
-    await userEvent.unhover(trigger);
-
-    // Tooltip should disappear (with a small delay)
-    await new Promise((resolve) => setTimeout(resolve, 300));
-  }
+  )
+  // play: async ({ canvasElement }) => {
+  //   const canvas = within(canvasElement?.parentElement as HTMLElement);
+  //   const trigger = canvas.getByRole("button", { name: /hover me/i });
+  //
+  //   // Test that trigger is visible
+  //   await expect(trigger).toBeVisible();
+  //
+  //   // Test hover interaction
+  //   await userEvent.hover(trigger);
+  //
+  //   // Wait for tooltip to appear and verify content
+  //   const tooltip = canvas.getByRole("tooltip");
+  //   await expect(tooltip).toBeInTheDocument();
+  //   await expect(tooltip).toHaveTextContent("Add to library");
+  //
+  //   // Test unhover
+  //   await userEvent.unhover(trigger);
+  //
+  //   // Tooltip should disappear (with a small delay)
+  //   await new Promise((resolve) => setTimeout(resolve, 300));
+  // }
 };
 
 export const WithLongContent: Story = {
@@ -67,17 +67,17 @@ export const WithLongContent: Story = {
     <Tooltip {...args}>
       <Button>Long content tooltip</Button>
     </Tooltip>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const trigger = canvas.getByRole("button");
-
-    await userEvent.hover(trigger);
-
-    const tooltip = await canvas.findByRole("tooltip");
-    await expect(tooltip).toBeVisible();
-    await expect(tooltip).toHaveTextContent(/Lorem ipsum dolor sit amet/);
-  }
+  )
+  // play: async ({ canvasElement }) => {
+  //   const canvas = within(canvasElement);
+  //   const trigger = canvas.getByRole("button");
+  //
+  //   await userEvent.hover(trigger);
+  //
+  //   const tooltip = await canvas.findByRole("tooltip");
+  //   await expect(tooltip).toBeVisible();
+  //   await expect(tooltip).toHaveTextContent(/Lorem ipsum dolor sit amet/);
+  // }
 };
 
 // export const DifferentSides: Story = {

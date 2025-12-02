@@ -54,7 +54,8 @@ const meta = {
     },
     modal: {
       control: "boolean",
-      description: "When true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+      description:
+        "When true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "true" }
@@ -145,13 +146,11 @@ export const WithoutCloseButton: Story = {
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>No X Button Dialog</DialogTitle>
-          <DialogDescription>
-            This dialog does not have a close button in the top-right corner.
-          </DialogDescription>
+          <DialogDescription>This dialog does not have a close button in the top-right corner.</DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <p>You can close this dialog using:</p>
-          <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-muted-foreground">
+          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
             <li>The Cancel button below</li>
             <li>The Escape key</li>
             <li>Clicking outside the dialog</li>
@@ -179,12 +178,12 @@ export const WithoutCloseButton: Story = {
 
     await step("Verify X close button is NOT present", async () => {
       // Check that there is no button with sr-only text "Close"
-      const buttons = document.querySelectorAll('button');
+      const buttons = document.querySelectorAll("button");
       let xButton: HTMLElement | null = null;
 
-      buttons.forEach(button => {
-        const srOnly = button.querySelector('.sr-only');
-        if (srOnly?.textContent === 'Close') {
+      buttons.forEach((button) => {
+        const srOnly = button.querySelector(".sr-only");
+        if (srOnly?.textContent === "Close") {
           xButton = button;
         }
       });
@@ -221,7 +220,7 @@ export const WithCloseButton: Story = {
         </DialogHeader>
         <div className="py-4">
           <p>You can close this dialog using:</p>
-          <ul className="mt-2 list-disc list-inside space-y-1 text-sm text-muted-foreground">
+          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
             <li>The X button in the top-right corner</li>
             <li>The Cancel button below</li>
             <li>The Escape key</li>
@@ -251,18 +250,18 @@ export const WithCloseButton: Story = {
     await step("Verify close button is visible", async () => {
       // The close button contains an X icon and sr-only text
       const closeButtons = canvas.getAllByRole("button");
-      const closeButton = closeButtons.find(btn => btn.querySelector('[class*="sr-only"]')?.textContent === 'Close');
+      const closeButton = closeButtons.find((btn) => btn.querySelector('[class*="sr-only"]')?.textContent === "Close");
       await expect(closeButton).toBeVisible();
     });
 
     await step("Close with X button", async () => {
       // Find the X close button by looking for the button with sr-only text "Close"
-      const buttons = document.querySelectorAll('button');
+      const buttons = document.querySelectorAll("button");
       let xButton: HTMLElement | null = null;
 
-      buttons.forEach(button => {
-        const srOnly = button.querySelector('.sr-only');
-        if (srOnly?.textContent === 'Close') {
+      buttons.forEach((button) => {
+        const srOnly = button.querySelector(".sr-only");
+        if (srOnly?.textContent === "Close") {
           xButton = button;
         }
       });
