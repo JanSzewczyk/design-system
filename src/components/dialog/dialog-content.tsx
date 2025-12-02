@@ -1,37 +1,47 @@
 import * as React from "react";
 
-import { clsx } from "clsx";
-import { X } from "lucide-react";
-import { Dialog as ReactDialog } from "radix-ui";
+import { XIcon } from "lucide-react";
+import { Dialog as DialogPrimitive } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
 import { type DialogContentWidth } from "~/components";
 
-import { dialogContentStyles } from "./dialog-content.styles";
+import { dialogContentVariants } from "./dialog-content.styles";
 
-export type DialogContentProps = React.ComponentProps<typeof ReactDialog.Content> & {
+export type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
   width?: DialogContentWidth;
+  showCloseButton?: boolean;
 };
 
-export function DialogContent({ className, children, width = "md", ...props }: DialogContentProps) {
+export function DialogContent({
+  className,
+  children,
+  width = "md",
+  showCloseButton = false,
+  ...props
+}: DialogContentProps) {
   return (
-    <ReactDialog.Portal>
-      <ReactDialog.Overlay
-        className="bg-app-background/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 backdrop-blur-xs"
-        {...props}
+    <DialogPrimitive.Portal data-slot="dialog-portal">
+      <DialogPrimitive.Overlay
+        data-slot="dialog-overlay"
+        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 bg-background/80 fixed inset-0 z-50 backdrop-blur-xs"
       />
-      <ReactDialog.Content aria-modal="true" className={twMerge(dialogContentStyles({ width }), className)} {...props}>
+      <DialogPrimitive.Content
+        data-slot="dialog-content"
+        className={twMerge(dialogContentVariants({ width }), className)}
+        {...props}
+      >
         {children}
-        <ReactDialog.Close
-          className={clsx([
-            "data-[state=open]:bg-app-foreground absolute top-4 right-4 cursor-pointer rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none",
-            "focus-visible:ring-primary-500/40 ring-offset-app-foreground focus-visible:ring-2 focus-visible:ring-offset-2"
-          ])}
-        >
-          <X className="size-4" />
-          <span className="sr-only">Close dialog</span>
-        </ReactDialog.Close>
-      </ReactDialog.Content>
-    </ReactDialog.Portal>
+        {showCloseButton ? (
+          <DialogPrimitive.Close
+            data-slot="dialog-close"
+            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+          >
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        ) : null}
+      </DialogPrimitive.Content>
+    </DialogPrimitive.Portal>
   );
 }

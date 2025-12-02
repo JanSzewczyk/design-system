@@ -1,7 +1,7 @@
 import { type VariantProps } from "class-variance-authority";
 
-import { type dialogContentStyles } from "./dialog-content.styles";
+import { type dialogContentVariants } from "./dialog-content.styles";
 
-type DialogContentCvaProps = VariantProps<typeof dialogContentStyles>;
+type DialogContentCvaProps = VariantProps<typeof dialogContentVariants>;
 
 export type DialogContentWidth = NonNullable<DialogContentCvaProps["width"]>;
