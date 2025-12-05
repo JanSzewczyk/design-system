@@ -5,6 +5,8 @@ import { BadgeCheckIcon, ShieldCheckIcon, StarIcon, XIcon } from "lucide-react";
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { Badge } from "~/components";
+import { BadgeDot } from "~/components/badge/badge-dot";
+import { BadgeButton } from "~/components/badge/badge-button";
 
 const meta = {
   title: "Components/Badge",
@@ -19,10 +21,12 @@ export const Example: Story = {
   render: () => (
     <div className="flex flex-col items-center gap-2">
       <div className="flex w-full flex-wrap gap-2">
-        <Badge>Badge</Badge>
+        <Badge>Primary</Badge>
         <Badge variant="secondary">Secondary</Badge>
-        <Badge variant="error">Destructive</Badge>
         <Badge variant="outline">Outline</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Destructive</Badge>
       </div>
       <div className="flex w-full flex-wrap gap-2">
         <Badge variant="secondary" className="bg-success text-success-foreground">
@@ -43,11 +47,13 @@ export const Example: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div className="flex flex-col items-start gap-8 sm:flex-row">
-      <Badge variant="default">Default</Badge>
+    <div className="flex flex-col items-start gap-2 sm:flex-row">
+      <Badge>Primary</Badge>
       <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="error">Error</Badge>
       <Badge variant="outline">Outline</Badge>
+      <Badge variant="success">Success</Badge>
+      <Badge variant="warning">Warning</Badge>
+      <Badge variant="error">Destructive</Badge>
     </div>
   )
 };
@@ -55,7 +61,7 @@ export const Variants: Story = {
 export const WithIcons: Story = {
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Badge variant="default">
+      <Badge>
         <BadgeCheckIcon />
         Verified
       </Badge>
@@ -70,6 +76,79 @@ export const WithIcons: Story = {
       <Badge variant="outline">
         <ShieldCheckIcon />
         Protected
+      </Badge>
+    </div>
+  )
+};
+
+export const WithDot: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge>
+        <BadgeDot />
+        Primary
+      </Badge>
+      <Badge variant="secondary">
+        <BadgeDot />
+        Secondary
+      </Badge>
+      <Badge variant="outline">
+        <BadgeDot />
+        Outline
+      </Badge>
+      <Badge variant="success">
+        <BadgeDot />
+        Success
+      </Badge>
+      <Badge variant="warning">
+        <BadgeDot />
+        Warning
+      </Badge>
+      <Badge variant="error">
+        <BadgeDot /> Destructive
+      </Badge>
+    </div>
+  )
+};
+
+export const RemoveButton: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge>
+        Primary
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
+      </Badge>
+      <Badge variant="secondary">
+        Secondary
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
+      </Badge>
+      <Badge variant="outline">
+        Outline
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
+      </Badge>
+      <Badge variant="success">
+        Success
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
+      </Badge>
+      <Badge variant="warning">
+        Warning
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
+      </Badge>
+      <Badge variant="error">
+        Error
+        <BadgeButton>
+          <XIcon />
+        </BadgeButton>
       </Badge>
     </div>
   )
@@ -177,7 +256,7 @@ export const InteractionTest: Story = {
   tags: ["test-only"],
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Badge variant="default">Default Badge</Badge>
+      <Badge>Primary Badge</Badge>
       <Badge variant="secondary">Secondary Badge</Badge>
       <Badge variant="error">Error Badge</Badge>
       <Badge variant="outline">Outline Badge</Badge>
@@ -188,17 +267,17 @@ export const InteractionTest: Story = {
   ),
   play: async ({ canvas, step }) => {
     await step("All badge variants are rendered", async () => {
-      const defaultBadge = canvas.getByText("Default Badge");
+      const primarytBadge = canvas.getByText("Primary Badge");
       const secondaryBadge = canvas.getByText("Secondary Badge");
       const errorBadge = canvas.getByText("Error Badge");
       const outlineBadge = canvas.getByText("Outline Badge");
 
-      await expect(defaultBadge).toBeVisible();
+      await expect(primarytBadge).toBeVisible();
       await expect(secondaryBadge).toBeVisible();
       await expect(errorBadge).toBeVisible();
       await expect(outlineBadge).toBeVisible();
 
-      await expect(defaultBadge).toHaveAttribute("data-slot", "badge");
+      await expect(primarytBadge).toHaveAttribute("data-slot", "badge");
       await expect(secondaryBadge).toHaveAttribute("data-slot", "badge");
       await expect(errorBadge).toHaveAttribute("data-slot", "badge");
       await expect(outlineBadge).toHaveAttribute("data-slot", "badge");
