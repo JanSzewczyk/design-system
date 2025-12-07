@@ -21,7 +21,7 @@ export function ScrollBar({ className, orientation = "vertical", ...props }: Scr
     >
       <ScrollAreaPrimitive.ScrollAreaThumb
         data-slot="scroll-area-thumb"
-        className="bg-border relative flex-1 rounded-full"
+        className="bg-border relative flex-1 rounded"
       />
     </ScrollAreaPrimitive.ScrollAreaScrollbar>
   );
