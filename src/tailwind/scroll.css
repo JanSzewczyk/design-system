@@ -2,24 +2,23 @@
 
 @layer base {
   * {
-    /* width */
     ::-webkit-scrollbar {
-      width: 8px;
+      @apply h-2 w-2;
     }
-
-    /* Track */
     ::-webkit-scrollbar-track {
-      background: var(--color-app-background);
+      @apply bg-background;
     }
-
-    /* Handle */
     ::-webkit-scrollbar-thumb {
-      background: var(--color-gray-400);
+      @apply bg-border rounded;
     }
-
-    /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background: var(--color-gray-300);
+      @apply bg-border/80;
+    }
+    ::-webkit-scrollbar-button {
+      @apply hidden;
+    }
+    ::-webkit-scrollbar-corner {
+      @apply bg-background;
     }
   }
 }
