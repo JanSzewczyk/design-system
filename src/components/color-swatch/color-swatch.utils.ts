@@ -15,9 +15,5 @@ export function getHasAlpha(v: string): boolean {
 
   if (/\b(?:rgba|hsla)\s*\(/i.test(s)) return true;
 
-  if (/\b(?:rgb|hsl|lab|lch|oklab|oklch|color)\s*\([^)]*\/\s*[\d.]+%?\s*\)/i.test(s)) {
-    return true;
-  }
-
-  return false;
+  return /\b(?:rgb|hsl|lab|lch|oklab|oklch|color)\s*\([^)]*\/\s*[\d.]+%?\s*\)/i.test(s);
 }
