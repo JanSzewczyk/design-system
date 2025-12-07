@@ -20,3 +20,4 @@ export * from "./textarea";
 export * from "./toaster";
 export * from "./tooltip";
 export * from "./radio-group";
+export * from "./color-swatch";
