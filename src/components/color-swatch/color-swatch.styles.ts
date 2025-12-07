@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const colorSwatchVariants = cva(
-  "box-border rounded border border-border shadow-sm [background-clip:padding-box] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+  "border-border box-border rounded border shadow-sm [background-clip:padding-box] data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
   {
     variants: {
       size: {

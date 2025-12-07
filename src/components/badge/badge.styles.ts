@@ -9,9 +9,9 @@ export const badgeVariants = cva(
         secondary: "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90 border-transparent",
         outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         success:
-          "bg-success text-success-foreground [a&]:hover:bg-success/90 border-transparent focus-visible:ring-success/20",
+          "bg-success text-success-foreground [a&]:hover:bg-success/90 focus-visible:ring-success/20 border-transparent",
         warning:
-          "bg-warning text-warning-foreground [a&]:hover:bg-warning/90 border-transparent focus-visible:ring-warning/20",
+          "bg-warning text-warning-foreground [a&]:hover:bg-warning/90 focus-visible:ring-warning/20 border-transparent",
         error:
           "bg-error [a&]:hover:bg-error/90 focus-visible:ring-error/20 dark:focus-visible:ring-error/40 dark:bg-error/60 text-error-foreground border-transparent"
       }
