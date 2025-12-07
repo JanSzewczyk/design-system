@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const dialogContentVariants = cva(
   [
-    "bg-background fixed top-[50%] left-[50%] z-50 grid w-full gap-4 rounded border border-border p-6 shadow-lg duration-200 translate-x-[-50%] translate-y-[-50%] max-w-[calc(100%-1rem)]",
+    "bg-background border-border fixed left-[50%] top-[50%] z-50 grid w-full max-w-[calc(100%-1rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded border p-6 shadow-lg duration-200",
     "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 "
   ],
   {
