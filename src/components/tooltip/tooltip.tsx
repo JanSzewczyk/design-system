@@ -29,7 +29,7 @@ export function Tooltip({
       {content ? (
         <ReactTooltip.Portal>
           <ReactTooltip.Content
-            className="text-body-1 data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade select-none rounded bg-white p-2 text-gray-100 will-change-[transform,opacity]"
+            className="text-body-1 data-[state=delayed-open]:data-[side=bottom]:animate-slideUpAndFade data-[state=delayed-open]:data-[side=left]:animate-slideRightAndFade data-[state=delayed-open]:data-[side=right]:animate-slideLeftAndFade data-[state=delayed-open]:data-[side=top]:animate-slideDownAndFade rounded bg-white p-2 text-gray-100 will-change-[transform,opacity] select-none"
             sideOffset={sideOffset}
             side={side}
             align={align}
