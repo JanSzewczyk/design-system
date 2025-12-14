@@ -10,7 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from "./index";
 const meta = {
   title: "Components/Alert",
   component: Alert,
-  tags: ["autodocs"],
+  tags: ["autodocs", "new"],
   argTypes: {
     variant: {
       control: "select",
