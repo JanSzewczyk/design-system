@@ -25,7 +25,10 @@ export const Default: Story = {
           </div>
 
           <Avatar>
-            <AvatarImage src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg" />
+            <AvatarImage
+              alt="ML-image"
+              src="https://bi.im-g.pl/im/d9/00/13/z19924697AMP,-Mona-Lisa---Leonardo-da-Vinci.jpg"
+            />
             <AvatarFallback>ML</AvatarFallback>
           </Avatar>
         </div>
