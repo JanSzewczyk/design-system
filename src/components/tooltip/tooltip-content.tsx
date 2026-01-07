@@ -6,6 +6,15 @@ import { cn } from "~/utils";
 
 export type TooltipContentProps = React.ComponentProps<typeof TooltipPrimitive.Content>;
 
+/**
+ * Render tooltip content inside a portal with built-in styling, animations, and an arrow.
+ *
+ * @param className - Additional CSS classes to merge with the component's default styles
+ * @param sideOffset - Distance in pixels between the tooltip content and its trigger
+ * @param children - Elements to display inside the tooltip content
+ * @param props - Additional props forwarded to the underlying TooltipPrimitive.Content
+ * @returns A React element containing the styled tooltip content and arrow
+ */
 export function TooltipContent({ className, sideOffset = 0, children, ...props }: TooltipContentProps) {
   return (
     <TooltipPrimitive.Portal>
