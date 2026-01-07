@@ -135,7 +135,7 @@
     "@storybook/addon-vitest": "^10.1.4",
     "@storybook/builder-vite": "^10.1.4",
     "@storybook/react-vite": "^10.1.4",
-    "@szum-tech/eslint-config": "^2.1.7",
+    "@szum-tech/eslint-config": "^2.1.14",
     "@szum-tech/prettier-config": "^1.6.2",
     "@szum-tech/semantic-release-config": "^2.3.1",
     "@tailwindcss/vite": "^4.1.11",
