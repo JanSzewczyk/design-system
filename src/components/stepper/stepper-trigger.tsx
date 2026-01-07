@@ -208,6 +208,7 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
         queueMicrotask(() => focusFirst(candidateRefs));
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       focusContext,
       context.nonInteractive,

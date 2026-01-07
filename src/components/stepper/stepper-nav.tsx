@@ -79,6 +79,7 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
 
       setIsTabbingBackOut(false);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listProps.onBlur]
   );
 
