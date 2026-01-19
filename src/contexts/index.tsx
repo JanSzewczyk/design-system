@@ -1,1 +1,1 @@
-export * from "./directon";
+export {};

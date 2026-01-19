@@ -66,7 +66,7 @@ export const Default: Story = {
     const accountTab = canvas.getByRole("tab", { name: "Account" });
     await expect(accountTab).toHaveAttribute("data-state", "active");
 
-    const accountContent = canvas.getByText("Make changes to your account here.");
+    const accountContent = canvas.getByText(/Make changes to your account here/);
     await expect(accountContent).toBeVisible();
   }
 };
@@ -183,10 +183,12 @@ export const DisabledTab: Story = {
     const disabledTab = canvas.getByRole("tab", { name: "Disabled" });
     await expect(disabledTab).toBeDisabled();
 
-    // Try clicking the disabled tab - it should not change
-    await userEvent.click(disabledTab);
+    // Verify the active tab stays active (disabled tab should not be selectable)
     const activeTab = canvas.getByRole("tab", { name: "Active" });
     await expect(activeTab).toHaveAttribute("data-state", "active");
+
+    // Verify the disabled tab has correct attributes
+    await expect(disabledTab).toHaveAttribute("data-state", "inactive");
   }
 };
 

@@ -365,7 +365,7 @@ export const PauseOnHover: Story = {
     await expect(animatedDivs.length).toBeGreaterThan(0);
 
     for (const div of animatedDivs) {
-      await expect(div).toHaveClass("group-hover:[animation-play-state:paused]");
+      await expect(div).toHaveClass("group-hover:paused");
     }
   }
 };
