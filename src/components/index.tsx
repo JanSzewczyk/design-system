@@ -24,3 +24,4 @@ export * from "./color-swatch";
 export * from "./scroll-area";
 export * from "./alert";
 export * from "./empty";
+export * from "./accordion";
