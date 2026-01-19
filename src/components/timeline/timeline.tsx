@@ -2,13 +2,6 @@ import * as React from "react";
 
 import { useDirection } from "@radix-ui/react-direction";
 import { Slot } from "@radix-ui/react-slot";
-import { type TimelineStore, TimelineStoreContext } from "~/components/timeline/timeline.store";
-import { getItemStatus, getSortedEntries } from "~/components/timeline/timeline.utils";
-import { useLazyRef } from "~/hooks";
-import { cn } from "~/utils";
-
-import { TimelineContext, type TimelineContextValue } from "./timeline.context";
-import { timelineVariants } from "./timeline.styles";
 import {
   type TimelineDirection,
   type TimelineOrientation,
@@ -16,6 +9,13 @@ import {
   type TimelineStatus,
   type TimelineItemElement
 } from "~/components";
+import { type TimelineStore, TimelineStoreContext } from "~/components/timeline/timeline.store";
+import { getItemStatus, getSortedEntries } from "~/components/timeline/timeline.utils";
+import { useLazyRef } from "~/hooks";
+import { cn } from "~/utils";
+
+import { TimelineContext, type TimelineContextValue } from "./timeline.context";
+import { timelineVariants } from "./timeline.styles";
 
 export type TimelineProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
