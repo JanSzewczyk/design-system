@@ -31,3 +31,4 @@ export * from "./empty";
 export * from "./accordion";
 export * from "./counting-number";
 export * from "./typing-text";
+export * from "./word-rotate";
