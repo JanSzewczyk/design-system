@@ -25,3 +25,4 @@ export * from "./scroll-area";
 export * from "./alert";
 export * from "./empty";
 export * from "./accordion";
+export * from "./counting-number";
