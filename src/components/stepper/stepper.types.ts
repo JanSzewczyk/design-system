@@ -1,5 +1,7 @@
 import type * as React from "react";
 
+export type StepperDirection = "ltr" | "rtl";
+
 export const StepperFocusIntent = {
   FIRST: "first",
   LAST: "last",

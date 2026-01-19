@@ -20,6 +20,7 @@ export * from "./status";
 export * from "./stepper";
 export * from "./tabs";
 export * from "./textarea";
+export * from "./timeline";
 export * from "./toaster";
 export * from "./tooltip";
 export * from "./radio-group";

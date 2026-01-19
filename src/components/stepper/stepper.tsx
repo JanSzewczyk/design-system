@@ -1,13 +1,14 @@
 import * as React from "react";
 
+import { useDirection } from "@radix-ui/react-direction";
 import { Slot } from "@radix-ui/react-slot";
 import {
   type StepIndicators,
   type StepperActivationMode,
+  type StepperDirection,
   type StepperNavigationDirection,
   type StepperOrientation
 } from "~/components";
-import { type Direction, useDirection } from "~/contexts";
 import { useIsomorphicLayoutEffect, useLazyRef } from "~/hooks";
 import { cn } from "~/utils";
 
@@ -24,7 +25,7 @@ export type StepperProps = React.ComponentProps<"div"> & {
   onValueRemove?: (value: string) => void;
   onValidate?: (value: string, direction: StepperNavigationDirection) => boolean | Promise<boolean>;
   activationMode?: StepperActivationMode;
-  dir?: Direction;
+  dir?: StepperDirection;
   orientation?: StepperOrientation;
   disabled?: boolean;
   loop?: boolean;
