@@ -10,6 +10,7 @@ export * from "./header";
 export * from "./input";
 export * from "./item";
 export * from "./label";
+export * from "./marquee";
 export * from "./progress";
 export * from "./select";
 export * from "./separator";
