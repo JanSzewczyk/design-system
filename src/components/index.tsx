@@ -18,6 +18,7 @@ export * from "./sheet";
 export * from "./spinner";
 export * from "./status";
 export * from "./stepper";
+export * from "./tabs";
 export * from "./textarea";
 export * from "./toaster";
 export * from "./tooltip";
