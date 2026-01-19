@@ -1,13 +1,16 @@
 import * as React from "react";
 
-import { type Direction } from "~/contexts";
-
 import { STEPPER_ROOT_NAME } from "./stepper.constants";
-import { type StepIndicators, type StepperActivationMode, type StepperOrientation } from "./stepper.types";
+import {
+  type StepIndicators,
+  type StepperActivationMode,
+  type StepperDirection,
+  type StepperOrientation
+} from "./stepper.types";
 
 export interface StepperContextValue {
   id: string;
-  dir: Direction;
+  dir: StepperDirection;
   orientation: StepperOrientation;
   activationMode: StepperActivationMode;
   disabled: boolean;

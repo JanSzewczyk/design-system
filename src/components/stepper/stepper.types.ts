@@ -1,6 +1,8 @@
 import type * as React from "react";
 
-export type StepperDirection = "ltr" | "rtl";
+import { type Direction } from "~/types/direction";
+
+export type StepperDirection = Direction;
 
 export const StepperFocusIntent = {
   FIRST: "first",
