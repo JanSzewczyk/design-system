@@ -1,9 +1,8 @@
 import * as React from "react";
 
 import { motion, type MotionProps, useInView, type UseInViewOptions, type Variants } from "motion/react";
+import { type WordRotateAnimationStyle } from "~/components";
 import { cn } from "~/utils";
-
-import { type WordRotateAnimationStyle } from "./word-rotate.types";
 
 export type WordRotateProps = Omit<MotionProps, "children"> & {
   words: string[];
@@ -42,9 +41,9 @@ export function WordRotate({
 }: WordRotateProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once, margin: inViewMargin as UseInViewOptions["margin"] });
-  const [hasAnimated, setHasAnimated] = React.useState(false);
-  const [currentWord, setCurrentWord] = React.useState(0);
-  const [show, setShow] = React.useState(true);
+  const [hasAnimated, setHasAnimated] = React.useState<boolean>(false);
+  const [currentWord, setCurrentWord] = React.useState<number>(0);
+  const [show, setShow] = React.useState<boolean>(true);
 
   // Animation variants
   const variants: Record<string, Variants> = {
@@ -177,7 +176,7 @@ export function WordRotate({
     <motion.span
       ref={ref}
       data-slot="word-rotate"
-      className={cn("inline-block overflow-hidden", containerClassName)}
+      className={cn("inline-block overflow-hidden align-bottom leading-none", containerClassName)}
       {...props}
     >
       <motion.span
@@ -190,7 +189,7 @@ export function WordRotate({
         style={{
           perspective: animationStyle === "flip" ? 1000 : undefined
         }}
-        className={cn("inline-block overflow-hidden", className)}
+        className={cn("inline-block", className)}
       >
         {words[currentWord]}
       </motion.span>
