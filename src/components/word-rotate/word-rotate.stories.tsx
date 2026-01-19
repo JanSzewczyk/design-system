@@ -2,8 +2,7 @@ import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, waitFor } from "storybook/test";
-
-import { WordRotate } from "./word-rotate";
+import { WordRotate } from "~/components";
 
 const meta = {
   title: "Components/WordRotate",
@@ -199,7 +198,7 @@ export const GradientText: Story = {
       <WordRotate
         words={["Innovative", "Creative", "Dynamic", "Inspiring"]}
         animationStyle="fade"
-        className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent"
+        className="bg-linear-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent"
         startOnView={false}
       />
     </div>
@@ -210,16 +209,10 @@ export const CallToAction: Story = {
   render: () => (
     <div className="bg-app-background rounded-lg p-8 text-center">
       <h2 className="mb-4 text-3xl font-bold">
-        <WordRotate
-          words={["Start", "Create", "Build", "Launch"]}
-          animationStyle="slide-up"
-          startOnView={false}
-        />
+        <WordRotate words={["Start", "Create", "Build", "Launch"]} animationStyle="slide-up" startOnView={false} />
         <span> your project today</span>
       </h2>
-      <p className="text-muted-foreground">
-        Join thousands of developers building with our design system
-      </p>
+      <p className="text-muted-foreground">Join thousands of developers building with our design system</p>
     </div>
   )
 };
