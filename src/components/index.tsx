@@ -16,6 +16,7 @@ export * from "./select";
 export * from "./separator";
 export * from "./sheet";
 export * from "./spinner";
+export * from "./status";
 export * from "./stepper";
 export * from "./textarea";
 export * from "./toaster";
