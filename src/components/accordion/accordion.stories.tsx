@@ -25,7 +25,9 @@ export const Single: Story = {
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>Yes. It comes with default styles that matches the other components aesthetic.</AccordionContent>
+        <AccordionContent>
+          Yes. It comes with default styles that matches the other components aesthetic.
+        </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
         <AccordionTrigger>Is it animated?</AccordionTrigger>
@@ -44,7 +46,9 @@ export const Multiple: Story = {
     <Accordion {...args} className="w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger>Can I open multiple items?</AccordionTrigger>
-        <AccordionContent>Yes. Use type=&quot;multiple&quot; to allow multiple items to be open at the same time.</AccordionContent>
+        <AccordionContent>
+          Yes. Use type=&quot;multiple&quot; to allow multiple items to be open at the same time.
+        </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
         <AccordionTrigger>Can I set default open items?</AccordionTrigger>
