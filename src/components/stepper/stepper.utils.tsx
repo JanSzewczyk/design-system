@@ -1,7 +1,6 @@
 import type * as React from "react";
 
-import { type StepperTriggerElement, StepperDataState, type StepperOrientation } from "~/components";
-import { Direction } from "~/contexts";
+import { type StepperTriggerElement, StepperDataState, type StepperDirection, type StepperOrientation } from "~/components";
 
 import { STEPPER_MAP_KEY_TO_FOCUS_INTENT } from "./stepper.constants";
 import { type StepperStepState } from "./stepper.store";
@@ -54,14 +53,14 @@ export function wrapArray<T>(array: T[], startIndex: number) {
   return array.map<T>((_, index) => array[(startIndex + index) % array.length] as T);
 }
 
-export function getDirectionAwareKey(key: string, dir?: Direction) {
-  if (dir !== Direction.RTL) return key;
+export function getDirectionAwareKey(key: string, dir?: StepperDirection) {
+  if (dir !== "rtl") return key;
   return key === "ArrowLeft" ? "ArrowRight" : key === "ArrowRight" ? "ArrowLeft" : key;
 }
 
 export function getFocusIntent(
   event: React.KeyboardEvent<StepperTriggerElement>,
-  dir?: Direction,
+  dir?: StepperDirection,
   orientation?: StepperOrientation
 ) {
   const key = getDirectionAwareKey(event.key, dir);
