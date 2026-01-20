@@ -32,10 +32,6 @@ export type MarqueeProps = React.ComponentPropsWithoutRef<"div"> & {
    */
   repeat?: number;
   /**
-   * If true, automatically repeats children enough to fill the visible area
-   */
-  autoFill?: boolean;
-  /**
    * ARIA label for accessibility
    */
   ariaLabel?: string;
@@ -89,9 +85,7 @@ export function Marquee({
                 key={i}
                 className={cn(
                   "flex shrink-0 justify-around gap-(--gap)",
-                  !vertical ? "flex-row" : "flex-col",
-                  !vertical && "animate-marquee flex-row",
-                  vertical && "animate-marquee-vertical flex-col",
+                  !vertical ? "animate-marquee flex-row" : "animate-marquee-vertical flex-col",
                   pauseOnHover && "group-hover:paused",
                   reverse && "direction-reverse"
                 )}

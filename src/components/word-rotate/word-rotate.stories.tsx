@@ -71,6 +71,7 @@ export default meta;
 type Story = StoryObj<typeof WordRotate>;
 
 export const Default: Story = {
+  tags: ["test"],
   args: {
     words: ["Hello", "World", "React", "TypeScript"],
     startOnView: false
@@ -154,6 +155,7 @@ export const HeroSection: Story = {
 };
 
 export const RoleRotator: Story = {
+  tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
       <span>I am a </span>

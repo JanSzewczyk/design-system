@@ -43,15 +43,27 @@ export function CountingNumber({
   React.useEffect(() => {
     if (!shouldStart) return;
     setHasAnimated(true);
+
+    // Reset to the starting value to ensure animation starts from the correct position
+    motionValue.set(from);
+    setDisplay(from);
+
+    let controls: ReturnType<typeof animate> | undefined;
+
     const timeout = setTimeout(() => {
-      const controls = animate(motionValue, to, {
+      controls = animate(motionValue, to, {
         duration,
         onUpdate: (v) => setDisplay(v),
         onComplete
       });
-      return () => controls.stop();
     }, delay);
-    return () => clearTimeout(timeout);
+
+    return () => {
+      clearTimeout(timeout);
+      if (controls) {
+        controls.stop();
+      }
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldStart, from, to, duration, delay]);
 

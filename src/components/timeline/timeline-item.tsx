@@ -28,9 +28,12 @@ export function TimelineItem({ asChild = false, className, id, ref, ...props }: 
 
   const itemIndex = useTimelineStore((state) => state.getItemIndex(itemId));
 
-  const status = React.useMemo<TimelineStatus>(() => {
-    return getItemStatus(itemIndex, activeIndex);
-  }, [activeIndex, itemIndex]);
+  const status = React.useMemo<TimelineStatus>(
+    function () {
+      return itemIndex < 0 ? "pending" : getItemStatus(itemIndex, activeIndex);
+    },
+    [activeIndex, itemIndex]
+  );
 
   useIsomorphicLayoutEffect(() => {
     store.onItemRegister(itemId, itemRef);

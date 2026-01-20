@@ -23,7 +23,7 @@ export const TimelineStoreContext = React.createContext<TimelineStore | null>(nu
 export function useTimelineStore<T>(selector: (store: TimelineStore) => T): T {
   const store = React.useContext(TimelineStoreContext);
   if (!store) {
-    throw new Error(`\`useStore\` must be used within \`${TIMELINE_ROOT_NAME}\``);
+    throw new Error(`\`useTimelineStore\` must be used within \`${TIMELINE_ROOT_NAME}\``);
   }
 
   const getSnapshot = React.useCallback(() => selector(store), [store, selector]);
