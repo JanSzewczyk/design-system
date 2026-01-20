@@ -78,16 +78,6 @@
         "require": "./dist/hooks/index.cjs"
       }
     },
-    "./contexts": {
-      "import": {
-        "types": "./dist/contexts/index.d.ts",
-        "import": "./dist/contexts/index.js"
-      },
-      "require": {
-        "types": "./dist/contexts/index.d.cts",
-        "require": "./dist/contexts/index.cjs"
-      }
-    },
     "./tailwind/*.css": "./tailwind/*.css",
     "./package.json": "./package.json"
   },

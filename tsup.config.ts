@@ -13,7 +13,6 @@ export default defineConfig({
     "src/components/index.tsx",
     "src/utils/index.ts",
     "src/hooks/index.tsx",
-    "src/contexts/index.tsx",
     "src/icons/index.tsx"
   ],
   esbuildOptions(options) {
@@ -27,6 +26,8 @@ export default defineConfig({
     "radix-ui",
     "@radix-ui/react-slot",
     "tailwind-merge",
-    "clx"
+    "clx",
+    "motion",
+    "sonner"
   ]
 });
