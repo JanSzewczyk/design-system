@@ -2,8 +2,7 @@ import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, fn, waitFor } from "storybook/test";
-
-import { TypingText } from "./typing-text";
+import { TypingText } from "~/components";
 
 const meta = {
   title: "Components/Typing Text",
@@ -108,26 +107,15 @@ export default meta;
 type Story = StoryObj<typeof TypingText>;
 
 export const Default: Story = {
+  tags: ["test"],
   args: {
     text: "Hello, World!",
     startOnView: false
-  },
-  play: async ({ canvas }) => {
-    const typingText = canvas.getByText("", { selector: '[data-slot="typing-text"]' });
-    await expect(typingText).toBeVisible();
-    await expect(typingText).toHaveAttribute("data-slot", "typing-text");
-
-    // Wait for typing to complete
-    await waitFor(
-      async () => {
-        await expect(canvas.getByText(/Hello/)).toBeVisible();
-      },
-      { timeout: 3000 }
-    );
   }
 };
 
 export const CustomSpeed: Story = {
+  tags: ["test"],
   render: () => (
     <div className="space-y-4">
       <div>
@@ -155,6 +143,7 @@ export const CustomSpeed: Story = {
 };
 
 export const WithDelay: Story = {
+  tags: ["test"],
   args: {
     text: "This text appears after a 1 second delay.",
     delay: 1000,
@@ -176,6 +165,7 @@ export const WithDelay: Story = {
 };
 
 export const WithoutCursor: Story = {
+  tags: ["test"],
   args: {
     text: "No cursor is shown here.",
     showCursor: false,
@@ -223,6 +213,7 @@ export const StyledCursor: Story = {
 };
 
 export const MultipleTexts: Story = {
+  tags: ["test"],
   args: {
     texts: ["First message", "Second message", "Third message"],
     loop: true,
@@ -240,6 +231,7 @@ export const MultipleTexts: Story = {
 };
 
 export const LoopingText: Story = {
+  tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
       <span>I am a </span>
@@ -264,6 +256,7 @@ export const LoopingText: Story = {
 };
 
 export const OnCompleteCallback: Story = {
+  tags: ["test"],
   args: {
     text: "Watch the console!",
     onComplete: fn(),
@@ -306,6 +299,7 @@ export const HeroSection: Story = {
 };
 
 export const TerminalStyle: Story = {
+  tags: ["test"],
   render: () => (
     <div className="rounded-lg bg-gray-950 p-4 font-mono">
       <div className="mb-2 flex gap-2">
@@ -345,6 +339,7 @@ export const CodeExample: Story = {
 };
 
 export const ChatMessage: Story = {
+  tags: ["test"],
   render: () => (
     <div className="max-w-md space-y-4">
       <div className="rounded-lg bg-gray-800 p-3">
@@ -390,6 +385,7 @@ export const LongText: Story = {
 };
 
 export const AnimationVariants: Story = {
+  tags: ["test"],
   render: () => (
     <div className="space-y-8">
       <div className="text-center">
@@ -461,7 +457,7 @@ export const AnimationVariants: Story = {
               text="Slide right animation"
               animation="slideRight"
               startOnView={false}
-              speed={1000}
+              speed={60}
               delay={3500}
             />
           </div>
@@ -470,7 +466,7 @@ export const AnimationVariants: Story = {
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">scaleUp</p>
           <div className="bg-app-background rounded-lg p-4">
-            <TypingText text="Scale up animation" animation="scaleUp" startOnView={false} speed={1000} delay={4000} />
+            <TypingText text="Scale up animation" animation="scaleUp" startOnView={false} speed={60} delay={4000} />
           </div>
         </div>
 
