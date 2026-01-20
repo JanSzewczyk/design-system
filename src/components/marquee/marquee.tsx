@@ -54,7 +54,7 @@ export function Marquee({
   repeat = 4,
   ariaLabel,
   ariaLive = "off",
-  ariaRole = "marquee",
+  ariaRole = "region",
   ...props
 }: MarqueeProps) {
   const marqueeRef = React.useRef<HTMLDivElement>(null);

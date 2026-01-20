@@ -57,7 +57,7 @@ const meta = {
       control: "text",
       description: "ARIA role",
       table: {
-        defaultValue: { summary: "marquee" }
+        defaultValue: { summary: "region" }
       }
     }
   },
@@ -138,7 +138,7 @@ export const Default: Story = {
     </div>
   ),
   play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("marquee");
+    const marquee = canvas.getByRole("region");
     await expect(marquee).toBeVisible();
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
@@ -160,7 +160,7 @@ export const WithTwoRows: Story = {
     </div>
   ),
   play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("marquee");
+    const marquees = canvas.getAllByRole("region");
     await expect(marquees).toHaveLength(2);
 
     for (const marquee of marquees) {
@@ -185,7 +185,7 @@ export const Vertical: Story = {
     </div>
   ),
   play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("marquee");
+    const marquees = canvas.getAllByRole("region");
     await expect(marquees).toHaveLength(2);
 
     for (const marquee of marquees) {
@@ -206,7 +206,7 @@ export const Reversed: Story = {
     </div>
   ),
   play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("marquee");
+    const marquee = canvas.getByRole("region");
     await expect(marquee).toBeVisible();
   }
 };
@@ -353,7 +353,7 @@ export const PauseOnHover: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const marquee = canvas.getByRole("marquee");
+    const marquee = canvas.getByRole("region");
 
     await expect(marquee).toBeVisible();
 
@@ -374,7 +374,7 @@ export const Accessibility: Story = {
   args: {
     ariaLabel: "Customer testimonials carousel",
     ariaLive: "polite",
-    ariaRole: "marquee",
+    ariaRole: "region",
     className: "[--duration:20s]",
     children: (
       <>
@@ -385,7 +385,7 @@ export const Accessibility: Story = {
     )
   },
   play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("marquee");
+    const marquee = canvas.getByRole("region");
 
     await expect(marquee).toHaveAttribute("aria-label", "Customer testimonials carousel");
     await expect(marquee).toHaveAttribute("aria-live", "polite");
@@ -400,7 +400,7 @@ export const DataSlotAttribute: Story = {
     children: <span>Test content</span>
   },
   play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("marquee");
+    const marquee = canvas.getByRole("region");
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
 };
@@ -430,7 +430,7 @@ export const ThreeDEffect: Story = {
     </div>
   ),
   play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("marquee");
+    const marquees = canvas.getAllByRole("region");
     await expect(marquees).toHaveLength(3);
   }
 };
