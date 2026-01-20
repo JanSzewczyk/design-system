@@ -6,10 +6,29 @@ import { expect, fn, waitFor } from "storybook/test";
 import { TypingText } from "./typing-text";
 
 const meta = {
-  title: "Components/TypingText",
+  title: "Components/Typing Text",
   component: TypingText,
-  tags: ["autodocs", "new"],
+  tags: ["autodocs"],
   argTypes: {
+    animation: {
+      control: "select",
+      options: [
+        "fadeIn",
+        "blurIn",
+        "blurInUp",
+        "blurInDown",
+        "slideUp",
+        "slideDown",
+        "slideLeft",
+        "slideRight",
+        "scaleUp",
+        "scaleDown"
+      ],
+      description: "The animation preset to use",
+      table: {
+        defaultValue: { summary: "fadeIn" }
+      }
+    },
     text: {
       control: "text",
       description: "Text to animate"
@@ -367,5 +386,110 @@ export const LongText: Story = {
     speed: 20,
     startOnView: false,
     className: "max-w-lg"
+  }
+};
+
+export const AnimationVariants: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div className="text-center">
+        <h2 className="text-muted-foreground mb-6 text-sm font-medium tracking-wider uppercase">
+          Available Animation Variants
+        </h2>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">fadeIn (default)</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Fade in animation" animation="fadeIn" startOnView={false} speed={60} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">blurIn</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Blur in animation" animation="blurIn" startOnView={false} speed={60} delay={500} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">blurInUp</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Blur in up animation" animation="blurInUp" startOnView={false} speed={60} delay={1000} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">blurInDown</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText
+              text="Blur in down animation"
+              animation="blurInDown"
+              startOnView={false}
+              speed={60}
+              delay={1500}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">slideUp</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Slide up animation" animation="slideUp" startOnView={false} speed={60} delay={2000} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">slideDown</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Slide down animation" animation="slideDown" startOnView={false} speed={60} delay={2500} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">slideLeft</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Slide left animation" animation="slideLeft" startOnView={false} speed={60} delay={3000} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">slideRight</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText
+              text="Slide right animation"
+              animation="slideRight"
+              startOnView={false}
+              speed={1000}
+              delay={3500}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">scaleUp</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Scale up animation" animation="scaleUp" startOnView={false} speed={1000} delay={4000} />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <p className="text-muted-foreground text-sm font-medium">scaleDown</p>
+          <div className="bg-app-background rounded-lg p-4">
+            <TypingText text="Scale down animation" animation="scaleDown" startOnView={false} speed={60} delay={4500} />
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    // Wait for first animation to start
+    await waitFor(
+      async () => {
+        await expect(canvas.getByText(/Fade in/)).toBeVisible();
+      },
+      { timeout: 3000 }
+    );
   }
 };

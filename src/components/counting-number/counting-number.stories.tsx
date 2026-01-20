@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, fn, waitFor, within } from "storybook/test";
+import { expect, waitFor, within } from "storybook/test";
 import { CountingNumber } from "~/components";
 
 const meta = {
@@ -236,7 +236,7 @@ export const Styling: Story = {
         to={100}
         duration={1.5}
         startOnView={false}
-        className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-5xl font-extrabold text-transparent"
+        className="bg-linear-to-r from-pink-500 to-violet-500 bg-clip-text text-5xl font-extrabold text-transparent"
       />
       <CountingNumber
         to={100}
@@ -345,18 +345,7 @@ export const DataSlotAttribute: Story = {
 export const AnimationTest: Story = {
   tags: ["test"],
   render: () => {
-    const onCompleteMock = fn();
-
-    return (
-      <CountingNumber
-        from={0}
-        to={10}
-        duration={0.5}
-        startOnView={false}
-        onComplete={onCompleteMock}
-        data-testid="animated-number"
-      />
-    );
+    return <CountingNumber from={0} to={10} duration={0.5} startOnView={false} data-testid="animated-number" />;
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

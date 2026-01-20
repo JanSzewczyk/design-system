@@ -136,7 +136,7 @@ export const timelineContentVariants = cva("flex-1", {
 });
 
 export const timelineDotVariants = cva(
-  "relative z-10 flex size-[var(--timeline-dot-size)] shrink-0 items-center justify-center rounded-full border-2 bg-background",
+  "relative z-10 flex size-(--timeline-dot-size) shrink-0 items-center justify-center rounded-full border-2 bg-background",
   {
     variants: {
       status: {
@@ -219,31 +219,31 @@ export const timelineConnectorVariants = cva("absolute z-0", {
       orientation: "vertical",
       variant: "default",
       class:
-        "start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-[var(--timeline-connector-thickness)]"
+        "start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-(--timeline-connector-thickness)"
     },
     {
       orientation: "horizontal",
       variant: "default",
       class:
-        "start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]"
+        "start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]"
     },
     {
       orientation: "vertical",
       variant: "alternate",
       isAlternateRight: false,
-      class: "top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]"
+      class: "top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)"
     },
     {
       orientation: "vertical",
       variant: "alternate",
       isAlternateRight: true,
-      class: "top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-[var(--timeline-connector-thickness)]"
+      class: "top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)"
     },
     {
       orientation: "horizontal",
       variant: "alternate",
       class:
-        "top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-[var(--timeline-connector-thickness)] w-[calc(100%+0.5rem)]"
+        "top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]"
     }
   ],
   defaultVariants: {

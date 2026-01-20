@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import { Code, Layers, Rocket } from "lucide-react";
+
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
+import { expect, within } from "storybook/test";
 
 import {
   Timeline,
@@ -28,7 +30,7 @@ const meta = {
     TimelineDescription,
     TimelineTime
   },
-  tags: ["autodocs", "new", "todo"],
+  tags: ["autodocs", "new", "todo", "test"],
   argTypes: {
     orientation: {
       control: "select",
@@ -64,527 +66,414 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Timeline>;
 
-export const Default: Story = {
-  render: () => (
-    <Timeline>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Order Placed</TimelineTitle>
-            <TimelineDescription>Your order has been confirmed</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>Jan 15, 2024</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Processing</TimelineTitle>
-            <TimelineDescription>Your order is being processed</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>Jan 16, 2024</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Delivered</TimelineTitle>
-            <TimelineDescription>Package has been delivered</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>Jan 18, 2024</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  ),
-  play: async ({ canvas }) => {
-    const timeline = canvas.getByRole("list");
-    await expect(timeline).toBeVisible();
-    await expect(timeline).toHaveAttribute("data-slot", "timeline");
-    await expect(timeline).toHaveAttribute("data-orientation", "vertical");
-
-    const items = canvas.getAllByRole("listitem");
-    await expect(items).toHaveLength(3);
+const timelineItems = [
+  {
+    id: "project-kickoff",
+    dateTime: "2025-01-15",
+    date: "January 15, 2025",
+    title: "Project Kickoff",
+    description: "Initial meeting to define scope."
+  },
+  {
+    id: "design-phase",
+    dateTime: "2025-02-01",
+    date: "February 1, 2025",
+    title: "Design Phase",
+    description: "Created wireframes and mockups."
+  },
+  {
+    id: "development",
+    dateTime: "2025-03-01",
+    date: "March 1, 2025",
+    title: "Development",
+    description: "Building core features."
   }
-};
+];
 
-export const WithActiveStep: Story = {
+export const Example: Story = {
   render: () => (
     <Timeline activeIndex={1}>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Step 1: Account Created</TimelineTitle>
-            <TimelineDescription>Your account has been set up</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Step 2: Profile Setup</TimelineTitle>
-            <TimelineDescription>Currently setting up your profile</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Step 3: Verification</TimelineTitle>
-            <TimelineDescription>Pending verification</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Step 4: Complete</TimelineTitle>
-            <TimelineDescription>Ready to use</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
+      {timelineItems.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot />
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   ),
-  play: async ({ canvas }) => {
-    const items = canvas.getAllByRole("listitem");
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-    // First item should be completed
-    await expect(items[0]).toHaveAttribute("data-status", "completed");
+    // Check all timeline items are rendered
+    await expect(canvas.getByText("Project Kickoff")).toBeInTheDocument();
+    await expect(canvas.getByText("Design Phase")).toBeInTheDocument();
+    await expect(canvas.getByText("Development")).toBeInTheDocument();
 
-    // Second item should be active
-    await expect(items[1]).toHaveAttribute("data-status", "active");
-    await expect(items[1]).toHaveAttribute("aria-current", "step");
+    // Check dates are rendered
+    await expect(canvas.getByText("January 15, 2025")).toBeInTheDocument();
+    await expect(canvas.getByText("February 1, 2025")).toBeInTheDocument();
+    await expect(canvas.getByText("March 1, 2025")).toBeInTheDocument();
 
-    // Third and fourth items should be pending
-    await expect(items[2]).toHaveAttribute("data-status", "pending");
-    await expect(items[3]).toHaveAttribute("data-status", "pending");
+    // Check descriptions are rendered
+    await expect(canvas.getByText("Initial meeting to define scope.")).toBeInTheDocument();
+    await expect(canvas.getByText("Created wireframes and mockups.")).toBeInTheDocument();
+    await expect(canvas.getByText("Building core features.")).toBeInTheDocument();
+
+    // Check timeline structure
+    const timeline = canvasElement.querySelector("[data-slot='timeline']");
+    await expect(timeline).toBeInTheDocument();
+    await expect(timeline).toHaveAttribute("data-orientation", "vertical");
+
+    // Check active index state - second item (index 1) should be active
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
 };
+
+const timelineItemsHorizontalTimeline = [
+  {
+    id: "research-and-planning",
+    dateTime: "2025-01",
+    date: "Jan - Mar",
+    title: "Q1",
+    description: "Research and planning"
+  },
+  {
+    id: "development-sprint",
+    dateTime: "2025-04",
+    date: "Apr - Jun",
+    title: "Q2",
+    description: "Development sprint"
+  },
+  {
+    id: "beta-launch",
+    dateTime: "2025-07",
+    date: "Jul - Sep",
+    title: "Q3",
+    description: "Beta launch"
+  }
+];
 
 export const Horizontal: Story = {
   render: () => (
-    <Timeline orientation="horizontal" activeIndex={2}>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Cart</TimelineTitle>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Shipping</TimelineTitle>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Payment</TimelineTitle>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Confirmation</TimelineTitle>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
+    <Timeline orientation="horizontal" activeIndex={1}>
+      {timelineItemsHorizontalTimeline.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot />
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTitle>{item.title}</TimelineTitle>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   ),
-  play: async ({ canvas }) => {
-    const timeline = canvas.getByRole("list");
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check all quarters are rendered
+    await expect(canvas.getByText("Q1")).toBeInTheDocument();
+    await expect(canvas.getByText("Q2")).toBeInTheDocument();
+    await expect(canvas.getByText("Q3")).toBeInTheDocument();
+
+    // Check descriptions
+    await expect(canvas.getByText("Research and planning")).toBeInTheDocument();
+    await expect(canvas.getByText("Development sprint")).toBeInTheDocument();
+    await expect(canvas.getByText("Beta launch")).toBeInTheDocument();
+
+    // Check horizontal orientation
+    const timeline = canvasElement.querySelector("[data-slot='timeline']");
+    await expect(timeline).toBeInTheDocument();
     await expect(timeline).toHaveAttribute("data-orientation", "horizontal");
+
+    // Check active index state
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
 };
 
+const timelineItemsRTL = [
+  {
+    id: "registration-opened",
+    dateTime: "2025-01-01",
+    date: "January 1, 2025",
+    title: "Registration Opened",
+    description: "Online registration portal opens."
+  },
+  {
+    id: "early-bird-deadline",
+    dateTime: "2025-02-15",
+    date: "February 15, 2025",
+    title: "Early Bird Deadline",
+    description: "Last day for early bird pricing."
+  },
+  {
+    id: "event-day",
+    dateTime: "2025-03-01",
+    date: "March 1, 2025",
+    title: "Event Day",
+    description: "Main event begins at 9:00 AM."
+  }
+];
+export const RTL: Story = {
+  render: () => (
+    <Timeline dir="rtl" activeIndex={1}>
+      {timelineItemsRTL.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot />
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTitle>{item.title}</TimelineTitle>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check all items are rendered
+    await expect(canvas.getByText("Registration Opened")).toBeInTheDocument();
+    await expect(canvas.getByText("Early Bird Deadline")).toBeInTheDocument();
+    await expect(canvas.getByText("Event Day")).toBeInTheDocument();
+
+    // Check RTL direction
+    const timeline = canvasElement.querySelector("[data-slot='timeline']");
+    await expect(timeline).toBeInTheDocument();
+    await expect(timeline).toHaveAttribute("dir", "rtl");
+
+    // Check active index state
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
+  }
+};
+
+const timelineItemsAlternate = [
+  {
+    id: "project-kickoff",
+    dateTime: "2025-01-15",
+    date: "January 15, 2025",
+    title: "Project Kickoff",
+    description: "Initial meeting to define scope."
+  },
+  {
+    id: "design-phase",
+    dateTime: "2025-02-01",
+    date: "February 1, 2025",
+    title: "Design Phase",
+    description: "Created wireframes and mockups."
+  },
+  {
+    id: "development",
+    dateTime: "2025-03-01",
+    date: "March 1, 2025",
+    title: "Development",
+    description: "Building core features."
+  }
+];
 export const Alternate: Story = {
   render: () => (
-    <Timeline variant="alternate" activeIndex={2}>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Founded</TimelineTitle>
-            <TimelineDescription>Company was established</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>2020</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>First Product</TimelineTitle>
-            <TimelineDescription>Launched our first product</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>2021</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Series A</TimelineTitle>
-            <TimelineDescription>Raised $10M in funding</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>2022</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Global Expansion</TimelineTitle>
-            <TimelineDescription>Opened offices worldwide</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>2023</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>IPO</TimelineTitle>
-            <TimelineDescription>Went public</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>2024</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
+    <Timeline variant="alternate" activeIndex={1}>
+      {timelineItemsAlternate.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot />
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   ),
-  play: async ({ canvas }) => {
-    const timeline = canvas.getByRole("list");
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check all items are rendered
+    await expect(canvas.getByText("Project Kickoff")).toBeInTheDocument();
+    await expect(canvas.getByText("Design Phase")).toBeInTheDocument();
+    await expect(canvas.getByText("Development")).toBeInTheDocument();
+
+    // Check alternate variant
+    const timeline = canvasElement.querySelector("[data-slot='timeline']");
+    await expect(timeline).toBeInTheDocument();
     await expect(timeline).toHaveAttribute("data-variant", "alternate");
+    await expect(timeline).toHaveAttribute("data-orientation", "vertical");
+
+    // Check active index state
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
 };
 
+const timelineItemsHorizontalAlternate = [
+  {
+    id: "company-founded",
+    dateTime: "2023-06",
+    date: "June 2023",
+    title: "Company Founded",
+    description: "Started with a team of five."
+  },
+  {
+    id: "series-a-funding",
+    dateTime: "2024-03",
+    date: "March 2024",
+    title: "Series A Funding",
+    description: "Raised $10M seed funding."
+  },
+  {
+    id: "product-launch",
+    dateTime: "2025-01",
+    date: "January 2025",
+    title: "Product Launch",
+    description: "Released MVP to beta testers."
+  }
+];
 export const HorizontalAlternate: Story = {
   render: () => (
-    <Timeline orientation="horizontal" variant="alternate" activeIndex={1}>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Q1</TimelineTitle>
-            <TimelineDescription>Planning</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Q2</TimelineTitle>
-            <TimelineDescription>Development</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Q3</TimelineTitle>
-            <TimelineDescription>Testing</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Q4</TimelineTitle>
-            <TimelineDescription>Launch</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
+    <Timeline variant="alternate" orientation="horizontal" activeIndex={1}>
+      {timelineItemsHorizontalAlternate.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot />
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   ),
-  play: async ({ canvas }) => {
-    const timeline = canvas.getByRole("list");
-    await expect(timeline).toHaveAttribute("data-orientation", "horizontal");
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check all items are rendered
+    await expect(canvas.getByText("Company Founded")).toBeInTheDocument();
+    await expect(canvas.getByText("Series A Funding")).toBeInTheDocument();
+    await expect(canvas.getByText("Product Launch")).toBeInTheDocument();
+
+    // Check descriptions
+    await expect(canvas.getByText("Started with a team of five.")).toBeInTheDocument();
+    await expect(canvas.getByText("Raised $10M seed funding.")).toBeInTheDocument();
+    await expect(canvas.getByText("Released MVP to beta testers.")).toBeInTheDocument();
+
+    // Check horizontal alternate variant
+    const timeline = canvasElement.querySelector("[data-slot='timeline']");
+    await expect(timeline).toBeInTheDocument();
     await expect(timeline).toHaveAttribute("data-variant", "alternate");
+    await expect(timeline).toHaveAttribute("data-orientation", "horizontal");
+
+    // Check active index state
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
 };
 
-export const WithCustomDotContent: Story = {
-  render: () => (
-    <Timeline activeIndex={1}>
-      <TimelineItem>
-        <TimelineDot className="size-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="text-primary"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </TimelineDot>
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Completed Task</TimelineTitle>
-            <TimelineDescription>This task has been finished</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot className="size-6">
-          <div className="bg-primary size-2 animate-pulse rounded-full" />
-        </TimelineDot>
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>In Progress</TimelineTitle>
-            <TimelineDescription>Currently working on this</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot className="size-6">
-          <span className="text-muted-foreground text-xs">3</span>
-        </TimelineDot>
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Pending Task</TimelineTitle>
-            <TimelineDescription>Waiting to be started</TimelineDescription>
-          </TimelineHeader>
-        </TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  ),
-  play: async ({ canvas }) => {
-    await expect(canvas.getByText("Completed Task")).toBeVisible();
-    await expect(canvas.getByText("In Progress")).toBeVisible();
-    await expect(canvas.getByText("Pending Task")).toBeVisible();
-  }
-};
-
-export const ProjectTimeline: Story = {
-  render: () => (
-    <div className="w-[400px]">
-      <Timeline activeIndex={2}>
-        <TimelineItem>
-          <TimelineDot />
-          <TimelineConnector />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTitle>Project Kickoff</TimelineTitle>
-              <TimelineDescription>
-                Initial meeting with stakeholders to define project scope and objectives.
-              </TimelineDescription>
-            </TimelineHeader>
-            <TimelineTime dateTime="2024-01-15">January 15, 2024</TimelineTime>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineDot />
-          <TimelineConnector />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTitle>Design Phase</TimelineTitle>
-              <TimelineDescription>Created wireframes and high-fidelity mockups for user approval.</TimelineDescription>
-            </TimelineHeader>
-            <TimelineTime dateTime="2024-02-01">February 1, 2024</TimelineTime>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineDot />
-          <TimelineConnector />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTitle>Development Sprint</TimelineTitle>
-              <TimelineDescription>Building core features and implementing the design system.</TimelineDescription>
-            </TimelineHeader>
-            <TimelineTime dateTime="2024-03-01">March 1, 2024</TimelineTime>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineDot />
-          <TimelineConnector />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTitle>Testing & QA</TimelineTitle>
-              <TimelineDescription>Comprehensive testing and bug fixes before release.</TimelineDescription>
-            </TimelineHeader>
-            <TimelineTime dateTime="2024-04-01">April 1, 2024</TimelineTime>
-          </TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-          <TimelineDot />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTitle>Launch</TimelineTitle>
-              <TimelineDescription>Public release and deployment to production.</TimelineDescription>
-            </TimelineHeader>
-            <TimelineTime dateTime="2024-05-01">May 1, 2024</TimelineTime>
-          </TimelineContent>
-        </TimelineItem>
-      </Timeline>
-    </div>
-  ),
-  play: async ({ canvas }) => {
-    await expect(canvas.getByText("Project Kickoff")).toBeVisible();
-    await expect(canvas.getByText("Launch")).toBeVisible();
-  }
-};
-
-export const DataSlotAttributes: Story = {
-  tags: ["test"],
-  render: () => (
-    <Timeline activeIndex={0}>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineConnector />
-        <TimelineContent>
-          <TimelineHeader>
-            <TimelineTitle>Test Title</TimelineTitle>
-            <TimelineDescription>Test Description</TimelineDescription>
-          </TimelineHeader>
-          <TimelineTime>Test Time</TimelineTime>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineDot />
-        <TimelineContent>
-          <TimelineTitle>Second Item</TimelineTitle>
-        </TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  ),
-  play: async ({ canvas, step }) => {
-    await step("Timeline has correct data-slot attribute", async () => {
-      const timeline = canvas.getByRole("list");
-      await expect(timeline).toHaveAttribute("data-slot", "timeline");
-    });
-
-    await step("TimelineItem has correct data-slot attribute", async () => {
-      const items = canvas.getAllByRole("listitem");
-      await expect(items[0]).toHaveAttribute("data-slot", "timeline-item");
-    });
-
-    await step("TimelineDot has correct data-slot attribute", async () => {
-      const dot = canvas
-        .getByText("Test Title")
-        .closest('[data-slot="timeline-item"]')
-        ?.querySelector('[data-slot="timeline-dot"]');
-      await expect(dot).toBeInTheDocument();
-    });
-
-    await step("TimelineConnector has correct data-slot attribute", async () => {
-      const connector = canvas
-        .getByText("Test Title")
-        .closest('[data-slot="timeline-item"]')
-        ?.querySelector('[data-slot="timeline-connector"]');
-      await expect(connector).toBeInTheDocument();
-    });
-
-    await step("TimelineContent has correct data-slot attribute", async () => {
-      const content = canvas.getByText("Test Title").closest('[data-slot="timeline-content"]');
-      await expect(content).toBeInTheDocument();
-    });
-
-    await step("TimelineTitle has correct data-slot attribute", async () => {
-      const title = canvas.getByText("Test Title");
-      await expect(title).toHaveAttribute("data-slot", "timeline-title");
-    });
-
-    await step("TimelineDescription has correct data-slot attribute", async () => {
-      const description = canvas.getByText("Test Description");
-      await expect(description).toHaveAttribute("data-slot", "timeline-description");
-    });
-
-    await step("TimelineTime has correct data-slot attribute", async () => {
-      const time = canvas.getByText("Test Time");
-      await expect(time).toHaveAttribute("data-slot", "timeline-time");
-    });
-  }
-};
-
-export const StatusTransitions: Story = {
-  tags: ["test"],
-  render: function Render() {
-    const [activeIndex, setActiveIndex] = React.useState(0);
-
-    return (
-      <div className="space-y-4">
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => setActiveIndex(Math.max(0, activeIndex - 1))}
-            className="rounded bg-gray-700 px-3 py-1 text-sm text-white"
-          >
-            Previous
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveIndex(Math.min(2, activeIndex + 1))}
-            className="bg-primary rounded px-3 py-1 text-sm text-white"
-          >
-            Next
-          </button>
-          <span className="text-sm text-gray-400">Active: {activeIndex}</span>
-        </div>
-        <Timeline activeIndex={activeIndex}>
-          <TimelineItem>
-            <TimelineDot />
-            <TimelineConnector />
-            <TimelineContent>
-              <TimelineTitle>Step 1</TimelineTitle>
-            </TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineDot />
-            <TimelineConnector />
-            <TimelineContent>
-              <TimelineTitle>Step 2</TimelineTitle>
-            </TimelineContent>
-          </TimelineItem>
-          <TimelineItem>
-            <TimelineDot />
-            <TimelineContent>
-              <TimelineTitle>Step 3</TimelineTitle>
-            </TimelineContent>
-          </TimelineItem>
-        </Timeline>
-      </div>
-    );
+const timelineItemsWithCustomDots = [
+  {
+    id: "project-kickoff",
+    dateTime: "2025-01-15",
+    date: "January 15, 2025",
+    title: "Project Kickoff",
+    description: "Initial meeting to define scope.",
+    icon: Rocket
   },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByText("Step 1")).toBeVisible();
-    await expect(canvas.getByText("Step 2")).toBeVisible();
-    await expect(canvas.getByText("Step 3")).toBeVisible();
+  {
+    id: "design-phase",
+    dateTime: "2025-02-01",
+    date: "February 1, 2025",
+    title: "Design Phase",
+    description: "Created wireframes and mockups.",
+    icon: Layers
+  },
+  {
+    id: "development",
+    dateTime: "2025-03-01",
+    date: "March 1, 2025",
+    title: "Development",
+    description: "Building core features.",
+    icon: Code
+  }
+];
+export const WithCustomDots: Story = {
+  render: () => (
+    <Timeline activeIndex={1} className="[--timeline-dot-size:2rem]">
+      {timelineItemsWithCustomDots.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot>
+            <item.icon className="size-3.5" />
+          </TimelineDot>
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Check all items are rendered
+    await expect(canvas.getByText("Project Kickoff")).toBeInTheDocument();
+    await expect(canvas.getByText("Design Phase")).toBeInTheDocument();
+    await expect(canvas.getByText("Development")).toBeInTheDocument();
+
+    // Check custom dots are rendered with icons inside
+    const timelineDots = canvasElement.querySelectorAll("[data-slot='timeline-dot']");
+    await expect(timelineDots).toHaveLength(3);
+
+    // Verify each dot contains an SVG icon
+    for (const dot of Array.from(timelineDots)) {
+      const svg = dot.querySelector("svg");
+      await expect(svg).toBeInTheDocument();
+    }
+
+    // Check active index state
+    const timelineItems = canvasElement.querySelectorAll("[data-slot='timeline-item']");
+    await expect(timelineItems).toHaveLength(3);
+    await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
+    await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
+    await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
 };

@@ -17,6 +17,59 @@ const cursorVariants: Variants = {
   }
 };
 
+const animationVariants: Record<TypingTextAnimationVariant, Variants> = {
+  fadeIn: {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0 },
+    exit: { opacity: 0 }
+  },
+  blurIn: {
+    hidden: { opacity: 0, filter: "blur(4px)" },
+    show: { opacity: 1, filter: "blur(0px)" },
+    exit: { opacity: 0, filter: "blur(4px)" }
+  },
+  blurInUp: {
+    hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
+    show: { opacity: 1, y: 0, filter: "blur(0px)" },
+    exit: { opacity: 0, y: -20, filter: "blur(4px)" }
+  },
+  blurInDown: {
+    hidden: { opacity: 0, y: -20, filter: "blur(4px)" },
+    show: { opacity: 1, y: 0, filter: "blur(0px)" },
+    exit: { opacity: 0, y: 20, filter: "blur(4px)" }
+  },
+  slideUp: {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 }
+  },
+  slideDown: {
+    hidden: { opacity: 0, y: -20 },
+    show: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 }
+  },
+  slideLeft: {
+    hidden: { opacity: 0, x: 20 },
+    show: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -20 }
+  },
+  slideRight: {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 20 }
+  },
+  scaleUp: {
+    hidden: { opacity: 0, scale: 0.8 },
+    show: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 1.2 }
+  },
+  scaleDown: {
+    hidden: { opacity: 0, scale: 1.2 },
+    show: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.8 }
+  }
+};
+
 export type TypingTextProps = Omit<MotionProps, "children"> & {
   /** Text to animate */
   text?: string;
@@ -64,6 +117,7 @@ export function TypingText({
   onComplete,
   startOnView = true,
   once = false,
+  animation = "fadeIn",
   inViewMargin,
   ...props
 }: TypingTextProps) {
@@ -117,20 +171,14 @@ export function TypingText({
     }
   }, [currentIndex, currentText, isTyping, speed, loop, texts, pauseDuration, onComplete]);
 
-  // Animation variants for container (fadeIn by default, extendable)
-  const finalVariants = {
-    container: {
-      hidden: { opacity: 0, y: 10 },
-      show: { opacity: 1, y: 0, transition: { staggerChildren: 0.02 } },
-      exit: { opacity: 0 }
-    }
-  };
+  // Use the selected animation variant
+  const selectedVariants = animationVariants[animation];
   const MotionComponent = motion.span;
 
   return (
     <MotionComponent
       ref={ref}
-      variants={finalVariants.container as Variants}
+      variants={selectedVariants}
       initial="hidden"
       whileInView={startOnView ? "show" : undefined}
       animate={startOnView ? undefined : "show"}

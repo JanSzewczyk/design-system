@@ -155,22 +155,33 @@ export function WordRotate({
 
   React.useEffect(() => {
     if (!shouldStart) return;
-    setHasAnimated(true);
-    const interval = setInterval(() => {
+    if (words.length === 0) return;
+
+    let intervalId: ReturnType<typeof setInterval> | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    intervalId = setInterval(() => {
       setShow(false);
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setCurrentWord((prev) => {
-          if (loop) {
-            return (prev + 1) % words.length;
-          } else {
-            return prev < words.length - 1 ? prev + 1 : prev;
+          const nextIndex = prev + 1;
+          if (!loop && nextIndex >= words.length) {
+            clearInterval(intervalId);
+            clearTimeout(timeoutId);
+            return prev;
           }
+          return loop ? nextIndex % words.length : nextIndex;
         });
         setShow(true);
+        setHasAnimated(true);
       }, pauseDuration);
     }, duration + pauseDuration);
-    return () => clearInterval(interval);
-  }, [shouldStart, duration, pauseDuration, words.length, loop]);
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
+  }, [shouldStart, duration, pauseDuration, words.length, loop, once, hasAnimated]);
 
   return (
     <motion.span
