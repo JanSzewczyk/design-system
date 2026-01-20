@@ -68,6 +68,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  tags: ["test"],
   args: {
     from: 0,
     to: 100,
@@ -82,6 +83,7 @@ export const Default: Story = {
 };
 
 export const CustomRange: Story = {
+  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -113,6 +115,7 @@ export const CustomRange: Story = {
 };
 
 export const Durations: Story = {
+  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -136,6 +139,7 @@ export const Durations: Story = {
 };
 
 export const WithDelay: Story = {
+  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -159,6 +163,7 @@ export const WithDelay: Story = {
 };
 
 export const WithFormatting: Story = {
+  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
@@ -223,6 +228,7 @@ export const WithFormatting: Story = {
 };
 
 export const Styling: Story = {
+  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
       <CountingNumber to={100} duration={1.5} startOnView={false} className="text-primary text-4xl font-black" />
@@ -257,6 +263,7 @@ export const Styling: Story = {
 };
 
 export const OnCompleteCallback: Story = {
+  tags: ["test"],
   render: function Render() {
     const [completed, setCompleted] = React.useState(false);
 
@@ -288,6 +295,7 @@ export const OnCompleteCallback: Story = {
 };
 
 export const StatisticsCard: Story = {
+  tags: ["test"],
   render: () => (
     <div className="grid grid-cols-3 gap-4">
       <div className="bg-app-foreground flex flex-col items-center rounded-lg border border-gray-800 p-6">
