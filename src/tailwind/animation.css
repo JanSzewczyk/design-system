@@ -53,8 +53,6 @@
 
   /* Marquee */
   --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-
   @keyframes marquee {
     from {
       transform: translateX(0);
@@ -64,12 +62,38 @@
     }
   }
 
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   @keyframes marquee-vertical {
     from {
       transform: translateY(0);
     }
     to {
       transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+
+  /* Accordion */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  @keyframes accordion-down {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+  }
+
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
     }
   }
 }
