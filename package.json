@@ -112,7 +112,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.562.0",
+    "lucide-react": "^0.563.0",
     "motion": "^12.28.1",
     "radix-ui": "^1.4.3",
     "sonner": "^2.0.7",
