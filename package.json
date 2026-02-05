@@ -1,6 +1,6 @@
 {
   "name": "@szum-tech/design-system",
-  "version": "3.10.3",
+  "version": "3.11.0",
   "description": "Szum-Tech design system with tailwindcss support",
   "keywords": [
     "szum-tech",
