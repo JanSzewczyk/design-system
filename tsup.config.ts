@@ -26,8 +26,9 @@ export default defineConfig({
     "radix-ui",
     "@radix-ui/react-slot",
     "tailwind-merge",
-    "clx",
+    "clsx",
     "motion",
-    "sonner"
+    "sonner",
+    "lucide-react"
   ]
 });
