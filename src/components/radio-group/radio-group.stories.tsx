@@ -10,33 +10,33 @@ import preview from "~/.storybook/preview";
 const meta = preview.meta({
   title: "Components/Radio Group",
   component: RadioGroup,
-  argTypes: {
-    defaultValue: {
-      control: "text",
-      description: "The default selected value when uncontrolled"
-    },
-    value: {
-      control: "text",
-      description: "The controlled selected value"
-    },
-    disabled: {
-      control: "boolean",
-      description: "When true, prevents interaction with all radio items"
-    },
-    required: {
-      control: "boolean",
-      description: "When true, indicates that user must select an option before submitting"
-    },
-    name: {
-      control: "text",
-      description: "The name of radio group (used in form submission)"
-    },
-    orientation: {
-      control: "select",
-      options: ["horizontal", "vertical"],
-      description: "The orientation of radio group"
-    }
-  },
+  // argTypes: {
+  //   defaultValue: {
+  //     control: "text",
+  //     description: "The default selected value when uncontrolled"
+  //   },
+  //   value: {
+  //     control: "text",
+  //     description: "The controlled selected value"
+  //   },
+  //   disabled: {
+  //     control: "boolean",
+  //     description: "When true, prevents interaction with all radio items"
+  //   },
+  //   required: {
+  //     control: "boolean",
+  //     description: "When true, indicates that user must select an option before submitting"
+  //   },
+  //   name: {
+  //     control: "text",
+  //     description: "The name of radio group (used in form submission)"
+  //   },
+  //   orientation: {
+  //     control: "select",
+  //     options: ["horizontal", "vertical"],
+  //     description: "The orientation of radio group"
+  //   }
+  // },
   tags: ["autodocs", "test"]
 });
 

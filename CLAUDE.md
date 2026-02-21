@@ -304,7 +304,7 @@ For complex components with shared state (like Stepper):
 
 1. **tsup** bundles components, utils, hooks, contexts, icons separately
 2. CSS files copied from `src/tailwind/` to `tailwind/` (root level)
-3. Post-build script (`src/scripts/post-build.js`) adds `"use client"` directive to component entry files (Next.js
+3. Post-build script (`src/scripts/post-build.ts`) adds `"use client"` directive to component entry files (Next.js
    compatibility)
 4. Outputs: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
 

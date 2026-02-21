@@ -1,10 +1,8 @@
-// @ts-ignore
-
 import { type Mock } from "vitest";
 
 import fs from "fs/promises";
 
-import { updateFilesWithText } from "./post-build.js";
+import { updateFilesWithText } from "./post-build";
 
 // Mock fs module
 vi.mock("fs/promises", () => ({
