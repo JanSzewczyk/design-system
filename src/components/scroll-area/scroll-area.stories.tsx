@@ -210,9 +210,7 @@ export const InteractionTest = meta.story({
         <div className="flex w-max space-x-4 p-4">
           {works.slice(0, 4).map((work) => (
             <figure key={work.art} className="shrink-0">
-              <div className="bg-muted flex h-20 w-25 items-center justify-center rounded-md text-xs">
-                {work.art}
-              </div>
+              <div className="bg-muted flex h-20 w-25 items-center justify-center rounded-md text-xs">{work.art}</div>
             </figure>
           ))}
         </div>
