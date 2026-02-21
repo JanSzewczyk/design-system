@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { Button, Input, Label, Select, SelectContent, SelectItem, Textarea } from "~/components";
 import { Checkbox } from "~/components/checkbox";
@@ -19,17 +18,16 @@ import {
   FieldTitle
 } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Field",
   component: Field,
   tags: ["autodocs", "new"],
   decorators: [(Story) => <div className="w-full max-w-md">{Story()}</div>]
-} satisfies Meta<typeof Field>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <form>
       <FieldGroup>
@@ -120,9 +118,9 @@ export const Example: Story = {
       </FieldGroup>
     </form>
   )
-};
+});
 
-export const InputStory: Story = {
+export const InputStory = meta.story({
   name: "Input",
   render: () => (
     <FieldSet>
@@ -140,9 +138,9 @@ export const InputStory: Story = {
       </FieldGroup>
     </FieldSet>
   )
-};
+});
 
-export const TextareaStory: Story = {
+export const TextareaStory = meta.story({
   name: "Textarea",
   render: () => (
     <FieldSet>
@@ -155,9 +153,9 @@ export const TextareaStory: Story = {
       </FieldGroup>
     </FieldSet>
   )
-};
+});
 
-export const SelectStory: Story = {
+export const SelectStory = meta.story({
   name: "Select",
   render: () => (
     <Field>
@@ -177,9 +175,9 @@ export const SelectStory: Story = {
       <FieldDescription>Select your department or area of work.</FieldDescription>
     </Field>
   )
-};
+});
 
-export const FieldsetStory: Story = {
+export const FieldsetStory = meta.story({
   name: "Fieldset",
   render: () => (
     <FieldSet>
@@ -203,15 +201,15 @@ export const FieldsetStory: Story = {
       </FieldGroup>
     </FieldSet>
   )
-};
+});
 
-export const CheckboxStory: Story = {
+export const CheckboxStory = meta.story({
   name: "Checkbox",
   render: () => (
     <FieldGroup>
       <FieldSet>
         <FieldLegend variant="label">Show these items on the desktop</FieldLegend>
-        <FieldDescription>Select the items you want to show on the desktop.</FieldDescription>
+        <FieldDescription>Select items you want to show on the desktop.</FieldDescription>
         <FieldGroup className="gap-3">
           <Field orientation="horizontal">
             <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
@@ -251,15 +249,15 @@ export const CheckboxStory: Story = {
       </Field>
     </FieldGroup>
   )
-};
+});
 
-export const ChoiceCard: Story = {
+export const ChoiceCard = meta.story({
   name: "Choice Card - Checkboxes",
   render: () => (
     <FieldGroup>
       <FieldSet>
         <FieldLabel htmlFor="compute-environment-p8w">Compute Environment</FieldLabel>
-        <FieldDescription>Select the compute environment for your cluster.</FieldDescription>
+        <FieldDescription>Select compute environment for your cluster.</FieldDescription>
         <FieldLabel htmlFor="kubernetes-r2h">
           <Field orientation="horizontal">
             <FieldContent>
@@ -281,9 +279,9 @@ export const ChoiceCard: Story = {
       </FieldSet>
     </FieldGroup>
   )
-};
+});
 
-export const RadioStory: Story = {
+export const RadioStory = meta.story({
   name: "Radio",
   render: () => (
     <FieldSet>
@@ -311,15 +309,15 @@ export const RadioStory: Story = {
       </RadioGroup>
     </FieldSet>
   )
-};
+});
 
-export const ChoiceCardRadioButtons: Story = {
+export const ChoiceCardRadioButtons = meta.story({
   name: "Choice Card - Radio Buttons",
   render: () => (
     <FieldGroup>
       <FieldSet>
         <FieldLabel htmlFor="compute-environment-p8w">Compute Environment</FieldLabel>
-        <FieldDescription>Select the compute environment for your cluster.</FieldDescription>
+        <FieldDescription>Select compute environment for your cluster.</FieldDescription>
         <RadioGroup defaultValue="kubernetes">
           <FieldLabel htmlFor="kubernetes-r2h">
             <Field orientation="horizontal">
@@ -343,9 +341,9 @@ export const ChoiceCardRadioButtons: Story = {
       </FieldSet>
     </FieldGroup>
   )
-};
+});
 
-export const Horizontal: Story = {
+export const Horizontal = meta.story({
   render: () => (
     <Field orientation="horizontal">
       <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -359,9 +357,9 @@ export const Horizontal: Story = {
     const group = canvas.getByRole("group");
     await expect(group).toHaveAttribute("data-orientation", "horizontal");
   }
-};
+});
 
-export const Responsive: Story = {
+export const Responsive = meta.story({
   render: () => (
     <Field orientation="responsive">
       <FieldLabel asChild>
@@ -372,9 +370,9 @@ export const Responsive: Story = {
       </FieldContent>
     </Field>
   )
-};
+});
 
-export const WithSeparatorAndLegend: Story = {
+export const WithSeparatorAndLegend = meta.story({
   render: () => (
     <FieldSet>
       <FieldLegend>Profile</FieldLegend>
@@ -395,9 +393,9 @@ export const WithSeparatorAndLegend: Story = {
       </FieldGroup>
     </FieldSet>
   )
-};
+});
 
-export const ErrorDeduplication: Story = {
+export const ErrorDeduplication = meta.story({
   render: () => (
     <Field>
       <FieldLabel htmlFor="password">Password</FieldLabel>
@@ -420,4 +418,4 @@ export const ErrorDeduplication: Story = {
     const messages = canvas.getAllByText(/Password/);
     await expect(messages.length >= 2).toBe(true);
   }
-};
+});

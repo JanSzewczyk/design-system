@@ -1,20 +1,18 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { within, expect, userEvent } from "storybook/test";
+import { within, expect } from "storybook/test";
 
 import { Textarea } from "./textarea";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Textarea",
   component: Textarea,
   tags: ["autodocs", "beta"]
-} satisfies Meta<typeof Textarea>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   play: async ({ canvas }) => {
     const textarea = canvas.getByRole("textbox");
 
@@ -23,9 +21,9 @@ export const Default: Story = {
     await expect(textarea).toBeVisible();
     await expect(textarea).not.toBeDisabled();
   }
-};
+});
 
-export const Base: Story = {
+export const Base = meta.story({
   render: (args) => (
     <div className="w-full max-w-sm space-y-4">
       <Textarea {...args} />
@@ -49,9 +47,9 @@ export const Base: Story = {
     await expect(defaultValueTextarea).toBeInTheDocument();
     await expect(defaultValueTextarea).toHaveValue("With default value");
   }
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: (args) => (
     <div className="w-full max-w-sm space-y-4">
       <Textarea {...args} />
@@ -62,7 +60,7 @@ export const Disabled: Story = {
   args: {
     disabled: true
   },
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const textareas = canvas.getAllByRole("textbox");
 
     // Test all textareas are disabled
@@ -76,9 +74,9 @@ export const Disabled: Story = {
     await userEvent.type(firstTextarea, "This should not work");
     await expect(firstTextarea).toHaveValue("");
   }
-};
+});
 
-export const Invalid: Story = {
+export const Invalid = meta.story({
   render: (args) => (
     <div className="w-full max-w-sm space-y-4">
       <Textarea {...args} />
@@ -100,14 +98,14 @@ export const Invalid: Story = {
       await expect(textarea).toHaveAttribute("aria-invalid", "true");
     }
   }
-};
+});
 
-export const ReadOnly: Story = {
+export const ReadOnly = meta.story({
   args: {
     readOnly: true,
     defaultValue: "This is read-only content"
   },
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
     // Test readonly attribute
@@ -119,14 +117,14 @@ export const ReadOnly: Story = {
     await userEvent.type(textarea, "Should not change");
     await expect(textarea).toHaveValue("This is read-only content");
   }
-};
+});
 
-export const UserInteraction: Story = {
+export const UserInteraction = meta.story({
   args: {
     placeholder: "Type something here..."
   },
   tags: ["test-only", "interaction"],
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
     // Test typing functionality
@@ -142,14 +140,14 @@ export const UserInteraction: Story = {
     await userEvent.type(textarea, "Line 1{enter}Line 2{enter}Line 3");
     await expect(textarea).toHaveValue("Line 1\nLine 2\nLine 3");
   }
-};
+});
 
-export const FocusAndBlur: Story = {
+export const FocusAndBlur = meta.story({
   args: {
     placeholder: "Focus and blur test"
   },
   tags: ["test-only", "interaction"],
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
     // Test focus
@@ -160,9 +158,9 @@ export const FocusAndBlur: Story = {
     await userEvent.tab();
     await expect(textarea).not.toHaveFocus();
   }
-};
+});
 
-export const KeyboardNavigation: Story = {
+export const KeyboardNavigation = meta.story({
   render: () => (
     <div className="space-y-4">
       <input placeholder="Previous element" />
@@ -171,7 +169,7 @@ export const KeyboardNavigation: Story = {
     </div>
   ),
   tags: ["test-only", "interaction"],
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const input = canvas.getByPlaceholderText("Previous element");
     const textarea = canvas.getByPlaceholderText("Textarea for keyboard test");
     const button = canvas.getByRole("button");
@@ -192,15 +190,15 @@ export const KeyboardNavigation: Story = {
     await userEvent.tab({ shift: true });
     await expect(textarea).toHaveFocus();
   }
-};
+});
 
-export const MaxLength: Story = {
+export const MaxLength = meta.story({
   args: {
     maxLength: 10,
     placeholder: "Max 10 characters"
   },
   tags: ["test-only", "interaction"],
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
     // Test maxLength attribute
@@ -215,9 +213,9 @@ export const MaxLength: Story = {
     await userEvent.type(textarea, "11");
     await expect(textarea).toHaveValue("1234567890");
   }
-};
+});
 
-export const Required: Story = {
+export const Required = meta.story({
   args: {
     required: true,
     placeholder: "This field is required"
@@ -230,4 +228,4 @@ export const Required: Story = {
     await expect(textarea).toBeRequired();
     await expect(textarea).toHaveAttribute("required");
   }
-};
+});

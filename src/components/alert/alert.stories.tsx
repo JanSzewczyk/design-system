@@ -2,12 +2,13 @@ import * as React from "react";
 
 import { AlertCircleIcon, InfoIcon, RocketIcon, TerminalIcon, TriangleAlertIcon } from "lucide-react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
 import { Alert, AlertDescription, AlertTitle } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Alert",
   component: Alert,
   tags: ["autodocs", "new"],
@@ -21,12 +22,9 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof Alert>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>
@@ -41,9 +39,9 @@ export const Example: Story = {
       </Alert>
     </div>
   )
-};
+});
 
-export const Default: Story = {
+export const Default = meta.story({
   args: {
     children: (
       <>
@@ -53,9 +51,9 @@ export const Default: Story = {
       </>
     )
   }
-};
+});
 
-export const Destructive: Story = {
+export const Destructive = meta.story({
   args: {
     variant: "destructive",
     children: (
@@ -66,9 +64,9 @@ export const Destructive: Story = {
       </>
     )
   }
-};
+});
 
-export const WithoutIcon: Story = {
+export const WithoutIcon = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>
@@ -81,9 +79,9 @@ export const WithoutIcon: Story = {
       </Alert>
     </div>
   )
-};
+});
 
-export const WithDifferentIcons: Story = {
+export const WithDifferentIcons = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>
@@ -103,9 +101,9 @@ export const WithDifferentIcons: Story = {
       </Alert>
     </div>
   )
-};
+});
 
-export const TitleOnly: Story = {
+export const TitleOnly = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>
@@ -118,9 +116,9 @@ export const TitleOnly: Story = {
       </Alert>
     </div>
   )
-};
+});
 
-export const DescriptionOnly: Story = {
+export const DescriptionOnly = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>
@@ -137,9 +135,9 @@ export const DescriptionOnly: Story = {
       </Alert>
     </div>
   )
-};
+});
 
-export const LongContent: Story = {
+export const LongContent = meta.story({
   render: () => (
     <Alert>
       <InfoIcon />
@@ -156,9 +154,9 @@ export const LongContent: Story = {
       </AlertDescription>
     </Alert>
   )
-};
+});
 
-export const DataAttributes: Story = {
+export const DataAttributes = meta.story({
   render: () => (
     <Alert>
       <TerminalIcon />
@@ -182,9 +180,9 @@ export const DataAttributes: Story = {
       await expect(description).toHaveAttribute("data-slot", "alert-description");
     });
   }
-};
+});
 
-export const InteractionTest: Story = {
+export const InteractionTest = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
@@ -226,4 +224,4 @@ export const InteractionTest: Story = {
       await expect(destructiveDescription).toBeVisible();
     });
   }
-};
+});

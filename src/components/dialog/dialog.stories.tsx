@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { userEvent, waitFor, within, expect } from "storybook/test";
+import { screen, waitFor, within, expect } from "storybook/test";
 import { Input, Label } from "~/components";
 
 import { Button } from "../button";
@@ -17,22 +16,22 @@ import {
   DialogTrigger
 } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Dialog",
   component: Dialog,
   tags: ["autodocs"],
   parameters: {
     docs: {
-      description: {
-        component:
-          "Dialog component built on Radix UI primitives. Provides a modal dialog overlay that can contain any content. Supports multiple width variants, controlled/uncontrolled modes, nested dialogs, and proper focus management."
-      }
+      subtitle:
+        "Dialog component built on Radix UI primitives. Provides a modal dialog overlay that can contain any content. Supports multiple width variants, controlled/uncontrolled modes, nested dialogs, and proper focus management."
     }
   },
   argTypes: {
     open: {
       control: "boolean",
-      description: "The controlled open state of the dialog. Must be used with `onOpenChange`.",
+      description: "The controlled open state of dialog. Must be used with `onOpenChange`.",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "undefined" }
@@ -40,14 +39,14 @@ const meta = {
     },
     defaultOpen: {
       control: "boolean",
-      description: "The open state of the dialog when it is initially rendered. Use when not controlling state.",
+      description: "The open state of dialog when it is initially rendered. Use when not controlling state.",
       table: {
         type: { summary: "boolean" },
         defaultValue: { summary: "false" }
       }
     },
     onOpenChange: {
-      description: "Event handler called when the open state changes.",
+      description: "Event handler called when open state changes.",
       table: {
         type: { summary: "(open: boolean) => void" }
       }
@@ -62,10 +61,7 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof Dialog>;
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const BasicDialogContent = () => (
   <DialogContent>
@@ -85,7 +81,7 @@ const BasicDialogContent = () => (
   </DialogContent>
 );
 
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -94,9 +90,7 @@ export const Default: Story = {
       <BasicDialogContent />
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement?.parentElement as HTMLElement);
-
+  play: async ({ step, userEvent, canvas }) => {
     await step("Trigger button is rendered with data-slot", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
       await expect(triggerButton).toBeInTheDocument();
@@ -105,15 +99,15 @@ export const Default: Story = {
     });
 
     await step("Dialog is initially closed", async () => {
-      await expect(canvas.queryByRole("dialog")).not.toBeInTheDocument();
+      await expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     });
 
     await step("Open and verify dialog structure", async () => {
-      const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
+      const triggerButton = screen.getByRole("button", { name: "Open Dialog" });
       await userEvent.click(triggerButton);
 
       await waitFor(async () => {
-        const dialog = canvas.getByRole("dialog");
+        const dialog = screen.getByRole("dialog");
         await expect(dialog).toBeVisible();
       });
 
@@ -127,17 +121,17 @@ export const Default: Story = {
     });
 
     await step("Close dialog with Cancel button", async () => {
-      const cancelButton = canvas.getByRole("button", { name: "Cancel" });
+      const cancelButton = screen.getByRole("button", { name: "Cancel" });
       await userEvent.click(cancelButton);
 
       await waitFor(async () => {
-        await expect(canvas.queryByRole("dialog")).not.toBeVisible();
+        await expect(screen.queryByRole("dialog")).not.toBeVisible();
       });
     });
   }
-};
+});
 
-export const WithoutCloseButton: Story = {
+export const WithoutCloseButton = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -165,14 +159,13 @@ export const WithoutCloseButton: Story = {
       </DialogContent>
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement?.parentElement as HTMLElement);
-
+  play: async ({ canvas, step, userEvent }) => {
     await step("Open dialog", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog without X Button" });
       await userEvent.click(triggerButton);
+
       await waitFor(async () => {
-        await expect(canvas.getByRole("dialog")).toBeVisible();
+        await expect(screen.getByRole("dialog")).toBeVisible();
       });
     });
 
@@ -193,19 +186,20 @@ export const WithoutCloseButton: Story = {
 
     await step("Verify other close options work", async () => {
       // Verify Cancel button is present
-      const cancelButton = canvas.getByRole("button", { name: "Cancel" });
+      const cancelButton = screen.getByRole("button", { name: "Cancel" });
       await expect(cancelButton).toBeVisible();
 
       // Close with Cancel button
       await userEvent.click(cancelButton);
+
       await waitFor(async () => {
-        await expect(canvas.queryByRole("dialog")).not.toBeVisible();
+        await expect(screen.queryByRole("dialog")).not.toBeVisible();
       });
     });
   }
-};
+});
 
-export const WithCloseButton: Story = {
+export const WithCloseButton = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -236,12 +230,13 @@ export const WithCloseButton: Story = {
       </DialogContent>
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     await step("Open dialog", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog with Close Button" });
       await userEvent.click(triggerButton);
+
       await waitFor(async () => {
         await expect(canvas.getByRole("dialog")).toBeVisible();
       });
@@ -255,7 +250,7 @@ export const WithCloseButton: Story = {
     });
 
     await step("Close with X button", async () => {
-      // Find the X close button by looking for the button with sr-only text "Close"
+      // Find the X close button by looking for a button with sr-only text "Close"
       const buttons = document.querySelectorAll("button");
       let xButton: HTMLElement | null = null;
 
@@ -269,19 +264,21 @@ export const WithCloseButton: Story = {
       await expect(xButton).not.toBeNull();
       if (xButton) {
         await userEvent.click(xButton);
+
         await waitFor(async () => {
           await expect(canvas.queryByRole("dialog")).not.toBeVisible();
         });
       }
     });
   }
-};
+});
 
-const DIALOGS_WIDTHS = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "full"] as const;
-export const Width: Story = {
+const DIALOG_WIDTHS = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "full"] as const;
+
+export const Width = meta.story({
   render: () => (
     <div className="grid grid-cols-4 gap-2">
-      {DIALOGS_WIDTHS.map((width) => (
+      {DIALOG_WIDTHS.map((width) => (
         <Dialog key={width}>
           <DialogTrigger asChild>
             <Button color="neutral">{width}</Button>
@@ -305,10 +302,10 @@ export const Width: Story = {
       ))}
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
-    for (const width of DIALOGS_WIDTHS) {
+    for (const width of DIALOG_WIDTHS) {
       await step(`Test ${width} width variant`, async () => {
         const triggerButton = canvas.getByRole("button", { name: width });
         await userEvent.click(triggerButton);
@@ -333,9 +330,9 @@ export const Width: Story = {
       });
     }
   }
-};
+});
 
-export const OpenDialog: Story = {
+export const OpenDialog = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -345,21 +342,21 @@ export const OpenDialog: Story = {
       <BasicDialogContent />
     </Dialog>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Open the dialog
     const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       const dialog = canvas.getByRole("dialog");
       await expect(dialog).toBeInTheDocument();
       await expect(dialog).toBeVisible();
     });
 
-    // Test dialog content
+    // Test the dialog content
     const dialogTitle = canvas.getByRole("heading", { name: "Dialog Title" });
     await expect(dialogTitle).toBeVisible();
 
@@ -369,9 +366,9 @@ export const OpenDialog: Story = {
     const mainContent = canvas.getByText("This is the main content of the dialog.");
     await expect(mainContent).toBeVisible();
   }
-};
+});
 
-export const DialogWithFooterButtons: Story = {
+export const DialogWithFooterButtons = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -381,26 +378,26 @@ export const DialogWithFooterButtons: Story = {
       <BasicDialogContent />
     </Dialog>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Open the dialog
     const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       const dialog = canvas.getByRole("dialog");
       await expect(dialog).toBeVisible();
     });
 
-    // Test footer buttons
+    // Test the footer buttons
     await expect(canvas.getByRole("button", { name: "Cancel" })).toBeVisible();
     await expect(canvas.getByRole("button", { name: "Confirm" })).toBeVisible();
   }
-};
+});
 
-export const CloseDialogWithCancelButton: Story = {
+export const CloseDialogWithCancelButton = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -410,14 +407,14 @@ export const CloseDialogWithCancelButton: Story = {
       <BasicDialogContent />
     </Dialog>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Open the dialog
     const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       const dialog = canvas.getByRole("dialog");
       await expect(dialog).toBeVisible();
@@ -427,15 +424,15 @@ export const CloseDialogWithCancelButton: Story = {
     const cancelButton = canvas.getByRole("button", { name: "Cancel" });
     await userEvent.click(cancelButton);
 
-    // Wait for dialog to disappear
+    // Wait for the dialog to disappear
     await waitFor(async () => {
       const dialog = canvas.queryByRole("dialog");
       await expect(dialog).not.toBeVisible();
     });
   }
-};
+});
 
-export const CloseDialogWithOverlayClick: Story = {
+export const CloseDialogWithOverlayClick = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -456,10 +453,10 @@ export const CloseDialogWithOverlayClick: Story = {
       </DialogContent>
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
-    await step("Open the dialog", async () => {
+    await step("Open dialog", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
       await userEvent.click(triggerButton);
 
@@ -487,9 +484,9 @@ export const CloseDialogWithOverlayClick: Story = {
       }
     });
   }
-};
+});
 
-export const CloseDialogWithEscapeKey: Story = {
+export const CloseDialogWithEscapeKey = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -499,10 +496,10 @@ export const CloseDialogWithEscapeKey: Story = {
       <BasicDialogContent />
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
-    await step("Open the dialog", async () => {
+    await step("Open dialog", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
       await userEvent.click(triggerButton);
 
@@ -532,9 +529,9 @@ export const CloseDialogWithEscapeKey: Story = {
       await expect(triggerButton).toBeEnabled();
     });
   }
-};
+});
 
-export const DialogFocusManagement: Story = {
+export const DialogFocusManagement = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <div className="space-y-4">
@@ -563,7 +560,7 @@ export const DialogFocusManagement: Story = {
       <Input placeholder="Input after dialog" />
     </div>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Focus should initially be manageable outside dialog
@@ -575,7 +572,7 @@ export const DialogFocusManagement: Story = {
     const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       await expect(canvas.getByRole("dialog")).toBeVisible();
     });
@@ -590,9 +587,9 @@ export const DialogFocusManagement: Story = {
     await userEvent.tab();
     await expect(canvas.getByRole("button", { name: "Close" })).toHaveFocus();
   }
-};
+});
 
-export const ControlledDialog: Story = {
+export const ControlledDialog = meta.story({
   render: () => {
     const [open, setOpen] = React.useState(false);
 
@@ -618,14 +615,14 @@ export const ControlledDialog: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Test controlled opening
     const openButton = canvas.getByRole("button", { name: "Open Controlled Dialog" });
     await userEvent.click(openButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       const dialog = canvas.getByRole("dialog");
       await expect(dialog).toBeVisible();
@@ -635,15 +632,15 @@ export const ControlledDialog: Story = {
     const closeButton = canvas.getByRole("button", { name: "Close Programmatically" });
     await userEvent.click(closeButton);
 
-    // Wait for dialog to disappear
+    // Wait for the dialog to disappear
     await waitFor(async () => {
       const dialog = canvas.queryByRole("dialog");
       await expect(dialog).not.toBeVisible();
     });
   }
-};
+});
 
-export const DialogWithForm: Story = {
+export const DialogWithForm = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -675,14 +672,14 @@ export const DialogWithForm: Story = {
       </DialogContent>
     </Dialog>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Open the dialog
     const triggerButton = canvas.getByRole("button", { name: "Open Form Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       await expect(canvas.getByRole("dialog")).toBeVisible();
     });
@@ -704,9 +701,9 @@ export const DialogWithForm: Story = {
     await expect(cancelButton).toBeVisible();
     await expect(submitButton).toBeVisible();
   }
-};
+});
 
-export const DataSlotAttributes: Story = {
+export const DataSlotAttributes = meta.story({
   tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
@@ -729,7 +726,7 @@ export const DataSlotAttributes: Story = {
       </DialogContent>
     </Dialog>
   ),
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     await step("Verify trigger has data-slot", async () => {
@@ -744,39 +741,39 @@ export const DataSlotAttributes: Story = {
       await waitFor(async () => {
         await expect(canvas.getByRole("dialog")).toBeVisible();
       });
-
-      // Check overlay data-slot
-      const overlay = document.querySelector('[data-slot="dialog-overlay"]');
-      await expect(overlay).toBeInTheDocument();
-
-      // Check content data-slot
-      const content = document.querySelector('[data-slot="dialog-content"]');
-      await expect(content).toBeInTheDocument();
-
-      // Check header data-slot
-      const header = document.querySelector('[data-slot="dialog-header"]');
-      await expect(header).toBeInTheDocument();
-
-      // Check title data-slot
-      const title = document.querySelector('[data-slot="dialog-title"]');
-      await expect(title).toBeInTheDocument();
-
-      // Check description data-slot
-      const description = document.querySelector('[data-slot="dialog-description"]');
-      await expect(description).toBeInTheDocument();
-
-      // Check footer data-slot
-      const footer = document.querySelector('[data-slot="dialog-footer"]');
-      await expect(footer).toBeInTheDocument();
-
-      // Check close button data-slot (both the X and the Close button)
-      const closeButtons = document.querySelectorAll('[data-slot="dialog-close"]');
-      await expect(closeButtons.length).toBeGreaterThanOrEqual(2); // X button and Close button
     });
-  }
-};
 
-export const AccessibilityTest: Story = {
+    // Check overlay data-slot
+    const overlay = document.querySelector('[data-slot="dialog-overlay"]');
+    await expect(overlay).toBeInTheDocument();
+
+    // Check content data-slot
+    const content = document.querySelector('[data-slot="dialog-content"]');
+    await expect(content).toBeInTheDocument();
+
+    // Check header data-slot
+    const header = document.querySelector('[data-slot="dialog-header"]');
+    await expect(header).toBeInTheDocument();
+
+    // Check title data-slot
+    const title = document.querySelector('[data-slot="dialog-title"]');
+    await expect(title).toBeInTheDocument();
+
+    // Check description data-slot
+    const description = document.querySelector('[data-slot="dialog-description"]');
+    await expect(description).toBeInTheDocument();
+
+    // Check footer data-slot
+    const footer = document.querySelector('[data-slot="dialog-footer"]');
+    await expect(footer).toBeInTheDocument();
+
+    // Check close button data-slot (both X and Close button)
+    const closeButtons = document.querySelectorAll('[data-slot="dialog-close"]');
+    await expect(closeButtons.length).toBeGreaterThanOrEqual(2); // X button and Close button
+  }
+});
+
+export const AccessibilityTest = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -798,15 +795,14 @@ export const AccessibilityTest: Story = {
       </DialogContent>
     </Dialog>
   ),
-  tags: ["test-only", "interaction"],
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     // Open the dialog
     const triggerButton = canvas.getByRole("button", { name: "Open Accessible Dialog" });
     await userEvent.click(triggerButton);
 
-    // Wait for dialog to appear
+    // Wait for the dialog to appear
     await waitFor(async () => {
       const dialog = canvas.getByRole("dialog");
       await expect(dialog).toBeVisible();
@@ -820,9 +816,9 @@ export const AccessibilityTest: Story = {
     const description = canvas.getByText("Testing dialog accessibility features.");
     await expect(description).toBeVisible();
   }
-};
+});
 
-export const NestedDialogs: Story = {
+export const NestedDialogs = meta.story({
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -862,8 +858,7 @@ export const NestedDialogs: Story = {
       </DialogContent>
     </Dialog>
   ),
-  tags: ["test-only", "interaction"],
-  play: async ({ canvasElement, step }) => {
+  play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
     await step("Open parent dialog", async () => {
@@ -891,4 +886,4 @@ export const NestedDialogs: Story = {
       });
     });
   }
-};
+});

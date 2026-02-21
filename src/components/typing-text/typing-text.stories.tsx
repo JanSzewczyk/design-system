@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, fn, waitFor } from "storybook/test";
 import { TypingText } from "~/components";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Typing Text",
   component: TypingText,
   tags: ["autodocs"],
@@ -101,20 +102,17 @@ const meta = {
       description: "Callback when typing completes"
     }
   }
-} satisfies Meta<typeof TypingText>;
+});
 
-export default meta;
-type Story = StoryObj<typeof TypingText>;
-
-export const Default: Story = {
+export const Default = meta.story({
   tags: ["test"],
   args: {
     text: "Hello, World!",
     startOnView: false
   }
-};
+});
 
-export const CustomSpeed: Story = {
+export const CustomSpeed = meta.story({
   tags: ["test"],
   render: () => (
     <div className="space-y-4">
@@ -140,9 +138,9 @@ export const CustomSpeed: Story = {
       { timeout: 5000 }
     );
   }
-};
+});
 
-export const WithDelay: Story = {
+export const WithDelay = meta.story({
   tags: ["test"],
   args: {
     text: "This text appears after a 1 second delay.",
@@ -162,9 +160,9 @@ export const WithDelay: Story = {
       { timeout: 5000 }
     );
   }
-};
+});
 
-export const WithoutCursor: Story = {
+export const WithoutCursor = meta.story({
   tags: ["test"],
   args: {
     text: "No cursor is shown here.",
@@ -183,36 +181,17 @@ export const WithoutCursor: Story = {
     const cursorElement = canvas.queryByText("|");
     await expect(cursorElement).not.toBeInTheDocument();
   }
-};
+});
 
-export const CustomCursor: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <div>
-        <p className="text-muted-foreground mb-2 text-sm">Block cursor</p>
-        <TypingText text="Block cursor style" cursor="█" startOnView={false} />
-      </div>
-      <div>
-        <p className="text-muted-foreground mb-2 text-sm">Underscore cursor</p>
-        <TypingText text="Underscore cursor style" cursor="_" startOnView={false} />
-      </div>
-      <div>
-        <p className="text-muted-foreground mb-2 text-sm">Custom emoji cursor</p>
-        <TypingText text="Fun cursor" cursor="👆" startOnView={false} />
-      </div>
-    </div>
-  )
-};
-
-export const StyledCursor: Story = {
+export const CustomCursor = meta.story({
   args: {
     text: "Custom styled cursor.",
     cursorClassName: "text-primary text-xl",
     startOnView: false
   }
-};
+});
 
-export const MultipleTexts: Story = {
+export const MultipleTexts = meta.story({
   tags: ["test"],
   args: {
     texts: ["First message", "Second message", "Third message"],
@@ -228,9 +207,9 @@ export const MultipleTexts: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const LoopingText: Story = {
+export const LoopingText = meta.story({
   tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
@@ -253,12 +232,12 @@ export const LoopingText: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const OnCompleteCallback: Story = {
+export const OnCompleteCallback = meta.story({
   tags: ["test"],
   args: {
-    text: "Watch the console!",
+    text: "Watch our console!",
     onComplete: fn(),
     startOnView: false
   },
@@ -278,9 +257,9 @@ export const OnCompleteCallback: Story = {
       { timeout: 5000 }
     );
   }
-};
+});
 
-export const HeroSection: Story = {
+export const HeroSection = meta.story({
   render: () => (
     <div className="bg-app-background flex min-h-64 flex-col items-center justify-center rounded-lg p-8">
       <h1 className="mb-4 text-4xl font-bold">
@@ -296,9 +275,9 @@ export const HeroSection: Story = {
       </p>
     </div>
   )
-};
+});
 
-export const TerminalStyle: Story = {
+export const TerminalStyle = meta.story({
   tags: ["test"],
   render: () => (
     <div className="rounded-lg bg-gray-950 p-4 font-mono">
@@ -321,9 +300,9 @@ export const TerminalStyle: Story = {
       { timeout: 5000 }
     );
   }
-};
+});
 
-export const CodeExample: Story = {
+export const CodeExample = meta.story({
   render: () => (
     <div className="rounded-lg bg-gray-900 p-4 font-mono text-sm">
       <TypingText
@@ -336,9 +315,9 @@ export const CodeExample: Story = {
       />
     </div>
   )
-};
+});
 
-export const ChatMessage: Story = {
+export const ChatMessage = meta.story({
   tags: ["test"],
   render: () => (
     <div className="max-w-md space-y-4">
@@ -361,9 +340,9 @@ export const ChatMessage: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const DataSlotAttribute: Story = {
+export const DataSlotAttribute = meta.story({
   tags: ["test"],
   args: {
     text: "Testing data-slot attribute",
@@ -373,18 +352,18 @@ export const DataSlotAttribute: Story = {
     const typingText = canvas.getByText("", { selector: '[data-slot="typing-text"]' });
     await expect(typingText).toHaveAttribute("data-slot", "typing-text");
   }
-};
+});
 
-export const LongText: Story = {
+export const LongText = meta.story({
   args: {
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
     speed: 20,
     startOnView: false,
     className: "max-w-lg"
   }
-};
+});
 
-export const AnimationVariants: Story = {
+export const AnimationVariants = meta.story({
   tags: ["test"],
   render: () => (
     <div className="space-y-8">
@@ -393,7 +372,6 @@ export const AnimationVariants: Story = {
           Available Animation Variants
         </h2>
       </div>
-
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">fadeIn (default)</p>
@@ -401,21 +379,18 @@ export const AnimationVariants: Story = {
             <TypingText text="Fade in animation" animation="fadeIn" startOnView={false} speed={60} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">blurIn</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Blur in animation" animation="blurIn" startOnView={false} speed={60} delay={500} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">blurInUp</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Blur in up animation" animation="blurInUp" startOnView={false} speed={60} delay={1000} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">blurInDown</p>
           <div className="bg-app-background rounded-lg p-4">
@@ -428,28 +403,24 @@ export const AnimationVariants: Story = {
             />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">slideUp</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Slide up animation" animation="slideUp" startOnView={false} speed={60} delay={2000} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">slideDown</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Slide down animation" animation="slideDown" startOnView={false} speed={60} delay={2500} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">slideLeft</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Slide left animation" animation="slideLeft" startOnView={false} speed={60} delay={3000} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">slideRight</p>
           <div className="bg-app-background rounded-lg p-4">
@@ -462,14 +433,12 @@ export const AnimationVariants: Story = {
             />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">scaleUp</p>
           <div className="bg-app-background rounded-lg p-4">
             <TypingText text="Scale up animation" animation="scaleUp" startOnView={false} speed={60} delay={4000} />
           </div>
         </div>
-
         <div className="space-y-2">
           <p className="text-muted-foreground text-sm font-medium">scaleDown</p>
           <div className="bg-app-background rounded-lg p-4">
@@ -488,4 +457,4 @@ export const AnimationVariants: Story = {
       { timeout: 3000 }
     );
   }
-};
+});

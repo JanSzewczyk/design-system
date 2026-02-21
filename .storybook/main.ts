@@ -1,6 +1,6 @@
 import tsConfigPaths from "vite-tsconfig-paths";
 
-import { type StorybookConfig } from "@storybook/react-vite";
+import { defineMain } from "@storybook/react-vite/node";
 import { type PresetValue, type TagsOptions } from "storybook/internal/types";
 
 process.env.STORYBOOK = "true";
@@ -12,8 +12,11 @@ const tags: PresetValue<TagsOptions | undefined> = {
   }
 };
 
-export default {
+export default defineMain({
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  features: {
+    experimentalTestSyntax: true
+  },
   addons: [
     "@storybook/addon-a11y",
     "@storybook/addon-vitest",
@@ -40,4 +43,4 @@ export default {
       assetsInclude: ["**/*.md"]
     });
   }
-} satisfies StorybookConfig;
+});

@@ -1,19 +1,16 @@
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 
 import { Header } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Header",
   component: Header,
   tags: ["autodocs"]
-} satisfies Meta<typeof Header>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
     <Header>
       <div className="flex w-full justify-between">
@@ -35,4 +32,4 @@ export const Default: Story = {
       </div>
     </Header>
   )
-};
+});

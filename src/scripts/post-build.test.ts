@@ -1,9 +1,9 @@
+// @ts-ignore
+
 import { type Mock } from "vitest";
 
 import fs from "fs/promises";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import { updateFilesWithText } from "./post-build.js";
 
 // Mock fs module

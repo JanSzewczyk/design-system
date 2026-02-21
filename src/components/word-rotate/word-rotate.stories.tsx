@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, waitFor } from "storybook/test";
 import { WordRotate } from "~/components";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/WordRotate",
   component: WordRotate,
   tags: ["autodocs", "new"],
@@ -58,19 +59,16 @@ const meta = {
     },
     className: {
       control: "text",
-      description: "Custom className for the word"
+      description: "Custom className for word"
     },
     containerClassName: {
       control: "text",
-      description: "Custom className for the container"
+      description: "Custom className for container"
     }
   }
-} satisfies Meta<typeof WordRotate>;
+});
 
-export default meta;
-type Story = StoryObj<typeof WordRotate>;
-
-export const Default: Story = {
+export const Default = meta.story({
   tags: ["test"],
   args: {
     words: ["Hello", "World", "React", "TypeScript"],
@@ -80,9 +78,9 @@ export const Default: Story = {
     const wordRotate = canvas.getByText("Hello", { selector: '[data-slot="word-rotate"] span' });
     await expect(wordRotate).toBeInTheDocument();
   }
-};
+});
 
-export const AnimationStyles: Story = {
+export const AnimationStyles = meta.story({
   render: () => (
     <div className="space-y-6">
       <div>
@@ -107,9 +105,9 @@ export const AnimationStyles: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const CustomDuration: Story = {
+export const CustomDuration = meta.story({
   render: () => (
     <div className="space-y-6">
       <div>
@@ -126,18 +124,18 @@ export const CustomDuration: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const NoLoop: Story = {
+export const NoLoop = meta.story({
   args: {
     words: ["First", "Second", "Third", "Final"],
     loop: false,
     duration: 1000,
     startOnView: false
   }
-};
+});
 
-export const HeroSection: Story = {
+export const HeroSection = meta.story({
   render: () => (
     <div className="bg-app-background flex min-h-64 flex-col items-center justify-center rounded-lg p-8">
       <h1 className="text-4xl font-bold">
@@ -152,9 +150,9 @@ export const HeroSection: Story = {
       </h1>
     </div>
   )
-};
+});
 
-export const RoleRotator: Story = {
+export const RoleRotator = meta.story({
   tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
@@ -176,9 +174,9 @@ export const RoleRotator: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const TechStack: Story = {
+export const TechStack = meta.story({
   render: () => (
     <div className="flex flex-col items-center gap-4">
       <p className="text-muted-foreground text-sm">Built with</p>
@@ -192,9 +190,9 @@ export const TechStack: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const GradientText: Story = {
+export const GradientText = meta.story({
   render: () => (
     <div className="text-4xl font-bold">
       <WordRotate
@@ -205,9 +203,9 @@ export const GradientText: Story = {
       />
     </div>
   )
-};
+});
 
-export const CallToAction: Story = {
+export const CallToAction = meta.story({
   render: () => (
     <div className="bg-app-background rounded-lg p-8 text-center">
       <h2 className="mb-4 text-3xl font-bold">
@@ -217,9 +215,9 @@ export const CallToAction: Story = {
       <p className="text-muted-foreground">Join thousands of developers building with our design system</p>
     </div>
   )
-};
+});
 
-export const Features: Story = {
+export const Features = meta.story({
   render: () => (
     <div className="space-y-2 text-lg">
       <div className="flex items-center gap-2">
@@ -239,25 +237,25 @@ export const Features: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const SlideUpAnimation: Story = {
+export const SlideUpAnimation = meta.story({
   args: {
     words: ["Slide", "Up", "Animation", "Demo"],
     animationStyle: "slide-up",
     startOnView: false
   }
-};
+});
 
-export const FlipAnimation: Story = {
+export const FlipAnimation = meta.story({
   args: {
     words: ["Flip", "3D", "Effect", "Cool"],
     animationStyle: "flip",
     startOnView: false
   }
-};
+});
 
-export const DataSlotAttribute: Story = {
+export const DataSlotAttribute = meta.story({
   tags: ["test"],
   args: {
     words: ["Testing", "Data", "Slot"],
@@ -267,18 +265,18 @@ export const DataSlotAttribute: Story = {
     const wordRotate = canvas.getByText("Testing").closest('[data-slot="word-rotate"]');
     await expect(wordRotate).toHaveAttribute("data-slot", "word-rotate");
   }
-};
+});
 
-export const CustomStyling: Story = {
+export const CustomStyling = meta.story({
   args: {
     words: ["Custom", "Styled", "Words"],
     className: "font-mono text-2xl tracking-wider",
     containerClassName: "bg-gray-900 px-4 py-2 rounded-lg",
     startOnView: false
   }
-};
+});
 
-export const QuickTransitions: Story = {
+export const QuickTransitions = meta.story({
   args: {
     words: ["Quick", "Fast", "Rapid", "Swift"],
     duration: 800,
@@ -286,4 +284,4 @@ export const QuickTransitions: Story = {
     animationStyle: "slide-up",
     startOnView: false
   }
-};
+});

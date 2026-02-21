@@ -1,18 +1,19 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import { Button } from "~/components";
 
 import { Checkbox } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Checkbox",
   component: Checkbox,
   argTypes: {
     checked: {
       control: "boolean",
-      description: "The controlled checked state of the checkbox"
+      description: "The controlled checked state of checkbox"
     },
     defaultChecked: {
       control: "boolean",
@@ -20,24 +21,21 @@ const meta = {
     },
     disabled: {
       control: "boolean",
-      description: "When true, prevents interaction with the checkbox"
+      description: "When true, prevents interaction with checkbox"
     },
     required: {
       control: "boolean",
-      description: "When true, indicates that the user must check the checkbox before submitting"
+      description: "When true, indicates that user must check checkbox before submitting"
     },
     name: {
       control: "text",
-      description: "The name of the checkbox (used in form submission)"
+      description: "The name of checkbox (used in form submission)"
     }
   },
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof Checkbox>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
     <div className="flex items-center gap-2">
       <Checkbox name="asd asd as dasd" required />
@@ -46,7 +44,7 @@ export const Default: Story = {
       </label>
     </div>
   ),
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const checkbox = canvas.getByRole("checkbox");
 
     // Verify initial unchecked state
@@ -60,9 +58,9 @@ export const Default: Story = {
     await userEvent.click(checkbox);
     await expect(checkbox).toHaveAttribute("data-state", "unchecked");
   }
-};
+});
 
-export const Checked: Story = {
+export const Checked = meta.story({
   render: () => (
     <div className="flex items-center gap-2">
       <Checkbox id="checked" defaultChecked />
@@ -77,9 +75,9 @@ export const Checked: Story = {
     // Verify initially checked
     await expect(checkbox).toHaveAttribute("data-state", "checked");
   }
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
@@ -110,9 +108,9 @@ export const Disabled: Story = {
     // Verify checked state for second checkbox
     await expect(checkboxes[1]).toHaveAttribute("data-state", "checked");
   }
-};
+});
 
-export const Invalid: Story = {
+export const Invalid = meta.story({
   render: () => (
     <div className="flex items-center gap-2">
       <Checkbox id="invalid" aria-invalid />
@@ -128,9 +126,9 @@ export const Invalid: Story = {
     // Verify aria-invalid attribute is present
     await expect(checkbox).toHaveAttribute("aria-invalid", "true");
   }
-};
+});
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: function ControlledCheckbox() {
     const [checked, setChecked] = React.useState(false);
 
@@ -148,7 +146,7 @@ export const Controlled: Story = {
       </div>
     );
   },
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const checkbox = canvas.getByRole("checkbox");
     const stateText = canvas.getByText(/State:/);
 
@@ -166,9 +164,9 @@ export const Controlled: Story = {
     await expect(checkbox).toHaveAttribute("data-state", "unchecked");
     await expect(stateText).toHaveTextContent("State: Unchecked");
   }
-};
+});
 
-export const WithForm: Story = {
+export const WithForm = meta.story({
   render: () => (
     <form className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
@@ -180,7 +178,7 @@ export const WithForm: Story = {
       <div className="flex items-center gap-2">
         <Checkbox id="terms-form" name="terms" required />
         <label htmlFor="terms-form" className="cursor-pointer text-sm">
-          I agree to the terms and conditions <span className="text-error">*</span>
+          I agree to terms and conditions <span className="text-error">*</span>
         </label>
       </div>
       <Button fullWidth type="submit">
@@ -192,12 +190,12 @@ export const WithForm: Story = {
     // Verify form attributes
     await expect(canvas.getByRole("checkbox", { name: /Subscribe to newsletter/ })).toBeVisible();
 
-    await expect(canvas.getByRole("checkbox", { name: /I agree to the terms and conditions */ })).toBeVisible();
-    await expect(canvas.getByRole("checkbox", { name: /I agree to the terms and conditions */ })).toBeRequired();
+    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeVisible();
+    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeRequired();
   }
-};
+});
 
-export const MultipleCheckboxes: Story = {
+export const MultipleCheckboxes = meta.story({
   render: () => (
     <div className="flex flex-col gap-3">
       <p className="text-sm font-medium">Select your interests:</p>
@@ -213,7 +211,7 @@ export const MultipleCheckboxes: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
 
     // Verify all checkboxes are rendered
@@ -229,9 +227,9 @@ export const MultipleCheckboxes: Story = {
     await expect(checkboxes[3]).toHaveAttribute("data-state", "unchecked");
     await expect(checkboxes[4]).toHaveAttribute("data-state", "unchecked");
   }
-};
+});
 
-export const Indeterminate: Story = {
+export const Indeterminate = meta.story({
   render: function IndeterminateCheckbox() {
     const [selectedItems, setSelectedItems] = React.useState<string[]>(["item-1"]);
 
@@ -276,7 +274,7 @@ export const Indeterminate: Story = {
       </div>
     );
   },
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
     const selectAllCheckbox = checkboxes[0];
 
@@ -298,9 +296,9 @@ export const Indeterminate: Story = {
     await expect(checkboxes[2]).toHaveAttribute("data-state", "unchecked");
     await expect(checkboxes[3]).toHaveAttribute("data-state", "unchecked");
   }
-};
+});
 
-export const KeyboardNavigation: Story = {
+export const KeyboardNavigation = meta.story({
   render: () => (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
@@ -323,7 +321,7 @@ export const KeyboardNavigation: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
 
     // Focus first checkbox
@@ -346,4 +344,4 @@ export const KeyboardNavigation: Story = {
     await userEvent.keyboard(" ");
     await expect(checkboxes[1]).toHaveAttribute("data-state", "checked");
   }
-};
+});

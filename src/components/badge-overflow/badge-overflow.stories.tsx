@@ -1,9 +1,10 @@
-import { type Meta, type StoryObj } from "@storybook/react";
 import { Badge, type BadgeVariant } from "~/components/badge";
 
 import { BadgeOverflow } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Badge Overflow",
   component: BadgeOverflow,
   tags: ["autodocs"],
@@ -29,21 +30,17 @@ const meta = {
     lineCount: 1,
     renderBadge: (_item, label) => <Badge variant="outline">{label}</Badge>
   }
-} satisfies Meta<typeof BadgeOverflow>;
+});
 
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: (args) => (
     <div className="w-full max-w-sm rounded-lg border p-4">
       <BadgeOverflow {...args} />
     </div>
   )
-};
+});
 
-export const CustomOverflow: Story = {
+export const CustomOverflow = meta.story({
   args: {
     renderOverflow: (count) => (
       <Badge variant="secondary" className="bg-muted">
@@ -56,9 +53,9 @@ export const CustomOverflow: Story = {
       <BadgeOverflow {...args} />
     </div>
   )
-};
+});
 
-export const MultiLine: Story = {
+export const MultiLine = meta.story({
   args: {
     items: [
       "Frontend Development",
@@ -80,9 +77,9 @@ export const MultiLine: Story = {
       <BadgeOverflow {...args} />
     </div>
   )
-};
+});
 
-export const ObjectItems: Story = {
+export const ObjectItems = meta.story({
   render: () => (
     <div className="w-full max-w-50 rounded-lg border p-4">
       <BadgeOverflow
@@ -99,4 +96,4 @@ export const ObjectItems: Story = {
       />
     </div>
   )
-};
+});

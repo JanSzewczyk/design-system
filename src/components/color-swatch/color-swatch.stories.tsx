@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
-import { ColorSwatch } from "./color-swatch";
+import { ColorSwatch } from "~/components";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Color Swatch",
   component: ColorSwatch,
   tags: ["autodocs", "new"],
@@ -32,18 +33,15 @@ const meta = {
       description: "Whether to render as a child element using Radix Slot"
     }
   }
-} satisfies Meta<typeof ColorSwatch>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   args: {
     color: "#3b82f6"
   }
-};
+});
 
-export const Sizes: Story = {
+export const Sizes = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch size="sm" color="#3b82f6" />
@@ -51,9 +49,9 @@ export const Sizes: Story = {
       <ColorSwatch size="lg" color="#3b82f6" />
     </div>
   )
-};
+});
 
-export const ColorFormats: Story = {
+export const ColorFormats = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -78,9 +76,9 @@ export const ColorFormats: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const TransparentColors: Story = {
+export const TransparentColors = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -105,9 +103,9 @@ export const TransparentColors: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const WithoutTransparencyPattern: Story = {
+export const WithoutTransparencyPattern = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -120,36 +118,36 @@ export const WithoutTransparencyPattern: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const NoColor: Story = {
+export const NoColor = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch />
       <span className="text-muted-foreground text-sm">No color (shows diagonal line)</span>
     </div>
   )
-};
+});
 
-export const InvalidColor: Story = {
+export const InvalidColor = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch color="not-a-color" />
       <span className="text-muted-foreground text-sm">Invalid color (transparent background)</span>
     </div>
   )
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch color="#3b82f6" />
       <ColorSwatch color="#3b82f6" disabled />
     </div>
   )
-};
+});
 
-export const AsChild: Story = {
+export const AsChild = meta.story({
   render: () => (
     <ColorSwatch color="#3b82f6" asChild>
       <button type="button" onClick={() => alert("Clicked!")}>
@@ -158,7 +156,7 @@ export const AsChild: Story = {
     </ColorSwatch>
   ),
   play: async ({ canvas, step }) => {
-    await step("AsChild renders the child element with swatch styles", async () => {
+    await step("AsChild renders child element with swatch styles", async () => {
       const button = canvas.getByRole("img", { name: /Color swatch: #3b82f6/ });
 
       await expect(button).toBeVisible();
@@ -167,9 +165,9 @@ export const AsChild: Story = {
       await expect(button).toHaveAttribute("type", "button");
     });
   }
-};
+});
 
-export const Accessibility: Story = {
+export const Accessibility = meta.story({
   tags: ["test-only"],
   render: () => (
     <div className="flex items-center gap-4">
@@ -199,9 +197,9 @@ export const Accessibility: Story = {
       await expect(disabled).toHaveAttribute("data-disabled", "");
     });
   }
-};
+});
 
-export const ColorValidation: Story = {
+export const ColorValidation = meta.story({
   tags: ["test-only"],
   render: () => (
     <div className="flex items-center gap-4">
@@ -235,4 +233,4 @@ export const ColorValidation: Story = {
       await expect(whitespaceColor).toHaveAttribute("aria-label", "No color selected");
     });
   }
-};
+});

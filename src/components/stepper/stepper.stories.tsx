@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent } from "storybook/test";
+import { expect } from "storybook/test";
 import { Spinner } from "~/components";
 
 import { Button } from "../button";
@@ -20,16 +19,15 @@ import {
   StepperTrigger
 } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Stepper",
   component: Stepper,
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof Stepper>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -116,9 +114,9 @@ export const Default: Story = {
     // Check if first step content is visible
     await expect(canvas.getByText("Step 1: Basic Information")).toBeInTheDocument();
   }
-};
+});
 
-export const VerticalOrientation: Story = {
+export const VerticalOrientation = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -196,9 +194,9 @@ export const VerticalOrientation: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const WithCompletedSteps: Story = {
+export const WithCompletedSteps = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step2");
 
@@ -254,9 +252,9 @@ export const WithCompletedSteps: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const WithDisabledSteps: Story = {
+export const WithDisabledSteps = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -303,9 +301,9 @@ export const WithDisabledSteps: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const WithLoadingState: Story = {
+export const WithLoadingState = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step2");
 
@@ -362,9 +360,9 @@ export const WithLoadingState: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const ManualActivation: Story = {
+export const ManualActivation = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -423,9 +421,9 @@ export const ManualActivation: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const WithCustomIndicators: Story = {
+export const WithCustomIndicators = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -489,9 +487,9 @@ export const WithCustomIndicators: Story = {
       </Stepper>
     );
   }
-};
+});
 
-export const WithValidation: Story = {
+export const WithValidation = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
     const [formValid, setFormValid] = React.useState(false);
@@ -545,16 +543,16 @@ export const WithValidation: Story = {
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
               <h3 className="mb-4 text-lg font-semibold">Step 2 Content</h3>
-              <p className="text-gray-600">You successfully validated the form!</p>
+              <p className="text-gray-600">You successfully validated form!</p>
             </div>
           </StepperContent>
         </StepperPanel>
       </Stepper>
     );
   }
-};
+});
 
-export const InteractiveNavigation: Story = {
+export const InteractiveNavigation = meta.story({
   render: () => {
     const [step, setStep] = React.useState("step1");
 
@@ -616,7 +614,7 @@ export const InteractiveNavigation: Story = {
       </Stepper>
     );
   },
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     // Verify initial state
     await expect(canvas.getByText("Step 1: Interactive Navigation")).toBeInTheDocument();
 
@@ -627,4 +625,4 @@ export const InteractiveNavigation: Story = {
     // Verify Step 2 content is now visible
     await expect(canvas.getByText("Step 2: Interactive Navigation")).toBeInTheDocument();
   }
-};
+});

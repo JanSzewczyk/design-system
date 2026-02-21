@@ -2,11 +2,11 @@ import * as React from "react";
 
 import { ArrowDownSquare, ArrowUpRightIcon } from "lucide-react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Button } from "./button";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Button",
   component: Button,
   argTypes: {
@@ -15,12 +15,9 @@ const meta = {
     }
   },
   tags: ["autodocs", "beta"]
-} satisfies Meta<typeof Button>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
       <Button variant="default">Default</Button>
@@ -31,9 +28,9 @@ export const Variants: Story = {
       <Button variant="error">Error</Button>
     </div>
   )
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
       <Button variant="default" disabled>
@@ -56,9 +53,9 @@ export const Disabled: Story = {
       </Button>
     </div>
   )
-};
+});
 
-export const Sizes: Story = {
+export const Sizes = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
       <div className="flex items-start gap-2">
@@ -85,26 +82,26 @@ export const Sizes: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const FullWidth: Story = {
+export const FullWidth = meta.story({
   render: () => (
     <div className="w-52">
       <Button fullWidth>FULL WIDTH</Button>
     </div>
   )
-};
+});
 
-export const WithIcon: Story = {
+export const WithIcon = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button startIcon={<ArrowDownSquare />}>LEFT ICON</Button>
       <Button endIcon={<ArrowDownSquare />}>RIGHT ICON</Button>
     </div>
   )
-};
+});
 
-export const Loading: Story = {
+export const Loading = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button variant="outline" loading>
@@ -118,9 +115,9 @@ export const Loading: Story = {
       </Button>
     </div>
   )
-};
+});
 
-export const AsLink: Story = {
+export const AsLink = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button asChild>
@@ -141,4 +138,4 @@ export const AsLink: Story = {
       </Button>
     </div>
   )
-};
+});

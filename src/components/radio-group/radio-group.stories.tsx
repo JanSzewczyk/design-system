@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import { Button, Label } from "~/components";
 
 import { RadioGroup, RadioGroupItem } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Radio Group",
   component: RadioGroup,
   argTypes: {
@@ -24,25 +25,22 @@ const meta = {
     },
     required: {
       control: "boolean",
-      description: "When true, indicates that the user must select an option before submitting"
+      description: "When true, indicates that user must select an option before submitting"
     },
     name: {
       control: "text",
-      description: "The name of the radio group (used in form submission)"
+      description: "The name of radio group (used in form submission)"
     },
     orientation: {
       control: "select",
       options: ["horizontal", "vertical"],
-      description: "The orientation of the radio group"
+      description: "The orientation of radio group"
     }
   },
   tags: ["autodocs", "test"]
-} satisfies Meta<typeof RadioGroup>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
     <RadioGroup defaultValue="comfortable">
       <div className="flex items-center gap-3">
@@ -59,7 +57,7 @@ export const Default: Story = {
       </div>
     </RadioGroup>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -83,9 +81,9 @@ export const Default: Story = {
     await expect(radioButtons[1]).not.toBeChecked();
     await expect(radioButtons[2]).toBeChecked();
   }
-};
+});
 
-export const Uncontrolled: Story = {
+export const Uncontrolled = meta.story({
   render: () => (
     <RadioGroup>
       <div className="flex items-center gap-3">
@@ -102,7 +100,7 @@ export const Uncontrolled: Story = {
       </div>
     </RadioGroup>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -115,9 +113,9 @@ export const Uncontrolled: Story = {
     await userEvent.click(radioButtons[1]);
     await expect(radioButtons[1]).toBeChecked();
   }
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
@@ -159,7 +157,7 @@ export const Disabled: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -180,9 +178,9 @@ export const Disabled: Story = {
     await userEvent.click(radioButtons[4]);
     await expect(radioButtons[4]).toBeChecked();
   }
-};
+});
 
-export const Invalid: Story = {
+export const Invalid = meta.story({
   render: () => (
     <RadioGroup aria-invalid>
       <div className="flex items-center gap-3">
@@ -200,7 +198,7 @@ export const Invalid: Story = {
       <p className="text-error text-xs">Please select an option</p>
     </RadioGroup>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioGroup = canvas.getByRole("radiogroup");
     const radioButtons = canvas.getAllByRole("radio");
@@ -215,9 +213,9 @@ export const Invalid: Story = {
     await userEvent.click(radioButtons[1]);
     await expect(radioButtons[1]).toBeChecked();
   }
-};
+});
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: function ControlledRadioGroup() {
     const [value, setValue] = React.useState("option-2");
 
@@ -251,7 +249,7 @@ export const Controlled: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
     const stateText = canvas.getByText(/Selected value:/);
@@ -277,9 +275,9 @@ export const Controlled: Story = {
     await expect(radioButtons[2]).toBeChecked();
     await expect(stateText).toHaveTextContent("Selected value: option-3");
   }
-};
+});
 
-export const Horizontal: Story = {
+export const Horizontal = meta.story({
   render: () => (
     <RadioGroup defaultValue="option-1" orientation="horizontal" className="flex-row">
       <div className="flex items-center gap-3">
@@ -296,7 +294,7 @@ export const Horizontal: Story = {
       </div>
     </RadioGroup>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioGroup = canvas.getByRole("radiogroup");
     const radioButtons = canvas.getAllByRole("radio");
@@ -309,9 +307,9 @@ export const Horizontal: Story = {
     await userEvent.click(radioButtons[1]);
     await expect(radioButtons[1]).toBeChecked();
   }
-};
+});
 
-export const WithForm: Story = {
+export const WithForm = meta.story({
   render: () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -342,7 +340,7 @@ export const WithForm: Story = {
       </form>
     );
   },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
     const radioGroup = canvas.getByRole("radiogroup");
@@ -358,9 +356,9 @@ export const WithForm: Story = {
     await expect(radioButtons[2]).toBeChecked();
     await expect(radioButtons[1]).not.toBeChecked();
   }
-};
+});
 
-export const MultipleGroups: Story = {
+export const MultipleGroups = meta.story({
   render: () => (
     <div className="flex flex-col gap-6">
       <div>
@@ -400,7 +398,7 @@ export const MultipleGroups: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -421,9 +419,9 @@ export const MultipleGroups: Story = {
     await expect(radioButtons[5]).toBeChecked();
     await expect(radioButtons[0]).toBeChecked(); // First group unchanged
   }
-};
+});
 
-export const KeyboardNavigation: Story = {
+export const KeyboardNavigation = meta.story({
   render: () => (
     <div className="flex flex-col gap-2">
       <p className="text-muted-foreground text-sm">Use arrow keys to navigate between options</p>
@@ -447,7 +445,7 @@ export const KeyboardNavigation: Story = {
       </RadioGroup>
     </div>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -472,9 +470,9 @@ export const KeyboardNavigation: Story = {
     await userEvent.tab();
     await expect(radioButtons[2]).not.toHaveFocus();
   }
-};
+});
 
-export const WithDescriptions: Story = {
+export const WithDescriptions = meta.story({
   render: () => (
     <RadioGroup defaultValue="plan-1">
       <div className="flex items-start gap-3">
@@ -506,7 +504,7 @@ export const WithDescriptions: Story = {
       </div>
     </RadioGroup>
   ),
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement);
     const radioButtons = canvas.getAllByRole("radio");
 
@@ -518,4 +516,4 @@ export const WithDescriptions: Story = {
     await expect(radioButtons[1]).toBeChecked();
     await expect(radioButtons[0]).not.toBeChecked();
   }
-};
+});
