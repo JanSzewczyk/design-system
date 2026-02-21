@@ -118,3 +118,6 @@ src/styles
 
 # Claude
 /.claude/settings.local.json
+
+# Docs
+/CHANGELOG.mdx
