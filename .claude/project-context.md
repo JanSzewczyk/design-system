@@ -40,7 +40,7 @@ This file contains project-specific configuration that agents and skills referen
 | Tailwind CSS | `src/tailwind/` (global.css, palette.css, typography.css, etc.) |
 | Storybook | `.storybook/` (main.ts, preview.tsx) |
 | Vitest config | `vitest.config.ts` |
-| Post-build script | `src/scripts/post-build.js` |
+| Post-build script | `src/scripts/post-build.ts` |
 
 ## Import Conventions
 

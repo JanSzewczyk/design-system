@@ -13,6 +13,6 @@ export async function updateFilesWithText(filePaths, text) {
   }
 }
 
-updateFilesWithText(["dist/components/index.js", "dist/components/index.cjs"], '"use client";\n\n').then(() => {
+await updateFilesWithText(["dist/components/index.js", "dist/components/index.cjs"], '"use client";\n\n').then(() => {
   console.log("Files updated successfully");
 });
