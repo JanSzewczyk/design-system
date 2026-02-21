@@ -1,0 +1,62 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7"
+  ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🚀 Session started in: $CLAUDE_PROJECT_DIR' >&2"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ \"$TOOL_INPUT\" =~ \"git push\".*\"--force-with-lease\" ]] && exit 0; [[ \"$TOOL_INPUT\" =~ (rm[[:space:]]+-rf[[:space:]]+/|git[[:space:]]+push.*--force([[:space:]]|$)|drop[[:space:]]+database) ]] && echo 'Dangerous command blocked' >&2 && exit 2 || true"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[[ \"$CLAUDE_FILE_PATH\" =~ (node_modules|\\.next|dist|out|\\.claude/) ]] && exit 0; npx --yes prettier --write --log-level=error \"$CLAUDE_FILE_PATH\" 2>/dev/null; [[ \"$CLAUDE_FILE_PATH\" =~ \\.(ts|tsx|js|jsx|mjs|cjs)$ ]] && npx --yes eslint --fix --quiet \"$CLAUDE_FILE_PATH\" 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ Session complete in: $CLAUDE_PROJECT_DIR' >&2"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": ".claude/statusline.sh",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "ralph-wiggum@claude-code-plugins": true,
+    "nextjs-react@szum-tech": true,
+    "code-quality@szum-tech": true,
+    "dev-experience@szum-tech": true,
+    "testing@szum-tech": true
+  }
+}
