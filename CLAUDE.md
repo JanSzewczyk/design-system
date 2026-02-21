@@ -151,7 +151,6 @@ The library uses **conditional exports** for fine-grained imports:
   "./icons": "./dist/icons/index.js", // Icon collection
   "./utils": "./dist/utils/index.js", // Utility functions
   "./hooks": "./dist/hooks/index.js", // Custom hooks
-  "./contexts": "./dist/contexts/index.js", // Context providers
   "./tailwind/*.css": "./tailwind/*.css" // CSS files (root level)
 }
 ```
@@ -164,12 +163,14 @@ The library uses **conditional exports** for fine-grained imports:
    - Location: `**/*.{test,spec}.{ts,tsx}`
    - Fast, lightweight testing for logic
    - Setup: `src/tests/unit/vitest.setup.ts`
+   - Uses global test functions (`describe`, `test`, `it`, `expect`) - no imports needed
 
 2. **Storybook Integration Tests** (Playwright browser)
    - Tests defined in `.stories.tsx` files
    - Real browser rendering for visual/interaction testing
    - Setup: `src/tests/integration/vitest.setup.ts`
    - Tag filters: include "test", exclude "experimental", skip "skip-test"
+   - Custom `test-only` tag: excludes from docs stories, shows in sidebar
 
 **Coverage:** v8 provider with text, html, json-summary, json reporters
 
@@ -437,4 +438,16 @@ import { Button } from "@szum-tech/design-system";
 
 ```typescript
 import { GoogleLogoIcon } from "@szum-tech/design-system/icons";
+```
+
+**Hooks Import:**
+
+```typescript
+import { useComposedRefs } from "@szum-tech/design-system/hooks";
+```
+
+**Utils Import:**
+
+```typescript
+import { cn } from "@szum-tech/design-system/utils";
 ```
