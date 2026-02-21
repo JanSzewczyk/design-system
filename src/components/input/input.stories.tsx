@@ -1,45 +1,42 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Input } from "./input";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Input",
   component: Input,
   tags: ["autodocs", "new"],
   decorators: [(story) => <div className="max-w-lg">{story()}</div>]
-} satisfies Meta<typeof Input>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   args: {
     type: "email",
     placeholder: "Email"
   }
-};
+});
 
-export const File: Story = {
+export const File = meta.story({
   args: {
     type: "file"
   }
-};
+});
 
-export const Disabled: Story = {
+export const Disabled = meta.story({
   args: {
     type: "email",
     placeholder: "Email",
     disabled: true
   }
-};
+});
 
-export const Invalid: Story = {
+export const Invalid = meta.story({
   args: {
     type: "email",
     placeholder: "Email",
     invalid: true,
     defaultValue: "incorrect@email.com"
   }
-};
+});

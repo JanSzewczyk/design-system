@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { Spinner } from "~/components";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Spinner",
   component: Spinner,
   argTypes: {
@@ -13,26 +14,23 @@ const meta = {
     }
   },
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof Spinner>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   play: async ({ canvas }) => {
-    // Test that the spinner renders
+    // Test that spinner renders
     const spinner = canvas.getByRole("status");
     await expect(spinner).toBeVisible();
 
-    // Test that it has the correct aria-label
+    // Test that it has correct aria-label
     await expect(spinner).toHaveAttribute("aria-label", "Loading");
 
     // Test that it has the animate-spin class
     await expect(spinner).toHaveClass("animate-spin");
   }
-};
+});
 
-export const Sizes: Story = {
+export const Sizes = meta.story({
   render: () => (
     <div className="flex items-center gap-8">
       <div className="flex flex-col items-center gap-2">
@@ -70,9 +68,9 @@ export const Sizes: Story = {
     await expect(canvas.getByText("Large (32px)")).toBeVisible();
     await expect(canvas.getByText("Extra Large (48px)")).toBeVisible();
   }
-};
+});
 
-export const Colors: Story = {
+export const Colors = meta.story({
   render: () => (
     <div className="flex items-center gap-8">
       <div className="flex flex-col items-center gap-2">
@@ -115,9 +113,9 @@ export const Colors: Story = {
     await expect(canvas.getByText("Warning")).toBeVisible();
     await expect(canvas.getByText("Error")).toBeVisible();
   }
-};
+});
 
-export const WithCustomClassName: Story = {
+export const WithCustomClassName = meta.story({
   tags: ["test-only"],
   render: () => <Spinner className="size-16 text-blue-500" data-testid="custom-spinner" />,
   play: async ({ canvasElement }) => {
@@ -130,9 +128,9 @@ export const WithCustomClassName: Story = {
     await expect(spinner).toHaveClass("text-blue-500");
     await expect(spinner).toHaveClass("animate-spin");
   }
-};
+});
 
-export const WithCustomProps: Story = {
+export const WithCustomProps = meta.story({
   tags: ["test-only"],
   render: () => <Spinner strokeWidth={3} data-testid="custom-props-spinner" />,
   play: async ({ canvasElement }) => {
@@ -143,9 +141,9 @@ export const WithCustomProps: Story = {
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveAttribute("stroke-width", "3");
   }
-};
+});
 
-export const InButton: Story = {
+export const InButton = meta.story({
   render: () => (
     <button
       type="button"
@@ -159,20 +157,20 @@ export const InButton: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Test that the button with spinner is rendered
+    // Test that button with spinner is rendered
     const button = canvas.getByRole("button");
     await expect(button).toBeVisible();
     await expect(button).toBeDisabled();
     await expect(canvas.getByText("Loading...")).toBeVisible();
 
-    // Test that the spinner is visible
+    // Test that spinner is visible
     const spinner = canvas.getByRole("status");
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveClass("animate-spin");
   }
-};
+});
 
-export const CenteredInCard: Story = {
+export const CenteredInCard = meta.story({
   render: () => (
     <div className="bg-app-foreground flex h-48 w-64 items-center justify-center rounded-lg border border-gray-800 p-6 shadow-sm">
       <Spinner className="size-8" />
@@ -181,9 +179,9 @@ export const CenteredInCard: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    // Test that the spinner is centered and visible
+    // Test that spinner is centered and visible
     const spinner = canvas.getByRole("status");
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveClass("animate-spin");
   }
-};
+});

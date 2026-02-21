@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Masonry, MasonryItem } from ".";
+
+import preview from "~/.storybook/preview";
 
 // Sample data for masonry items
 const generateItems = (count: number) =>
@@ -12,7 +12,7 @@ const generateItems = (count: number) =>
     color: `hsl(${Math.random() * 360}, 70%, 60%)`
   }));
 
-const meta = {
+const meta = preview.meta({
   title: "Components/Masonry",
   component: Masonry,
   subcomponents: { MasonryItem },
@@ -58,16 +58,13 @@ const meta = {
       </div>
     )
   ]
-} satisfies Meta<typeof Masonry>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+});
 
 /**
  * Basic masonry layout with default settings.
  * Items are arranged in columns with automatic height detection.
  */
-export const Basic: Story = {
+export const Basic = meta.story({
   render: () => {
     const items = generateItems(20);
 
@@ -95,13 +92,13 @@ export const Basic: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Masonry with custom column width.
  * Smaller columns allow more items to fit horizontally.
  */
-export const CustomColumnWidth: Story = {
+export const CustomColumnWidth = meta.story({
   render: () => {
     const items = generateItems(30);
 
@@ -124,12 +121,12 @@ export const CustomColumnWidth: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Fixed number of columns regardless of container width.
  */
-export const FixedColumns: Story = {
+export const FixedColumns = meta.story({
   render: () => {
     const items = generateItems(24);
 
@@ -157,13 +154,13 @@ export const FixedColumns: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Masonry with custom gap spacing.
  * Different gaps for columns and rows.
  */
-export const WithCustomGap: Story = {
+export const WithCustomGap = meta.story({
   render: () => {
     const items = generateItems(20);
 
@@ -187,13 +184,13 @@ export const WithCustomGap: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Linear positioning mode.
  * Items are positioned left-to-right, top-to-bottom instead of filling shortest columns.
  */
-export const LinearMode: Story = {
+export const LinearMode = meta.story({
   render: () => {
     const items = generateItems(20);
 
@@ -221,12 +218,12 @@ export const LinearMode: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Image gallery example with varying aspect ratios.
  */
-export const ImageGallery: Story = {
+export const ImageGallery = meta.story({
   render: () => {
     const images = Array.from({ length: 25 }, (_, i) => ({
       id: i,
@@ -253,13 +250,13 @@ export const ImageGallery: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Masonry with maximum column count limit.
  * Prevents too many columns on ultra-wide screens.
  */
-export const WithMaxColumns: Story = {
+export const WithMaxColumns = meta.story({
   render: () => {
     const items = generateItems(30);
 
@@ -285,13 +282,13 @@ export const WithMaxColumns: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Large dataset with virtualization.
  * Efficiently renders many items by only mounting visible ones.
  */
-export const LargeDataset: Story = {
+export const LargeDataset = meta.story({
   render: () => {
     const items = generateItems(100);
 
@@ -321,13 +318,13 @@ export const LargeDataset: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Masonry with loading fallback.
  * Shows spinner while items are being measured.
  */
-export const WithFallback: Story = {
+export const WithFallback = meta.story({
   render: () => {
     const [items, setItems] = React.useState<ReturnType<typeof generateItems>>([]);
     const [loading, setLoading] = React.useState(true);
@@ -382,13 +379,13 @@ export const WithFallback: Story = {
       </Masonry>
     );
   }
-};
+});
 
 /**
  * Responsive masonry that adapts to container width.
- * Try resizing the window to see columns adjust.
+ * Try resizing window to see columns adjust.
  */
-export const Responsive: Story = {
+export const Responsive = meta.story({
   render: () => {
     const items = generateItems(30);
 
@@ -407,7 +404,7 @@ export const Responsive: Story = {
             >
               <div style={{ color: "white" }}>
                 <div style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "8px" }}>Card {item.id + 1}</div>
-                <div style={{ fontSize: "14px", opacity: 0.9 }}>Resize the window to see the layout adapt</div>
+                <div style={{ fontSize: "14px", opacity: 0.9 }}>Resize window to see layout adapt</div>
               </div>
             </div>
           </MasonryItem>
@@ -415,4 +412,4 @@ export const Responsive: Story = {
       </Masonry>
     );
   }
-};
+});

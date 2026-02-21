@@ -1,20 +1,18 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
+import { ScrollArea } from "~/components";
 import { Separator } from "~/components/separator";
 
-import { ScrollArea } from "./scroll-area";
 import { ScrollBar } from "./scroll-bar";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/ScrollArea",
   component: ScrollArea,
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof ScrollArea>;
-export default meta;
-
-type Story = StoryObj<typeof meta>;
+});
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 
@@ -49,7 +47,7 @@ const works = [
   }
 ];
 
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <ScrollArea className="border-border h-72 w-48 rounded-md border">
       <div className="p-4">
@@ -63,9 +61,9 @@ export const Example: Story = {
       </div>
     </ScrollArea>
   )
-};
+});
 
-export const HorizontalScrolling: Story = {
+export const HorizontalScrolling = meta.story({
   render: () => (
     <ScrollArea className="border-border w-96 rounded-md border whitespace-nowrap">
       <div className="flex w-max space-x-4 p-4">
@@ -75,7 +73,7 @@ export const HorizontalScrolling: Story = {
               <img
                 src={`https://avatar.vercel.sh/${work.art}`}
                 alt={`Artwork: ${work.art}`}
-                className="aspect-[3/4] h-fit w-[150px] object-cover"
+                className="aspect-3/4 h-fit w-37.5 object-cover"
               />
             </div>
             <figcaption className="text-muted-foreground pt-2 text-xs">
@@ -89,17 +87,17 @@ export const HorizontalScrolling: Story = {
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   )
-};
+});
 
-export const BothDirections: Story = {
+export const BothDirections = meta.story({
   render: () => (
     <ScrollArea className="border-border size-72 rounded-md border">
-      <div className="w-[500px] p-4">
+      <div className="w-125 p-4">
         <h4 className="mb-4 text-sm leading-none font-medium">Both Directions</h4>
         <p className="text-muted-foreground text-sm">
           This ScrollArea supports scrolling in both vertical and horizontal directions. The content inside is wider and
-          taller than the visible area, allowing you to scroll in any direction to see the full content. This is useful
-          for displaying large tables, code blocks, or any content that exceeds the container dimensions.
+          taller than visible area, allowing you to scroll in any direction to see full content. This is useful for
+          displaying large tables, code blocks, or any content that exceeds the container dimensions.
         </p>
         <div className="mt-4 grid grid-cols-5 gap-4">
           {Array.from({ length: 25 }).map((_, i) => (
@@ -112,9 +110,9 @@ export const BothDirections: Story = {
       <ScrollBar orientation="horizontal" />
     </ScrollArea>
   )
-};
+});
 
-export const CustomHeight: Story = {
+export const CustomHeight = meta.story({
   render: () => (
     <div className="flex gap-4">
       <ScrollArea className="border-border h-40 w-48 rounded-md border">
@@ -152,9 +150,9 @@ export const CustomHeight: Story = {
       </ScrollArea>
     </div>
   )
-};
+});
 
-export const WithLongContent: Story = {
+export const WithLongContent = meta.story({
   render: () => (
     <ScrollArea className="border-border h-72 w-full max-w-lg rounded-md border">
       <div className="p-4">
@@ -191,9 +189,9 @@ export const WithLongContent: Story = {
       </div>
     </ScrollArea>
   )
-};
+});
 
-export const InteractionTest: Story = {
+export const InteractionTest = meta.story({
   tags: ["test-only"],
   render: () => (
     <div className="flex gap-4">
@@ -212,7 +210,7 @@ export const InteractionTest: Story = {
         <div className="flex w-max space-x-4 p-4">
           {works.slice(0, 4).map((work) => (
             <figure key={work.art} className="shrink-0">
-              <div className="bg-muted flex h-20 w-[100px] items-center justify-center rounded-md text-xs">
+              <div className="bg-muted flex h-20 w-25 items-center justify-center rounded-md text-xs">
                 {work.art}
               </div>
             </figure>
@@ -244,4 +242,4 @@ export const InteractionTest: Story = {
       await expect(artworkItem).toBeVisible();
     });
   }
-};
+});

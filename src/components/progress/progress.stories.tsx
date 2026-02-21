@@ -1,20 +1,18 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
 import { Progress } from "./progress";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Progress",
   component: Progress,
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof Progress>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   args: {
     value: 50
   },
@@ -26,9 +24,9 @@ export const Example: Story = {
     await expect(progressbar).toHaveAttribute("aria-valuemax", "100");
     await expect(progressbar).toHaveAttribute("data-slot", "progress");
   }
-};
+});
 
-export const DataAttributes: Story = {
+export const DataAttributes = meta.story({
   render: () => (
     <div className="space-y-4">
       <Progress value={60} />
@@ -43,9 +41,9 @@ export const DataAttributes: Story = {
       await expect(indicator).toBeVisible();
     });
   }
-};
+});
 
-export const AccessibilityTest: Story = {
+export const AccessibilityTest = meta.story({
   tags: ["test-only"],
   render: () => (
     <div className="space-y-4">
@@ -67,4 +65,4 @@ export const AccessibilityTest: Story = {
       await expect(progressbars[1]).toHaveAttribute("aria-valuenow", "50");
     });
   }
-};
+});

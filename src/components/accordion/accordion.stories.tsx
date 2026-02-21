@@ -1,18 +1,15 @@
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Accordion",
   component: Accordion,
   subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
   tags: ["autodocs"]
-} satisfies Meta<typeof Accordion>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Single: Story = {
+export const Single = meta.story({
   args: {
     type: "single",
     collapsible: true
@@ -35,9 +32,9 @@ export const Single: Story = {
       </AccordionItem>
     </Accordion>
   )
-};
+});
 
-export const Multiple: Story = {
+export const Multiple = meta.story({
   args: {
     type: "multiple",
     defaultValue: ["item-1"]
@@ -56,4 +53,4 @@ export const Multiple: Story = {
       </AccordionItem>
     </Accordion>
   )
-};
+});

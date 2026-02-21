@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, waitFor, within } from "storybook/test";
 import { CountingNumber } from "~/components";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Counting Number",
   component: CountingNumber,
   tags: ["autodocs", "new"],
@@ -56,18 +57,15 @@ const meta = {
       }
     },
     format: {
-      description: "Custom formatting function for the displayed value"
+      description: "Custom formatting function for displayed value"
     },
     onComplete: {
       description: "Callback function called when animation completes"
     }
   }
-} satisfies Meta<typeof CountingNumber>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   tags: ["test"],
   args: {
     from: 0,
@@ -80,9 +78,9 @@ export const Default: Story = {
     await expect(element).toBeVisible();
     await expect(element).toHaveAttribute("data-slot", "counting-number");
   }
-};
+});
 
-export const CustomRange: Story = {
+export const CustomRange = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
@@ -112,9 +110,9 @@ export const CustomRange: Story = {
       await expect(element).toBeVisible();
     }
   }
-};
+});
 
-export const Durations: Story = {
+export const Durations = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
@@ -136,9 +134,9 @@ export const Durations: Story = {
     const elements = canvas.getAllByText(/\d+/);
     await expect(elements.length).toBeGreaterThanOrEqual(3);
   }
-};
+});
 
-export const WithDelay: Story = {
+export const WithDelay = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
@@ -160,9 +158,9 @@ export const WithDelay: Story = {
     const elements = canvas.getAllByText(/\d+/);
     await expect(elements.length).toBeGreaterThanOrEqual(3);
   }
-};
+});
 
-export const WithFormatting: Story = {
+export const WithFormatting = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
@@ -225,9 +223,9 @@ export const WithFormatting: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const Styling: Story = {
+export const Styling = meta.story({
   tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
@@ -260,9 +258,9 @@ export const Styling: Story = {
       await expect(element).toBeVisible();
     }
   }
-};
+});
 
-export const OnCompleteCallback: Story = {
+export const OnCompleteCallback = meta.story({
   tags: ["test"],
   render: function Render() {
     const [completed, setCompleted] = React.useState(false);
@@ -292,9 +290,9 @@ export const OnCompleteCallback: Story = {
       { timeout: 3000 }
     );
   }
-};
+});
 
-export const StatisticsCard: Story = {
+export const StatisticsCard = meta.story({
   tags: ["test"],
   render: () => (
     <div className="grid grid-cols-3 gap-4">
@@ -335,9 +333,9 @@ export const StatisticsCard: Story = {
     await expect(canvas.getByText("Success Rate")).toBeVisible();
     await expect(canvas.getByText("Avg. Response")).toBeVisible();
   }
-};
+});
 
-export const DataSlotAttribute: Story = {
+export const DataSlotAttribute = meta.story({
   tags: ["test"],
   args: {
     to: 50,
@@ -348,9 +346,9 @@ export const DataSlotAttribute: Story = {
     const element = canvas.getByText(/\d+/);
     await expect(element).toHaveAttribute("data-slot", "counting-number");
   }
-};
+});
 
-export const AnimationTest: Story = {
+export const AnimationTest = meta.story({
   tags: ["test"],
   render: () => {
     return <CountingNumber from={0} to={10} duration={0.5} startOnView={false} data-testid="animated-number" />;
@@ -370,4 +368,4 @@ export const AnimationTest: Story = {
       { timeout: 2000 }
     );
   }
-};
+});

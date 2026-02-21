@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { BadgeCheckIcon, ChevronRightIcon, ExternalLinkIcon, Plus, PlusIcon, ShieldAlertIcon } from "lucide-react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 import {
   Avatar,
@@ -21,16 +20,15 @@ import { Item } from "./item";
 import { ItemMedia } from "./item-media";
 import { ItemTitle } from "./item-title";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Item",
   component: Item,
   tags: ["autodocs", "new"]
-} satisfies Meta<typeof Item>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-6">
       <Item variant="outline">
@@ -74,9 +72,9 @@ export const Example: Story = {
     const item = canvas.getByText("Basic Item").closest("div");
     await expect(item).toBeVisible();
   }
-};
+});
 
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className="flex flex-col gap-6">
       <Item>
@@ -114,9 +112,9 @@ export const Variants: Story = {
       </Item>
     </div>
   )
-};
+});
 
-export const Size: Story = {
+export const Size = meta.story({
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-6">
       <Item variant="outline">
@@ -145,9 +143,9 @@ export const Size: Story = {
       </Item>
     </div>
   )
-};
+});
 
-export const Icon: Story = {
+export const Icon = meta.story({
   render: () => (
     <div className="flex w-full max-w-lg flex-col gap-6">
       <Item variant="outline">
@@ -166,9 +164,9 @@ export const Icon: Story = {
       </Item>
     </div>
   )
-};
+});
 
-export const AvatarStory: Story = {
+export const AvatarStory = meta.story({
   name: "Avatar",
   render: () => (
     <div className="flex w-full max-w-lg flex-col gap-6">
@@ -218,7 +216,7 @@ export const AvatarStory: Story = {
       </Item>
     </div>
   )
-};
+});
 
 const music = [
   {
@@ -241,7 +239,7 @@ const music = [
   }
 ];
 
-export const Image: Story = {
+export const Image = meta.story({
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-6">
       <ItemGroup className="gap-4">
@@ -272,7 +270,7 @@ export const Image: Story = {
       </ItemGroup>
     </div>
   )
-};
+});
 
 const people = [
   {
@@ -292,7 +290,7 @@ const people = [
   }
 ];
 
-export const Group: Story = {
+export const Group = meta.story({
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-6">
       <ItemGroup>
@@ -321,7 +319,7 @@ export const Group: Story = {
       </ItemGroup>
     </div>
   )
-};
+});
 
 const models = [
   {
@@ -344,7 +342,7 @@ const models = [
   }
 ];
 
-export const Header: Story = {
+export const Header = meta.story({
   render: () => (
     <div className="flex w-full max-w-xl flex-col gap-6">
       <ItemGroup className="grid grid-cols-3 gap-4">
@@ -368,9 +366,9 @@ export const Header: Story = {
       </ItemGroup>
     </div>
   )
-};
+});
 
-export const Link: Story = {
+export const Link = meta.story({
   render: () => (
     <div className="flex w-full max-w-md flex-col gap-4">
       <Item asChild>
@@ -397,4 +395,4 @@ export const Link: Story = {
       </Item>
     </div>
   )
-};
+});

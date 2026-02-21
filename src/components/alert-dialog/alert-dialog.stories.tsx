@@ -1,5 +1,3 @@
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-
 import { Button } from "../button";
 
 import {
@@ -14,16 +12,15 @@ import {
   AlertDialogTrigger
 } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Alert Dialog",
   component: AlertDialog,
   tags: ["autodocs"]
-} satisfies Meta<typeof AlertDialog>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -48,4 +45,4 @@ export const Default: Story = {
       </AlertDialogContent>
     </AlertDialog>
   )
-};
+});

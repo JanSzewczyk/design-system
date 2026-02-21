@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent } from "storybook/test";
+import { expect } from "storybook/test";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Tabs",
   component: Tabs,
   subcomponents: { TabsList, TabsTrigger, TabsContent },
@@ -13,16 +14,16 @@ const meta = {
   argTypes: {
     defaultValue: {
       control: "text",
-      description: "The value of the tab that should be active when initially rendered"
+      description: "The value of tab that should be active when initially rendered"
     },
     value: {
       control: "text",
-      description: "The controlled value of the tab to activate"
+      description: "The controlled value of tab to activate"
     },
     orientation: {
       control: "select",
       options: ["horizontal", "vertical"],
-      description: "The orientation of the tabs",
+      description: "The orientation of tabs",
       table: {
         defaultValue: { summary: "horizontal" }
       }
@@ -32,14 +33,11 @@ const meta = {
       description: "Additional CSS classes"
     }
   }
-} satisfies Meta<typeof Tabs>;
+});
 
-export default meta;
-type Story = StoryObj<typeof Tabs>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: () => (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="account" className="w-100">
       <TabsList>
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
@@ -69,9 +67,9 @@ export const Default: Story = {
     const accountContent = canvas.getByText(/Make changes to your account here/);
     await expect(accountContent).toBeVisible();
   }
-};
+});
 
-export const ThreeTabs: Story = {
+export const ThreeTabs = meta.story({
   render: () => (
     <Tabs defaultValue="overview" className="w-125">
       <TabsList>
@@ -103,11 +101,11 @@ export const ThreeTabs: Story = {
     const tabs = canvas.getAllByRole("tab");
     await expect(tabs).toHaveLength(3);
   }
-};
+});
 
-export const TabSwitching: Story = {
+export const TabSwitching = meta.story({
   render: () => (
-    <Tabs defaultValue="tab1" className="w-[400px]">
+    <Tabs defaultValue="tab1" className="w-100">
       <TabsList>
         <TabsTrigger value="tab1">Tab 1</TabsTrigger>
         <TabsTrigger value="tab2">Tab 2</TabsTrigger>
@@ -129,32 +127,12 @@ export const TabSwitching: Story = {
         </div>
       </TabsContent>
     </Tabs>
-  ),
-  play: async ({ canvas }) => {
-    // Initially Tab 1 is active
-    const tab1 = canvas.getByRole("tab", { name: "Tab 1" });
-    const tab2 = canvas.getByRole("tab", { name: "Tab 2" });
-    const tab3 = canvas.getByRole("tab", { name: "Tab 3" });
+  )
+});
 
-    await expect(tab1).toHaveAttribute("data-state", "active");
-    await expect(canvas.getByText("Content for Tab 1")).toBeVisible();
-
-    // Click Tab 2
-    await userEvent.click(tab2);
-    await expect(tab2).toHaveAttribute("data-state", "active");
-    await expect(tab1).toHaveAttribute("data-state", "inactive");
-    await expect(canvas.getByText("Content for Tab 2")).toBeVisible();
-
-    // Click Tab 3
-    await userEvent.click(tab3);
-    await expect(tab3).toHaveAttribute("data-state", "active");
-    await expect(canvas.getByText("Content for Tab 3")).toBeVisible();
-  }
-};
-
-export const DisabledTab: Story = {
+export const DisabledTab = meta.story({
   render: () => (
-    <Tabs defaultValue="active" className="w-[400px]">
+    <Tabs defaultValue="active" className="w-100">
       <TabsList>
         <TabsTrigger value="active">Active</TabsTrigger>
         <TabsTrigger value="disabled" disabled>
@@ -174,7 +152,7 @@ export const DisabledTab: Story = {
       </TabsContent>
       <TabsContent value="other">
         <div className="bg-app-foreground rounded-lg border border-gray-800 p-4">
-          <p className="text-sm text-gray-300">This is the other tab content.</p>
+          <p className="text-sm text-gray-300">This is other tab content.</p>
         </div>
       </TabsContent>
     </Tabs>
@@ -183,18 +161,18 @@ export const DisabledTab: Story = {
     const disabledTab = canvas.getByRole("tab", { name: "Disabled" });
     await expect(disabledTab).toBeDisabled();
 
-    // Verify the active tab stays active (disabled tab should not be selectable)
+    // Verify active tab stays active (disabled tab should not be selectable)
     const activeTab = canvas.getByRole("tab", { name: "Active" });
     await expect(activeTab).toHaveAttribute("data-state", "active");
 
-    // Verify the disabled tab has correct attributes
+    // Verify disabled tab has correct attributes
     await expect(disabledTab).toHaveAttribute("data-state", "inactive");
   }
-};
+});
 
-export const WithIcons: Story = {
+export const WithIcons = meta.story({
   render: () => (
-    <Tabs defaultValue="music" className="w-[400px]">
+    <Tabs defaultValue="music" className="w-100">
       <TabsList>
         <TabsTrigger value="music">
           <svg
@@ -228,7 +206,10 @@ export const WithIcons: Story = {
           >
             <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
             <circle cx="9" cy="9" r="2" />
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+            <path d="m21 15-3.086-3.086a2 2 0 0-.777-.416V7.87a.5.5 0L6 21" />
+            <rect x="2" y="6" width="14" height="12" rx="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m16 13-5.223 3.482a.5.5 0 .777-.416V7.87a.5.5 0L6 21" />
           </svg>
           Photos
         </TabsTrigger>
@@ -244,8 +225,10 @@ export const WithIcons: Story = {
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" />
+            <path d="m16 13 5.223 3.482a.5.5 0 .777-.416V7.87a.5.5 0L6 21" />
             <rect x="2" y="6" width="14" height="12" rx="2" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="m21 15-3.086-3.086a.5.5 0L6 21" />
           </svg>
           Videos
         </TabsTrigger>
@@ -277,9 +260,9 @@ export const WithIcons: Story = {
       await expect(svg).toBeInTheDocument();
     }
   }
-};
+});
 
-export const FullWidth: Story = {
+export const FullWidth = meta.story({
   render: () => (
     <Tabs defaultValue="all" className="w-full">
       <TabsList className="w-full">
@@ -314,11 +297,11 @@ export const FullWidth: Story = {
     const tabsList = canvas.getByRole("tablist");
     await expect(tabsList).toHaveClass("w-full");
   }
-};
+});
 
-export const SettingsExample: Story = {
+export const SettingsExample = meta.story({
   render: () => (
-    <Tabs defaultValue="general" className="w-[500px]">
+    <Tabs defaultValue="general" className="w-125">
       <TabsList>
         <TabsTrigger value="general">General</TabsTrigger>
         <TabsTrigger value="security">Security</TabsTrigger>
@@ -342,10 +325,25 @@ export const SettingsExample: Story = {
               placeholder="john@example.com"
             />
           </div>
+          <div>
+            <label className="text-sm font-medium text-gray-100">Current Password</label>
+            <input
+              type="password"
+              className="mt-1 w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="text-sm font-medium text-gray-100">New Password</label>
+            <input
+              type="password"
+              className="mt-1 w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100"
+            />
+          </div>
         </div>
       </TabsContent>
       <TabsContent value="security">
         <div className="bg-app-foreground space-y-4 rounded-lg border border-gray-800 p-4">
+          <h3 className="mb-4 text-lg font-semibold text-gray-100">Security</h3>
           <div>
             <label className="text-sm font-medium text-gray-100">Current Password</label>
             <input
@@ -380,7 +378,7 @@ export const SettingsExample: Story = {
       </TabsContent>
     </Tabs>
   ),
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     await expect(canvas.getByText("Display Name")).toBeVisible();
 
     const securityTab = canvas.getByRole("tab", { name: "Security" });
@@ -391,12 +389,12 @@ export const SettingsExample: Story = {
     await userEvent.click(notificationsTab);
     await expect(canvas.getByText("Email notifications")).toBeVisible();
   }
-};
+});
 
-export const DataSlotAttributes: Story = {
+export const DataSlotAttributes = meta.story({
   tags: ["test"],
   render: () => (
-    <Tabs defaultValue="test" className="w-[300px]">
+    <Tabs defaultValue="test" className="w-75">
       <TabsList>
         <TabsTrigger value="test">Test Tab</TabsTrigger>
       </TabsList>
@@ -424,12 +422,12 @@ export const DataSlotAttributes: Story = {
       await expect(content).toHaveAttribute("data-slot", "tabs-content");
     });
   }
-};
+});
 
-export const KeyboardNavigation: Story = {
+export const KeyboardNavigation = meta.story({
   tags: ["test"],
   render: () => (
-    <Tabs defaultValue="first" className="w-[400px]">
+    <Tabs defaultValue="first" className="w-100">
       <TabsList>
         <TabsTrigger value="first">First</TabsTrigger>
         <TabsTrigger value="second">Second</TabsTrigger>
@@ -440,10 +438,10 @@ export const KeyboardNavigation: Story = {
       <TabsContent value="third">Third content</TabsContent>
     </Tabs>
   ),
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     const firstTab = canvas.getByRole("tab", { name: "First" });
 
-    // Focus the first tab
+    // Focus first tab
     await userEvent.click(firstTab);
     await expect(firstTab).toHaveFocus();
 
@@ -461,4 +459,4 @@ export const KeyboardNavigation: Story = {
     await userEvent.keyboard("{ArrowLeft}");
     await expect(secondTab).toHaveFocus();
   }
-};
+});

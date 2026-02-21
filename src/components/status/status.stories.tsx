@@ -1,11 +1,12 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
 import { Status, StatusIndicator, StatusLabel } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Status",
   component: Status,
   subcomponents: { StatusIndicator, StatusLabel },
@@ -14,7 +15,7 @@ const meta = {
     variant: {
       control: "select",
       options: ["default", "success", "error", "warning", "primary"],
-      description: "Visual style variant of the status badge",
+      description: "Visual style variant of status badge",
       table: {
         defaultValue: { summary: "default" }
       }
@@ -31,12 +32,9 @@ const meta = {
       description: "Additional CSS classes"
     }
   }
-} satisfies Meta<typeof Status>;
+});
 
-export default meta;
-type Story = StoryObj<typeof Status>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: (args) => (
     <Status {...args}>
       <StatusIndicator />
@@ -52,9 +50,9 @@ export const Default: Story = {
     await expect(status).toHaveAttribute("data-slot", "status");
     await expect(status).toHaveAttribute("data-variant", "default");
   }
-};
+});
 
-export const AllVariants: Story = {
+export const AllVariants = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Status variant="default">
@@ -86,9 +84,9 @@ export const AllVariants: Story = {
     await expect(canvas.getByText("Warning")).toBeVisible();
     await expect(canvas.getByText("Primary")).toBeVisible();
   }
-};
+});
 
-export const Success: Story = {
+export const Success = meta.story({
   render: () => (
     <Status variant="success">
       <StatusIndicator />
@@ -99,9 +97,9 @@ export const Success: Story = {
     const status = canvas.getByText("Online").closest('[data-slot="status"]');
     await expect(status).toHaveAttribute("data-variant", "success");
   }
-};
+});
 
-export const Error: Story = {
+export const Error = meta.story({
   render: () => (
     <Status variant="error">
       <StatusIndicator />
@@ -112,9 +110,9 @@ export const Error: Story = {
     const status = canvas.getByText("Offline").closest('[data-slot="status"]');
     await expect(status).toHaveAttribute("data-variant", "error");
   }
-};
+});
 
-export const Warning: Story = {
+export const Warning = meta.story({
   render: () => (
     <Status variant="warning">
       <StatusIndicator />
@@ -125,9 +123,9 @@ export const Warning: Story = {
     const status = canvas.getByText("Pending").closest('[data-slot="status"]');
     await expect(status).toHaveAttribute("data-variant", "warning");
   }
-};
+});
 
-export const Primary: Story = {
+export const Primary = meta.story({
   render: () => (
     <Status variant="primary">
       <StatusIndicator />
@@ -138,9 +136,9 @@ export const Primary: Story = {
     const status = canvas.getByText("Active").closest('[data-slot="status"]');
     await expect(status).toHaveAttribute("data-variant", "primary");
   }
-};
+});
 
-export const WithoutIndicator: Story = {
+export const WithoutIndicator = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Status variant="default">
@@ -165,9 +163,9 @@ export const WithoutIndicator: Story = {
     await expect(canvas.getByText("Failed")).toBeVisible();
     await expect(canvas.getByText("In Progress")).toBeVisible();
   }
-};
+});
 
-export const IndicatorOnly: Story = {
+export const IndicatorOnly = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
       <Status variant="default">
@@ -191,9 +189,9 @@ export const IndicatorOnly: Story = {
     const indicators = canvas.getAllByRole("generic").filter((el) => el.getAttribute("data-slot") === "status");
     await expect(indicators).toHaveLength(5);
   }
-};
+});
 
-export const UserStatus: Story = {
+export const UserStatus = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-3">
@@ -240,9 +238,9 @@ export const UserStatus: Story = {
     await expect(canvas.getByText("Away")).toBeVisible();
     await expect(canvas.getByText("Offline")).toBeVisible();
   }
-};
+});
 
-export const ServiceHealth: Story = {
+export const ServiceHealth = meta.story({
   render: () => (
     <div className="bg-app-foreground rounded-lg border border-gray-800 p-4">
       <h3 className="mb-4 text-sm font-semibold text-gray-100">Service Health</h3>
@@ -285,9 +283,9 @@ export const ServiceHealth: Story = {
     await expect(canvas.getByText("Degraded")).toBeVisible();
     await expect(canvas.getByText("Outage")).toBeVisible();
   }
-};
+});
 
-export const OrderStatus: Story = {
+export const OrderStatus = meta.story({
   render: () => (
     <div className="flex flex-col gap-2">
       <div className="bg-app-foreground flex items-center justify-between rounded-lg border border-gray-800 p-3">
@@ -336,9 +334,9 @@ export const OrderStatus: Story = {
     await expect(canvas.getByText("Processing")).toBeVisible();
     await expect(canvas.getByText("Cancelled")).toBeVisible();
   }
-};
+});
 
-export const DataSlotAttributes: Story = {
+export const DataSlotAttributes = meta.story({
   tags: ["test"],
   render: () => (
     <Status variant="success">
@@ -363,9 +361,9 @@ export const DataSlotAttributes: Story = {
       await expect(label).toHaveAttribute("data-slot", "status-label");
     });
   }
-};
+});
 
-export const AsChildPattern: Story = {
+export const AsChildPattern = meta.story({
   render: () => (
     <Status asChild variant="success">
       <a href="#" className="cursor-pointer hover:opacity-80">
@@ -380,9 +378,9 @@ export const AsChildPattern: Story = {
     await expect(link).toHaveAttribute("data-slot", "status");
     await expect(link).toHaveAttribute("data-variant", "success");
   }
-};
+});
 
-export const CustomStyling: Story = {
+export const CustomStyling = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Status variant="success" className="px-4 py-2">
@@ -404,4 +402,4 @@ export const CustomStyling: Story = {
     await expect(canvas.getByText("Less Rounded")).toBeVisible();
     await expect(canvas.getByText("Thicker Border")).toBeVisible();
   }
-};
+});

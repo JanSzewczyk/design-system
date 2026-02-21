@@ -1,13 +1,14 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, fn, within } from "storybook/test";
 
 import { Button } from "../button";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Tooltip",
   component: Tooltip,
   args: {
@@ -22,12 +23,9 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof Tooltip>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -36,9 +34,9 @@ export const Example: Story = {
       <TooltipContent>Add to library</TooltipContent>
     </Tooltip>
   )
-};
+});
 
-export const Positions: Story = {
+export const Positions = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-4">
       <Tooltip>
@@ -67,9 +65,9 @@ export const Positions: Story = {
       </Tooltip>
     </div>
   )
-};
+});
 
-export const WithDelay: Story = {
+export const WithDelay = meta.story({
   render: () => (
     <Tooltip delayDuration={500}>
       <TooltipTrigger asChild>
@@ -78,9 +76,9 @@ export const WithDelay: Story = {
       <TooltipContent>This tooltip has a 500ms delay</TooltipContent>
     </Tooltip>
   )
-};
+});
 
-export const Controlled: Story = {
+export const Controlled = meta.story({
   render: function ControlledTooltip() {
     const [open, setOpen] = React.useState(false);
 
@@ -98,9 +96,9 @@ export const Controlled: Story = {
       </div>
     );
   }
-};
+});
 
-export const InteractionTest: Story = {
+export const InteractionTest = meta.story({
   tags: ["test-only"],
   render: () => (
     <Tooltip defaultOpen>
@@ -125,9 +123,9 @@ export const InteractionTest: Story = {
       await expect(content).toHaveAttribute("data-slot", "tooltip-content");
     });
   }
-};
+});
 
-export const HoverInteractionTest: Story = {
+export const HoverInteractionTest = meta.story({
   tags: ["test-only"],
   render: () => (
     <Tooltip>
@@ -158,4 +156,4 @@ export const HoverInteractionTest: Story = {
       await expect(content).toHaveAttribute("data-state", "closed");
     });
   }
-};
+});

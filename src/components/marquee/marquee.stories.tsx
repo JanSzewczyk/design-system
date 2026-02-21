@@ -1,24 +1,28 @@
 import * as React from "react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { Marquee } from "~/components/marquee";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Marquee",
   component: Marquee,
   tags: ["autodocs"],
+  parameters: {
+    layout: "padded"
+  },
   argTypes: {
     reverse: {
       control: "boolean",
-      description: "Whether to reverse the animation direction",
+      description: "Whether to reverse animation direction",
       table: {
         defaultValue: { summary: "false" }
       }
     },
     pauseOnHover: {
       control: "boolean",
-      description: "Whether to pause the animation on hover",
+      description: "Whether to pause animation on hover",
       table: {
         defaultValue: { summary: "false" }
       }
@@ -32,7 +36,7 @@ const meta = {
     },
     repeat: {
       control: { type: "number", min: 1, max: 10 },
-      description: "Number of times to repeat the content",
+      description: "Number of times to repeat content",
       table: {
         defaultValue: { summary: "4" }
       }
@@ -60,14 +64,8 @@ const meta = {
         defaultValue: { summary: "region" }
       }
     }
-  },
-  parameters: {
-    layout: "padded"
   }
-} satisfies Meta<typeof Marquee>;
-
-export default meta;
-type Story = StoryObj<typeof Marquee>;
+});
 
 const ReviewCard = ({ img, name, username, body }: { img: string; name: string; username: string; body: string }) => {
   return (
@@ -126,7 +124,7 @@ const reviews = [
 const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
-export const Default: Story = {
+export const Default = meta.story({
   tags: ["test"],
   render: () => (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
@@ -142,9 +140,9 @@ export const Default: Story = {
     await expect(marquee).toBeVisible();
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
-};
+});
 
-export const WithTwoRows: Story = {
+export const WithTwoRows = meta.story({
   render: () => (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover className="[--duration:20s]">
@@ -167,9 +165,9 @@ export const WithTwoRows: Story = {
       await expect(marquee).toBeVisible();
     }
   }
-};
+});
 
-export const Vertical: Story = {
+export const Vertical = meta.story({
   render: () => (
     <div className="relative flex h-100 w-full flex-row items-center justify-center gap-4 overflow-hidden">
       <Marquee vertical pauseOnHover className="[--duration:15s]">
@@ -193,9 +191,9 @@ export const Vertical: Story = {
       await expect(marquee).toHaveClass("flex-col");
     }
   }
-};
+});
 
-export const Reversed: Story = {
+export const Reversed = meta.story({
   render: () => (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee reverse pauseOnHover className="[--duration:20s]">
@@ -209,9 +207,9 @@ export const Reversed: Story = {
     const marquee = canvas.getByRole("region");
     await expect(marquee).toBeVisible();
   }
-};
+});
 
-export const SimpleText: Story = {
+export const SimpleText = meta.story({
   render: () => (
     <Marquee className="text-xl font-semibold text-gray-100 [--duration:30s] [--gap:2rem]">
       <span>Welcome to our design system</span>
@@ -224,41 +222,39 @@ export const SimpleText: Story = {
     await expect(canvas.getAllByText("Welcome to our design system").length).toBeGreaterThan(0);
     await expect(canvas.getAllByText("Built with React & Tailwind").length).toBeGreaterThan(0);
   }
-};
+});
 
-export const LogoCloud: Story = {
-  render: () => {
-    const logos = [
-      { name: "React", color: "text-cyan-400" },
-      { name: "TypeScript", color: "text-blue-500" },
-      { name: "Tailwind", color: "text-teal-400" },
-      { name: "Vite", color: "text-purple-400" },
-      { name: "Storybook", color: "text-pink-400" },
-      { name: "Vitest", color: "text-green-400" }
-    ];
+const logos = [
+  { name: "React", color: "text-cyan-400" },
+  { name: "TypeScript", color: "text-blue-500" },
+  { name: "Tailwind", color: "text-teal-400" },
+  { name: "Vite", color: "text-purple-400" },
+  { name: "Storybook", color: "text-pink-400" },
+  { name: "Vitest", color: "text-green-400" }
+];
 
-    return (
-      <div className="bg-app rounded-lg border border-gray-800 py-8">
-        <Marquee pauseOnHover className="[--duration:25s]">
-          {logos.map((logo) => (
-            <div
-              key={logo.name}
-              className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-900 px-6 py-3"
-            >
-              <span className={`text-lg font-bold ${logo.color}`}>{logo.name}</span>
-            </div>
-          ))}
-        </Marquee>
-      </div>
-    );
-  },
+export const LogoCloud = meta.story({
+  render: () => (
+    <div className="bg-app rounded-lg border border-gray-800 py-8">
+      <Marquee pauseOnHover className="[--duration:25s]">
+        {logos.map((logo) => (
+          <div
+            key={logo.name}
+            className="flex items-center gap-2 rounded-lg border border-gray-700 bg-gray-900 px-6 py-3"
+          >
+            <span className={`text-lg font-bold ${logo.color}`}>{logo.name}</span>
+          </div>
+        ))}
+      </Marquee>
+    </div>
+  ),
   play: async ({ canvas }) => {
     await expect(canvas.getAllByText("React").length).toBeGreaterThan(0);
     await expect(canvas.getAllByText("TypeScript").length).toBeGreaterThan(0);
   }
-};
+});
 
-export const CustomSpeed: Story = {
+export const CustomSpeed = meta.story({
   render: () => (
     <div className="space-y-8">
       <div>
@@ -292,9 +288,9 @@ export const CustomSpeed: Story = {
     await expect(canvas.getByText("Normal (20s)")).toBeVisible();
     await expect(canvas.getByText("Slow (40s)")).toBeVisible();
   }
-};
+});
 
-export const CustomGap: Story = {
+export const CustomGap = meta.story({
   render: () => (
     <div className="space-y-8">
       <div>
@@ -319,9 +315,9 @@ export const CustomGap: Story = {
     await expect(canvas.getByText("Small gap (0.5rem)")).toBeVisible();
     await expect(canvas.getByText("Large gap (3rem)")).toBeVisible();
   }
-};
+});
 
-export const RepeatCount: Story = {
+export const RepeatCount = meta.story({
   args: {
     repeat: 2,
     className: "[--duration:15s]",
@@ -338,12 +334,12 @@ export const RepeatCount: Story = {
     const items = canvas.getAllByText("Item 1");
     await expect(items).toHaveLength(2);
   }
-};
+});
 
-export const PauseOnHover: Story = {
+export const PauseOnHover = meta.story({
   render: () => (
     <div>
-      <p className="mb-4 text-center text-sm text-gray-400">Hover over the marquee to pause</p>
+      <p className="mb-4 text-center text-sm text-gray-400">Hover over to marquee to pause</p>
       <Marquee pauseOnHover className="[--duration:15s]">
         {firstRow.map((review) => (
           <ReviewCard key={review.username} {...review} />
@@ -368,9 +364,9 @@ export const PauseOnHover: Story = {
       await expect(div).toHaveClass("group-hover:paused");
     }
   }
-};
+});
 
-export const Accessibility: Story = {
+export const Accessibility = meta.story({
   args: {
     ariaLabel: "Customer testimonials carousel",
     ariaLive: "polite",
@@ -391,10 +387,10 @@ export const Accessibility: Story = {
     await expect(marquee).toHaveAttribute("aria-live", "polite");
     await expect(marquee).toHaveAttribute("tabindex", "0");
   }
-};
+});
 
-export const DataSlotAttribute: Story = {
-  tags: ["test"],
+export const DataSlotAttribute = meta.story({
+  tags: ["test-only"],
   args: {
     className: "[--duration:20s]",
     children: <span>Test content</span>
@@ -403,9 +399,9 @@ export const DataSlotAttribute: Story = {
     const marquee = canvas.getByRole("region");
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
-};
+});
 
-export const ThreeDEffect: Story = {
+export const ThreeDEffect = meta.story({
   render: () => (
     <div className="relative flex h-125 w-full flex-row items-center justify-center gap-4 overflow-hidden perspective-near">
       <div className="flex transform-[rotateX(10deg)] flex-row gap-4">
@@ -433,4 +429,4 @@ export const ThreeDEffect: Story = {
     const marquees = canvas.getAllByRole("region");
     await expect(marquees).toHaveLength(3);
   }
-};
+});

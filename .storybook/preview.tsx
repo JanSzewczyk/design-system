@@ -1,7 +1,9 @@
 import * as React from "react";
 
+import addonA11y from "@storybook/addon-a11y";
+import addonDocs from "@storybook/addon-docs";
 import { DocsContainer, type DocsContainerProps } from "@storybook/addon-docs/blocks";
-import { type Preview } from "@storybook/react-vite";
+import { definePreview } from "@storybook/react-vite";
 import { DARK_MODE_EVENT_NAME } from "@storybook-community/storybook-dark-mode";
 
 import dark from "./theme/dark";
@@ -20,7 +22,7 @@ export function DarkModeDocsContainer(props: DocsContainerProps) {
   return <DocsContainer {...props} theme={isDark ? dark : light} />;
 }
 
-export default {
+export default definePreview({
   parameters: {
     darkMode: {
       dark,
@@ -35,7 +37,6 @@ export default {
       }
     },
     actions: { argTypesRegex: "^on[A-Z].*" },
-    backgrounds: { disabled: true },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -50,5 +51,5 @@ export default {
     }
   },
   decorators: [],
-  tags: ["autodocs"]
-} satisfies Preview;
+  addons: [addonA11y(), addonDocs()]
+});

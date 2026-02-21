@@ -1,20 +1,18 @@
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { Input, Label, Button } from "~/components";
 
 import { Card, CardDescription, CardHeader, CardContent, CardFooter, CardTitle, CardAction } from ".";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Card",
   component: Card,
   subcomponents: { CardDescription, CardHeader, CardContent, CardFooter, CardTitle, CardAction },
   decorators: [(Story) => <div className="max-w-lg">{Story()}</div>],
   tags: ["beta"]
-} satisfies Meta<typeof Card>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -53,4 +51,4 @@ export const Example: Story = {
       </CardFooter>
     </Card>
   )
-};
+});

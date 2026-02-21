@@ -1,4 +1,5 @@
-import { type Meta, type StoryObj } from "@storybook/react";
+import * as React from "react";
+
 import { Card } from "~/components/card";
 
 import { Carousel } from "./carousel";
@@ -7,7 +8,9 @@ import { CarouselItem } from "./carousel-item";
 import { CarouselNext } from "./carousel-next";
 import { CarouselPrevious } from "./carousel-previous";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Carousel",
   component: Carousel,
   tags: ["autodocs"],
@@ -17,12 +20,9 @@ const meta = {
       options: ["horizontal", "vertical"]
     }
   }
-} satisfies Meta<typeof Carousel>;
+});
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default = meta.story({
   render: (args) => (
     <div className="flex justify-center px-12">
       <Carousel {...args} className="w-full max-w-xs">
@@ -42,9 +42,9 @@ export const Default: Story = {
       </Carousel>
     </div>
   )
-};
+});
 
-export const Vertical: Story = {
+export const Vertical = meta.story({
   args: {
     orientation: "vertical"
   },
@@ -73,4 +73,4 @@ export const Vertical: Story = {
       </Carousel>
     </div>
   )
-};
+});

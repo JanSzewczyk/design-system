@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { Code, Layers, Rocket } from "lucide-react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 
 import {
@@ -17,7 +16,9 @@ import {
   TimelineTitle
 } from "./index";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Timeline",
   component: Timeline,
   subcomponents: {
@@ -35,7 +36,7 @@ const meta = {
     orientation: {
       control: "select",
       options: ["vertical", "horizontal"],
-      description: "The orientation of the timeline",
+      description: "The orientation of timeline",
       table: {
         defaultValue: { summary: "vertical" }
       }
@@ -43,14 +44,14 @@ const meta = {
     variant: {
       control: "select",
       options: ["default", "alternate"],
-      description: "The visual variant of the timeline",
+      description: "The visual variant of timeline",
       table: {
         defaultValue: { summary: "default" }
       }
     },
     activeIndex: {
       control: { type: "number", min: 0 },
-      description: "Index of the currently active step (0-based)"
+      description: "Index of currently active step (0-based)"
     },
     dir: {
       control: "select",
@@ -61,10 +62,7 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof Timeline>;
-
-export default meta;
-type Story = StoryObj<typeof Timeline>;
+});
 
 const timelineItems = [
   {
@@ -90,7 +88,7 @@ const timelineItems = [
   }
 ];
 
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <Timeline activeIndex={1}>
       {timelineItems.map((item) => (
@@ -138,7 +136,7 @@ export const Example: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});
 
 const timelineItemsHorizontalTimeline = [
   {
@@ -164,7 +162,7 @@ const timelineItemsHorizontalTimeline = [
   }
 ];
 
-export const Horizontal: Story = {
+export const Horizontal = meta.story({
   render: () => (
     <Timeline orientation="horizontal" activeIndex={1}>
       {timelineItemsHorizontalTimeline.map((item) => (
@@ -173,8 +171,8 @@ export const Horizontal: Story = {
           <TimelineConnector />
           <TimelineContent>
             <TimelineHeader>
-              <TimelineTitle>{item.title}</TimelineTitle>
               <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
             </TimelineHeader>
             <TimelineDescription>{item.description}</TimelineDescription>
           </TimelineContent>
@@ -207,7 +205,7 @@ export const Horizontal: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});
 
 const timelineItemsRTL = [
   {
@@ -232,7 +230,8 @@ const timelineItemsRTL = [
     description: "Main event begins at 9:00 AM."
   }
 ];
-export const RTL: Story = {
+
+export const RTL = meta.story({
   render: () => (
     <Timeline dir="rtl" activeIndex={1}>
       {timelineItemsRTL.map((item) => (
@@ -241,8 +240,8 @@ export const RTL: Story = {
           <TimelineConnector />
           <TimelineContent>
             <TimelineHeader>
-              <TimelineTitle>{item.title}</TimelineTitle>
               <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
             </TimelineHeader>
             <TimelineDescription>{item.description}</TimelineDescription>
           </TimelineContent>
@@ -270,7 +269,7 @@ export const RTL: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});
 
 const timelineItemsAlternate = [
   {
@@ -295,7 +294,8 @@ const timelineItemsAlternate = [
     description: "Building core features."
   }
 ];
-export const Alternate: Story = {
+
+export const Alternate = meta.story({
   render: () => (
     <Timeline variant="alternate" activeIndex={1}>
       {timelineItemsAlternate.map((item) => (
@@ -334,7 +334,7 @@ export const Alternate: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});
 
 const timelineItemsHorizontalAlternate = [
   {
@@ -359,7 +359,8 @@ const timelineItemsHorizontalAlternate = [
     description: "Released MVP to beta testers."
   }
 ];
-export const HorizontalAlternate: Story = {
+
+export const HorizontalAlternate = meta.story({
   render: () => (
     <Timeline variant="alternate" orientation="horizontal" activeIndex={1}>
       {timelineItemsHorizontalAlternate.map((item) => (
@@ -403,7 +404,7 @@ export const HorizontalAlternate: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});
 
 const timelineItemsWithCustomDots = [
   {
@@ -431,7 +432,8 @@ const timelineItemsWithCustomDots = [
     icon: Code
   }
 ];
-export const WithCustomDots: Story = {
+
+export const WithCustomDots = meta.story({
   render: () => (
     <Timeline activeIndex={1} className="[--timeline-dot-size:2rem]">
       {timelineItemsWithCustomDots.map((item) => (
@@ -476,4 +478,4 @@ export const WithCustomDots: Story = {
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
   }
-};
+});

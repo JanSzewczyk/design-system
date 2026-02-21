@@ -2,22 +2,20 @@ import * as React from "react";
 
 import { BadgeCheckIcon, ShieldCheckIcon, StarIcon, XIcon } from "lucide-react";
 
-import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import { Badge } from "~/components";
 import { BadgeButton } from "~/components/badge/badge-button";
 import { BadgeDot } from "~/components/badge/badge-dot";
 
-const meta = {
+import preview from "~/.storybook/preview";
+
+const meta = preview.meta({
   title: "Components/Badge",
   component: Badge,
   tags: ["autodocs", "beta"]
-} satisfies Meta<typeof Badge>;
-export default meta;
+});
 
-type Story = StoryObj<typeof meta>;
-
-export const Example: Story = {
+export const Example = meta.story({
   render: () => (
     <div className="flex flex-col items-center gap-2">
       <div className="flex w-full flex-wrap gap-2">
@@ -43,9 +41,9 @@ export const Example: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const Variants: Story = {
+export const Variants = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-2 sm:flex-row">
       <Badge>Primary</Badge>
@@ -56,9 +54,9 @@ export const Variants: Story = {
       <Badge variant="error">Destructive</Badge>
     </div>
   )
-};
+});
 
-export const WithIcons: Story = {
+export const WithIcons = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge>
@@ -79,9 +77,9 @@ export const WithIcons: Story = {
       </Badge>
     </div>
   )
-};
+});
 
-export const WithDot: Story = {
+export const WithDot = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge>
@@ -109,9 +107,9 @@ export const WithDot: Story = {
       </Badge>
     </div>
   )
-};
+});
 
-export const RemoveButton: Story = {
+export const RemoveButton = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge>
@@ -152,9 +150,9 @@ export const RemoveButton: Story = {
       </Badge>
     </div>
   )
-};
+});
 
-export const CustomStyles: Story = {
+export const CustomStyles = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge variant="secondary" className="bg-success text-success-foreground">
@@ -173,9 +171,9 @@ export const CustomStyles: Story = {
       </Badge>
     </div>
   )
-};
+});
 
-export const NotificationBadges: Story = {
+export const NotificationBadges = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-8">
       <div className="relative">
@@ -197,9 +195,9 @@ export const NotificationBadges: Story = {
       </div>
     </div>
   )
-};
+});
 
-export const AsLink: Story = {
+export const AsLink = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge asChild>
@@ -236,9 +234,9 @@ export const AsLink: Story = {
       await expect(errorLink).toHaveAttribute("href", "#error");
     });
   }
-};
+});
 
-export const DataAttributes: Story = {
+export const DataAttributes = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge>Check data-slot</Badge>
@@ -250,9 +248,9 @@ export const DataAttributes: Story = {
       await expect(badge).toHaveAttribute("data-slot", "badge");
     });
   }
-};
+});
 
-export const InteractionTest: Story = {
+export const InteractionTest = meta.story({
   tags: ["test-only"],
   render: () => (
     <div className="flex flex-wrap gap-4">
@@ -265,7 +263,7 @@ export const InteractionTest: Story = {
       </Badge>
     </div>
   ),
-  play: async ({ canvas, step }) => {
+  play: async ({ canvas, step, userEvent }) => {
     await step("All badge variants are rendered", async () => {
       const primarytBadge = canvas.getByText("Primary Badge");
       const secondaryBadge = canvas.getByText("Secondary Badge");
@@ -291,4 +289,4 @@ export const InteractionTest: Story = {
       await userEvent.click(clickableBadge);
     });
   }
-};
+});
