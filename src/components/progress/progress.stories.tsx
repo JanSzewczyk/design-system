@@ -9,7 +9,7 @@ import preview from "~/.storybook/preview";
 const meta = preview.meta({
   title: "Components/Progress",
   component: Progress,
-  tags: ["autodocs", "new"]
+  tags: ["new"]
 });
 
 export const Example = meta.story({
