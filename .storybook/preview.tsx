@@ -51,5 +51,6 @@ export default definePreview({
     }
   },
   decorators: [],
-  addons: [addonA11y(), addonDocs()]
+  addons: [addonA11y(), addonDocs()],
+  tags: ["autodocs"]
 });
