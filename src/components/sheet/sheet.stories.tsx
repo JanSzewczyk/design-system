@@ -91,8 +91,7 @@ export const SheetStory = meta.story({
       </SheetTrigger>
       <BasicSheetContent />
     </Sheet>
-  ),
-  tags: ["test"]
+  )
 });
 
 // Rendering Tests
@@ -111,7 +110,10 @@ SheetStory.test("Clicking trigger button opens sheet", async ({ canvas, userEven
   await userEvent.click(triggerButton);
 
   const sheet = await screen.findByRole("dialog");
-  await expect(sheet).toBeVisible();
+  // Wait for animation to complete before checking visibility
+  await waitFor(async () => {
+    await expect(sheet).toBeVisible();
+  });
 });
 
 SheetStory.test("All data-slot attributes are present when sheet is open", async ({ canvas, userEvent }) => {
@@ -261,8 +263,7 @@ export const SheetWithoutCloseButton = meta.story({
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  ),
-  tags: ["test"]
+  )
 });
 
 SheetWithoutCloseButton.test(
@@ -273,9 +274,11 @@ SheetWithoutCloseButton.test(
 
     await screen.findByRole("dialog");
 
-    // Check that X button with screen reader text "Close" is not present
-    // The X button has a span with sr-only class containing "Close" text
-    const closeButton = screen.queryByText("Close");
+    // Check that X close button (direct child of sheet-content) is not present
+    // The X button is the last direct child of SheetPrimitive.Content
+    // SheetClose button in footer is nested deeper, so we check direct children only
+    const sheetContent = document.querySelector('[data-slot="sheet-content"]');
+    const closeButton = sheetContent?.querySelector(':scope > [data-slot="sheet-close"]');
     await expect(closeButton).not.toBeInTheDocument();
   }
 );
@@ -352,8 +355,7 @@ export const SheetControlled = meta.story({
         </Sheet>
       </div>
     );
-  },
-  tags: ["test"]
+  }
 });
 
 SheetControlled.test("External open button opens controlled sheet", async ({ canvas, userEvent }) => {
@@ -361,7 +363,10 @@ SheetControlled.test("External open button opens controlled sheet", async ({ can
   await userEvent.click(openButton);
 
   const sheet = await screen.findByRole("dialog");
-  await expect(sheet).toBeVisible();
+  // Wait for animation to complete before checking visibility
+  await waitFor(async () => {
+    await expect(sheet).toBeVisible();
+  });
 });
 
 SheetControlled.test("Sheet can be opened multiple times", async ({ canvas, userEvent }) => {
@@ -382,7 +387,10 @@ SheetControlled.test("Sheet can be opened multiple times", async ({ canvas, user
   await userEvent.click(openButton);
 
   const sheet = await screen.findByRole("dialog");
-  await expect(sheet).toBeVisible();
+  // Wait for animation to complete before checking visibility
+  await waitFor(async () => {
+    await expect(sheet).toBeVisible();
+  });
 
   // Second close
   await userEvent.keyboard("{Escape}");
@@ -399,8 +407,11 @@ SheetControlled.test("Controlled sheet opens and closes correctly", async ({ can
   await screen.findByRole("dialog");
 
   // Verify state text shows "open" while dialog is open
-  const stateText = screen.getByText(/Sheet is open/i);
-  await expect(stateText).toBeVisible();
+  // Wait for animation to complete
+  await waitFor(async () => {
+    const stateText = screen.getByText(/Sheet is open/i);
+    await expect(stateText).toBeVisible();
+  });
 
   // Close sheet
   await userEvent.keyboard("{Escape}");

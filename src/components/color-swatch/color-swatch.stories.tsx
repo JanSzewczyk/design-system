@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { expect } from "storybook/test";
-
 import { ColorSwatch } from "~/components";
 
 import preview from "~/.storybook/preview";
