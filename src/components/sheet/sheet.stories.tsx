@@ -140,7 +140,6 @@ SheetStory.test("Sheet content has correct data-side attribute", async ({ canvas
   await expect(content).toHaveAttribute("data-side", "right");
 });
 
-// Interaction Tests
 SheetStory.test("Clicking close button (X) closes sheet", async ({ canvas, userEvent }) => {
   const triggerButton = canvas.getByRole("button", { name: "Open Sheet" });
   await userEvent.click(triggerButton);
@@ -218,7 +217,6 @@ SheetStory.test("Dialog has correct ARIA attributes", async ({ canvas, userEvent
 
   const sheet = await screen.findByRole("dialog");
   await expect(sheet).toHaveAttribute("role", "dialog");
-  // Note: aria-modal may be handled by Radix UI via state/aria attributes
 });
 
 SheetStory.test("Focus is trapped within dialog when open", async ({ canvas, userEvent }) => {
@@ -231,10 +229,6 @@ SheetStory.test("Focus is trapped within dialog when open", async ({ canvas, use
   const focusedElement = document.activeElement;
   await expect(sheet).toContainElement(focusedElement as HTMLElement);
 });
-
-// -----------------------------------------------------------------------------
-// Story 2: SheetWithoutCloseButton
-// -----------------------------------------------------------------------------
 
 export const SheetWithoutCloseButton = meta.story({
   render: () => (
