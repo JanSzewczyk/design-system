@@ -7,3 +7,6 @@ export * from "./sheet-header";
 export * from "./sheet-footer";
 export * from "./sheet-title";
 export * from "./sheet-description";
+
+// Type alias for easier import
+export { type SheetContentSide as SheetSide } from "./sheet-content.types";
