@@ -118,6 +118,7 @@ src/styles
 
 # Claude
 /.claude/settings.local.json
+/bash.exe.stackdump
 
 # Docs
 /CHANGELOG.mdx

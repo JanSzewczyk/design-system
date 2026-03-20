@@ -51,12 +51,5 @@
     "type": "command",
     "command": ".claude/statusline.sh",
     "padding": 0
-  },
-  "enabledPlugins": {
-    "ralph-wiggum@claude-code-plugins": true,
-    "nextjs-react@szum-tech": true,
-    "code-quality@szum-tech": true,
-    "dev-experience@szum-tech": true,
-    "testing@szum-tech": true
   }
 }
