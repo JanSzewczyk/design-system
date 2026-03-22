@@ -1,4 +1,4 @@
-import { createRef } from "react";
+import { createRef, type Ref } from "react";
 
 import { describe, expect, test, vi } from "vitest";
 
@@ -142,7 +142,7 @@ describe("useComposedRefs", () => {
     rerender();
     const secondFn = result.current;
 
-    expect(firstFn).not.toBe(secondFn); // New function is created each render
+    expect(firstFn).toBe(secondFn); // Same function is returned (memoized by useCallback with same deps)
     secondFn(node);
 
     expect(callbackRef).toHaveBeenCalledTimes(2);
@@ -154,7 +154,7 @@ describe("useComposedRefs", () => {
     const node = document.createElement("div");
 
     const { result, rerender } = renderHook(({ refs }) => useComposedRefs(...refs), {
-      initialProps: { refs: [callbackRef1] as Array<React.Ref<HTMLDivElement> | undefined> }
+      initialProps: { refs: [callbackRef1] as Array<Ref<HTMLDivElement> | undefined> }
     });
 
     result.current(node);
