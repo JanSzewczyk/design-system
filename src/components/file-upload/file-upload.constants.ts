@@ -1,0 +1,10 @@
+export const ROOT_NAME = "FileUpload";
+export const DROPZONE_NAME = "FileUploadDropzone";
+export const TRIGGER_NAME = "FileUploadTrigger";
+export const LIST_NAME = "FileUploadList";
+export const ITEM_NAME = "FileUploadItem";
+export const ITEM_PREVIEW_NAME = "FileUploadItemPreview";
+export const ITEM_METADATA_NAME = "FileUploadItemMetadata";
+export const ITEM_PROGRESS_NAME = "FileUploadItemProgress";
+export const ITEM_DELETE_NAME = "FileUploadItemDelete";
+export const CLEAR_NAME = "FileUploadClear";
