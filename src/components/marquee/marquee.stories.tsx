@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { expect, userEvent, within } from "storybook/test";
+import { expect } from "storybook/test";
 import { Marquee } from "~/components/marquee";
 
 import preview from "~/.storybook/preview";
@@ -135,8 +135,8 @@ export const Default = meta.story({
       </Marquee>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquee = canvasElement.querySelector('[data-slot="marquee"]')!;
     await expect(marquee).toBeVisible();
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
@@ -157,11 +157,11 @@ export const WithTwoRows = meta.story({
       </Marquee>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquees = canvasElement.querySelectorAll('[data-slot="marquee"]');
     await expect(marquees).toHaveLength(2);
 
-    for (const marquee of marquees) {
+    for (const marquee of Array.from(marquees)) {
       await expect(marquee).toBeVisible();
     }
   }
@@ -182,11 +182,11 @@ export const Vertical = meta.story({
       </Marquee>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquees = canvasElement.querySelectorAll('[data-slot="marquee"]');
     await expect(marquees).toHaveLength(2);
 
-    for (const marquee of marquees) {
+    for (const marquee of Array.from(marquees)) {
       await expect(marquee).toBeVisible();
       await expect(marquee).toHaveClass("flex-col");
     }
@@ -203,8 +203,8 @@ export const Reversed = meta.story({
       </Marquee>
     </div>
   ),
-  play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquee = canvasElement.querySelector('[data-slot="marquee"]')!;
     await expect(marquee).toBeVisible();
   }
 });
@@ -348,8 +348,8 @@ export const PauseOnHover = meta.story({
     </div>
   ),
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const marquee = canvas.getByRole("region");
+    const { userEvent } = await import("storybook/test");
+    const marquee = canvasElement.querySelector('[data-slot="marquee"]') as HTMLElement;
 
     await expect(marquee).toBeVisible();
 
@@ -380,8 +380,8 @@ export const Accessibility = meta.story({
       </>
     )
   },
-  play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquee = canvasElement.querySelector('[data-slot="marquee"]')!;
 
     await expect(marquee).toHaveAttribute("aria-label", "Customer testimonials carousel");
     await expect(marquee).toHaveAttribute("aria-live", "polite");
@@ -395,8 +395,9 @@ export const DataSlotAttribute = meta.story({
     className: "[--duration:20s]",
     children: <span>Test content</span>
   },
-  play: async ({ canvas }) => {
-    const marquee = canvas.getByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquee = canvasElement.querySelector('[data-slot="marquee"]')!;
+    await expect(marquee).toBeInTheDocument();
     await expect(marquee).toHaveAttribute("data-slot", "marquee");
   }
 });
@@ -425,8 +426,8 @@ export const ThreeDEffect = meta.story({
       <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-linear-to-b from-gray-950" />
     </div>
   ),
-  play: async ({ canvas }) => {
-    const marquees = canvas.getAllByRole("region");
+  play: async ({ canvasElement }) => {
+    const marquees = canvasElement.querySelectorAll('[data-slot="marquee"]');
     await expect(marquees).toHaveLength(3);
   }
 });

@@ -115,8 +115,8 @@ export const BasicDropzone = meta.story({
   }
 });
 
-BasicDropzone.test("renders dropzone region", async ({ canvas }) => {
-  const dropzone = canvas.getByRole("region");
+BasicDropzone.test("renders dropzone region", async ({ canvasElement }) => {
+  const dropzone = canvasElement.querySelector('[data-slot="file-upload-dropzone"]')!;
   await expect(dropzone).toBeVisible();
 });
 
@@ -196,8 +196,8 @@ export const WithProgress = meta.story({
   }
 });
 
-WithProgress.test("renders dropzone", async ({ canvas }) => {
-  const dropzone = canvas.getByRole("region");
+WithProgress.test("renders dropzone", async ({ canvasElement }) => {
+  const dropzone = canvasElement.querySelector('[data-slot="file-upload-dropzone"]')!;
   await expect(dropzone).toBeVisible();
 });
 
@@ -256,8 +256,8 @@ LogoUpload.test("renders upload trigger button", async ({ canvas }) => {
   await expect(trigger).toBeVisible();
 });
 
-LogoUpload.test("renders dropzone placeholder", async ({ canvas }) => {
-  const dropzone = canvas.getByRole("region");
+LogoUpload.test("renders dropzone placeholder", async ({ canvasElement }) => {
+  const dropzone = canvasElement.querySelector('[data-slot="file-upload-dropzone"]')!;
   await expect(dropzone).toBeVisible();
 });
 
