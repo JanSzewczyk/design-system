@@ -36,3 +36,4 @@ export * from "./typing-text";
 export * from "./word-rotate";
 export * from "./masonry";
 export * from "./popover";
+export * from "./file-upload";
