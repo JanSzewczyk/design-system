@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { expect } from "storybook/test";
 import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from "lucide-react";
 
 import { Badge, type BadgeVariant, Card, CardContent } from "~/components";
@@ -138,6 +139,41 @@ export const List = meta.story({
   }
 });
 
+List.test("renders all sortable items", async ({ canvas }) => {
+  await expect(canvas.getByText("Product Demo")).toBeVisible();
+  await expect(canvas.getByText("Product Demo Video")).toBeVisible();
+  await expect(canvas.getByText("Product Audio Guide")).toBeVisible();
+  const specs = canvas.getAllByText("Product Specification");
+  await expect(specs).toHaveLength(2);
+});
+
+List.test("renders data-slot attributes", async ({ canvasElement }) => {
+  const sortable = canvasElement.querySelector('[data-slot="sortable"]');
+  await expect(sortable).toBeTruthy();
+
+  const items = canvasElement.querySelectorAll('[data-slot="sortable-item"]');
+  await expect(items.length).toBe(5);
+
+  const handles = canvasElement.querySelectorAll('[data-slot="sortable-item-handle"]');
+  await expect(handles.length).toBe(5);
+});
+
+List.test("renders badges with correct type labels", async ({ canvas }) => {
+  const imageBadges = canvas.getAllByText("image");
+  await expect(imageBadges).toHaveLength(2);
+
+  await expect(canvas.getByText("document")).toBeVisible();
+  await expect(canvas.getByText("video")).toBeVisible();
+  await expect(canvas.getByText("audio")).toBeVisible();
+});
+
+List.test("renders item descriptions and file sizes", async ({ canvas }) => {
+  await expect(canvas.getByText("Main product image")).toBeVisible();
+  await expect(canvas.getByText("Technical details document")).toBeVisible();
+  await expect(canvas.getByText("2.4 MB")).toBeVisible();
+  await expect(canvas.getByText("15.7 MB")).toBeVisible();
+});
+
 interface GridItem {
   id: string;
   title: string;
@@ -259,7 +295,7 @@ export const Grid = meta.story({
                 className={cn(
                   "group bg-background hover:bg-accent/50 relative cursor-pointer rounded-md border p-3 transition-colors",
                   getItemSize(item.type),
-                  "flex min-h-[100px] flex-col"
+                  "flex min-h-25 flex-col"
                 )}
                 onClick={() => {}}
               >
@@ -280,6 +316,41 @@ export const Grid = meta.story({
       </div>
     );
   }
+});
+
+Grid.test("renders all grid items", async ({ canvas }) => {
+  await expect(canvas.getByText("Hero Image")).toBeVisible();
+  await expect(canvas.getByText("Product Specs")).toBeVisible();
+  await expect(canvas.getByText("Demo Video")).toBeVisible();
+  await expect(canvas.getByText("Audio Guide")).toBeVisible();
+  await expect(canvas.getByText("Gallery Photo 1")).toBeVisible();
+  await expect(canvas.getByText("Gallery Photo 2")).toBeVisible();
+  await expect(canvas.getByText("User Manual")).toBeVisible();
+  await expect(canvas.getByText("Background Music")).toBeVisible();
+  await expect(canvas.getByText("Feature Highlight")).toBeVisible();
+});
+
+Grid.test("renders items in grid layout", async ({ canvasElement }) => {
+  const items = canvasElement.querySelectorAll('[data-slot="sortable-item"]');
+  await expect(items.length).toBe(9);
+});
+
+Grid.test("renders badges for each item type", async ({ canvas }) => {
+  const imageBadges = canvas.getAllByText("image");
+  await expect(imageBadges).toHaveLength(3);
+
+  const documentBadges = canvas.getAllByText("document");
+  await expect(documentBadges).toHaveLength(2);
+
+  const audioBadges = canvas.getAllByText("audio");
+  await expect(audioBadges).toHaveLength(3);
+
+  await expect(canvas.getByText("video")).toBeVisible();
+});
+
+Grid.test("renders drag handles for grid items", async ({ canvasElement }) => {
+  const handles = canvasElement.querySelectorAll('[data-slot="sortable-item-handle"]');
+  await expect(handles.length).toBe(9);
 });
 
 interface OptionValue {
@@ -388,4 +459,39 @@ export const Nested = meta.story({
       </div>
     );
   }
+});
+
+Nested.test("renders all option groups", async ({ canvas }) => {
+  await expect(canvas.getByText("Colors")).toBeVisible();
+  await expect(canvas.getByText("Sizes")).toBeVisible();
+  await expect(canvas.getByText("Materials")).toBeVisible();
+});
+
+Nested.test("renders nested option values", async ({ canvas }) => {
+  await expect(canvas.getByText("White")).toBeVisible();
+  await expect(canvas.getByText("Black")).toBeVisible();
+  await expect(canvas.getByText("Grey")).toBeVisible();
+  await expect(canvas.getByText("Green")).toBeVisible();
+  await expect(canvas.getByText("Small")).toBeVisible();
+  await expect(canvas.getByText("Medium")).toBeVisible();
+  await expect(canvas.getByText("Large")).toBeVisible();
+  await expect(canvas.getByText("Cotton")).toBeVisible();
+  await expect(canvas.getByText("Polyester")).toBeVisible();
+  await expect(canvas.getByText("Wool")).toBeVisible();
+});
+
+Nested.test("renders drag handles for groups and values", async ({ canvasElement }) => {
+  const handles = canvasElement.querySelectorAll('[data-slot="sortable-item-handle"]');
+  // 3 group handles + 4 + 3 + 3 = 13 total handles
+  await expect(handles.length).toBe(13);
+});
+
+Nested.test("renders correct number of child items per group", async ({ canvasElement }) => {
+  const sortables = canvasElement.querySelectorAll('[data-slot="sortable"]');
+  // 1 parent sortable + 3 child sortables
+  await expect(sortables.length).toBe(4);
+
+  const items = canvasElement.querySelectorAll('[data-slot="sortable-item"]');
+  // 3 group items + 4 + 3 + 3 = 13 total items
+  await expect(items.length).toBe(13);
 });
