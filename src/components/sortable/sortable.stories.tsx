@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { expect } from "storybook/test";
 import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from "lucide-react";
 
+import { expect } from "storybook/test";
 import { Badge, type BadgeVariant, Card, CardContent } from "~/components";
 import { cn } from "~/utils";
 
@@ -299,7 +299,7 @@ export const Grid = meta.story({
                 )}
                 onClick={() => {}}
               >
-                <SortableItemHandle className="text-muted-foreground hover:text-foreground absolute end-1.5 top-2.5 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+                <SortableItemHandle className="text-muted-foreground hover:text-foreground absolute inset-e-1.5 top-2.5 z-10 opacity-0 transition-opacity group-hover:opacity-100">
                   <GripVerticalIcon className="h-3.5 w-3.5" />
                 </SortableItemHandle>
                 <div className="min-w-0 flex-1">
