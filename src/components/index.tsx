@@ -37,4 +37,6 @@ export * from "./word-rotate";
 export * from "./masonry";
 export * from "./popover";
 export * from "./file-upload";
+export * from "./skeleton";
 export * from "./sortable";
+export * from "./sidebar";
