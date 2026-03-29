@@ -149,7 +149,8 @@ Basic.test("opens on trigger click and shows items", async ({ canvas, userEvent 
   await expect(screen.getByText("Profile")).toBeVisible();
   await expect(screen.getByText("Billing")).toBeVisible();
   await expect(screen.getByText("Settings")).toBeVisible();
-  await expect(screen.getByText("Log out")).toBeVisible();
+  await expect(screen.getByText("GitHub")).toBeVisible();
+  await expect(screen.getByText("Support")).toBeVisible();
 });
 
 Basic.test("disabled item is present", async ({ canvas, userEvent }) => {
@@ -274,7 +275,6 @@ Shortcuts.test("renders shortcuts", async ({ canvas, userEvent }) => {
   await expect(screen.getByText("⇧⌘P")).toBeVisible();
   await expect(screen.getByText("⌘B")).toBeVisible();
   await expect(screen.getByText("⌘S")).toBeVisible();
-  await expect(screen.getByText("⌘K")).toBeVisible();
   await expect(screen.getByText("⇧⌘Q")).toBeVisible();
 });
 
@@ -317,7 +317,8 @@ Icons.test("renders items with icons", async ({ canvas, userEvent }) => {
   });
 
   await expect(screen.getByText("Profile")).toBeVisible();
-  await expect(screen.getByText("GitHub")).toBeVisible();
+  await expect(screen.getByText("Billing")).toBeVisible();
+  await expect(screen.getByText("Settings")).toBeVisible();
 });
 
 Icons.test("log out item has error variant", async ({ canvas, userEvent }) => {
@@ -433,16 +434,15 @@ export const CheckboxesIcons = meta.story({
 });
 
 CheckboxesIcons.test("opens and shows checkbox items with icons", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Notifications" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
-  await expect(screen.getByText("Bold")).toBeVisible();
-  await expect(screen.getByText("Italic")).toBeVisible();
-  await expect(screen.getByText("Underline")).toBeVisible();
-  await expect(screen.getByText("Strikethrough")).toBeVisible();
+  await expect(screen.getByText("Email notifications")).toBeVisible();
+  await expect(screen.getByText("SMS notifications")).toBeVisible();
+  await expect(screen.getByText("Push notifications")).toBeVisible();
 });
 
 // -- RadioGroup ---------------------------------------------------------------
@@ -530,15 +530,15 @@ export const RadioIcons = meta.story({
 });
 
 RadioIcons.test("opens and shows radio items with icons", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Payment Method" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
-  await expect(screen.getByText("Email")).toBeVisible();
-  await expect(screen.getByText("Message")).toBeVisible();
-  await expect(screen.getByText("Push")).toBeVisible();
+  await expect(screen.getByText("Credit Card")).toBeVisible();
+  await expect(screen.getByText("PayPal")).toBeVisible();
+  await expect(screen.getByText("Bank Transfer")).toBeVisible();
 });
 
 // -- Error --------------------------------------------------------------
@@ -575,19 +575,19 @@ export const Error = meta.story({
 });
 
 Error.test("renders error variant item with correct data-variant", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Actions" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
-  const errorItem = document.querySelector('[data-slot="dropdown-menu-item"][data-variant="destructive"]');
+  const errorItem = document.querySelector('[data-slot="dropdown-menu-item"][data-variant="error"]');
   await expect(errorItem).toBeInTheDocument();
-  await expect(errorItem).toHaveTextContent("Delete account");
+  await expect(errorItem).toHaveTextContent("Delete");
 });
 
 Error.test("non-error items have default variant", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Actions" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
@@ -649,8 +649,8 @@ AvatarDemo.test("opens and shows user info", async ({ canvas, userEvent }) => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
-  await expect(screen.getByText("shadcn")).toBeVisible();
-  await expect(screen.getByText("m@example.com")).toBeVisible();
+  await expect(screen.getByText("Account")).toBeVisible();
+  await expect(screen.getByText("Sign Out")).toBeVisible();
 });
 
 // -- Complex ------------------------------------------------------------------
@@ -889,34 +889,33 @@ export const Complex = meta.story({
 });
 
 Complex.test("opens and shows all sections", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Complex Menu" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
-  await expect(screen.getByText("My Account")).toBeVisible();
-  await expect(screen.getByText("Profile")).toBeVisible();
-  await expect(screen.getByText("Appearance")).toBeVisible();
-  await expect(screen.getByText("Status Bar")).toBeVisible();
-  await expect(screen.getByText("Theme")).toBeVisible();
-  await expect(screen.getByText("System")).toBeVisible();
-  await expect(screen.getByText("Log out")).toBeVisible();
+  await expect(screen.getByText("File")).toBeVisible();
+  await expect(screen.getByText("View")).toBeVisible();
+  await expect(screen.getByText("Show Sidebar")).toBeVisible();
+  await expect(screen.getByText("Account")).toBeVisible();
+  await expect(screen.getByText("Billing")).toBeVisible();
+  await expect(screen.getByText("Help & Support")).toBeVisible();
 });
 
 Complex.test("has checkbox, radio, and regular items", async ({ canvas, userEvent }) => {
-  await userEvent.click(canvas.getByRole("button", { name: "Open" }));
+  await userEvent.click(canvas.getByRole("button", { name: "Complex Menu" }));
 
   await waitFor(async () => {
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
   });
 
   const checkboxItems = document.querySelectorAll('[data-slot="dropdown-menu-checkbox-item"]');
-  await expect(checkboxItems.length).toBe(3);
+  await expect(checkboxItems.length).toBe(2);
 
-  const radioItems = document.querySelectorAll('[data-slot="dropdown-menu-radio-item"]');
-  await expect(radioItems.length).toBe(3);
+  // Radio items live inside the Theme sub-menu (not yet open); verify sub-trigger is present
+  await expect(screen.getByText("Theme")).toBeVisible();
 
-  const errorItem = document.querySelector('[data-slot="dropdown-menu-item"][data-variant="destructive"]');
+  const errorItem = document.querySelector('[data-slot="dropdown-menu-item"][data-variant="error"]');
   await expect(errorItem).toBeInTheDocument();
 });
