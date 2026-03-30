@@ -40,3 +40,5 @@ export * from "./file-upload";
 export * from "./skeleton";
 export * from "./sortable";
 export * from "./sidebar";
+export * from "./dropdown-menu";
+export * from "./collapsible";

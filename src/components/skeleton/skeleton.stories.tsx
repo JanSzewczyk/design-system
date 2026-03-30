@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { expect, within } from "storybook/test";
+import { expect } from "storybook/test";
 import { Skeleton } from "~/components";
 
 import preview from "~/.storybook/preview";
@@ -19,13 +19,17 @@ const meta = preview.meta({
 export const Default = meta.story({
   args: {
     className: "h-4 w-48"
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skeleton = canvas.getByRole("generic", { hidden: true });
-    await expect(skeleton).toHaveAttribute("data-slot", "skeleton");
-    await expect(skeleton).toHaveClass("animate-pulse");
   }
+});
+
+Default.test("Has correct data-slot attribute", async ({ canvasElement }) => {
+  const skeleton = canvasElement.querySelector("[data-slot='skeleton']");
+  await expect(skeleton).toHaveAttribute("data-slot", "skeleton");
+});
+
+Default.test("Has animate-pulse class", async ({ canvasElement }) => {
+  const skeleton = canvasElement.querySelector("[data-slot='skeleton']");
+  await expect(skeleton).toHaveClass("animate-pulse");
 });
 
 export const TextLines = meta.story({
@@ -35,14 +39,18 @@ export const TextLines = meta.story({
       <Skeleton className="h-4 w-56" />
       <Skeleton className="h-4 w-48" />
     </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
-    await expect(skeletons).toHaveLength(3);
-    for (const skeleton of Array.from(skeletons)) {
-      await expect(skeleton).toHaveClass("animate-pulse");
-    }
+  )
+});
+
+TextLines.test("Renders 3 skeleton lines", async ({ canvasElement }) => {
+  const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
+  await expect(skeletons).toHaveLength(3);
+});
+
+TextLines.test("All skeletons have animate-pulse class", async ({ canvasElement }) => {
+  const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
+  for (const skeleton of Array.from(skeletons)) {
+    await expect(skeleton).toHaveClass("animate-pulse");
   }
 });
 
@@ -57,11 +65,12 @@ export const Card = meta.story({
         <Skeleton className="h-8 w-20 rounded-md" />
       </div>
     </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
-    await expect(skeletons).toHaveLength(5);
-  }
+  )
+});
+
+Card.test("Renders 5 skeletons", async ({ canvasElement }) => {
+  const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
+  await expect(skeletons).toHaveLength(5);
 });
 
 export const Avatar = meta.story({
@@ -73,9 +82,16 @@ export const Avatar = meta.story({
         <Skeleton className="h-3 w-24" />
       </div>
     </div>
-  ),
-  play: async ({ canvasElement }) => {
-    const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
-    await expect(skeletons).toHaveLength(3);
-  }
+  )
+});
+
+Avatar.test("Renders 3 skeletons", async ({ canvasElement }) => {
+  const skeletons = canvasElement.querySelectorAll("[data-slot='skeleton']");
+  await expect(skeletons).toHaveLength(3);
+});
+
+Avatar.test("Avatar skeleton is circular", async ({ canvasElement }) => {
+  const avatarSkeleton = canvasElement.querySelector(".rounded-full");
+  await expect(avatarSkeleton).toHaveAttribute("data-slot", "skeleton");
+  await expect(avatarSkeleton).toHaveClass("animate-pulse");
 });
