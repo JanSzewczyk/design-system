@@ -4,9 +4,9 @@ import { Slot } from "@radix-ui/react-slot";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components";
 import { cn } from "~/utils";
 
+import { type SidebarMenuButtonSizeType, type SidebarMenuButtonVariantType } from "./sidebar-menu-button.types";
 import { useSidebarContext } from "./sidebar.context";
 import { sidebarMenuButtonVariants } from "./sidebar.styles";
-import { type SidebarMenuButtonSizeType, type SidebarMenuButtonVariantType } from "./sidebar-menu-button.types";
 
 export type SidebarMenuButtonProps = React.ComponentProps<"button"> & {
   asChild?: boolean;
