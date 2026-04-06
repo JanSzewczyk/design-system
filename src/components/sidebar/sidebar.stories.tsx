@@ -857,7 +857,7 @@ export const WithCollapsibleSumMenus = meta.story({
                 <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title}>
+                      <SidebarMenuButton tooltip={item.title} isActive={item.isActive}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
