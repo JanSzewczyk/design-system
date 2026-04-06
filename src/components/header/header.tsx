@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "~/utils";
 
-export type HeaderProps = React.RefAttributes<HTMLHtmlElement> & {
+export type HeaderProps = React.ComponentProps<"header"> & {
   children?: React.ReactNode;
   /**
    * Controls the width constraint of the header's inner content area.

@@ -849,6 +849,7 @@ export const WithCollapsibleSumMenus = meta.story({
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
+
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -881,9 +882,7 @@ export const WithCollapsibleSumMenus = meta.story({
               ))}
             </SidebarMenu>
           </SidebarGroup>
-
-          <SidebarSeparator />
-
+          <SidebarSeparator className="mx-0" />
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>Projects</SidebarGroupLabel>
             <SidebarMenu>
