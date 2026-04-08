@@ -44,3 +44,4 @@ export * from "./dropdown-menu";
 export * from "./collapsible";
 export * from "./toggle";
 export * from "./toggle-group";
+export * from "./breadcrump";
