@@ -44,29 +44,113 @@ const meta = preview.meta({
   }
 });
 
+// ─── Visual Stories ────────────────────────────────────────────────────────────
+
 export const FormattingToolbar = meta.story({
-  render: () => (
-    <ToggleGroup type="multiple" variant="outline">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
+  args: {
+    type: "multiple",
+    variant: "outline"
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+          <BoldIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+          <ItalicIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+          <UnderlineIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    );
+  }
+});
+
+FormattingToolbar.test("Renders group with correct data-slot attribute", async ({ canvas }) => {
+  const root = canvas.getByRole("group");
+  await expect(root).toHaveAttribute("data-slot", "toggle-group");
+});
+
+FormattingToolbar.test("Each item has correct data-slot attribute", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-slot", "toggle-group-item");
+  }
+});
+
+FormattingToolbar.test("Variant from args propagates to items via data-variant", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-variant", "outline");
+  }
+});
+
+FormattingToolbar.test("Multiple items can be selected simultaneously", async ({ canvas, userEvent, step }) => {
+  const bold = canvas.getByRole("button", { name: /toggle bold/i });
+  const italic = canvas.getByRole("button", { name: /toggle italic/i });
+
+  await step("Select bold", async () => {
+    await userEvent.click(bold);
+    await expect(bold).toHaveAttribute("data-state", "on");
+  });
+
+  await step("Select italic — both remain on", async () => {
+    await userEvent.click(italic);
+    await expect(italic).toHaveAttribute("data-state", "on");
+    await expect(bold).toHaveAttribute("data-state", "on");
+  });
+});
+
+FormattingToolbar.test("Clicking a selected item deselects it", async ({ canvas, userEvent, step }) => {
+  const bold = canvas.getByRole("button", { name: /toggle bold/i });
+
+  await step("Select bold", async () => {
+    await userEvent.click(bold);
+    await expect(bold).toHaveAttribute("data-state", "on");
+  });
+
+  await step("Click again to deselect", async () => {
+    await userEvent.click(bold);
+    await expect(bold).toHaveAttribute("data-state", "off");
+  });
 });
 
 export const Outline = meta.story({
-  render: () => (
-    <ToggleGroup type="single" variant="outline" defaultValue="all">
-      <ToggleGroupItem value="all">All</ToggleGroupItem>
-      <ToggleGroupItem value="missed">Missed</ToggleGroupItem>
-    </ToggleGroup>
-  )
+  args: {
+    type: "single",
+    variant: "outline",
+    defaultValue: "all"
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="all">All</ToggleGroupItem>
+        <ToggleGroupItem value="missed">Missed</ToggleGroupItem>
+      </ToggleGroup>
+    );
+  }
+});
+
+Outline.test("Default value item starts as on", async ({ canvas }) => {
+  const all = canvas.getByRole("radio", { name: /all/i });
+  await expect(all).toHaveAttribute("data-state", "on");
+});
+
+Outline.test("Clicking another item deselects the current one", async ({ canvas, userEvent, step }) => {
+  const all = canvas.getByRole("radio", { name: /all/i });
+  const missed = canvas.getByRole("radio", { name: /missed/i });
+
+  await step("All starts selected", async () => {
+    await expect(all).toHaveAttribute("data-state", "on");
+  });
+
+  await step("Click missed — all becomes off", async () => {
+    await userEvent.click(missed);
+    await expect(missed).toHaveAttribute("data-state", "on");
+    await expect(all).toHaveAttribute("data-state", "off");
+  });
 });
 
 export const Sizes = meta.story({
@@ -88,47 +172,119 @@ export const Sizes = meta.story({
   )
 });
 
+Sizes.test("Items inherit size from root via data-size", async ({ canvas }) => {
+  const groups = canvas.getAllByRole("group");
+  const smItems = Array.from(groups[0].querySelectorAll("[data-slot='toggle-group-item']"));
+  const defaultItems = Array.from(groups[1].querySelectorAll("[data-slot='toggle-group-item']"));
+
+  for (const item of smItems) {
+    await expect(item).toHaveAttribute("data-size", "sm");
+  }
+  for (const item of defaultItems) {
+    await expect(item).toHaveAttribute("data-size", "default");
+  }
+});
+
 export const Spacing = meta.story({
-  render: () => (
-    <ToggleGroup type="single" variant="outline" size="sm" spacing={2} defaultValue="top">
-      <ToggleGroupItem value="top">Top</ToggleGroupItem>
-      <ToggleGroupItem value="bottom">Bottom</ToggleGroupItem>
-      <ToggleGroupItem value="left">Left</ToggleGroupItem>
-      <ToggleGroupItem value="right">Right</ToggleGroupItem>
-    </ToggleGroup>
-  )
+  args: {
+    type: "single",
+    variant: "outline",
+    size: "sm",
+    spacing: 2,
+    defaultValue: "top"
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="top">Top</ToggleGroupItem>
+        <ToggleGroupItem value="bottom">Bottom</ToggleGroupItem>
+        <ToggleGroupItem value="left">Left</ToggleGroupItem>
+        <ToggleGroupItem value="right">Right</ToggleGroupItem>
+      </ToggleGroup>
+    );
+  }
+});
+
+Spacing.test("Items have data-spacing matching root spacing prop", async ({ canvas }) => {
+  const items = canvas.getAllByRole("radio");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-spacing", "2");
+  }
 });
 
 export const Vertical = meta.story({
-  render: () => (
-    <ToggleGroup type="multiple" orientation="vertical" spacing={1} defaultValue={["bold", "italic"]}>
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
+  args: {
+    type: "multiple",
+    orientation: "vertical",
+    spacing: 1,
+    defaultValue: ["bold", "italic"]
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+          <BoldIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+          <ItalicIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+          <UnderlineIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    );
+  }
+});
+
+Vertical.test("Root has data-orientation vertical", async ({ canvas }) => {
+  const root = canvas.getByRole("group");
+  await expect(root).toHaveAttribute("data-orientation", "vertical");
+});
+
+Vertical.test("Default values are pre-selected on mount", async ({ canvas }) => {
+  const bold = canvas.getByRole("button", { name: /toggle bold/i });
+  const italic = canvas.getByRole("button", { name: /toggle italic/i });
+  const underline = canvas.getByRole("button", { name: /toggle underline/i });
+
+  await expect(bold).toHaveAttribute("data-state", "on");
+  await expect(italic).toHaveAttribute("data-state", "on");
+  await expect(underline).toHaveAttribute("data-state", "off");
 });
 
 export const AllDisabled = meta.story({
-  render: () => (
-    <ToggleGroup type="multiple" disabled>
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
+  args: {
+    type: "multiple",
+    disabled: true
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+          <BoldIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+          <ItalicIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+          <UnderlineIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    );
+  }
+});
+
+AllDisabled.test("All items have disabled attribute when group is disabled", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toBeDisabled();
+  }
+});
+
+AllDisabled.test("Clicking disabled items does not change data-state", async ({ canvas, userEvent }) => {
+  const bold = canvas.getByRole("button", { name: /toggle bold/i });
+  await expect(bold).toHaveAttribute("data-state", "off");
+  await userEvent.click(bold);
+  await expect(bold).toHaveAttribute("data-state", "off");
 });
 
 export const Custom = meta.story({
@@ -170,191 +326,49 @@ export const Custom = meta.story({
   }
 });
 
+Custom.test("Selecting an item updates the controlled state display", async ({ canvas, userEvent, step }) => {
+  const bold = canvas.getByRole("radio", { name: /font weight bold/i });
+  const selectedText = canvas.getByText(/selected:/i);
+
+  await step("Initially shows normal", async () => {
+    await expect(selectedText).toHaveTextContent("Selected: normal");
+  });
+
+  await step("After clicking bold, display updates", async () => {
+    await userEvent.click(bold);
+    await expect(selectedText).toHaveTextContent("Selected: bold");
+    await expect(bold).toHaveAttribute("data-state", "on");
+  });
+});
+
 export const MultiplePreselected = meta.story({
-  render: () => (
-    <ToggleGroup type="multiple" defaultValue={["bold", "underline"]}>
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
-
-// ─── Test Stories ──────────────────────────────────────────────────────────────
-
-export const DataSlotAttributes = meta.story({
-  tags: ["test"],
-  render: () => (
-    <ToggleGroup type="multiple">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
-
-DataSlotAttributes.test("Root has data-slot toggle-group attribute", async ({ canvas }) => {
-  const root = canvas.getByRole("group");
-  await expect(root).toHaveAttribute("data-slot", "toggle-group");
-});
-
-DataSlotAttributes.test("Each item has data-slot toggle-group-item attribute", async ({ canvas }) => {
-  const items = canvas.getAllByRole("button");
-  for (const item of items) {
-    await expect(item).toHaveAttribute("data-slot", "toggle-group-item");
+  args: {
+    type: "multiple",
+    defaultValue: ["bold", "underline"]
+  },
+  render(args) {
+    return (
+      <ToggleGroup {...args}>
+        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+          <BoldIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+          <ItalicIcon />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+          <UnderlineIcon />
+        </ToggleGroupItem>
+      </ToggleGroup>
+    );
   }
 });
 
-export const SingleSelection = meta.story({
-  tags: ["test"],
-  render: () => (
-    <ToggleGroup type="single">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
+MultiplePreselected.test("Pre-selected items start with data-state on", async ({ canvas }) => {
+  const bold = canvas.getByRole("button", { name: /toggle bold/i });
+  const italic = canvas.getByRole("button", { name: /toggle italic/i });
+  const underline = canvas.getByRole("button", { name: /toggle underline/i });
 
-SingleSelection.test("Clicking an item sets it to data-state on", async ({ canvas, userEvent }) => {
-  const boldItem = canvas.getByRole("radio", { name: /toggle bold/i });
-  await userEvent.click(boldItem);
-  await expect(boldItem).toHaveAttribute("data-state", "on");
-});
-
-SingleSelection.test("Clicking a second item deselects the first", async ({ canvas, userEvent, step }) => {
-  const boldItem = canvas.getByRole("radio", { name: /toggle bold/i });
-  const italicItem = canvas.getByRole("radio", { name: /toggle italic/i });
-
-  await step("Select bold item", async () => {
-    await userEvent.click(boldItem);
-    await expect(boldItem).toHaveAttribute("data-state", "on");
-  });
-
-  await step("Select italic item — bold becomes off", async () => {
-    await userEvent.click(italicItem);
-    await expect(italicItem).toHaveAttribute("data-state", "on");
-    await expect(boldItem).toHaveAttribute("data-state", "off");
-  });
-});
-
-export const MultipleSelection = meta.story({
-  tags: ["test"],
-  render: () => (
-    <ToggleGroup type="multiple">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
-
-MultipleSelection.test("Multiple items can be selected simultaneously", async ({ canvas, userEvent, step }) => {
-  const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-  const italicItem = canvas.getByRole("button", { name: /toggle italic/i });
-
-  await step("Select bold", async () => {
-    await userEvent.click(boldItem);
-    await expect(boldItem).toHaveAttribute("data-state", "on");
-  });
-
-  await step("Select italic — both are on", async () => {
-    await userEvent.click(italicItem);
-    await expect(italicItem).toHaveAttribute("data-state", "on");
-    await expect(boldItem).toHaveAttribute("data-state", "on");
-  });
-});
-
-MultipleSelection.test("Clicking a selected item deselects it", async ({ canvas, userEvent, step }) => {
-  const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-
-  await step("Select bold", async () => {
-    await userEvent.click(boldItem);
-    await expect(boldItem).toHaveAttribute("data-state", "on");
-  });
-
-  await step("Click again to deselect", async () => {
-    await userEvent.click(boldItem);
-    await expect(boldItem).toHaveAttribute("data-state", "off");
-  });
-});
-
-export const DisabledGroup = meta.story({
-  tags: ["test"],
-  render: () => (
-    <ToggleGroup type="multiple" disabled>
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="underline" aria-label="Toggle underline">
-        <UnderlineIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
-
-DisabledGroup.test("All items have disabled attribute when group is disabled", async ({ canvas }) => {
-  const items = canvas.getAllByRole("button");
-  for (const item of items) {
-    await expect(item).toBeDisabled();
-  }
-});
-
-DisabledGroup.test("Clicking disabled items does not change data-state", async ({ canvas, userEvent }) => {
-  const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-  await expect(boldItem).toHaveAttribute("data-state", "off");
-  await userEvent.click(boldItem);
-  await expect(boldItem).toHaveAttribute("data-state", "off");
-});
-
-export const ContextInheritance = meta.story({
-  tags: ["test"],
-  render: () => (
-    <ToggleGroup type="multiple" variant="outline" size="sm">
-      <ToggleGroupItem value="bold" aria-label="Toggle bold">
-        <BoldIcon />
-      </ToggleGroupItem>
-      <ToggleGroupItem value="italic" aria-label="Toggle italic">
-        <ItalicIcon />
-      </ToggleGroupItem>
-    </ToggleGroup>
-  )
-});
-
-ContextInheritance.test("Variant from root context propagates to items via data-variant", async ({ canvas }) => {
-  const items = canvas.getAllByRole("button");
-  for (const item of items) {
-    await expect(item).toHaveAttribute("data-variant", "outline");
-  }
-});
-
-ContextInheritance.test("Size from root context propagates to items via data-size", async ({ canvas }) => {
-  const items = canvas.getAllByRole("button");
-  for (const item of items) {
-    await expect(item).toHaveAttribute("data-size", "sm");
-  }
+  await expect(bold).toHaveAttribute("data-state", "on");
+  await expect(italic).toHaveAttribute("data-state", "off");
+  await expect(underline).toHaveAttribute("data-state", "on");
 });
