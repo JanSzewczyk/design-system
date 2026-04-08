@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { BoldIcon, BookmarkIcon, ItalicIcon } from "lucide-react";
+
 import { expect } from "storybook/test";
 
 import { Toggle } from "./toggle";
@@ -9,7 +11,6 @@ import preview from "~/.storybook/preview";
 const meta = preview.meta({
   title: "Components/Toggle",
   component: Toggle,
-  tags: ["autodocs", "new"],
   argTypes: {
     variant: {
       control: "select",
@@ -21,46 +22,99 @@ const meta = preview.meta({
       options: ["sm", "default", "lg"],
       description: "Size of the toggle"
     },
-    disabled: {
-      control: "boolean",
-      description: "Disable the toggle"
-    },
     pressed: {
       control: "boolean",
       description: "Controlled pressed state"
+    },
+    defaultPressed: {
+      control: "boolean",
+      description: "Initial pressed state (uncontrolled)"
+    },
+    disabled: {
+      control: "boolean",
+      description: "Disable the toggle"
     }
   }
 });
 
-export const Default = meta.story({
-  render: () => <Toggle>Toggle</Toggle>
+export const ToggleStory = meta.story({
+  name: "Toggle",
+  render: () => (
+    <Toggle aria-label="Toggle bookmark" size="sm" variant="outline">
+      <BookmarkIcon className="group-data-[state=on]/toggle:fill-foreground" />
+      Bookmark
+    </Toggle>
+  )
 });
 
-export const Variants = meta.story({
+ToggleStory.test("Has correct data-slot attribute", async ({ canvas }) => {
+  const toggle = canvas.getByRole("button", { name: /bold/i });
+  await expect(toggle).toHaveAttribute("data-slot", "toggle");
+});
+
+ToggleStory.test("Starts unpressed with data-state off", async ({ canvas }) => {
+  const toggle = canvas.getByRole("button", { name: /bold/i });
+  await expect(toggle).toHaveAttribute("data-state", "off");
+});
+
+ToggleStory.test("Click toggles data-state between off and on", async ({ canvas, userEvent }) => {
+  const toggle = canvas.getByRole("button", { name: /bold/i });
+
+  await expect(toggle).toHaveAttribute("data-state", "off");
+
+  await userEvent.click(toggle);
+  await expect(toggle).toHaveAttribute("data-state", "on");
+
+  await userEvent.click(toggle);
+  await expect(toggle).toHaveAttribute("data-state", "off");
+});
+
+ToggleStory.test("Space key toggles the state", async ({ canvas, userEvent }) => {
+  const toggle = canvas.getByRole("button", { name: /bold/i });
+
+  toggle.focus();
+  await expect(toggle).toHaveFocus();
+
+  await userEvent.keyboard("{Space}");
+  await expect(toggle).toHaveAttribute("data-state", "on");
+
+  await userEvent.keyboard("{Space}");
+  await expect(toggle).toHaveAttribute("data-state", "off");
+});
+
+export const Outline = meta.story({
   render: () => (
-    <div className="flex items-center gap-4">
-      <Toggle variant="default">Default</Toggle>
-      <Toggle variant="outline">Outline</Toggle>
-    </div>
+    <Toggle variant="outline" aria-label="Toggle bold">
+      <BoldIcon />
+      Bold
+    </Toggle>
+  )
+});
+
+export const WithText = meta.story({
+  name: "With Text",
+  render: () => (
+    <Toggle aria-label="Toggle italic">
+      <ItalicIcon />
+      Italic
+    </Toggle>
   )
 });
 
 export const Sizes = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
-      <Toggle size="sm">Small</Toggle>
-      <Toggle size="default">Default</Toggle>
-      <Toggle size="lg">Large</Toggle>
-    </div>
-  )
-});
-
-export const Pressed = meta.story({
-  render: () => (
-    <div className="flex items-center gap-4">
-      <Toggle defaultPressed>Pressed</Toggle>
-      <Toggle variant="outline" defaultPressed>
-        Pressed Outline
+      <Toggle variant="outline" size="sm" aria-label="Toggle small">
+        <ItalicIcon />
+        Small
+      </Toggle>
+      <Toggle variant="outline" size="default" aria-label="Toggle default">
+        <ItalicIcon />
+        Default
+      </Toggle>
+      <Toggle variant="outline" size="lg" aria-label="Toggle large">
+        <ItalicIcon />
+        Large
       </Toggle>
     </div>
   )
@@ -69,94 +123,41 @@ export const Pressed = meta.story({
 export const Disabled = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
-      <Toggle disabled>Disabled</Toggle>
-      <Toggle disabled defaultPressed>
-        Disabled Pressed
+      <Toggle disabled aria-label="Toggle default disabled">
+        Default
       </Toggle>
-      <Toggle variant="outline" disabled>
-        Disabled Outline
+      <Toggle variant="outline" disabled aria-label="Toggle outline disabled">
+        Outline
       </Toggle>
     </div>
   )
 });
 
-export const WithIcon = meta.story({
+Disabled.test("Disabled toggles are not interactive", async ({ canvas, step }) => {
+  const toggles = canvas.getAllByRole("button");
+
+  await step("Both toggles are disabled", async () => {
+    await expect(toggles[0]).toBeDisabled();
+    await expect(toggles[1]).toBeDisabled();
+  });
+
+  await step("Both toggles remain unpressed", async () => {
+    await expect(toggles[0]).toHaveAttribute("data-state", "off");
+    await expect(toggles[1]).toHaveAttribute("data-state", "off");
+  });
+});
+
+export const DefaultPressed = meta.story({
+  name: "Default Pressed",
   render: () => (
-    <div className="flex items-center gap-4">
-      <Toggle variant="outline" aria-label="Bold">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M14 12a4 4 0 0 0 0-8H6v8" />
-          <path d="M15 20a4 4 0 0 0 0-8H6v8Z" />
-        </svg>
-      </Toggle>
-      <Toggle variant="outline" aria-label="Italic">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="19" x2="10" y1="4" y2="4" />
-          <line x1="14" x2="5" y1="20" y2="20" />
-          <line x1="15" x2="9" y1="4" y2="20" />
-        </svg>
-      </Toggle>
-      <Toggle variant="outline" aria-label="Underline">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M6 4v6a6 6 0 0 0 12 0V4" />
-          <line x1="4" x2="20" y1="20" y2="20" />
-        </svg>
-      </Toggle>
-    </div>
+    <Toggle defaultPressed aria-label="Toggle italic">
+      <ItalicIcon />
+      Italic
+    </Toggle>
   )
 });
 
-export const DataSlotAttributes = meta.story({
-  tags: ["test"],
-  render: () => <Toggle>Test</Toggle>,
-  play: async ({ canvas }) => {
-    const toggle = canvas.getByRole("button");
-    await expect(toggle).toHaveAttribute("data-slot", "toggle");
-  }
-});
-
-export const PressedInteraction = meta.story({
-  tags: ["test"],
-  render: () => <Toggle variant="outline">Click me</Toggle>,
-  play: async ({ canvas, userEvent }) => {
-    const toggle = canvas.getByRole("button");
-
-    await expect(toggle).toHaveAttribute("data-state", "off");
-
-    await userEvent.click(toggle);
-    await expect(toggle).toHaveAttribute("data-state", "on");
-
-    await userEvent.click(toggle);
-    await expect(toggle).toHaveAttribute("data-state", "off");
-  }
+DefaultPressed.test("Renders in pressed state by default", async ({ canvas }) => {
+  const toggle = canvas.getByRole("button", { name: /italic/i });
+  await expect(toggle).toHaveAttribute("data-state", "on");
 });
