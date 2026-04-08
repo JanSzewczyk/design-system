@@ -99,7 +99,6 @@ export const Controlled = meta.story({
 });
 
 export const InteractionTest = meta.story({
-  tags: ["test-only"],
   render: () => (
     <Tooltip defaultOpen>
       <TooltipTrigger asChild>
@@ -126,7 +125,6 @@ export const InteractionTest = meta.story({
 });
 
 export const HoverInteractionTest = meta.story({
-  tags: ["test-only"],
   render: () => (
     <Tooltip>
       <TooltipTrigger asChild>

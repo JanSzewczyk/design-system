@@ -116,7 +116,6 @@ export const Colors = meta.story({
 });
 
 export const WithCustomClassName = meta.story({
-  tags: ["test-only"],
   render: () => <Spinner className="size-16 text-blue-500" data-testid="custom-spinner" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -131,7 +130,6 @@ export const WithCustomClassName = meta.story({
 });
 
 export const WithCustomProps = meta.story({
-  tags: ["test-only"],
   render: () => <Spinner strokeWidth={3} data-testid="custom-props-spinner" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

@@ -251,7 +251,6 @@ export const DataAttributes = meta.story({
 });
 
 export const InteractionTest = meta.story({
-  tags: ["test-only"],
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Badge>Primary Badge</Badge>

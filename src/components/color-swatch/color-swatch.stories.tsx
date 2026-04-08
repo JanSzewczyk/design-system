@@ -167,7 +167,6 @@ export const AsChild = meta.story({
 });
 
 export const Accessibility = meta.story({
-  tags: ["test-only"],
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch data-testid="swatch-with-color" color="#3b82f6" />
@@ -199,7 +198,6 @@ export const Accessibility = meta.story({
 });
 
 export const ColorValidation = meta.story({
-  tags: ["test-only"],
   render: () => (
     <div className="flex items-center gap-4">
       <ColorSwatch data-testid="hex-color" color="#ff5733" />

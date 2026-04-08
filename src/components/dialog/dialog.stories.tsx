@@ -333,7 +333,6 @@ export const Width = meta.story({
 });
 
 export const OpenDialog = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -369,7 +368,6 @@ export const OpenDialog = meta.story({
 });
 
 export const DialogWithFooterButtons = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -398,7 +396,6 @@ export const DialogWithFooterButtons = meta.story({
 });
 
 export const CloseDialogWithCancelButton = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -433,7 +430,6 @@ export const CloseDialogWithCancelButton = meta.story({
 });
 
 export const CloseDialogWithOverlayClick = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -487,7 +483,6 @@ export const CloseDialogWithOverlayClick = meta.story({
 });
 
 export const CloseDialogWithEscapeKey = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -532,7 +527,6 @@ export const CloseDialogWithEscapeKey = meta.story({
 });
 
 export const DialogFocusManagement = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <div className="space-y-4">
       <Input placeholder="Input before dialog" />
@@ -704,7 +698,6 @@ export const DialogWithForm = meta.story({
 });
 
 export const DataSlotAttributes = meta.story({
-  tags: ["test-only", "interaction"],
   render: () => (
     <Dialog>
       <DialogTrigger asChild>

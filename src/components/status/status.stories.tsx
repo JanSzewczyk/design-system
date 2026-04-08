@@ -337,7 +337,6 @@ export const OrderStatus = meta.story({
 });
 
 export const DataSlotAttributes = meta.story({
-  tags: ["test"],
   render: () => (
     <Status variant="success">
       <StatusIndicator />

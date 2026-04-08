@@ -392,7 +392,6 @@ export const SettingsExample = meta.story({
 });
 
 export const DataSlotAttributes = meta.story({
-  tags: ["test"],
   render: () => (
     <Tabs defaultValue="test" className="w-75">
       <TabsList>
@@ -425,7 +424,6 @@ export const DataSlotAttributes = meta.story({
 });
 
 export const KeyboardNavigation = meta.story({
-  tags: ["test"],
   render: () => (
     <Tabs defaultValue="first" className="w-100">
       <TabsList>

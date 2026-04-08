@@ -183,7 +183,6 @@ export const DataAttributes = meta.story({
 });
 
 export const InteractionTest = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <Alert>

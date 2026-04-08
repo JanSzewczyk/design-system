@@ -105,7 +105,6 @@ const meta = preview.meta({
 });
 
 export const Default = meta.story({
-  tags: ["test"],
   args: {
     text: "Hello, World!",
     startOnView: false
@@ -113,7 +112,6 @@ export const Default = meta.story({
 });
 
 export const CustomSpeed = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="space-y-4">
       <div>
@@ -141,7 +139,6 @@ export const CustomSpeed = meta.story({
 });
 
 export const WithDelay = meta.story({
-  tags: ["test"],
   args: {
     text: "This text appears after a 1 second delay.",
     delay: 1000,
@@ -163,7 +160,6 @@ export const WithDelay = meta.story({
 });
 
 export const WithoutCursor = meta.story({
-  tags: ["test"],
   args: {
     text: "No cursor is shown here.",
     showCursor: false,
@@ -192,7 +188,6 @@ export const CustomCursor = meta.story({
 });
 
 export const MultipleTexts = meta.story({
-  tags: ["test"],
   args: {
     texts: ["First message", "Second message", "Third message"],
     loop: true,
@@ -210,7 +205,6 @@ export const MultipleTexts = meta.story({
 });
 
 export const LoopingText = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
       <span>I am a </span>
@@ -235,7 +229,6 @@ export const LoopingText = meta.story({
 });
 
 export const OnCompleteCallback = meta.story({
-  tags: ["test"],
   args: {
     text: "Watch our console!",
     onComplete: fn(),
@@ -278,7 +271,6 @@ export const HeroSection = meta.story({
 });
 
 export const TerminalStyle = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="rounded-lg bg-gray-950 p-4 font-mono">
       <div className="mb-2 flex gap-2">
@@ -318,7 +310,6 @@ export const CodeExample = meta.story({
 });
 
 export const ChatMessage = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="max-w-md space-y-4">
       <div className="rounded-lg bg-gray-800 p-3">
@@ -343,7 +334,6 @@ export const ChatMessage = meta.story({
 });
 
 export const DataSlotAttribute = meta.story({
-  tags: ["test"],
   args: {
     text: "Testing data-slot attribute",
     startOnView: false
@@ -364,7 +354,6 @@ export const LongText = meta.story({
 });
 
 export const AnimationVariants = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="space-y-8">
       <div className="text-center">

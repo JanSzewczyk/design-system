@@ -232,7 +232,6 @@ export const EmptyInput: Story = {
 
 // Test-only stories for comprehensive testing
 export const DataAttributesTest: Story = {
-  tags: ["test-only"],
   render: () => (
     <Empty>
       <EmptyHeader>
@@ -286,7 +285,6 @@ export const DataAttributesTest: Story = {
 };
 
 export const BorderVariantsTest: Story = {
-  tags: ["test-only"],
   render: () => (
     <div className="flex flex-col gap-8">
       <Empty data-testid="empty-no-border">
@@ -328,7 +326,6 @@ export const BorderVariantsTest: Story = {
 };
 
 export const MediaVariantsTest: Story = {
-  tags: ["test-only"],
   render: () => (
     <div className="flex flex-col gap-8">
       <Empty>
@@ -365,7 +362,6 @@ export const MediaVariantsTest: Story = {
 };
 
 export const AllSubcomponentsTest: Story = {
-  tags: ["test-only"],
   render: () => (
     <Empty border>
       <EmptyHeader>
