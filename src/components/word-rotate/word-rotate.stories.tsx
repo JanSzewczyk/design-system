@@ -69,7 +69,6 @@ const meta = preview.meta({
 });
 
 export const Default = meta.story({
-  tags: ["test"],
   args: {
     words: ["Hello", "World", "React", "TypeScript"],
     startOnView: false
@@ -153,7 +152,6 @@ export const HeroSection = meta.story({
 });
 
 export const RoleRotator = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="text-2xl font-bold">
       <span>I am a </span>
@@ -256,7 +254,6 @@ export const FlipAnimation = meta.story({
 });
 
 export const DataSlotAttribute = meta.story({
-  tags: ["test"],
   args: {
     words: ["Testing", "Data", "Slot"],
     startOnView: false

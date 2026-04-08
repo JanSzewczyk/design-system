@@ -44,7 +44,6 @@ export const DataAttributes = meta.story({
 });
 
 export const AccessibilityTest = meta.story({
-  tags: ["test-only"],
   render: () => (
     <div className="space-y-4">
       <Progress value={33} max={100} />

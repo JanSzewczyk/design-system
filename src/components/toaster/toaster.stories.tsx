@@ -256,7 +256,6 @@ export const CustomIcons: Story = {
 };
 
 export const InteractionTest: Story = {
-  tags: ["test-only"],
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button data-testid="default-toast" onClick={() => toast("Default toast message")}>

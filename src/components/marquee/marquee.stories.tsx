@@ -125,7 +125,6 @@ const firstRow = reviews.slice(0, reviews.length / 2);
 const secondRow = reviews.slice(reviews.length / 2);
 
 export const Default = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover className="[--duration:20s]">
@@ -390,7 +389,6 @@ export const Accessibility = meta.story({
 });
 
 export const DataSlotAttribute = meta.story({
-  tags: ["test-only"],
   args: {
     className: "[--duration:20s]",
     children: <span>Test content</span>

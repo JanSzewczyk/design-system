@@ -66,7 +66,6 @@ const meta = preview.meta({
 });
 
 export const Default = meta.story({
-  tags: ["test"],
   args: {
     from: 0,
     to: 100,
@@ -81,7 +80,6 @@ export const Default = meta.story({
 });
 
 export const CustomRange = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -113,7 +111,6 @@ export const CustomRange = meta.story({
 });
 
 export const Durations = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -137,7 +134,6 @@ export const Durations = meta.story({
 });
 
 export const WithDelay = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
@@ -161,7 +157,6 @@ export const WithDelay = meta.story({
 });
 
 export const WithFormatting = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
       <div className="flex items-center gap-4">
@@ -226,7 +221,6 @@ export const WithFormatting = meta.story({
 });
 
 export const Styling = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="flex flex-col gap-6">
       <CountingNumber to={100} duration={1.5} startOnView={false} className="text-primary text-4xl font-black" />
@@ -261,7 +255,6 @@ export const Styling = meta.story({
 });
 
 export const OnCompleteCallback = meta.story({
-  tags: ["test"],
   render: function Render() {
     const [completed, setCompleted] = React.useState(false);
 
@@ -293,7 +286,6 @@ export const OnCompleteCallback = meta.story({
 });
 
 export const StatisticsCard = meta.story({
-  tags: ["test"],
   render: () => (
     <div className="grid grid-cols-3 gap-4">
       <div className="bg-app-foreground flex flex-col items-center rounded-lg border border-gray-800 p-6">
@@ -336,7 +328,6 @@ export const StatisticsCard = meta.story({
 });
 
 export const DataSlotAttribute = meta.story({
-  tags: ["test"],
   args: {
     to: 50,
     duration: 0.5,
@@ -349,7 +340,6 @@ export const DataSlotAttribute = meta.story({
 });
 
 export const AnimationTest = meta.story({
-  tags: ["test"],
   render: () => {
     return <CountingNumber from={0} to={10} duration={0.5} startOnView={false} data-testid="animated-number" />;
   },

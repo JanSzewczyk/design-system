@@ -123,7 +123,6 @@ export const UserInteraction = meta.story({
   args: {
     placeholder: "Type something here..."
   },
-  tags: ["test-only", "interaction"],
   play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
@@ -146,7 +145,6 @@ export const FocusAndBlur = meta.story({
   args: {
     placeholder: "Focus and blur test"
   },
-  tags: ["test-only", "interaction"],
   play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
@@ -168,7 +166,6 @@ export const KeyboardNavigation = meta.story({
       <button>Next element</button>
     </div>
   ),
-  tags: ["test-only", "interaction"],
   play: async ({ canvas, userEvent }) => {
     const input = canvas.getByPlaceholderText("Previous element");
     const textarea = canvas.getByPlaceholderText("Textarea for keyboard test");
@@ -197,7 +194,6 @@ export const MaxLength = meta.story({
     maxLength: 10,
     placeholder: "Max 10 characters"
   },
-  tags: ["test-only", "interaction"],
   play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
 
@@ -220,7 +216,6 @@ export const Required = meta.story({
     required: true,
     placeholder: "This field is required"
   },
-  tags: ["test-only", "interaction"],
   play: async ({ canvas }) => {
     const textarea = canvas.getByRole("textbox");
 

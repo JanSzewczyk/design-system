@@ -192,7 +192,6 @@ export const WithLongContent = meta.story({
 });
 
 export const InteractionTest = meta.story({
-  tags: ["test-only"],
   render: () => (
     <div className="flex gap-4">
       <ScrollArea className="border-border h-40 w-48 rounded-md border" data-testid="vertical-scroll">
