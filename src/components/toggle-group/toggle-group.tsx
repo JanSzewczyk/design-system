@@ -22,7 +22,7 @@ export function ToggleGroup({
   className,
   variant = "default",
   size = "default",
-  spacing = 1,
+  spacing = 0,
   orientation = "horizontal",
   children,
   ...props
