@@ -44,7 +44,7 @@ const meta = preview.meta({
   }
 });
 
-export const Default = meta.story({
+export const FormattingToolbar = meta.story({
   render: () => (
     <ToggleGroup type="multiple" variant="outline">
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -115,7 +115,7 @@ export const Vertical = meta.story({
   )
 });
 
-export const Disabled = meta.story({
+export const AllDisabled = meta.story({
   render: () => (
     <ToggleGroup type="multiple" disabled>
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -132,7 +132,6 @@ export const Disabled = meta.story({
 });
 
 export const Custom = meta.story({
-  name: "Custom",
   render: () => {
     const [fontWeight, setFontWeight] = React.useState("normal");
 
@@ -171,7 +170,7 @@ export const Custom = meta.story({
   }
 });
 
-export const Multiple = meta.story({
+export const MultiplePreselected = meta.story({
   render: () => (
     <ToggleGroup type="multiple" defaultValue={["bold", "underline"]}>
       <ToggleGroupItem value="bold" aria-label="Toggle bold">
@@ -208,15 +207,11 @@ DataSlotAttributes.test("Root has data-slot toggle-group attribute", async ({ ca
   await expect(root).toHaveAttribute("data-slot", "toggle-group");
 });
 
-DataSlotAttributes.test("Each item has data-slot toggle-group-item attribute", async ({ canvas, step }) => {
-  await step("Bold item has correct data-slot", async () => {
-    const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-    await expect(boldItem).toHaveAttribute("data-slot", "toggle-group-item");
-  });
-  await step("Italic item has correct data-slot", async () => {
-    const italicItem = canvas.getByRole("button", { name: /toggle italic/i });
-    await expect(italicItem).toHaveAttribute("data-slot", "toggle-group-item");
-  });
+DataSlotAttributes.test("Each item has data-slot toggle-group-item attribute", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-slot", "toggle-group-item");
+  }
 });
 
 export const SingleSelection = meta.story({
@@ -291,22 +286,19 @@ MultipleSelection.test("Multiple items can be selected simultaneously", async ({
   });
 });
 
-MultipleSelection.test(
-  "Clicking a selected item in multiple mode deselects it",
-  async ({ canvas, userEvent, step }) => {
-    const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
+MultipleSelection.test("Clicking a selected item deselects it", async ({ canvas, userEvent, step }) => {
+  const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
 
-    await step("Select bold", async () => {
-      await userEvent.click(boldItem);
-      await expect(boldItem).toHaveAttribute("data-state", "on");
-    });
+  await step("Select bold", async () => {
+    await userEvent.click(boldItem);
+    await expect(boldItem).toHaveAttribute("data-state", "on");
+  });
 
-    await step("Click again to deselect", async () => {
-      await userEvent.click(boldItem);
-      await expect(boldItem).toHaveAttribute("data-state", "off");
-    });
-  }
-);
+  await step("Click again to deselect", async () => {
+    await userEvent.click(boldItem);
+    await expect(boldItem).toHaveAttribute("data-state", "off");
+  });
+});
 
 export const DisabledGroup = meta.story({
   tags: ["test"],
@@ -325,25 +317,16 @@ export const DisabledGroup = meta.story({
   )
 });
 
-DisabledGroup.test("All items have disabled attribute when group is disabled", async ({ canvas, step }) => {
-  await step("Bold item is disabled", async () => {
-    const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-    await expect(boldItem).toBeDisabled();
-  });
-  await step("Italic item is disabled", async () => {
-    const italicItem = canvas.getByRole("button", { name: /toggle italic/i });
-    await expect(italicItem).toBeDisabled();
-  });
-  await step("Underline item is disabled", async () => {
-    const underlineItem = canvas.getByRole("button", { name: /toggle underline/i });
-    await expect(underlineItem).toBeDisabled();
-  });
+DisabledGroup.test("All items have disabled attribute when group is disabled", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toBeDisabled();
+  }
 });
 
 DisabledGroup.test("Clicking disabled items does not change data-state", async ({ canvas, userEvent }) => {
   const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
   await expect(boldItem).toHaveAttribute("data-state", "off");
-
   await userEvent.click(boldItem);
   await expect(boldItem).toHaveAttribute("data-state", "off");
 });
@@ -362,24 +345,16 @@ export const ContextInheritance = meta.story({
   )
 });
 
-ContextInheritance.test("Variant from root context is applied to items via data-variant", async ({ canvas, step }) => {
-  await step("Bold item inherits variant=outline", async () => {
-    const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-    await expect(boldItem).toHaveAttribute("data-variant", "outline");
-  });
-  await step("Italic item inherits variant=outline", async () => {
-    const italicItem = canvas.getByRole("button", { name: /toggle italic/i });
-    await expect(italicItem).toHaveAttribute("data-variant", "outline");
-  });
+ContextInheritance.test("Variant from root context propagates to items via data-variant", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-variant", "outline");
+  }
 });
 
-ContextInheritance.test("Size from root context is applied to items via data-size", async ({ canvas, step }) => {
-  await step("Bold item inherits size=sm", async () => {
-    const boldItem = canvas.getByRole("button", { name: /toggle bold/i });
-    await expect(boldItem).toHaveAttribute("data-size", "sm");
-  });
-  await step("Italic item inherits size=sm", async () => {
-    const italicItem = canvas.getByRole("button", { name: /toggle italic/i });
-    await expect(italicItem).toHaveAttribute("data-size", "sm");
-  });
+ContextInheritance.test("Size from root context propagates to items via data-size", async ({ canvas }) => {
+  const items = canvas.getAllByRole("button");
+  for (const item of items) {
+    await expect(item).toHaveAttribute("data-size", "sm");
+  }
 });
