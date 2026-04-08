@@ -48,17 +48,17 @@ export const ToggleStory = meta.story({
 });
 
 ToggleStory.test("Has correct data-slot attribute", async ({ canvas }) => {
-  const toggle = canvas.getByRole("button", { name: /bold/i });
+  const toggle = canvas.getByRole("button", { name: /bookmark/i });
   await expect(toggle).toHaveAttribute("data-slot", "toggle");
 });
 
 ToggleStory.test("Starts unpressed with data-state off", async ({ canvas }) => {
-  const toggle = canvas.getByRole("button", { name: /bold/i });
+  const toggle = canvas.getByRole("button", { name: /bookmark/i });
   await expect(toggle).toHaveAttribute("data-state", "off");
 });
 
 ToggleStory.test("Click toggles data-state between off and on", async ({ canvas, userEvent }) => {
-  const toggle = canvas.getByRole("button", { name: /bold/i });
+  const toggle = canvas.getByRole("button", { name: /bookmark/i });
 
   await expect(toggle).toHaveAttribute("data-state", "off");
 
@@ -70,7 +70,7 @@ ToggleStory.test("Click toggles data-state between off and on", async ({ canvas,
 });
 
 ToggleStory.test("Space key toggles the state", async ({ canvas, userEvent }) => {
-  const toggle = canvas.getByRole("button", { name: /bold/i });
+  const toggle = canvas.getByRole("button", { name: /bookmark/i });
 
   toggle.focus();
   await expect(toggle).toHaveFocus();

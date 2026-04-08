@@ -1,4 +1,4 @@
-import { expect, userEvent, within } from "storybook/test";
+import { expect, within } from "storybook/test";
 import { Button } from "~/components/button";
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from ".";
@@ -51,7 +51,7 @@ Default.test("content is hidden by default", async ({ canvasElement }) => {
   await expect(content?.getAttribute("data-state")).toBe("closed");
 });
 
-Default.test("opens content on trigger click", async ({ canvasElement }) => {
+Default.test("opens content on trigger click", async ({ canvasElement, userEvent }) => {
   const canvas = within(canvasElement);
   const trigger = canvas.getByRole("button", { name: "Toggle content" });
   await userEvent.click(trigger);

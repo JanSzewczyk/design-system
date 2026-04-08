@@ -15,7 +15,7 @@ and modular exports for optimal tree-shaking.
 - Radix UI for accessible primitives
 - CVA for type-safe variant styling
 - Vitest + Playwright for testing
-- Storybook for documentation
+- Storybook 10+ (CSF Next format) for documentation
 - tsup for bundling (ESM + CJS)
 
 ## Essential Commands
@@ -64,363 +64,214 @@ Each component follows a consistent pattern:
 ```
 component-name/
 ├── index.tsx                    # Barrel export
-├── component-name.tsx           # Main component implementation
-├── component-name.types.ts      # TypeScript type definitions
-├── component-name.styles.ts     # CVA variant definitions
+├── component-name.tsx           # Main component + PropsType
+├── component-name.types.ts      # CVA-derived types and const enums only
+├── component-name.styles.ts     # CVA variant definitions (only if variants exist)
 └── component-name.stories.tsx   # Storybook stories
 ```
 
-**IMPORTANT:** All file names use lowercase with hyphens (kebab-case), while the exported component name uses PascalCase.
+For composite components with sub-parts, each sub-component that has CVA variants gets its own `.styles.ts`:
 
-**Key Patterns:**
+```
+tabs/
+├── index.tsx
+├── tabs.tsx
+├── tabs.types.ts               # Shared CVA-derived types and const enums
+├── tabs-trigger.tsx
+├── tabs-trigger.styles.ts      # Only TabsTrigger variants here
+├── tabs-content.tsx
+└── tabs.stories.tsx
+```
 
-1. **CVA for Variants**: All component styling uses class-variance-authority for type-safe variants
+For components with shared state, also create `component-name.context.tsx` (and optionally `.store.tsx`, `.utils.ts`, `.constants.ts`). Context hooks are exported by name from `index.tsx` — never via `export *` from context files.
 
-   ```typescript
-   // In component-name.styles.ts
-   export const componentVariants = cva("base-classes", {
-     variants: {
-       variant: { primary: "...", secondary: "..." },
-       size: { sm: "...", md: "...", lg: "..." }
-     },
-     defaultVariants: { variant: "primary", size: "md" }
-   });
+**File naming:** kebab-case files, PascalCase exports.
 
-   // In component-name.types.ts
-   type ComponentCvaProps = VariantProps<typeof componentVariants>;
-   export type ComponentVariantType = NonNullable<ComponentCvaProps["variant"]>;
-   ```
+### Key Implementation Patterns
 
-2. **Data Slot Attributes**: Components use `data-slot` attributes for CSS targeting and testing
+**Component props type** — defined inline in the `.tsx` file, not in `.types.ts`:
+```typescript
+// component-name.tsx
+export type ButtonProps = React.ComponentProps<"button"> & {
+  variant?: ButtonVariantType;
+  size?: ButtonSizeType;
+  asChild?: boolean;
+};
+```
 
-   ```typescript
-   <button data-slot="button">...</button>
-   ```
+**`.types.ts`** — holds only CVA-derived variant types and const enums:
+```typescript
+import { type VariantProps } from "class-variance-authority";
+import { type buttonVariants } from "./button.styles";
 
-3. **Radix UI Slot Pattern**: Components support `asChild` prop for polymorphic rendering
+type ButtonCvaProps = VariantProps<typeof buttonVariants>;
+export type ButtonVariantType = NonNullable<ButtonCvaProps["variant"]>;
+export type ButtonSizeType = NonNullable<ButtonCvaProps["size"]>;
+```
 
-   ```typescript
-   <Button asChild><a href="...">Link Button</a></Button>
-   ```
+**CVA styles** — use array format for base classes:
+```typescript
+export const buttonVariants = cva(
+  [
+    "inline-flex items-center justify-center gap-2 rounded text-sm font-medium",
+    "disabled:pointer-events-none disabled:opacity-50",
+    "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring"
+  ],
+  {
+    variants: { variant: { default: "bg-primary text-primary-foreground" } },
+    defaultVariants: { variant: "default" }
+  }
+);
+```
 
-4. **cn() Utility**: Use for merging Tailwind classes safely (combines clsx + tailwind-merge)
-   ```typescript
-   import { cn } from "~/utils";
-   className={cn("base-classes", className)}
-   ```
+**Component implementation:**
+```typescript
+import * as React from "react";           // always namespace import
+import { cn } from "~/utils";             // always ~/utils not @/lib/utils
+
+export function Button({ variant, size, className, ...props }: ButtonProps) {
+  return (
+    <button
+      data-slot="button"                  // always add data-slot
+      data-variant={variant}              // expose props as data attributes
+      className={cn(buttonVariants({ variant, size }), className)}
+      {...props}
+    />
+  );
+}
+```
+
+**`"use client"` directive** — add to `.tsx` component files that wrap interactive Radix primitives. The post-build script adds it automatically to the main entry point, but interactive components need it individually.
+
+**`asChild` / Slot pattern** — use `Slot` from `@radix-ui/react-slot` when root element could be swapped:
+```typescript
+const Comp = asChild ? Slot : "button";
+return <Comp data-slot="button" {...props} />;
+```
+
+**Context pattern** — context provides parent props to children (variant, size, spacing, orientation):
+```typescript
+// Export hook by name from index.tsx, never via export *
+export { useToggleGroupContext } from "./toggle-group.context";
+```
+
+**Barrel `index.tsx`:**
+```typescript
+export * from "./component-name";
+export * from "./component-name.types";
+// named exports for context hooks:
+export { useComponentContext } from "./component-name.context";
+```
 
 ### Styling System
 
-**Color System** (`src/tailwind/palette.css`):
+**Color tokens** (`src/tailwind/palette.css`) use OKLCH. Always use semantic CSS custom property tokens in Tailwind classes (e.g., `bg-primary`, `text-muted-foreground`) — never raw `oklch(...)` literals.
 
-- Uses **OKLCH color space** for perceptually uniform colors
-- Light theme in `:root`, dark theme in `.dark` selector
-- CSS Custom Properties pattern:
-  ```css
-  :root {
-    --primary: oklch(...);
-    --primary-foreground: oklch(...);
-  }
-  @theme inline {
-    --color-primary: var(--primary);
-  }
-  ```
+When adding new colors, add to both `:root` and `.dark`, then register in `@theme inline`:
+```css
+:root { --new-color: oklch(0.5 0.15 250); }
+.dark { --new-color: oklch(0.6 0.2 255); }
+@theme inline { --color-new-color: var(--new-color); }
+```
 
-**CSS Files** (`src/tailwind/`):
-
-- `global.css` - Base styles, imports all other CSS files
-- `palette.css` - Color variables (light/dark themes)
-- `typography.css` - Typography tokens (Poppins, JetBrains Mono)
-- `animation.css` - Custom animations
-- `scroll.css` - Scrollbar customization
-
-**Theme Architecture:**
-
-- Two-theme system activated by `.dark` class on root element
-- OKLCH provides better perceptual uniformity than RGB/HSL
-- All colors defined as CSS Custom Properties for dynamic theming
+**Data attribute selectors** in Tailwind — use `data-[state=on]:bg-accent`, `data-[orientation=vertical]:flex-col` (not `data-vertical:flex-col`). For group-based selectors use the named group pattern: `group/toggle-group` on root, `group-data-[orientation=horizontal]/toggle-group:` on items.
 
 ### Module Exports
 
-The library uses **conditional exports** for fine-grained imports:
-
 ```json
 {
-  ".": "./dist/components/index.js", // All components
-  "./components/*": "./dist/components/*/index.js", // Individual components
-  "./icons": "./dist/icons/index.js", // Icon collection
-  "./utils": "./dist/utils/index.js", // Utility functions
-  "./hooks": "./dist/hooks/index.js", // Custom hooks
-  "./tailwind/*.css": "./tailwind/*.css" // CSS files (root level)
+  ".": "./dist/components/index.js",
+  "./components/*": "./dist/components/*/index.js",
+  "./icons": "./dist/icons/index.js",
+  "./utils": "./dist/utils/index.js",
+  "./hooks": "./dist/hooks/index.js",
+  "./tailwind/*.css": "./tailwind/*.css"
 }
 ```
+
+After creating a component, add it to `src/components/index.tsx`.
 
 ### Testing Strategy
 
-**Two Test Projects:**
+**Two test projects:**
 
-1. **Unit Tests** (happy-dom environment)
-   - Location: `**/*.{test,spec}.{ts,tsx}`
-   - Fast, lightweight testing for logic
-   - Setup: `src/tests/unit/vitest.setup.ts`
-   - Uses global test functions (`describe`, `test`, `it`, `expect`) - no imports needed
+1. **Unit Tests** (`npm run test:unit`) — happy-dom, files matching `**/*.{test,spec}.{ts,tsx}`. Global functions available without imports.
 
-2. **Storybook Integration Tests** (Playwright browser)
-   - Tests defined in `.stories.tsx` files
-   - Real browser rendering for visual/interaction testing
-   - Setup: `src/tests/integration/vitest.setup.ts`
-   - Tag filters: include "test", exclude "experimental", skip "skip-test"
-   - Custom `test-only` tag: excludes from docs stories, shows in sidebar
+2. **Storybook Integration Tests** (`npm run test:storybook`) — Playwright browser, tests defined inside `.stories.tsx` files via `.test()` method.
 
-**Coverage:** v8 provider with text, html, json-summary, json reporters
+**Coverage:** v8 provider.
 
-## Component Development Guidelines
+## Storybook Stories (CSF Next Format)
 
-### Creating a New Component
+This project uses **Storybook 10+ with CSF Next** — `preview.meta()` / `meta.story()` factory functions. Do **not** use the CSF 3.0 pattern (`satisfies Meta<>`, `export default meta`, `type Story = StoryObj<>`).
 
-1. **Create component directory** in `src/components/component-name/`
+**`tags: ["autodocs"]` is set globally** in `.storybook/preview.tsx` — do not repeat it per-component. Only add meta-level tags for classification: `"new"`, `"beta"`, `"experimental"`.
 
-2. **Define types** (`component-name.types.ts`):
+```typescript
+import { expect } from "storybook/test";   // import expect here
+import preview from "~/.storybook/preview";
+import { MyComponent } from "./my-component";
 
-   ```typescript
-   import { VariantProps } from "class-variance-authority";
-   import { componentVariants } from "./component-name.styles";
+const meta = preview.meta({
+  title: "Components/My Component",        // space-separated, not CamelCase
+  component: MyComponent,
+  tags: ["new"],                           // optional: "new", "beta" only
+  argTypes: { variant: { control: "select", options: ["default", "outline"] } }
+});
 
-   type ComponentCvaProps = VariantProps<typeof componentVariants>;
-   export type ComponentVariantType = NonNullable<ComponentCvaProps["variant"]>;
+// Visual story — use args + render(args) when props drive the content
+export const OutlineVariant = meta.story({
+  args: { type: "single", variant: "outline" },
+  render(args) {
+    return <MyComponent {...args}><Item value="a">A</Item></MyComponent>;
+  }
+});
 
-   export interface ComponentProps {
-     variant?: ComponentVariantType;
-     // ... other props
-   }
-   ```
+// Interaction tests — attach via .test(), never create separate play stories
+OutlineVariant.test("Renders with correct data-slot", async ({ canvas }) => {
+  await expect(canvas.getByRole("group")).toHaveAttribute("data-slot", "my-component");
+});
 
-3. **Define styles** (`component-name.styles.ts`):
+OutlineVariant.test("Clicking item selects it", async ({ canvas, userEvent, step }) => {
+  const item = canvas.getByRole("radio", { name: /a/i });
+  await step("Click item", async () => {
+    await userEvent.click(item);
+    await expect(item).toHaveAttribute("data-state", "on");
+  });
+});
+```
 
-   ```typescript
-   import { cva } from "class-variance-authority";
-
-   export const componentVariants = cva("base-classes", {
-     variants: {
-       variant: {
-         /* ... */
-       },
-       size: {
-         /* ... */
-       }
-     },
-     defaultVariants: {
-       /* ... */
-     }
-   });
-   ```
-
-4. **Implement component** (`component-name.tsx`):
-
-   ```typescript
-   import { cn } from "~/utils";
-   import { componentVariants } from "./component-name.styles";
-   import type { ComponentProps } from "./component-name.types";
-
-   export function ComponentName({ variant, className, ...props }: ComponentProps) {
-     return (
-       <div
-         data-slot="component-name"
-         className={cn(componentVariants({ variant }), className)}
-         {...props}
-       />
-     );
-   }
-   ```
-
-5. **Create stories** (`component-name.stories.tsx`):
-
-   ```typescript
-   import type { Meta, StoryObj } from "@storybook/react";
-   import { ComponentName } from "./component-name";
-
-   const meta = {
-     title: "Components/ComponentName",
-     component: ComponentName,
-     tags: ["autodocs"],
-     argTypes: {
-       /* ... */
-     }
-   } satisfies Meta<typeof ComponentName>;
-
-   export default meta;
-   type Story = StoryObj<typeof meta>;
-
-   export const Default: Story = {
-     args: {
-       /* ... */
-     }
-   };
-   ```
-
-6. **Export from barrel** (`index.tsx`):
-
-   ```typescript
-   export * from "./component-name";
-   export * from "./component-name.types";
-   ```
-
-7. **Add to main exports** (`src/components/index.tsx`):
-   ```typescript
-   export * from "./component-name";
-   ```
-
-### Form Components
-
-Components that integrate with react-hook-form should:
-
-- Accept a `name` prop for form registration
-- Support validation through react-hook-form's validation context
-- Use the `Form` component wrapper (wraps `FormProvider`)
-- Display error states from form context
-
-### Composite Components
-
-For components with sub-components (like Field, Dialog, Sheet):
-
-- Use compound component pattern
-- Each sub-component should be independently importable
-- Share context between parent and children when needed
-- Use consistent `data-slot` attributes across sub-components
-
-### Complex Stateful Components
-
-For complex components with shared state (like Stepper):
-
-- Use context providers to share state between sub-components
-- Create separate context files (e.g., `stepper.context.tsx`, `stepper-item.context.tsx`, `stepper-focus.context.tsx`)
-- Use a store pattern (`stepper.store.tsx`) for state management when needed
-- Keep business logic in utility files (`stepper.utils.tsx`)
-- Define constants in separate files (`stepper.constants.ts`)
+**Critical rules:**
+- `userEvent` — always destructure from test parameters, **never** import from `storybook/test`
+- Story names — descriptive state names (`OutlineVariant`, `AllDisabled`), **not** `Default`, `Basic`, `Example`
+- `step()` — only for dependent sequential flows; independent assertions go in separate `.test()` calls
+- Per-story `tags` — **removed from this codebase**; use only meta-level tags
+- `import * as React from "react"` — always use namespace import in stories that use `React.useState`
 
 ## Build Process
 
-**Build Pipeline:**
-
 1. **tsup** bundles components, utils, hooks, contexts, icons separately
 2. CSS files copied from `src/tailwind/` to `tailwind/` (root level)
-3. Post-build script (`src/scripts/post-build.ts`) adds `"use client"` directive to component entry files (Next.js
-   compatibility)
+3. Post-build script (`src/scripts/post-build.ts`) adds `"use client"` to component entry files
 4. Outputs: ESM (`.js`) + CJS (`.cjs`) + TypeScript declarations (`.d.ts`)
-
-**Output Structure:**
-
-```
-dist/
-├── components/        # Individual component bundles
-│   ├── index.js       # Main ESM components entry (with "use client" directive)
-│   ├── index.cjs      # Main CJS components entry (with "use client" directive)
-│   └── */index.{js,cjs,d.ts}  # Individual component bundles
-├── icons/
-├── utils/
-├── hooks/
-└── contexts/
-tailwind/              # CSS files (root level, not in dist/)
-├── global.css
-├── palette.css
-├── typography.css
-├── animation.css
-└── scroll.css
-```
 
 ## TypeScript Configuration
 
-- **Target:** ES2020
-- **Module:** ESNext with bundler resolution
-- **JSX:** react-jsx (automatic React imports)
-- **Path Alias:** `~/*` → `./src/*`
-- **Strict Mode:** Enabled
-- Generated declaration files with source maps
-
-## Storybook
-
-**Key Features:**
-
-- Auto-generated documentation with `tags: ["autodocs"]`
-- Dark mode support via `storybook-dark-mode` addon
-- Tag-based organization (use "test", "experimental" tags)
-- Vitest integration for story-based testing
-
-**Story Organization:**
-
-- Prefix: "Components/", "Icons/", etc.
-- Use `satisfies Meta<typeof Component>` for type safety
-- Export default meta and individual story objects
+- **Path Alias:** `~/*` → `./src/*` — use for all cross-directory imports
+- **JSX:** react-jsx automatic transform — no `import React` needed in `.tsx` files (except stories using `React.useState`)
+- **Strict Mode:** enabled
 
 ## CI/CD
 
-**PR Checks** (`.github/workflows/pr-check.yml`):
+**PR Checks** (`.github/workflows/pr-check.yml`): type-check, prettier, ESLint, unit tests, Storybook tests, Storybook build, library build, dependency review.
 
-- TypeScript type checking
-- Prettier formatting validation
-- ESLint with SARIF output
-- Unit and Storybook tests with coverage (Vitest + Playwright)
-- Storybook build validation
-- Library build validation
-- Dependency review
-
-**Publishing:**
-
-- Automated via semantic-release on main branch
-- Version bumps based on conventional commits
-- Generates changelog automatically
-
-## Path Aliases
-
-Use the `~/*` alias for internal imports:
-
-```typescript
-import { cn } from "~/utils";
-import { Button } from "~/components/button";
-```
-
-## Color System Usage
-
-When adding new colors to `src/tailwind/palette.css`:
-
-1. Add to both `:root` (light theme) and `.dark` (dark theme)
-2. Use OKLCH format for consistency: `oklch(L C H)` or `oklch(L C H / alpha%)`
-3. Add corresponding entry in `@theme inline` block
-4. Follow naming convention: `--color-name` and `--color-name-foreground`
-5. Ensure sufficient contrast between color and foreground (WCAG AA minimum)
-
-Example:
-
-```css
-:root {
-  --new-color: oklch(0.5 0.15 250);
-  --new-color-foreground: oklch(1 0 0);
-}
-.dark {
-  --new-color: oklch(0.6 0.2 255);
-  --new-color-foreground: oklch(0.1 0 0);
-}
-@theme inline {
-  --color-new-color: var(--new-color);
-  --color-new-color-foreground: var(--new-color-foreground);
-}
-```
-
-## Documentation
-
-- **Storybook Docs:** https://janszewczyk.github.io/design-system
-- **Repository:** https://github.com/JanSzewczyk/design-system
-- **NPM:** https://www.npmjs.com/package/@szum-tech/design-system
+**Publishing:** semantic-release on main branch, version bumps from conventional commits.
 
 ## Consumer Usage
-
-**Installation:**
 
 ```bash
 npm install tailwindcss @szum-tech/design-system
 ```
-
-**CSS Setup (consumer's CSS file):**
 
 ```css
 @import "tailwindcss";
@@ -428,26 +279,9 @@ npm install tailwindcss @szum-tech/design-system
 @source "../node_modules/@szum-tech/design-system";
 ```
 
-**Component Import:**
-
 ```typescript
 import { Button } from "@szum-tech/design-system";
-```
-
-**Icon Import:**
-
-```typescript
 import { GoogleLogoIcon } from "@szum-tech/design-system/icons";
-```
-
-**Hooks Import:**
-
-```typescript
-import { useComposedRefs } from "@szum-tech/design-system/hooks";
-```
-
-**Utils Import:**
-
-```typescript
 import { cn } from "@szum-tech/design-system/utils";
+import { useComposedRefs } from "@szum-tech/design-system/hooks";
 ```

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { type Meta, type StoryObj } from "@storybook/react-vite";
-import { expect, userEvent } from "storybook/test";
+import { expect } from "storybook/test";
 
 import { Button } from "../button";
 
@@ -283,7 +283,7 @@ export const InteractionTest: Story = {
       <Toaster />
     </div>
   ),
-  play: async ({ canvas, canvasElement, step }) => {
+  play: async ({ canvas, canvasElement, step, userEvent }) => {
     await step("All trigger buttons are rendered and clickable", async () => {
       const defaultButton = canvas.getByTestId("default-toast");
       const successButton = canvas.getByTestId("success-toast");
