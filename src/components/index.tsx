@@ -45,3 +45,4 @@ export * from "./collapsible";
 export * from "./toggle";
 export * from "./toggle-group";
 export * from "./breadcrump";
+export * from "./table";
