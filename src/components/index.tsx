@@ -46,3 +46,4 @@ export * from "./toggle";
 export * from "./toggle-group";
 export * from "./breadcrump";
 export * from "./table";
+export * from "./pagination";
