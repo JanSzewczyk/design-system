@@ -39,12 +39,19 @@ const meta = preview.meta({
 
 export const ToggleStory = meta.story({
   name: "Toggle",
-  render: () => (
-    <Toggle aria-label="Toggle bookmark" size="sm" variant="outline">
-      <BookmarkIcon className="group-data-[state=on]/toggle:fill-foreground" />
-      Bookmark
-    </Toggle>
-  )
+  args: {
+    size: "sm",
+    variant: "outline",
+    "aria-label": "Toggle bookmark"
+  },
+  render(args) {
+    return (
+      <Toggle {...args}>
+        <BookmarkIcon className="group-data-[state=on]/toggle:fill-foreground" />
+        Bookmark
+      </Toggle>
+    );
+  }
 });
 
 ToggleStory.test("Has correct data-slot attribute", async ({ canvas }) => {
@@ -83,22 +90,33 @@ ToggleStory.test("Space key toggles the state", async ({ canvas, userEvent }) =>
 });
 
 export const Outline = meta.story({
-  render: () => (
-    <Toggle variant="outline" aria-label="Toggle bold">
-      <BoldIcon />
-      Bold
-    </Toggle>
-  )
+  args: {
+    variant: "outline",
+    "aria-label": "Toggle bold"
+  },
+  render(args) {
+    return (
+      <Toggle {...args}>
+        <BoldIcon />
+        Bold
+      </Toggle>
+    );
+  }
 });
 
 export const WithText = meta.story({
   name: "With Text",
-  render: () => (
-    <Toggle aria-label="Toggle italic">
-      <ItalicIcon />
-      Italic
-    </Toggle>
-  )
+  args: {
+    "aria-label": "Toggle italic"
+  },
+  render(args) {
+    return (
+      <Toggle {...args}>
+        <ItalicIcon />
+        Italic
+      </Toggle>
+    );
+  }
 });
 
 export const Sizes = meta.story({
@@ -149,12 +167,18 @@ Disabled.test("Disabled toggles are not interactive", async ({ canvas, step }) =
 
 export const DefaultPressed = meta.story({
   name: "Default Pressed",
-  render: () => (
-    <Toggle defaultPressed aria-label="Toggle italic">
-      <ItalicIcon />
-      Italic
-    </Toggle>
-  )
+  args: {
+    defaultPressed: true,
+    "aria-label": "Toggle italic"
+  },
+  render(args) {
+    return (
+      <Toggle {...args}>
+        <ItalicIcon />
+        Italic
+      </Toggle>
+    );
+  }
 });
 
 DefaultPressed.test("Renders in pressed state by default", async ({ canvas }) => {
