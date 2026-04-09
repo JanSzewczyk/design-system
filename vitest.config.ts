@@ -1,5 +1,3 @@
-import tsconfigPaths from "vite-tsconfig-paths";
-
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
@@ -15,7 +13,10 @@ export default defineConfig({
     },
     projects: [
       {
-        plugins: [tsconfigPaths()],
+        plugins: [],
+        resolve: {
+          tsconfigPaths: true
+        },
         test: {
           name: "unit",
           globals: true,
@@ -26,6 +27,9 @@ export default defineConfig({
       },
       {
         plugins: [storybookTest()],
+        resolve: {
+          tsconfigPaths: true
+        },
         test: {
           name: "storybook",
           exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**"],

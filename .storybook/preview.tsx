@@ -5,12 +5,11 @@ import addonDocs from "@storybook/addon-docs";
 import { DocsContainer, type DocsContainerProps } from "@storybook/addon-docs/blocks";
 import { definePreview } from "@storybook/react-vite";
 import { DARK_MODE_EVENT_NAME } from "@storybook-community/storybook-dark-mode";
-import { Toaster } from "~/components";
+
+import { Toaster } from "../src/components";
 
 import dark from "./theme/dark";
 import light from "./theme/light";
-
-import "../src/tailwind/global.css";
 
 export function DarkModeDocsContainer(props: DocsContainerProps) {
   const [isDark, setDark] = React.useState(true);

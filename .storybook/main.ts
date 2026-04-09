@@ -1,5 +1,3 @@
-import tsConfigPaths from "vite-tsconfig-paths";
-
 import { defineMain } from "@storybook/react-vite/node";
 import { type PresetValue, type TagsOptions } from "storybook/internal/types";
 
@@ -30,16 +28,18 @@ export default defineMain({
     enableCrashReports: true
   },
   typescript: {
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: "react-docgen",
     check: true
   },
   tags,
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
     const tailwindcss = (await import("@tailwindcss/vite")).default();
-
     return mergeConfig(config, {
-      plugins: [tsConfigPaths(), tailwindcss],
+      plugins: [tailwindcss],
+      resolve: {
+        tsconfigPaths: true
+      },
       assetsInclude: ["**/*.md"]
     });
   }
