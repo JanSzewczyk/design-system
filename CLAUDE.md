@@ -141,8 +141,6 @@ export function Button({ variant, size, className, ...props }: ButtonProps) {
 }
 ```
 
-**`"use client"` directive** — add to `.tsx` component files that wrap interactive Radix primitives. The post-build script adds it automatically to the main entry point, but interactive components need it individually.
-
 **`asChild` / Slot pattern** — use `Slot` from `@radix-ui/react-slot` when root element could be swapped:
 ```typescript
 const Comp = asChild ? Slot : "button";
