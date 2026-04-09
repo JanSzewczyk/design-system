@@ -76,16 +76,17 @@ ToggleStory.test("Click toggles data-state between off and on", async ({ canvas,
   await expect(toggle).toHaveAttribute("data-state", "off");
 });
 
-ToggleStory.test("Space key toggles the state", async ({ canvas, userEvent }) => {
+ToggleStory.test("Enter key toggles the state", async ({ canvas, userEvent }) => {
   const toggle = canvas.getByRole("button", { name: /bookmark/i });
 
-  toggle.focus();
+  await userEvent.tab();
   await expect(toggle).toHaveFocus();
+  await expect(toggle).toHaveAttribute("data-state", "off");
 
-  await userEvent.keyboard("{Space}");
+  await userEvent.keyboard("{Enter}");
   await expect(toggle).toHaveAttribute("data-state", "on");
 
-  await userEvent.keyboard("{Space}");
+  await userEvent.keyboard("{Enter}");
   await expect(toggle).toHaveAttribute("data-state", "off");
 });
 

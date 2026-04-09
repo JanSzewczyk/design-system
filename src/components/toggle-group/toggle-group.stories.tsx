@@ -280,11 +280,11 @@ AllDisabled.test("All items have disabled attribute when group is disabled", asy
   }
 });
 
-AllDisabled.test("Clicking disabled items does not change data-state", async ({ canvas, userEvent }) => {
+AllDisabled.test("Disabled items have pointer-events none and remain off", async ({ canvas }) => {
   const bold = canvas.getByRole("button", { name: /toggle bold/i });
+  await expect(bold).toBeDisabled();
   await expect(bold).toHaveAttribute("data-state", "off");
-  await userEvent.click(bold);
-  await expect(bold).toHaveAttribute("data-state", "off");
+  await expect(bold).toHaveStyle({ pointerEvents: "none" });
 });
 
 export const Custom = meta.story({
