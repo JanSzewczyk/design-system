@@ -73,9 +73,8 @@ export function Button({
       aria-disabled={isDisabled || undefined}
       className={cn(buttonVariants({ fullWidth, size, variant }), className)}
       data-state={loading ? "loading" : undefined}
-      disabled={isDisabled}
-      role={Comp !== "button" ? "button" : undefined}
-      tabIndex={isDisabled ? -1 : 0}
+      disabled={!asChild ? isDisabled : undefined}
+      tabIndex={isDisabled && asChild ? -1 : undefined}
       type={Comp === "button" ? type : undefined}
       data-size={size}
       data-variant={variant}
