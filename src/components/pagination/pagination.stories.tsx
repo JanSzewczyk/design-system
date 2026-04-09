@@ -70,9 +70,9 @@ PaginationStory.test("Renders all sub-components with correct data-slots", async
     }
   });
 
-  await step("Renders 5 pagination buttons (3 pages + prev + next)", async () => {
-    const buttons = canvas.getAllByRole("button");
-    await expect(buttons).toHaveLength(5);
+  await step("Renders 5 pagination links (3 pages + prev + next)", async () => {
+    const links = canvas.getAllByRole("link");
+    await expect(links).toHaveLength(5);
   });
 });
 
@@ -80,23 +80,23 @@ PaginationStory.test(
   "Active page has aria-current and data-active, inactive pages do not",
   async ({ canvas, step }) => {
     await step("Active page 2 has aria-current=page and data-active=true", async () => {
-      const active = canvas.getByRole("button", { name: "2" });
+      const active = canvas.getByRole("link", { name: "2" });
       await expect(active).toHaveAttribute("aria-current", "page");
       await expect(active).toHaveAttribute("data-active", "true");
     });
 
     await step("Inactive pages 1 and 3 have no aria-current", async () => {
-      const link1 = canvas.getByRole("button", { name: "1" });
-      const link3 = canvas.getByRole("button", { name: "3" });
+      const link1 = canvas.getByRole("link", { name: "1" });
+      const link3 = canvas.getByRole("link", { name: "3" });
       await expect(link1).not.toHaveAttribute("aria-current");
       await expect(link3).not.toHaveAttribute("aria-current");
     });
   }
 );
 
-PaginationStory.test("Previous and Next buttons have correct aria-labels", async ({ canvas }) => {
-  const prev = canvas.getByRole("button", { name: /go to previous page/i });
-  const next = canvas.getByRole("button", { name: /go to next page/i });
+PaginationStory.test("Previous and Next links have correct aria-labels", async ({ canvas }) => {
+  const prev = canvas.getByRole("link", { name: /go to previous page/i });
+  const next = canvas.getByRole("link", { name: /go to next page/i });
   await expect(prev).toBeVisible();
   await expect(next).toBeVisible();
 });
@@ -139,19 +139,19 @@ export const Simple = meta.story({
   }
 });
 
-Simple.test("Renders five page buttons with only page 2 active", async ({ canvas, step }) => {
-  const buttons = canvas.getAllByRole("button");
+Simple.test("Renders five page links with only page 2 active", async ({ canvas, step }) => {
+  const links = canvas.getAllByRole("link");
 
-  await step("Renders exactly 5 page buttons", async () => {
-    await expect(buttons).toHaveLength(5);
+  await step("Renders exactly 5 page links", async () => {
+    await expect(links).toHaveLength(5);
   });
 
   await step("Only page 2 has aria-current=page", async () => {
-    for (const button of buttons) {
-      if (button.textContent === "2") {
-        await expect(button).toHaveAttribute("aria-current", "page");
+    for (const link of links) {
+      if (link.textContent === "2") {
+        await expect(link).toHaveAttribute("aria-current", "page");
       } else {
-        await expect(button).not.toHaveAttribute("aria-current");
+        await expect(link).not.toHaveAttribute("aria-current");
       }
     }
   });
@@ -190,9 +190,9 @@ export const IconsOnly = meta.story({
   }
 });
 
-IconsOnly.test("Renders previous and next navigation buttons", async ({ canvas }) => {
-  const prev = canvas.getByRole("button", { name: /go to previous page/i });
-  const next = canvas.getByRole("button", { name: /go to next page/i });
+IconsOnly.test("Renders previous and next navigation links", async ({ canvas }) => {
+  const prev = canvas.getByRole("link", { name: /go to previous page/i });
+  const next = canvas.getByRole("link", { name: /go to next page/i });
   await expect(prev).toBeVisible();
   await expect(next).toBeVisible();
 });
