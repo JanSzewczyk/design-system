@@ -1,8 +1,8 @@
 import { MoreHorizontalIcon } from "lucide-react";
 
-import { Button } from "dist/components";
 import { expect } from "storybook/test";
 
+import { Button } from "../button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -73,7 +73,7 @@ export const BasicTable = meta.story({
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead className="w-25">Invoice</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead className="text-right">Amount</TableHead>
@@ -120,10 +120,11 @@ BasicTable.test("Renders header with data-slot", async ({ canvas }) => {
 
 BasicTable.test("Renders column headers", async ({ canvas }) => {
   const headers = canvas.getAllByRole("columnheader");
-  await expect(headers).toHaveLength(3);
-  await expect(headers[0]).toHaveTextContent("Name");
-  await expect(headers[1]).toHaveTextContent("Email");
-  await expect(headers[2]).toHaveTextContent("Role");
+  await expect(headers).toHaveLength(4);
+  await expect(headers[0]).toHaveTextContent("Invoice");
+  await expect(headers[1]).toHaveTextContent("Status");
+  await expect(headers[2]).toHaveTextContent("Method");
+  await expect(headers[3]).toHaveTextContent("Amount");
 });
 
 BasicTable.test("Headers have data-slot attribute", async ({ canvas }) => {
@@ -142,19 +143,20 @@ BasicTable.test("Renders rows with data-slot", async ({ canvas }) => {
 
 BasicTable.test("Renders cells with data-slot", async ({ canvas }) => {
   const cells = canvas.getAllByRole("cell");
-  await expect(cells).toHaveLength(6);
+  // 7 invoices * 4 columns + 2 footer cells = 30
+  await expect(cells).toHaveLength(30);
   for (const cell of cells) {
     await expect(cell).toHaveAttribute("data-slot", "table-cell");
   }
 });
 
 BasicTable.test("Custom className is applied to header cell", async ({ canvas }) => {
-  const roleHeader = canvas.getByRole("columnheader", { name: /role/i });
-  await expect(roleHeader).toHaveClass("text-right");
+  const amountHeader = canvas.getByRole("columnheader", { name: /amount/i });
+  await expect(amountHeader).toHaveClass("text-right");
 });
 
 BasicTable.test("Custom className is applied to cell", async ({ canvas }) => {
-  const cell = canvas.getByText("Alice").closest("td");
+  const cell = canvas.getByText("INV001").closest("td");
   await expect(cell).toHaveClass("font-medium");
 });
 
@@ -201,7 +203,7 @@ export const WithFooter = meta.story({
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead className="w-25">Invoice</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead className="text-right">Amount</TableHead>
@@ -237,7 +239,7 @@ WithFooter.test("Renders footer with data-slot", async ({ canvas }) => {
 WithFooter.test("Footer displays total", async ({ canvas }) => {
   const totalCell = canvas.getByRole("cell", { name: /total/i });
   await expect(totalCell).toBeVisible();
-  const amountCell = canvas.getByRole("cell", { name: /\$30\.00/i });
+  const amountCell = canvas.getByRole("cell", { name: /\$2,500\.00/i });
   await expect(amountCell).toBeVisible();
 });
 
@@ -333,7 +335,7 @@ export const FullTable = meta.story({
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead className="w-25">Invoice</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead className="text-right">Amount</TableHead>
