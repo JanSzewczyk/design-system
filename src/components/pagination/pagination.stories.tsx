@@ -202,3 +202,41 @@ IconsOnly.test("Custom className merges with pagination", async ({ canvas }) => 
   await expect(nav).toHaveClass("mx-0");
   await expect(nav).toHaveClass("w-auto");
 });
+
+export const AsChildButton = meta.story({
+  name: "As Child Button",
+  render() {
+    return (
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationLink asChild>
+              <button type="button">1</button>
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink asChild isActive>
+              <button type="button">2</button>
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink asChild>
+              <button type="button">3</button>
+            </PaginationLink>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    );
+  }
+});
+
+AsChildButton.test("Renders buttons instead of links when asChild is used", async ({ canvas }) => {
+  const buttons = canvas.getAllByRole("button");
+  await expect(buttons).toHaveLength(3);
+});
+
+AsChildButton.test("Active button has aria-current and data-active", async ({ canvas }) => {
+  const activeButton = canvas.getByRole("button", { name: "2" });
+  await expect(activeButton).toHaveAttribute("aria-current", "page");
+  await expect(activeButton).toHaveAttribute("data-active", "true");
+});

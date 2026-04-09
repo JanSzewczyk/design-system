@@ -1,18 +1,35 @@
 import * as React from "react";
 
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "~/utils";
 
-import { Button } from "../button";
+import { type Button } from "../button";
+import { buttonVariants } from "../button/button.styles";
 
 export type PaginationLinkProps = {
   isActive?: boolean;
+  asChild?: boolean;
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">;
 
-export function PaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps) {
+export function PaginationLink({
+  className,
+  isActive,
+  asChild,
+  size = "icon",
+  children,
+  ...props
+}: PaginationLinkProps) {
+  const Comp = asChild ? Slot : "a";
   return (
-    <Button asChild variant={isActive ? "outline" : "ghost"} size={size} className={cn(className)}>
-      <a aria-current={isActive ? "page" : undefined} data-slot="pagination-link" data-active={isActive} {...props} />
-    </Button>
+    <Comp
+      aria-current={isActive ? "page" : undefined}
+      data-slot="pagination-link"
+      data-active={isActive}
+      className={cn(buttonVariants({ variant: isActive ? "outline" : "ghost", size }), className)}
+      {...props}
+    >
+      {children}
+    </Comp>
   );
 }
