@@ -7,18 +7,15 @@ export default defineConfig({
   format: ["esm", "cjs"],
   bundle: true,
   treeshake: true,
+  minify: true,
   outDir: "dist",
   entry: [
-    "src/components/*/index.tsx",
+    // "src/components/*/index.tsx",
     "src/components/index.tsx",
     "src/utils/index.ts",
     "src/hooks/index.tsx",
     "src/icons/index.tsx"
   ],
-  esbuildOptions(options) {
-    // the directory structure will be the same as the source
-    options.outbase = "./src";
-  },
   external: [
     "react",
     "react-dom",
@@ -29,6 +26,11 @@ export default defineConfig({
     "clsx",
     "motion",
     "sonner",
-    "lucide-react"
+    "lucide-react",
+    "@dnd-kit/core",
+    "@dnd-kit/sortable",
+    "@dnd-kit/utilities",
+    "embla-carousel-react",
+    "tailwindcss-animate"
   ]
 });

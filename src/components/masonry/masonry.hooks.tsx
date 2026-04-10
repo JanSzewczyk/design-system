@@ -255,7 +255,7 @@ export function useDebouncedWindowSize(options: DebouncedWindowSizeOptions) {
   }, [defaultWidth, defaultHeight]);
 
   const [size, setSize] = React.useState(getDocumentSize());
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const setDebouncedSize = React.useCallback(
     (value: { width: number; height: number }) => {
