@@ -38,16 +38,6 @@
         "require": "./dist/components/index.cjs"
       }
     },
-    "./components/*": {
-      "import": {
-        "types": "./dist/components/*/index.d.ts",
-        "import": "./dist/components/*/index.js"
-      },
-      "require": {
-        "types": "./dist/components/*/index.d.cts",
-        "require": "./dist/components/*/index.cjs"
-      }
-    },
     "./icons": {
       "import": {
         "types": "./dist/icons/index.d.ts",
@@ -89,7 +79,7 @@
     "tailwind/**"
   ],
   "scripts": {
-    "build": "tsup && cpy 'src/tailwind/*.css' './tailwind' --flat && npm run post-build",
+    "build": "tsup && cpy \"src/tailwind/*.css\" \"./tailwind\" --flat && npm run post-build",
     "lint": "eslint .",
     "lint:ci": "eslint . -o eslint-results.sarif -f @microsoft/eslint-formatter-sarif",
     "lint:fix": "eslint . --fix",
@@ -169,6 +159,9 @@
     "react": ">=19",
     "react-dom": ">=19",
     "tailwindcss": ">=4"
+  },
+  "engines": {
+    "node": ">=24"
   },
   "publishConfig": {
     "access": "public"

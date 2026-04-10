@@ -109,7 +109,8 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "preserveWatchOutput": true,
-    "strict": false /* Temporarily disable strict mode due to CSF Next experimental types */
+    "strict": false /* Temporarily disable strict mode due to CSF Next experimental types */,
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.tsx", ".storybook/**/*"]

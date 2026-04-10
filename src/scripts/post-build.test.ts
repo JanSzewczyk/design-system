@@ -8,7 +8,9 @@ import { updateFilesWithText } from "./post-build";
 vi.mock("fs/promises", () => ({
   default: {
     readFile: vi.fn(),
-    writeFile: vi.fn()
+    writeFile: vi.fn(),
+    readdir: vi.fn().mockResolvedValue([]),
+    copyFile: vi.fn().mockResolvedValue(undefined)
   }
 }));
 
