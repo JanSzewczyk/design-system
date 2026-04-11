@@ -7,6 +7,7 @@ import { definePreview } from "@storybook/react-vite";
 import { DARK_MODE_EVENT_NAME } from "@storybook-community/storybook-dark-mode";
 
 import { Toaster } from "../src/components";
+import "../src/tailwind/global.css";
 
 import dark from "./theme/dark";
 import light from "./theme/light";
