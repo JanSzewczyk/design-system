@@ -1,21 +1,22 @@
-"use client";
-
 import * as React from "react";
 
 import { Tabs as TabsPrimitive } from "radix-ui";
 
 import { cn } from "~/utils";
 
-export type TabsListProps = React.ComponentProps<typeof TabsPrimitive.List>;
+import { tabsListVariants } from "./tabs-list.styles";
+import { type TabsListVariantType } from "./tabs-list.types";
 
-export function TabsList({ className, ...props }: TabsListProps) {
+export type TabsListProps = React.ComponentProps<typeof TabsPrimitive.List> & {
+  variant?: TabsListVariantType;
+};
+
+export function TabsList({ className, variant = "default", ...props }: TabsListProps) {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
-      className={cn(
-        "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded p-0.75",
-        className
-      )}
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
       {...props}
     />
   );
