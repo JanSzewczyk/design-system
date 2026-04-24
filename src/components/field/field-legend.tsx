@@ -9,7 +9,7 @@ export function FieldLegend({ className, variant = "legend", ...props }: FieldLe
     <legend
       data-slot="field-legend"
       data-variant={variant}
-      className={cn("mb-3 font-medium", "data-[variant=legend]:text-base", "data-[variant=label]:text-sm", className)}
+      className={cn("mb-1.5 font-medium data-[variant=label]:text-sm data-[variant=legend]:text-base", className)}
       {...props}
     />
   );
