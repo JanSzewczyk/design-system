@@ -49,3 +49,4 @@ export * from "./breadcrump";
 export * from "./table";
 export * from "./pagination";
 export * from "./kbd";
+export * from "./combobox";
