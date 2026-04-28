@@ -24,10 +24,6 @@ export type ButtonProps = React.ComponentProps<"button"> & {
    */
   children?: React.ReactNode;
   /**
-   * Disabled button
-   */
-  disabled?: boolean;
-  /**
    * Defines left icon
    */
   startIcon?: React.ReactElement;
@@ -104,10 +100,10 @@ function ButtonContent({
   ...props
 }: Partial<ButtonProps>) {
   const isStartLoading = loading && loadingPosition === "start";
-  const StartIcon = isStartLoading ? <Spinner aria-label="Loading" /> : startIcon || null;
+  const StartIcon = isStartLoading ? <Spinner aria-label="Loading" data-icon="inline-start" /> : startIcon || null;
 
   const isEndLoading = loading && loadingPosition === "end";
-  const EndIcon = isEndLoading ? <Spinner aria-label="Loading" /> : endIcon || null;
+  const EndIcon = isEndLoading ? <Spinner aria-label="Loading" data-icon="inline-start" /> : endIcon || null;
 
   const isCenterLoading = loading && loadingPosition === "center";
 
