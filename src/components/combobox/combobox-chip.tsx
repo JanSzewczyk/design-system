@@ -1,8 +1,8 @@
-import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { XIcon } from "lucide-react";
 
-import { cn } from "~/utils";
+import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { Button } from "~/components/button";
+import { cn } from "~/utils";
 
 export type ComboboxChipProps = ComboboxPrimitive.Chip.Props & {
   showRemove?: boolean;
@@ -21,14 +21,12 @@ export function ComboboxChip({ className, children, showRemove = true, ...props 
       {children}
       {showRemove && (
         <ComboboxPrimitive.ChipRemove
+          render={<Button variant="ghost" size="icon-xs" />}
           className="-ml-1 opacity-50 hover:opacity-100"
           data-slot="combobox-chip-remove"
-          render={
-            <Button variant="ghost" size="icon-xs">
-              <XIcon className="pointer-events-none" />
-            </Button>
-          }
-        />
+        >
+          <XIcon className="pointer-events-none" />
+        </ComboboxPrimitive.ChipRemove>
       )}
     </ComboboxPrimitive.Chip>
   );
