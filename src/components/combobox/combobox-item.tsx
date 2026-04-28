@@ -1,8 +1,6 @@
-"use client";
-
-import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { CheckIcon } from "lucide-react";
 
+import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "~/utils";
 
 export type ComboboxItemProps = ComboboxPrimitive.Item.Props;
@@ -19,12 +17,10 @@ export function ComboboxItem({ className, children, ...props }: ComboboxItemProp
     >
       {children}
       <ComboboxPrimitive.ItemIndicator
-        render={
-          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
-            <CheckIcon className="pointer-events-none" />
-          </span>
-        }
-      />
+        render={<span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />}
+      >
+        <CheckIcon className="pointer-events-none" />
+      </ComboboxPrimitive.ItemIndicator>
     </ComboboxPrimitive.Item>
   );
 }
