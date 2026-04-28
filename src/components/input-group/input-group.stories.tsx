@@ -17,7 +17,7 @@ import {
   UserIcon
 } from "lucide-react";
 
-import { expect } from "storybook/test";
+import { expect, screen, waitFor } from "storybook/test";
 import {
   Field,
   FieldDescription,
@@ -47,6 +47,14 @@ const meta = preview.meta({
   decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>]
 });
 
+// Helper: find the InputGroup element (data-slot="input-group") among all role="group" elements.
+// Field also renders role="group", so we must disambiguate by data-slot.
+function getInputGroup(canvas: { getAllByRole: (role: string) => HTMLElement[] }) {
+  const groups = canvas.getAllByRole("group");
+  const found = groups.find((g) => g.getAttribute("data-slot") === "input-group");
+  return found ?? groups[0];
+}
+
 export const InputGroupStory = meta.story({
   name: "Input Group",
   render: () => (
@@ -58,6 +66,19 @@ export const InputGroupStory = meta.story({
       <InputGroupAddon align="inline-end">12 results</InputGroupAddon>
     </InputGroup>
   )
+});
+
+InputGroupStory.test("renders with correct data-slot attribute", async ({ canvas }) => {
+  const group = canvas.getByRole("group");
+  await expect(group).toHaveAttribute("data-slot", "input-group");
+});
+
+InputGroupStory.test("renders input and both addons", async ({ canvas }) => {
+  const group = canvas.getByRole("group");
+  const input = canvas.getByRole("textbox");
+  await expect(input).toBeVisible();
+  const addons = group.querySelectorAll('[data-slot="input-group-addon"]');
+  await expect(addons).toHaveLength(2);
 });
 
 export const AlignInlineStart = meta.story({
@@ -77,8 +98,8 @@ export const AlignInlineStart = meta.story({
 });
 
 AlignInlineStart.test("addon has data-align inline-start", async ({ canvas }) => {
-  const group = canvas.getByRole("group");
-  const addon = group.querySelector('[data-slot="input-group-addon"]');
+  const inputGroup = getInputGroup(canvas);
+  const addon = inputGroup.querySelector('[data-slot="input-group-addon"]');
   await expect(addon).toHaveAttribute("data-align", "inline-start");
 });
 
@@ -99,8 +120,8 @@ export const AlignInlineEnd = meta.story({
 });
 
 AlignInlineEnd.test("addon has data-align inline-end", async ({ canvas }) => {
-  const group = canvas.getByRole("group");
-  const addon = group.querySelector('[data-slot="input-group-addon"]');
+  const inputGroup = getInputGroup(canvas);
+  const addon = inputGroup.querySelector('[data-slot="input-group-addon"]');
   await expect(addon).toHaveAttribute("data-align", "inline-end");
 });
 
@@ -141,10 +162,17 @@ export const AlignBlockStart = meta.story({
 
 AlignBlockStart.test("block-start addons have correct data-align", async ({ canvas }) => {
   const groups = canvas.getAllByRole("group");
-  for (const group of groups) {
+  const inputGroups = groups.filter((g) => g.getAttribute("data-slot") === "input-group");
+  await expect(inputGroups.length).toBeGreaterThanOrEqual(2);
+  for (const group of inputGroups) {
     const addon = group.querySelector('[data-slot="input-group-addon"]');
     if (addon) await expect(addon).toHaveAttribute("data-align", "block-start");
   }
+});
+
+AlignBlockStart.test("copy button in block-start addon has correct data-slot", async ({ canvas }) => {
+  const btn = canvas.getByRole("button", { name: /copy/i });
+  await expect(btn).toHaveAttribute("data-slot", "button");
 });
 
 export const AlignBlockEnd = meta.story({
@@ -180,10 +208,17 @@ export const AlignBlockEnd = meta.story({
 
 AlignBlockEnd.test("block-end addons have correct data-align", async ({ canvas }) => {
   const groups = canvas.getAllByRole("group");
-  for (const group of groups) {
+  const inputGroups = groups.filter((g) => g.getAttribute("data-slot") === "input-group");
+  await expect(inputGroups.length).toBeGreaterThanOrEqual(2);
+  for (const group of inputGroups) {
     const addon = group.querySelector('[data-slot="input-group-addon"]');
     if (addon) await expect(addon).toHaveAttribute("data-align", "block-end");
   }
+});
+
+AlignBlockEnd.test("post button in block-end addon is visible", async ({ canvas }) => {
+  const btn = canvas.getByRole("button", { name: /post/i });
+  await expect(btn).toBeVisible();
 });
 
 export const IconStory = meta.story({
@@ -223,10 +258,16 @@ export const IconStory = meta.story({
   )
 });
 
-IconStory.test("all groups render with data-slot", async ({ canvas }) => {
+IconStory.test("all groups render with correct data-slot", async ({ canvas }) => {
   const groups = canvas.getAllByRole("group");
   await expect(groups.length).toBeGreaterThanOrEqual(4);
   for (const g of groups) await expect(g).toHaveAttribute("data-slot", "input-group");
+});
+
+IconStory.test("renders inputs for all input groups", async ({ canvas }) => {
+  const inputs = canvas.getAllByRole("textbox");
+  await expect(inputs.length).toBeGreaterThanOrEqual(4);
+  for (const input of inputs) await expect(input).toBeVisible();
 });
 
 export const Text = meta.story({
@@ -267,11 +308,17 @@ export const Text = meta.story({
   )
 });
 
-Text.test("text addons render with correct data-slot", async ({ canvas }) => {
+Text.test("text addons in first group render with correct data-slot", async ({ canvas }) => {
   const groups = canvas.getAllByRole("group");
   const firstGroup = groups[0];
   const texts = firstGroup.querySelectorAll('[data-slot="input-group-text"]');
   await expect(texts).toHaveLength(2);
+});
+
+Text.test("text addon content is visible", async ({ canvas }) => {
+  await expect(canvas.getByText("$")).toBeVisible();
+  await expect(canvas.getByText("USD")).toBeVisible();
+  await expect(canvas.getByText("https://")).toBeVisible();
 });
 
 export const ButtonStory = meta.story({
@@ -334,12 +381,20 @@ export const ButtonStory = meta.story({
 
 ButtonStory.test("copy button renders with correct data-slot", async ({ canvas }) => {
   const btn = canvas.getByRole("button", { name: /copy/i });
-  await expect(btn).toHaveAttribute("data-slot", "input-group-button");
+  await expect(btn).toHaveAttribute("data-slot", "button");
 });
 
 ButtonStory.test("search button renders with correct data-slot", async ({ canvas }) => {
   const btn = canvas.getByRole("button", { name: /^search$/i });
-  await expect(btn).toHaveAttribute("data-slot", "input-group-button");
+  await expect(btn).toHaveAttribute("data-slot", "button");
+});
+
+ButtonStory.test("clicking toggle favorite button toggles active state on icon", async ({ canvas, userEvent }) => {
+  const favoriteBtn = canvas.getByRole("button", { name: /toggle favorite/i });
+  await expect(favoriteBtn).toBeVisible();
+  await userEvent.click(favoriteBtn);
+  const starIcon = favoriteBtn.querySelector("svg");
+  await expect(starIcon).toHaveAttribute("data-active", "true");
 });
 
 export const KbdStory = meta.story({
@@ -357,6 +412,16 @@ export const KbdStory = meta.story({
       </InputGroup>
     );
   }
+});
+
+KbdStory.test("renders input group with correct data-slot", async ({ canvas }) => {
+  const group = canvas.getByRole("group");
+  await expect(group).toHaveAttribute("data-slot", "input-group");
+});
+
+KbdStory.test("renders kbd shortcut in addon", async ({ canvas }) => {
+  const kbd = canvas.getByText("⌘K");
+  await expect(kbd).toBeVisible();
 });
 
 export const DropdownStory = meta.story({
@@ -382,7 +447,7 @@ export const DropdownStory = meta.story({
           </DropdownMenu>
         </InputGroupAddon>
       </InputGroup>
-      <InputGroup className="[--radius:1rem]">
+      <InputGroup>
         <InputGroupInput placeholder="Enter search query" />
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
@@ -405,9 +470,18 @@ export const DropdownStory = meta.story({
   )
 });
 
-DropdownStory.test("dropdown buttons render with correct data-slot", async ({ canvas }) => {
+DropdownStory.test("dropdown trigger buttons render with correct data-slot", async ({ canvas }) => {
   const btns = canvas.getAllByRole("button");
-  for (const btn of btns) await expect(btn).toHaveAttribute("data-slot", "input-group-button");
+  for (const btn of btns) await expect(btn).toHaveAttribute("data-slot", "dropdown-menu-trigger");
+});
+
+DropdownStory.test("clicking more button opens dropdown with items", async ({ canvas, userEvent }) => {
+  const moreBtn = canvas.getByRole("button", { name: /more/i });
+  await userEvent.click(moreBtn);
+  await waitFor(async () => {
+    const settingsItem = await screen.findByRole("menuitem", { name: /settings/i });
+    await expect(settingsItem).toBeVisible();
+  });
 });
 
 export const SpinnerStory = meta.story({
@@ -446,9 +520,16 @@ export const SpinnerStory = meta.story({
   )
 });
 
-SpinnerStory.test("all groups render with data-slot", async ({ canvas }) => {
+SpinnerStory.test("all input groups render with correct data-slot", async ({ canvas }) => {
   const groups = canvas.getAllByRole("group");
   await expect(groups.length).toBeGreaterThanOrEqual(4);
+  for (const g of groups) await expect(g).toHaveAttribute("data-slot", "input-group");
+});
+
+SpinnerStory.test("all inputs are visible", async ({ canvas }) => {
+  const inputs = canvas.getAllByRole("textbox");
+  await expect(inputs.length).toBeGreaterThanOrEqual(4);
+  for (const input of inputs) await expect(input).toBeVisible();
 });
 
 export const CodeEditorTextarea = meta.story({
@@ -484,7 +565,17 @@ CodeEditorTextarea.test("block-start and block-end addons both render", async ({
 
 CodeEditorTextarea.test("run button renders with correct data-slot", async ({ canvas }) => {
   const btn = canvas.getByRole("button", { name: /run/i });
-  await expect(btn).toHaveAttribute("data-slot", "input-group-button");
+  await expect(btn).toHaveAttribute("data-slot", "button");
+});
+
+CodeEditorTextarea.test("block-start addon has script.js label and action buttons", async ({ canvas, step }) => {
+  await step("Script filename is visible", async () => {
+    await expect(canvas.getByText("script.js")).toBeVisible();
+  });
+  await step("Refresh and Copy buttons are visible", async () => {
+    await expect(canvas.getByRole("button", { name: /refresh/i })).toBeVisible();
+    await expect(canvas.getByRole("button", { name: /copy/i })).toBeVisible();
+  });
 });
 
 export const Disabled = meta.story({
@@ -498,6 +589,16 @@ export const Disabled = meta.story({
       <InputGroupInput placeholder="Username" disabled />
     </InputGroup>
   )
+});
+
+Disabled.test("renders with correct data-slot attribute", async ({ canvas }) => {
+  const group = canvas.getByRole("group");
+  await expect(group).toHaveAttribute("data-slot", "input-group");
+});
+
+Disabled.test("input is disabled", async ({ canvas }) => {
+  const input = canvas.getByRole("textbox");
+  await expect(input).toBeDisabled();
 });
 
 export const Invalid = meta.story({

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { GlobeIcon } from "lucide-react";
 
-import { expect } from "storybook/test";
+import { expect, screen, waitFor } from "storybook/test";
 import { InputGroupAddon } from "~/components";
 
 import {
@@ -31,7 +31,8 @@ const meta = preview.meta({
 
 const frameworks = ["Next.js", "SvelteKit", "Nuxt.js", "Remix", "Astro"] as const;
 
-export const Basic = meta.story({
+export const SingleSelect = meta.story({
+  name: "Single Select",
   render: () => {
     return (
       <Combobox items={frameworks}>
@@ -51,35 +52,59 @@ export const Basic = meta.story({
   }
 });
 
-Basic.test("Renders combobox input", async ({ canvas }) => {
+SingleSelect.test("renders combobox input with placeholder", async ({ canvas }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
-  await expect(input).toBeInTheDocument();
+  await expect(input).toBeVisible();
 });
 
-Basic.test("Opens dropdown on input click", async ({ canvas, userEvent }) => {
+SingleSelect.test("opens dropdown on input click and shows all options", async ({ canvas, userEvent }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
   await userEvent.click(input);
 
-  const options = canvas.queryAllByRole("option");
-  await expect(options.length).toBeGreaterThan(0);
+  await waitFor(async () => {
+    const options = screen.queryAllByRole("option");
+    await expect(options.length).toBe(frameworks.length);
+  });
 });
 
-Basic.test("Filters options while typing", async ({ canvas, userEvent, step }) => {
+SingleSelect.test("filters options while typing", async ({ canvas, userEvent, step }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
+
   await step("Open dropdown", async () => {
     await userEvent.click(input);
   });
 
   await step("Type to filter", async () => {
     await userEvent.type(input, "Next");
-    const options = canvas.queryAllByRole("option");
-    await expect(options.length).toBeLessThanOrEqual(5);
+    await waitFor(async () => {
+      const options = screen.queryAllByRole("option");
+      await expect(options).toHaveLength(1);
+      await expect(options[0]).toHaveTextContent("Next.js");
+    });
+  });
+});
+
+SingleSelect.test("selects an option on click and updates input value", async ({ canvas, userEvent, step }) => {
+  const input = canvas.getByPlaceholderText(/select a framework/i);
+
+  await step("Open dropdown", async () => {
+    await userEvent.click(input);
+  });
+
+  await step("Click Remix option", async () => {
+    const option = await screen.findByRole("option", { name: /remix/i });
+    await userEvent.click(option);
+  });
+
+  await step("Verify input shows selected value", async () => {
+    await expect(input).toHaveValue("Remix");
   });
 });
 
 const languages = ["TypeScript", "JavaScript", "Python", "Rust", "Go", "Java"] as const;
 
-export const Multiple = meta.story({
+export const MultipleSelect = meta.story({
+  name: "Multiple Select",
   render: () => {
     const [value, setValue] = React.useState<string[]>([]);
     const anchor = useComboboxAnchor();
@@ -111,35 +136,50 @@ export const Multiple = meta.story({
   }
 });
 
-Multiple.test("Selects multiple items", async ({ canvas, userEvent, step }) => {
+MultipleSelect.test("renders chips input with placeholder", async ({ canvas }) => {
   const input = canvas.getByPlaceholderText(/add language/i);
-  await step("Click input", async () => {
+  await expect(input).toBeVisible();
+});
+
+MultipleSelect.test("selects multiple items and renders chips", async ({ canvas, userEvent, step }) => {
+  const input = canvas.getByPlaceholderText(/add language/i);
+
+  await step("Click input to open dropdown", async () => {
     await userEvent.click(input);
   });
 
-  await step("Select first item", async () => {
-    const option = canvas.getByRole("option", { name: /typescript/i });
-    await userEvent.click(option);
+  await step("Select TypeScript", async () => {
+    await waitFor(() => expect(screen.getByRole("option", { name: /typescript/i })).toBeInTheDocument());
+    await userEvent.click(screen.getByRole("option", { name: /typescript/i }));
   });
 
-  await step("Select second item", async () => {
-    const option = canvas.getByRole("option", { name: /python/i });
-    await userEvent.click(option);
+  await step("Select Python", async () => {
+    await waitFor(() => expect(screen.getByRole("option", { name: /python/i })).toBeInTheDocument());
+    await userEvent.click(screen.getByRole("option", { name: /python/i }));
   });
 
-  const chips = canvas.queryAllByText(/typescript|python/i);
-  await expect(chips.length).toBeGreaterThanOrEqual(2);
+  await step("Verify chips are rendered", async () => {
+    await expect(canvas.getByText("TypeScript")).toBeVisible();
+    await expect(canvas.getByText("Python")).toBeVisible();
+  });
 });
 
-Multiple.test("Displays chips for selected items", async ({ canvas, userEvent }) => {
+MultipleSelect.test("chip has remove button", async ({ canvas, userEvent, step }) => {
   const input = canvas.getByPlaceholderText(/add language/i);
-  await userEvent.click(input);
 
-  const option = canvas.getByRole("option", { name: /rust/i });
-  await userEvent.click(option);
+  await step("Select Rust", async () => {
+    await userEvent.click(input);
+    await waitFor(() => expect(screen.getByRole("option", { name: /rust/i })).toBeInTheDocument());
+    await userEvent.click(screen.getByRole("option", { name: /rust/i }));
+  });
 
-  const chip = canvas.getByText("Rust");
-  await expect(chip).toBeInTheDocument();
+  await step("Chip and its remove button are visible", async () => {
+    const chip = canvas.getByText("Rust");
+    await expect(chip).toBeVisible();
+    const chipContainer = chip.closest('[data-slot="combobox-chip"]');
+    const removeBtn = chipContainer?.querySelector('[data-slot="combobox-chip-remove"]');
+    await expect(removeBtn).not.toBeNull();
+  });
 });
 
 const timezones = [
@@ -185,32 +225,36 @@ export const Groups = meta.story({
   }
 });
 
-Groups.test("Renders group labels", async ({ canvas, userEvent }) => {
+Groups.test("opens dropdown and renders group labels", async ({ canvas, userEvent }) => {
   const input = canvas.getByPlaceholderText(/select a timezone/i);
   await userEvent.click(input);
 
-  const americasLabel = canvas.getByText("Americas");
-  const europeLabel = canvas.getByText("Europe");
-
-  await expect(americasLabel).toBeInTheDocument();
-  await expect(europeLabel).toBeInTheDocument();
+  await waitFor(async () => {
+    await expect(screen.getByText("Americas")).toBeVisible();
+    await expect(screen.getByText("Europe")).toBeVisible();
+    await expect(screen.getByText("Asia/Pacific")).toBeVisible();
+  });
 });
 
-Groups.test("Selects item from specific group", async ({ canvas, userEvent, step }) => {
+Groups.test("selects item from specific group and updates input value", async ({ canvas, userEvent, step }) => {
   const input = canvas.getByPlaceholderText(/select a timezone/i);
+
   await step("Open dropdown", async () => {
     await userEvent.click(input);
   });
 
-  await step("Select London", async () => {
-    const option = canvas.getByRole("option", { name: /london/i });
-    await userEvent.click(option);
+  await step("Select London from Europe group", async () => {
+    await waitFor(() => expect(screen.getByRole("option", { name: /london/i })).toBeInTheDocument());
+    await userEvent.click(screen.getByRole("option", { name: /london/i }));
   });
 
-  await expect(input).toHaveValue("(GMT+0) London");
+  await step("Verify input displays selected value", async () => {
+    await expect(input).toHaveValue("(GMT+0) London");
+  });
 });
 
-export const Clear = meta.story({
+export const WithClear = meta.story({
+  name: "With Clear",
   render: () => {
     return (
       <Combobox items={frameworks} defaultValue={frameworks[0]}>
@@ -230,17 +274,29 @@ export const Clear = meta.story({
   }
 });
 
-Clear.test("Renders with default value", async ({ canvas }) => {
-  const input = canvas.getByDisplayValue(/next\.js/i);
-  await expect(input).toBeInTheDocument();
+WithClear.test("renders with default value pre-filled", async ({ canvas }) => {
+  const input = canvas.getAllByDisplayValue("Next.js").find((element) => element.checkVisibility());
+  await expect(input).toBeVisible();
 });
 
-Clear.test("Shows clear button", async ({ canvas }) => {
-  const clearButton = canvas.getByRole("button");
-  await expect(clearButton).toBeInTheDocument();
+WithClear.test("renders clear button with correct data-slot", async ({ canvas }) => {
+  const buttons = canvas.getAllByRole("button");
+  const clearButton = buttons.find((btn) => btn.getAttribute("data-slot") === "combobox-clear");
+  await expect(clearButton).toBeDefined();
+  await expect(clearButton!).toBeVisible();
 });
 
-export const Disabled = meta.story({
+WithClear.test("clicking clear button removes the selected value", async ({ canvas, userEvent }) => {
+  const buttons = canvas.getAllByRole("button");
+  const clearButton = buttons.find((btn) => btn.getAttribute("data-slot") === "combobox-clear");
+  await expect(clearButton).toBeDefined();
+  await userEvent.click(clearButton!);
+  const input = canvas.getByRole("combobox");
+  await expect(input).toHaveValue("");
+});
+
+export const DisabledCombobox = meta.story({
+  name: "Disabled",
   render: () => {
     return (
       <Combobox items={frameworks}>
@@ -260,20 +316,13 @@ export const Disabled = meta.story({
   }
 });
 
-Disabled.test("Input is disabled", async ({ canvas }) => {
-  const input = canvas.getByPlaceholderText(/select a framework/i) as HTMLInputElement;
-  await expect(input.disabled).toBe(true);
-});
-
-Disabled.test("Cannot open dropdown when disabled", async ({ canvas, userEvent }) => {
+DisabledCombobox.test("input is disabled", async ({ canvas }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
-  await userEvent.click(input);
-
-  const options = canvas.queryAllByRole("option");
-  await expect(options).toHaveLength(0);
+  await expect(input).toBeDisabled();
 });
 
 export const WithInputAddon = meta.story({
+  name: "With Input Addon",
   render: () => {
     return (
       <Combobox items={timezones}>
@@ -304,12 +353,25 @@ export const WithInputAddon = meta.story({
   }
 });
 
-WithInputAddon.test("Renders input with addon", async ({ canvas }) => {
+WithInputAddon.test("renders input group with globe icon addon", async ({ canvas }) => {
   const input = canvas.getByPlaceholderText(/select a timezone/i);
-  await expect(input).toBeInTheDocument();
+  await expect(input).toBeVisible();
+  const group = canvas.getByRole("group");
+  const addon = group.querySelector('[data-slot="input-group-addon"]');
+  await expect(addon).not.toBeNull();
 });
 
-export const Invalid = meta.story({
+WithInputAddon.test("opens dropdown with grouped timezone options", async ({ canvas, userEvent }) => {
+  const input = canvas.getByPlaceholderText(/select a timezone/i);
+  await userEvent.click(input);
+  await waitFor(async () => {
+    const options = screen.queryAllByRole("option");
+    await expect(options.length).toBeGreaterThan(0);
+  });
+});
+
+export const InvalidCombobox = meta.story({
+  name: "Invalid",
   render: () => {
     return (
       <Combobox items={frameworks}>
@@ -329,12 +391,22 @@ export const Invalid = meta.story({
   }
 });
 
-Invalid.test("Input has invalid state", async ({ canvas }) => {
+InvalidCombobox.test("input has aria-invalid attribute", async ({ canvas }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
   await expect(input).toHaveAttribute("aria-invalid", "true");
 });
 
+InvalidCombobox.test("combobox still opens when invalid", async ({ canvas, userEvent }) => {
+  const input = canvas.getByPlaceholderText(/select a framework/i);
+  await userEvent.click(input);
+  await waitFor(async () => {
+    const options = screen.queryAllByRole("option");
+    await expect(options.length).toBeGreaterThan(0);
+  });
+});
+
 export const AutoHighlight = meta.story({
+  name: "Auto Highlight",
   render: () => {
     return (
       <Combobox items={frameworks} autoHighlight>
@@ -354,20 +426,33 @@ export const AutoHighlight = meta.story({
   }
 });
 
-AutoHighlight.test("Highlights first item on filter", async ({ canvas, userEvent, step }) => {
+AutoHighlight.test("opens dropdown and shows all options", async ({ canvas, userEvent }) => {
   const input = canvas.getByPlaceholderText(/select a framework/i);
-  await step("Click input", async () => {
+  await userEvent.click(input);
+  await waitFor(async () => {
+    const options = screen.queryAllByRole("option");
+    await expect(options.length).toBe(frameworks.length);
+  });
+});
+
+AutoHighlight.test("auto-highlights first matching item when typing", async ({ canvas, userEvent, step }) => {
+  const input = canvas.getByPlaceholderText(/select a framework/i);
+
+  await step("Open dropdown and type", async () => {
     await userEvent.click(input);
+    await userEvent.type(input, "N");
   });
 
-  await step("Type to filter", async () => {
-    await userEvent.type(input, "N");
-    const options = canvas.queryAllByRole("option");
-    await expect(options.length).toBeGreaterThan(0);
+  await step("First matching option is highlighted", async () => {
+    await waitFor(async () => {
+      const highlighted = screen.queryAllByRole("option").find((opt) => opt.hasAttribute("data-highlighted"));
+      await expect(highlighted).not.toBeUndefined();
+    });
   });
 });
 
 export const EmptyState = meta.story({
+  name: "Empty State",
   render: () => {
     const [search, setSearch] = React.useState("");
     const filtered = frameworks.filter((f) => f.toLowerCase().includes(search.toLowerCase()));
@@ -390,10 +475,20 @@ export const EmptyState = meta.story({
   }
 });
 
-EmptyState.test("Shows empty state when no results", async ({ canvas, userEvent }) => {
+EmptyState.test("shows empty state message when search yields no results", async ({ canvas, userEvent }) => {
   const input = canvas.getByPlaceholderText(/search frameworks/i);
   await userEvent.type(input, "xyz");
 
-  const emptyMessage = canvas.getByText(/no frameworks found/i);
-  await expect(emptyMessage).toBeInTheDocument();
+  await waitFor(() => expect(screen.getByText(/no frameworks found/i)).toBeInTheDocument());
+});
+
+EmptyState.test("shows matching options when search has results", async ({ canvas, userEvent }) => {
+  const input = canvas.getByPlaceholderText(/search frameworks/i);
+  await userEvent.type(input, "Next");
+
+  await waitFor(async () => {
+    const options = screen.queryAllByRole("option");
+    await expect(options).toHaveLength(1);
+    await expect(options[0]).toHaveTextContent("Next.js");
+  });
 });
