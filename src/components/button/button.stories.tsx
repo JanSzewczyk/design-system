@@ -59,6 +59,14 @@ export const Sizes = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
       <div className="flex items-start gap-2">
+        <Button size="xs" variant="outline">
+          XSmall
+        </Button>
+        <Button size="icon-xs" aria-label="Submit" variant="outline">
+          <ArrowUpRightIcon />
+        </Button>
+      </div>
+      <div className="flex items-start gap-2">
         <Button size="sm" variant="outline">
           Small
         </Button>
