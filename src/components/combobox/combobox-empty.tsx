@@ -1,5 +1,4 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
-
 import { cn } from "~/utils";
 
 export type ComboboxEmptyProps = ComboboxPrimitive.Empty.Props;
