@@ -1,5 +1,6 @@
 <div align="center">
   <h1 align="center">@szum-tech/design-system</h1>
+  <img width="3168" height="1344" alt="Gemini_Generated_Image_l5csbel5csbel5cs (1)" src="https://github.com/user-attachments/assets/59791086-c549-4cf8-8f3c-ab10e531bafa" />
   <p align="center">A comprehensive, accessible, and highly customizable React design system tailored to Szum-Tech standards.</p>
 </div>
 
