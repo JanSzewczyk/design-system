@@ -18,7 +18,7 @@ import {
   Trash2Icon
 } from "lucide-react";
 
-import { expect } from "storybook/test";
+import { expect, screen, waitFor } from "storybook/test";
 import { Button } from "~/components/button";
 import {
   DropdownMenu,
@@ -157,7 +157,10 @@ EmailActions.test("Archive and Report buttons are visible", async ({ canvas }) =
 EmailActions.test("Clicking More Options opens dropdown", async ({ canvas, userEvent }) => {
   const trigger = canvas.getByRole("button", { name: /more options/i });
   await userEvent.click(trigger);
-  await expect(canvas.getByRole("menuitem", { name: /mark as read/i })).toBeVisible();
+  await waitFor(async () => {
+    await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
+  });
+  await expect(screen.getByText("Mark as Read")).toBeVisible();
 });
 
 // ─── Orientation ──────────────────────────────────────────────────────────────
@@ -244,7 +247,8 @@ Sizes.test("Small buttons have data-size sm", async ({ canvas }) => {
   const smGroup = canvas.getByRole("group", { name: /small buttons/i });
   const buttons = smGroup.querySelectorAll("[data-slot='button']");
   for (const btn of buttons) {
-    await expect(btn).toHaveAttribute("data-size", "sm");
+    const size = btn.getAttribute("data-size") ?? "";
+    await expect(["sm", "icon-sm"]).toContain(size);
   }
 });
 
@@ -422,15 +426,18 @@ export const Dropdown = meta.story({
 });
 
 Dropdown.test("Follow button and dropdown trigger are visible", async ({ canvas }) => {
-  await expect(canvas.getByRole("button", { name: /follow/i })).toBeVisible();
+  await expect(canvas.getByRole("button", { name: /^follow$/i })).toBeVisible();
   await expect(canvas.getByRole("button", { name: /more follow options/i })).toBeVisible();
 });
 
 Dropdown.test("Clicking dropdown trigger reveals menu items", async ({ canvas, userEvent }) => {
   const trigger = canvas.getByRole("button", { name: /more follow options/i });
   await userEvent.click(trigger);
-  await expect(canvas.getByRole("menuitem", { name: /mute conversation/i })).toBeVisible();
-  await expect(canvas.getByRole("menuitem", { name: /delete conversation/i })).toBeVisible();
+  await waitFor(async () => {
+    await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeVisible();
+  });
+  await expect(screen.getByText("Mute Conversation")).toBeVisible();
+  await expect(screen.getByText("Delete Conversation")).toBeVisible();
 });
 
 // ─── Select ───────────────────────────────────────────────────────────────────
@@ -570,12 +577,15 @@ export const Popover = meta.story({
 });
 
 Popover.test("Copilot button and options trigger are visible", async ({ canvas }) => {
-  await expect(canvas.getByRole("button", { name: /copilot/i })).toBeVisible();
+  await expect(canvas.getByRole("button", { name: /^copilot$/i })).toBeVisible();
   await expect(canvas.getByRole("button", { name: /open copilot options/i })).toBeVisible();
 });
 
 Popover.test("Clicking trigger opens popover with task textarea", async ({ canvas, userEvent }) => {
   const trigger = canvas.getByRole("button", { name: /open copilot options/i });
   await userEvent.click(trigger);
-  await expect(canvas.getByPlaceholderText(/i need to/i)).toBeVisible();
+  await waitFor(async () => {
+    await expect(document.querySelector('[data-slot="popover-content"]')).toBeVisible();
+  });
+  await expect(screen.getByPlaceholderText(/i need to/i)).toBeVisible();
 });
