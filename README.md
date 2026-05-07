@@ -35,7 +35,8 @@
 
 - 🎨 **Modern Stack**: Ready to go with [Tailwind CSS v4+](https://tailwindcss.com/) & React 19+.
 - 🧩 **Extensive Kit**: Over 50+ crafted components (Carousel, Sortable, Drawers, Comboboxes, Pickers & more).
-- ♿ **Accessible**: Built around [Radix UI](https://www.radix-ui.com/) and [@base-ui/react](https://base-ui.com/) to ensure WAI-ARIA compliance.
+- ♿ **Accessible**: Built around [Radix UI](https://www.radix-ui.com/) and [@base-ui/react](https://base-ui.com/) to
+  ensure WAI-ARIA compliance.
 - 🌓 **Themes**: Native support for configurable `light` and `dark` color palettes.
 - 📐 **Animations**: Smooth motion and interactions powered by `motion`, `tailwindcss-animate`, and `@dnd-kit`.
 - 🗃️ **Iconography**: Bundled optimized icon set with Lucide React.
@@ -82,7 +83,8 @@ _Note: You must have `react`, `react-dom` (>=19) and `tailwindcss` (>=4) install
 
 ### 🎨 Tailwind CSS Configuration
 
-To use the design system components correctly, ensure Tailwind compiles its CSS framework. If you are using Tailwind v4+ with `@import` methodology, append the following lines to your main CSS file:
+To use the design system components correctly, ensure Tailwind compiles its CSS framework. If you are using Tailwind v4+
+with `@import` methodology, append the following lines to your main CSS file:
 
 ```css
 @import "tailwindcss";
@@ -94,7 +96,8 @@ To use the design system components correctly, ensure Tailwind compiles its CSS 
 @source "../node_modules/@szum-tech/design-system";
 ```
 
-> For additional installation methods, refer to the [Tailwind CSS Installation Docs](https://tailwindcss.com/docs/installation).
+> For additional installation methods, refer to the
+> [Tailwind CSS Installation Docs](https://tailwindcss.com/docs/installation).
 
 ---
 
@@ -105,13 +108,7 @@ To use the design system components correctly, ensure Tailwind compiles its CSS 
 All available components, contexts, and specific providers are exported from the root `@szum-tech/design-system`.
 
 ```tsx
-import { 
-  Button, 
-  Card, 
-  CardHeader, 
-  CardTitle, 
-  CardContent 
-} from "@szum-tech/design-system";
+import { Button, Card, CardHeader, CardTitle, CardContent } from "@szum-tech/design-system";
 
 export default function App() {
   return (
@@ -150,7 +147,8 @@ import { cn } from "@szum-tech/design-system/utils";
 
 ### 🌓 Theming (Light & Dark Mode)
 
-The design system inherits native support for both `light` and `dark` themes. Theme switching relies on Tailwind CSS's selector strategies (custom variant `.dark`). 
+The design system inherits native support for both `light` and `dark` themes. Theme switching relies on Tailwind CSS's
+selector strategies (custom variant `.dark`).
 
 To activate the dark mode, append the `.dark` class to the `<html>` or `<body>` tag of your application:
 
@@ -169,11 +167,7 @@ export default function ThemeToggle() {
     }
   }, [isDark]);
 
-  return (
-    <Button onClick={() => setIsDark(!isDark)}>
-      Toggle to {isDark ? "Light" : "Dark"} Mode
-    </Button>
-  );
+  return <Button onClick={() => setIsDark(!isDark)}>Toggle to {isDark ? "Light" : "Dark"} Mode</Button>;
 }
 ```
 
@@ -181,7 +175,8 @@ export default function ThemeToggle() {
 
 ## 📚 Documentation
 
-Detailed documentation and an interactive component sandbox is generated via [Storybook](https://storybook.js.org/). View it here:
+Detailed documentation and an interactive component sandbox is generated via [Storybook](https://storybook.js.org/).
+View it here:
 
 👉 **[Szum-Tech Design System Docs](https://janszewczyk.github.io/design-system)**
 
@@ -215,7 +210,8 @@ For running the environment locally:
 
 ## 📓 Changelog
 
-We use Semantic Release for semantic versioning. For a complete list of updates, please see the [CHANGELOG.md](https://github.com/JanSzewczyk/design-system/blob/main/CHANGELOG.md).
+We use Semantic Release for semantic versioning. For a complete list of updates, please see the
+[CHANGELOG.md](https://github.com/JanSzewczyk/design-system/blob/main/CHANGELOG.md).
 
 ---
 
