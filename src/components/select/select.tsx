@@ -61,7 +61,7 @@ export function Select({
           "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "aria-invalid:ring-error/20 dark:aria-invalid:ring-error/40 aria-invalid:border-error",
-          "data-[size=default]:h-9 data-[size=sm]:h-8",
+          "data-[size=default]:h-8 data-[size=sm]:h-7",
           "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
           "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
           "data-[placeholder]:text-muted-foreground",
