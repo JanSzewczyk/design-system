@@ -107,7 +107,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
-    "lucide-react": "^1.8.0",
+    "lucide-react": "^1.14.0",
     "motion": "^12.38.0",
     "radix-ui": "^1.4.3",
     "sonner": "^2.0.7",
@@ -133,10 +133,10 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/browser": "^4.1.4",
-    "@vitest/browser-playwright": "^4.1.4",
-    "@vitest/coverage-v8": "^4.1.4",
-    "@vitest/ui": "^4.1.4",
+    "@vitest/browser": "^4.1.5",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/ui": "^4.1.5",
     "cpy-cli": "^7.0.0",
     "eslint": "9.39.4",
     "happy-dom": "^20.8.9",
@@ -154,7 +154,7 @@
     "tsup": "^8.5.1",
     "typescript": "^6.0.2",
     "vite": "^8.0.8",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.5"
   },
   "peerDependencies": {
     "react": ">=19",
