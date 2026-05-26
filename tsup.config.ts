@@ -21,16 +21,15 @@ export default defineConfig({
     "react-dom",
     "class-variance-authority",
     "radix-ui",
-    "@radix-ui/react-slot",
     "tailwind-merge",
     "clsx",
     "motion",
     "sonner",
     "lucide-react",
-    "@dnd-kit/core",
-    "@dnd-kit/sortable",
-    "@dnd-kit/utilities",
     "embla-carousel-react",
-    "tailwindcss-animate"
+    "tailwindcss-animate",
+    /^@radix-ui\/.*/,
+    /^@dnd-kit\/.*/,
+    /^@base-ui\/.*/
   ]
 });
