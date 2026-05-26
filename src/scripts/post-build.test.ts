@@ -1,8 +1,14 @@
+import path from "path";
+
 import { type Mock } from "vitest";
 
 import fs from "fs/promises";
 
-import { updateFilesWithText } from "./post-build";
+import { collectComponentEntries, updateFilesWithText } from "./post-build";
+
+function dirent(name: string, isDir: boolean) {
+  return { name, isDirectory: () => isDir };
+}
 
 // Mock fs module
 vi.mock("fs/promises", () => ({
@@ -306,6 +312,40 @@ export { Button } from "./button";`;
 
       // Assert
       expect(fs.writeFile).toHaveBeenCalledWith(filePath, expectedContent, "utf8");
+    });
+  });
+
+  describe("collectComponentEntries", () => {
+    test("collects barrel and per-component index.js/index.cjs entries", async () => {
+      // Arrange — dist/components has the barrel + one component folder
+      vi.mocked(fs.readdir).mockImplementation((async (dir: string) => {
+        if (dir === "dist/components") {
+          return [dirent("index.js", false), dirent("index.cjs", false), dirent("button", true)];
+        }
+        if (dir.endsWith("button")) {
+          return [dirent("index.js", false), dirent("index.cjs", false), dirent("index.d.ts", false)];
+        }
+        return [];
+      }) as never);
+
+      // Act
+      const entries = await collectComponentEntries("dist/components");
+
+      // Assert — only index.{js,cjs}, recursing into the component folder; no .d.ts
+      expect(entries).toEqual([
+        path.join("dist", "components", "index.js"),
+        path.join("dist", "components", "index.cjs"),
+        path.join("dist", "components", "button", "index.js"),
+        path.join("dist", "components", "button", "index.cjs")
+      ]);
+    });
+
+    test("returns empty array when there are no entries", async () => {
+      vi.mocked(fs.readdir).mockResolvedValue([] as never);
+
+      const entries = await collectComponentEntries("dist/components");
+
+      expect(entries).toEqual([]);
     });
   });
 
