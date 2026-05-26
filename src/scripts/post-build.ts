@@ -27,7 +27,25 @@ async function copyDts(dir: string) {
   }
 }
 
-await updateFilesWithText(["dist/components/index.js", "dist/components/index.cjs"], '"use client";\n\n');
+// Collect every component entry file (barrel + per-component `index.js`/`index.cjs`).
+// esbuild strips the "use client" directive during bundling, so it must be re-added to
+// each client boundary — now one per component, not just the barrel.
+export async function collectComponentEntries(dir: string): Promise<Array<string>> {
+  const result: Array<string> = [];
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      result.push(...(await collectComponentEntries(fullPath)));
+    } else if (/^index\.(js|cjs)$/.test(entry.name)) {
+      result.push(fullPath);
+    }
+  }
+  return result;
+}
+
+const componentEntries = await collectComponentEntries("dist/components");
+await updateFilesWithText(componentEntries, '"use client";\n\n');
 await copyDts("dist");
 
 console.log("Post-build complete");

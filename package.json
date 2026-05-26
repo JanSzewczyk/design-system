@@ -38,6 +38,16 @@
         "require": "./dist/components/index.cjs"
       }
     },
+    "./components/*": {
+      "import": {
+        "types": "./dist/components/*/index.d.ts",
+        "import": "./dist/components/*/index.js"
+      },
+      "require": {
+        "types": "./dist/components/*/index.d.cts",
+        "require": "./dist/components/*/index.cjs"
+      }
+    },
     "./icons": {
       "import": {
         "types": "./dist/icons/index.d.ts",
@@ -79,7 +89,7 @@
     "tailwind/**"
   ],
   "scripts": {
-    "build": "tsup && cpy \"src/tailwind/*.css\" \"./tailwind\" --flat && npm run post-build",
+    "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsup && cpy \"src/tailwind/*.css\" \"./tailwind\" --flat && npm run post-build",
     "lint": "eslint .",
     "lint:ci": "eslint . -o eslint-results.sarif -f @microsoft/eslint-formatter-sarif",
     "lint:fix": "eslint . --fix",
@@ -138,6 +148,7 @@
     "@vitest/coverage-v8": "^4.1.5",
     "@vitest/ui": "^4.1.5",
     "cpy-cli": "^7.0.0",
+    "cross-env": "^10.1.0",
     "eslint": "9.39.4",
     "happy-dom": "^20.8.9",
     "playwright": "^1.60.0",

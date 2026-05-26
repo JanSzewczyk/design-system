@@ -10,8 +10,11 @@ export default defineConfig({
   minify: true,
   outDir: "dist",
   entry: [
-    // "src/components/*/index.tsx",
+    // Barrel entry — keeps `import { X } from "@szum-tech/design-system"` working.
     "src/components/index.tsx",
+    // One entry per component — enables per-component tree-shaking and subpath imports
+    // (`@szum-tech/design-system/components/button`). Shared code lands in split chunks.
+    "src/components/*/index.tsx",
     "src/utils/index.ts",
     "src/hooks/index.tsx",
     "src/icons/index.tsx"
