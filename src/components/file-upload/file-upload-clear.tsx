@@ -1,5 +1,6 @@
-import { Slot as SlotPrimitive } from "radix-ui";
 import * as React from "react";
+
+import { Slot as SlotPrimitive } from "radix-ui";
 
 import { CLEAR_NAME } from "./file-upload.constants";
 import { useFileUploadContext } from "./file-upload.context";

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button } from "~/components";
+import { Button } from "~/components/button";
 import { cn } from "~/utils";
 
 import { inputGroupButtonVariants } from "./input-group-button.styles";

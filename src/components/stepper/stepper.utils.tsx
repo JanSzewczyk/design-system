@@ -1,14 +1,9 @@
 import type * as React from "react";
 
-import {
-  type StepperTriggerElement,
-  StepperDataState,
-  type StepperDirection,
-  type StepperOrientation
-} from "~/components";
-
+import { type StepperTriggerElement } from "./stepper-trigger";
 import { STEPPER_MAP_KEY_TO_FOCUS_INTENT } from "./stepper.constants";
 import { type StepperStepState } from "./stepper.store";
+import { StepperDataState, type StepperDirection, type StepperOrientation } from "./stepper.types";
 
 export function focusFirst(candidates: React.RefObject<StepperTriggerElement | null>[], preventScroll = false) {
   const PREVIOUSLY_FOCUSED_ELEMENT = document.activeElement;

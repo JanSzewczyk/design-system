@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { type StepperNavigationDirection } from "~/components";
-
 import { STEPPER_ROOT_NAME } from "./stepper.constants";
+import { type StepperNavigationDirection } from "./stepper.types";
 
 export type StepperStepState = {
   value: string;

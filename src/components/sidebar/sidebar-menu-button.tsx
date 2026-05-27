@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components";
+import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/tooltip";
 import { cn } from "~/utils";
 
 import { type SidebarMenuButtonSizeType, type SidebarMenuButtonVariantType } from "./sidebar-menu-button.types";

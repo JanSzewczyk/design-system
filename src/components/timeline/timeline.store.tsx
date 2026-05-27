@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { type TimelineItemElement, type TimelineStatus } from "~/components";
-
 import { TIMELINE_ROOT_NAME } from "./timeline.constants";
+import { type TimelineItemElement, type TimelineStatus } from "./timeline.types";
 
 type TimelineStoreState = {
   items: Map<string, React.RefObject<TimelineItemElement | null>>;

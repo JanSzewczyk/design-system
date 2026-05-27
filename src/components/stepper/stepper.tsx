@@ -2,18 +2,18 @@ import * as React from "react";
 
 import { useDirection } from "@radix-ui/react-direction";
 import { Slot } from "@radix-ui/react-slot";
+import { useIsomorphicLayoutEffect, useLazyRef } from "~/hooks";
+import { cn } from "~/utils";
+
+import { StepperContext, type StepperContextValue } from "./stepper.context";
+import { createStepperStore, StepperStoreContext, type StepperStoreState } from "./stepper.store";
 import {
   type StepIndicators,
   type StepperActivationMode,
   type StepperDirection,
   type StepperNavigationDirection,
   type StepperOrientation
-} from "~/components";
-import { useIsomorphicLayoutEffect, useLazyRef } from "~/hooks";
-import { cn } from "~/utils";
-
-import { StepperContext, type StepperContextValue } from "./stepper.context";
-import { createStepperStore, StepperStoreContext, type StepperStoreState } from "./stepper.store";
+} from "./stepper.types";
 
 export type StepperProps = React.ComponentProps<"div"> & {
   asChild?: boolean;

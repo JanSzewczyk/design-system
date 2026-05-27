@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "~/components";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "~/components/sheet";
 import { cn } from "~/utils";
 
 import { SIDEBAR_WIDTH_MOBILE } from "./sidebar.constants";

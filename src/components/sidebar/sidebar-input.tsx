@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Input } from "~/components";
+import { Input } from "~/components/input";
 import { cn } from "~/utils";
 
 export type SidebarInputProps = React.ComponentProps<typeof Input>;

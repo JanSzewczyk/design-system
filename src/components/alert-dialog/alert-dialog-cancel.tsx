@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
 
-import { Button, type ButtonProps } from "~/components";
+import { Button, type ButtonProps } from "~/components/button";
 import { cn } from "~/utils";
 
 export type AlertDialogCancelProps = React.ComponentProps<typeof AlertDialogPrimitive.Cancel> &

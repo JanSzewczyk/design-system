@@ -4,9 +4,8 @@ import { XIcon } from "lucide-react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { twMerge } from "tailwind-merge";
 
-import { type DialogContentWidth } from "~/components";
-
 import { dialogContentVariants } from "./dialog-content.styles";
+import { type DialogContentWidth } from "./dialog-content.types";
 
 export type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
   width?: DialogContentWidth;
