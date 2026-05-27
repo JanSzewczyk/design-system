@@ -1,6 +1,6 @@
 import type * as React from "react";
 
-import { type TimelineItemElement, type TimelineStatus } from "~/components";
+import { type TimelineItemElement, type TimelineStatus } from "./timeline.types";
 
 export function getItemStatus(itemIndex: number, activeIndex?: number): TimelineStatus {
   if (activeIndex === undefined) return "pending";

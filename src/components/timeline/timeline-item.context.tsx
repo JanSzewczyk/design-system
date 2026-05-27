@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { type TimelineStatus } from "~/components";
-
 import { TIMELINE_ITEM_NAME } from "./timeline.constants";
+import { type TimelineStatus } from "./timeline.types";
 
 export type TimelineItemContextValue = {
   id: string;

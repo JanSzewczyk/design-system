@@ -3,10 +3,10 @@ import * as React from "react";
 import { XIcon } from "lucide-react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 
-import { type SheetContentSide } from "~/components";
 import { cn } from "~/utils";
 
 import { sheetContentStyles } from "./sheet-content.styles";
+import { type SheetContentSide } from "./sheet-content.types";
 
 export type SheetContentProps = React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: SheetContentSide;

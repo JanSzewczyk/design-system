@@ -1,3 +1,5 @@
+import { SearchIcon } from "lucide-react";
+
 import {
   Kbd,
   KbdGroup,
@@ -11,7 +13,6 @@ import {
 } from "~/components";
 
 import preview from "~/.storybook/preview";
-import { SearchIcon } from "lucide-react";
 
 const meta = preview.meta({
   title: "Components/Kbd",

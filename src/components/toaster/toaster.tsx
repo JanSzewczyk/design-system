@@ -3,7 +3,7 @@ import * as React from "react";
 import { CircleCheckIcon, InfoIcon, OctagonXIcon, TriangleAlertIcon } from "lucide-react";
 import { Toaster as ReactToster, type ToasterProps as ReactToasterProps, toast } from "sonner";
 
-import { Spinner } from "~/components";
+import { Spinner } from "~/components/spinner";
 
 export type ToasterProps = ReactToasterProps;
 

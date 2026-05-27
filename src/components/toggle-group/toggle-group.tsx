@@ -2,8 +2,9 @@ import * as React from "react";
 
 import { ToggleGroup as ToggleGroupPrimitive } from "radix-ui";
 
-import { type ToggleSize, type ToggleVariant } from "~/components";
 import { cn } from "~/utils";
+
+import { type ToggleSize, type ToggleVariant } from "../toggle/toggle.types";
 
 import { ToggleGroupContext } from "./toggle-group.context";
 

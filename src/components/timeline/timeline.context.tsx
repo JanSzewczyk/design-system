@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { type TimelineDirection, type TimelineOrientation, type TimelineVariant } from "~/components";
-
 import { TIMELINE_ROOT_NAME } from "./timeline.constants";
+import { type TimelineDirection, type TimelineOrientation, type TimelineVariant } from "./timeline.types";
 
 export type TimelineContextValue = {
   dir: TimelineDirection;

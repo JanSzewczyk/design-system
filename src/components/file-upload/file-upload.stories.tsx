@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Upload, UploadIcon, XIcon } from "lucide-react";
+
 import { expect, fn } from "storybook/test";
 import { Button } from "~/components/button";
 import { Toaster, toast } from "~/components/toaster";
@@ -15,7 +16,7 @@ import {
   FileUploadItemPreview,
   FileUploadItemProgress,
   FileUploadList,
-  FileUploadProps,
+  type FileUploadProps,
   FileUploadTrigger,
   useFileUploadStore
 } from ".";

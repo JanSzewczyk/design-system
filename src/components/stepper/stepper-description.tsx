@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { useStepperContext, useStepperItemContext } from "~/components";
 import { cn } from "~/utils";
 
+import { useStepperItemContext } from "./stepper-item.context";
 import { STEPPER_DESCRIPTION_NAME } from "./stepper.constants";
+import { useStepperContext } from "./stepper.context";
 import { getId } from "./stepper.utils";
 
 export type StepperDescriptionProps = React.ComponentProps<"span"> & {

@@ -1,8 +1,9 @@
 import * as React from "react";
 
 import { motion, type MotionProps, useInView, type UseInViewOptions, type Variants } from "motion/react";
-import { type TypingTextAnimationVariant } from "~/components";
 import { cn } from "~/utils";
+
+import { type TypingTextAnimationVariant } from "./typing-text.types";
 
 const cursorVariants: Variants = {
   blinking: {

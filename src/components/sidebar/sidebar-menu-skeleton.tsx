@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Skeleton } from "~/components";
+import { Skeleton } from "~/components/skeleton";
 import { cn } from "~/utils";
 
 export type SidebarMenuSkeletonProps = React.ComponentProps<"div"> & {

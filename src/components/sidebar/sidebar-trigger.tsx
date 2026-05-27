@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { PanelLeftIcon } from "lucide-react";
 
-import { Button } from "~/components";
+import { Button } from "~/components/button";
 import { cn } from "~/utils";
 
 import { useSidebarContext } from "./sidebar.context";

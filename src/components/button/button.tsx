@@ -1,10 +1,11 @@
 import * as React from "react";
 
 import { Slot } from "@radix-ui/react-slot";
-import { type ButtonSizeType, type ButtonVariantType, Spinner } from "~/components";
+import { Spinner } from "~/components/spinner";
 import { cn } from "~/utils";
 
 import { buttonVariants } from "./button.styles";
+import { type ButtonSizeType, type ButtonVariantType } from "./button.types";
 
 export type ButtonProps = React.ComponentProps<"button"> & {
   /**

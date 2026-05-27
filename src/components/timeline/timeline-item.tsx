@@ -2,7 +2,6 @@ import * as React from "react";
 
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import { Slot } from "@radix-ui/react-slot";
-import { type TimelineStatus } from "~/components";
 import { TimelineItemContext, type TimelineItemContextValue } from "~/components/timeline/timeline-item.context";
 import { useTimelineStore, useTimelineStoreContext } from "~/components/timeline/timeline.store";
 import { getItemStatus } from "~/components/timeline/timeline.utils";
@@ -12,6 +11,7 @@ import { cn } from "~/utils";
 import { TIMELINE_ITEM_NAME } from "./timeline.constants";
 import { useTimelineContext } from "./timeline.context";
 import { timelineItemVariants } from "./timeline.styles";
+import { type TimelineStatus } from "./timeline.types";
 
 type ItemElement = HTMLDivElement;
 

@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import {
   FileArchiveIcon,
   FileAudioIcon,
@@ -7,7 +9,6 @@ import {
   FileTextIcon,
   FileVideoIcon
 } from "lucide-react";
-import * as React from "react";
 
 export function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 B";

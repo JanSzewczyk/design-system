@@ -1,8 +1,9 @@
 import * as React from "react";
 
 import { motion, type MotionProps, useInView, type UseInViewOptions, type Variants } from "motion/react";
-import { type WordRotateAnimationStyle } from "~/components";
 import { cn } from "~/utils";
+
+import { type WordRotateAnimationStyle } from "./word-rotate.types";
 
 export type WordRotateProps = Omit<MotionProps, "children"> & {
   words: string[];

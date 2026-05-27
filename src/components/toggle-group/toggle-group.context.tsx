@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { type ToggleSize, type ToggleVariant } from "~/components";
+import { type ToggleSize, type ToggleVariant } from "~/components/toggle/toggle.types";
 
 import { type ToggleGroupOrientationType } from "./toggle-group.types";
 
