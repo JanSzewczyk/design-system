@@ -90,6 +90,7 @@
   ],
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 tsup && cpy \"src/tailwind/*.css\" \"./tailwind\" --flat && npm run post-build",
+    "ds:generate-skill": "node tools/generate-ds-skill/src/index.ts --src ./src/components --out ./ds-skill-snapshot --pkg ./package.json",
     "lint": "eslint .",
     "lint:ci": "eslint . -o eslint-results.sarif -f @microsoft/eslint-formatter-sarif",
     "lint:fix": "eslint . --fix",

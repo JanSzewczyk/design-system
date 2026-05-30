@@ -1,0 +1,22 @@
+{
+  "name": "generate-ds-skill",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generates @szum-tech/design-system snapshot for Claude Code skill",
+  "type": "module",
+  "bin": {
+    "generate-ds-skill": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "mri": "^1.2.0",
+    "ts-morph": "^25.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.19",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,154 @@
+# Button
+
+**Category:** Misc · **Public:** yes · **Stories:** 7
+
+## Import
+```ts
+import { Button } from "@szum-tech/design-system";
+```
+
+## Props
+| Prop | Type | Required | Default |
+|---|---|---|---|
+| `fullWidth` | `boolean` | no | — |
+| `variant` | `ButtonVariantType` | no | — |
+| `size` | `ButtonSizeType` | no | — |
+| `children` | `React.ReactNode` | no | — |
+| `startIcon` | `React.ReactElement` | no | — |
+| `endIcon` | `React.ReactElement` | no | — |
+| `loading` | `boolean` | no | — |
+| `loadingPosition` | `"start" \| "end" \| "center"` | no | — |
+| `asChild` | `boolean` | no | — |
+
+## Variants
+- **variant**: **default** (default), outline, secondary, ghost, error, link
+- **size**: xs, sm, **default** (default), lg, icon-xs, icon-sm, icon, icon-lg
+- **fullWidth**: true
+
+## Examples
+### Variants
+```tsx
+<div className="flex flex-col items-start gap-8 sm:flex-row">
+  <Button variant="default">Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="link">Link</Button>
+  <Button variant="error">Error</Button>
+</div>
+```
+
+### Disabled
+```tsx
+<div className="flex flex-col items-start gap-8 sm:flex-row">
+  <Button variant="default" disabled>
+    Default
+  </Button>
+  <Button variant="secondary" disabled>
+    Secondary
+  </Button>
+  <Button variant="outline" disabled>
+    Outline
+  </Button>
+  <Button variant="ghost" disabled>
+    Ghost
+  </Button>
+  <Button variant="link" disabled>
+    Link
+  </Button>
+  <Button variant="error" disabled>
+    Error
+  </Button>
+</div>
+```
+
+### Sizes
+```tsx
+<div className="flex flex-col items-start gap-8 sm:flex-row">
+  <div className="flex items-start gap-2">
+    <Button size="xs" variant="outline">
+      XSmall
+    </Button>
+    <Button size="icon-xs" aria-label="Submit" variant="outline">
+      <ArrowUpRightIcon />
+    </Button>
+  </div>
+  <div className="flex items-start gap-2">
+    <Button size="sm" variant="outline">
+      Small
+    </Button>
+    <Button size="icon-sm" aria-label="Submit" variant="outline">
+      <ArrowUpRightIcon />
+    </Button>
+  </div>
+  <div className="flex items-start gap-2">
+    <Button variant="outline">Default</Button>
+    <Button size="icon" aria-label="Submit" variant="outline">
+      <ArrowUpRightIcon />
+    </Button>
+  </div>
+  <div className="flex items-start gap-2">
+    <Button variant="outline" size="lg">
+      Large
+    </Button>
+    <Button size="icon-lg" aria-label="Submit" variant="outline">
+      <ArrowUpRightIcon />
+    </Button>
+  </div>
+</div>
+```
+
+### Full Width
+```tsx
+<div className="w-52">
+  <Button fullWidth>FULL WIDTH</Button>
+</div>
+```
+
+### With Icon
+```tsx
+<div className="flex flex-wrap gap-4">
+  <Button startIcon={<ArrowDownSquare />}>LEFT ICON</Button>
+  <Button endIcon={<ArrowDownSquare />}>RIGHT ICON</Button>
+</div>
+```
+
+### Loading
+```tsx
+<div className="flex flex-wrap gap-4">
+  <Button variant="outline" loading>
+    LEFT LOADING
+  </Button>
+  <Button loading loadingPosition="end">
+    RIGHT LOADING
+  </Button>
+  <Button size="icon" loading>
+    <ArrowUpRightIcon />
+  </Button>
+</div>
+```
+
+### As Link
+```tsx
+<div className="flex flex-wrap gap-4">
+  <Button asChild>
+    <a href="">Icon button</a>
+  </Button>
+  <Button asChild disabled>
+    <a href="">Icon button - disabled</a>
+  </Button>
+  <Button size="icon" asChild>
+    <a href="">
+      <ArrowUpRightIcon />
+    </a>
+  </Button>
+  <Button size="icon" asChild disabled>
+    <a href="">
+      <ArrowUpRightIcon />
+    </a>
+  </Button>
+</div>
+```
+
+## Notes
+- Supports `asChild` (polymorphic via Radix `Slot`).
