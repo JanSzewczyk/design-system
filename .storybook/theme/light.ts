@@ -9,18 +9,27 @@ export default create({
 
   brandTitle: "Szum-Tech Design System",
 
-  //
-  colorPrimary: "#0085FF",
-  colorSecondary: "#339CFF",
+  // --primary: oklch(0.488 0.243 264.376) ≈ blue-700
+  // --chart-3: oklch(0.546 0.245 262.881) ≈ blue-600
+  colorPrimary: "#1d4ed8",
+  colorSecondary: "#2563eb",
 
+  // --background: oklch(1 0 0)
   appBg: "#ffffff",
-  appContentBg: "#f7f7f7",
-  appBorderRadius: 0,
-  appBorderColor: "#EBEBEB",
+  // --muted: oklch(0.97 0.001 106.424)
+  appContentBg: "#f6f5ef",
+  // --radius: 0.25rem = 4px
+  appBorderRadius: 4,
+  // --border: oklch(0.923 0.003 48.717)
+  appBorderColor: "#eceae6",
 
+  // --background: oklch(1 0 0)
   barBg: "#ffffff",
-  barTextColor: "#585757",
-  barSelectedColor: "#0085FF",
+  // --muted-foreground: oklch(0.553 0.013 58.071)
+  barTextColor: "#736d62",
+  // --primary
+  barSelectedColor: "#1d4ed8",
 
-  textColor: "#1C1C1C"
+  // --foreground: oklch(0.147 0.004 49.25)
+  textColor: "#201c15"
 });
