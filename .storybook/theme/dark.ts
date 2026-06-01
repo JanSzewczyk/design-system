@@ -14,22 +14,22 @@ export default create({
   colorPrimary: "#1e40af",
   colorSecondary: "#3b82f6",
 
-  // --background: oklch(0.147 0.004 49.25)
-  appBg: "#201c15",
-  // --card: oklch(0.216 0.006 56.043)
-  appContentBg: "#2e2921",
+  // --background: oklch(0.145 0 0)
+  appBg: "#0a0a0a",
+  // --card: oklch(0.205 0 0)
+  appContentBg: "#171717",
   // --radius: 0.25rem = 4px
   appBorderRadius: 4,
   // --border: oklch(1 0 0 / 10%)
   appBorderColor: "rgba(255, 255, 255, 0.1)",
 
   // --background
-  barBg: "#201c15",
-  // --muted-foreground: oklch(0.709 0.01 56.259)
-  barTextColor: "#a49e93",
+  barBg: "#0a0a0a",
+  // --muted-foreground: oklch(0.708 0 0)
+  barTextColor: "#a1a1a1",
   // --chart-2 (brighter than primary for visibility on dark bg)
   barSelectedColor: "#3b82f6",
 
-  // --foreground: oklch(0.985 0.001 106.423)
-  textColor: "#f8f7f2"
+  // --foreground: oklch(0.985 0 0)
+  textColor: "#fafafa"
 });

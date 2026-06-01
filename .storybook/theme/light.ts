@@ -16,20 +16,20 @@ export default create({
 
   // --background: oklch(1 0 0)
   appBg: "#ffffff",
-  // --muted: oklch(0.97 0.001 106.424)
-  appContentBg: "#f6f5ef",
+  // --muted: oklch(0.97 0 0)
+  appContentBg: "#f5f5f5",
   // --radius: 0.25rem = 4px
   appBorderRadius: 4,
-  // --border: oklch(0.923 0.003 48.717)
-  appBorderColor: "#eceae6",
+  // --border: oklch(0.922 0 0)
+  appBorderColor: "#e5e5e5",
 
   // --background: oklch(1 0 0)
   barBg: "#ffffff",
-  // --muted-foreground: oklch(0.553 0.013 58.071)
-  barTextColor: "#736d62",
+  // --muted-foreground: oklch(0.556 0 0)
+  barTextColor: "#737373",
   // --primary
   barSelectedColor: "#1d4ed8",
 
-  // --foreground: oklch(0.147 0.004 49.25)
-  textColor: "#201c15"
+  // --foreground: oklch(0.145 0 0)
+  textColor: "#0a0a0a"
 });
