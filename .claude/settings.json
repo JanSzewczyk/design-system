@@ -1,8 +1,5 @@
 {
   "enableAllProjectMcpServers": true,
-  "enabledMcpjsonServers": [
-    "context7"
-  ],
   "hooks": {
     "SessionStart": [
       {
@@ -46,5 +43,11 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "code-quality@szum-tech": true,
+    "performance@szum-tech": true,
+    "testing@szum-tech": true,
+    "design@szum-tech": true
   }
 }
