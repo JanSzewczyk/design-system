@@ -143,10 +143,10 @@
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
-    "@vitest/browser": "^4.1.5",
-    "@vitest/browser-playwright": "^4.1.5",
-    "@vitest/coverage-v8": "^4.1.5",
-    "@vitest/ui": "^4.1.5",
+    "@vitest/browser": "^4.1.8",
+    "@vitest/browser-playwright": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.8",
+    "@vitest/ui": "^4.1.8",
     "cpy-cli": "^7.0.0",
     "cross-env": "^10.1.0",
     "embla-carousel-autoplay": "^8.6.0",
@@ -166,7 +166,7 @@
     "tsup": "^8.5.1",
     "typescript": "^6.0.2",
     "vite": "^8.0.14",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.8"
   },
   "peerDependencies": {
     "react": ">=19",
