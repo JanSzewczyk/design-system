@@ -34,7 +34,8 @@
 ## ✨ Features
 
 - 🎨 **Modern Stack**: Ready to go with [Tailwind CSS v4+](https://tailwindcss.com/) & React 19+.
-- 🧩 **Extensive Kit**: Over 50+ crafted components (Carousel, Sortable, Drawers, Comboboxes, Pickers & more).
+- 🧩 **Extensive Kit**: 55+ crafted components (Carousel, Sortable, Combobox, Color Picker, File Upload, Sidebar &
+  more).
 - ♿ **Accessible**: Built around [Radix UI](https://www.radix-ui.com/) and [@base-ui/react](https://base-ui.com/) to
   ensure WAI-ARIA compliance.
 - 🌓 **Themes**: Native support for configurable `light` and `dark` color palettes.
@@ -186,10 +187,25 @@ View it here:
 
 ### Core Dependencies
 
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/class-variance-authority)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/clsx)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/radix-ui)
-![NPM (prod) Dependency Version](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/tailwind-merge)
+**UI primitives & icons**
+
+![radix-ui](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/radix-ui)
+![@base-ui/react](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/@base-ui/react)
+![lucide-react](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/lucide-react)
+
+**Styling & variants**
+
+![class-variance-authority](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/class-variance-authority)
+![clsx](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/clsx)
+![tailwind-merge](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/tailwind-merge)
+![tailwindcss-animate](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/tailwindcss-animate)
+
+**Interactions & motion**
+
+![motion](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/motion)
+![@dnd-kit/core](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/@dnd-kit/core)
+![embla-carousel-react](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/embla-carousel-react)
+![sonner](https://img.shields.io/npm/dependency-version/%40szum-tech%2Fdesign-system/sonner)
 
 ### Peer Dependencies
 
