@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { cn } from "~/utils";
+
 import { useCarousel } from "./carousel.context";
 import { carouselItemVariants } from "./carousel.styles";
 
@@ -13,7 +15,7 @@ export function CarouselItem({ className, ...props }: CarouselItemProps) {
       role="group"
       aria-roledescription="slide"
       data-slot="carousel-item"
-      className={carouselItemVariants({ orientation, className })}
+      className={cn(carouselItemVariants({ orientation, className }))}
       {...props}
     />
   );
