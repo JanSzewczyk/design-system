@@ -1,0 +1,30 @@
+{
+  "projectId": "019e1388-9b37-74a1-8c40-b11c378b426d",
+  "shape": "storybook",
+  "storybookConfigDir": ".storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "pkg": "@szum-tech/design-system",
+  "buildCmd": "npm run build",
+  "entry": "dist/components/index.js",
+  "titleMap": {
+    "Typography": null
+  },
+  "extraEntries": ["./dist/components/carousel/index.js", "./dist/components/badge-overflow/index.js", "lucide-react"],
+  "storyImports": {
+    "shim": ["src/components/index", "@storybook-community/storybook-dark-mode", ".storybook/theme/"]
+  },
+  "overrides": {
+    "Badge": { "cardMode": "column" },
+    "Button": { "cardMode": "column" },
+    "Carousel": { "cardMode": "column" },
+    "ScrollArea": { "cardMode": "column" },
+    "Sidebar": { "cardMode": "single", "primaryStory": "VariantSidebar" },
+    "Spinner": { "cardMode": "column" },
+    "Stepper": { "cardMode": "column" },
+    "Tabs": { "cardMode": "column" },
+    "Tooltip": { "cardMode": "single", "primaryStory": "Example" }
+  },
+  "libOverrides": {
+    "story-imports.mjs": "Adds a CSF Next definePreview/meta.story passthrough to the @storybook/* inert stub — this repo's CSF-Next stories call definePreview from @storybook/react-vite, which the stock inert stub left undefined as a named export, crashing every such story at module eval."
+  }
+}
