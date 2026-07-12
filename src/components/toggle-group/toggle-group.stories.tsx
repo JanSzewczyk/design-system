@@ -69,7 +69,7 @@ export const FormattingToolbar = meta.story({
 });
 
 FormattingToolbar.test("Renders group with correct data-slot attribute", async ({ canvas }) => {
-  const root = canvas.getByRole("group");
+  const root = canvas.getByRole("toolbar");
   await expect(root).toHaveAttribute("data-slot", "toggle-group");
 });
 
@@ -173,7 +173,7 @@ export const Sizes = meta.story({
 });
 
 Sizes.test("Items inherit size from root via data-size", async ({ canvas }) => {
-  const groups = canvas.getAllByRole("group");
+  const groups = canvas.getAllByRole("radiogroup");
   const smItems = Array.from(groups[0].querySelectorAll("[data-slot='toggle-group-item']"));
   const defaultItems = Array.from(groups[1].querySelectorAll("[data-slot='toggle-group-item']"));
 
@@ -237,7 +237,7 @@ export const Vertical = meta.story({
 });
 
 Vertical.test("Root has data-orientation vertical", async ({ canvas }) => {
-  const root = canvas.getByRole("group");
+  const root = canvas.getByRole("toolbar");
   await expect(root).toHaveAttribute("data-orientation", "vertical");
 });
 
