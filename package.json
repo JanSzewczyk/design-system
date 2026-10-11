@@ -152,7 +152,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "eslint": "10.8.1",
     "happy-dom": "^20.10.6",
-    "playwright": "^1.61.1",
+    "playwright": "^1.64.0",
     "prettier": "^3.9.5",
     "react": "^19.3.0",
     "react-docgen": "^8.0.3",
