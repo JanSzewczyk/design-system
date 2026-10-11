@@ -142,7 +142,7 @@
     "@types/node": "^26.2.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.1.2",
     "@vitest/browser": "^4.1.10",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
@@ -165,7 +165,7 @@
     "tailwindcss": "^4.3.2",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
-    "vite": "^8.1.4",
+    "vite": "^8.3.4",
     "vitest": "^4.1.10"
   },
   "peerDependencies": {
