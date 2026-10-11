@@ -118,7 +118,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^1.55.0",
-    "motion": "^13.1.0",
+    "motion": "^14.1.0",
     "radix-ui": "^1.7.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.7.0",
