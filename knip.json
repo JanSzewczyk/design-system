@@ -1,12 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": ["src/components/*/index.tsx"],
-  "ignoreDependencies": [
-    "@semantic-release/changelog",
-    "@semantic-release/git",
-    "react-docgen",
-    "tailwindcss",
-    "tailwindcss-animate"
-  ],
+  "ignoreDependencies": ["react-docgen", "tailwindcss", "tailwindcss-animate"],
   "project": ["src/**/*.{ts,tsx}"]
 }
