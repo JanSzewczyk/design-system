@@ -8,5 +8,5 @@ import { alertVariants } from "./alert.styles";
 export type AlertProps = React.ComponentProps<"div"> & { variant?: AlertVariant };
 
 export function Alert({ className, variant = "default", ...props }: AlertProps) {
-  return <div data-slot="alert" role="alert" className={cn(alertVariants({ variant }), className)} {...props} />;
+  return <div className={cn(alertVariants({ variant }), className)} data-slot="alert" role="alert" {...props} />;
 }
