@@ -33,8 +33,8 @@ npm run test:ui          # Run tests with interactive UI
 
 ```bash
 npm run type-check       # TypeScript type checking
-npm run lint             # Biome lint checking
-npm run format:check     # Biome format checking
+npm run biome:lint       # Biome lint checking
+npm run biome:format     # Biome format checking
 npm run test             # All tests (unit + Storybook integration)
 npm run build            # Build library (tsup + CSS copy + post-build)
 ```
@@ -52,9 +52,9 @@ npx playwright install --with-deps  # Install Playwright browsers (required for 
 ### Fixes
 
 ```bash
-npm run lint:fix         # Auto-fix Biome lint issues
-npm run format            # Auto-format code with Biome
-npm run check:fix         # Apply lint + format + assist fixes in one pass
+npm run biome:lint:fix   # Auto-fix Biome lint issues
+npm run biome:format:fix # Auto-format code with Biome
+npm run biome:fix        # Apply lint + format + assist fixes in one pass
 ```
 
 ## Architecture

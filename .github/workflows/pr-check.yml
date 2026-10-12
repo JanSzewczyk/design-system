@@ -32,7 +32,7 @@ jobs:
       - name: Setup Biome 🌿
         uses: biomejs/setup-biome@v2
       - name: Biome Check 🌿
-        run: npm run lint:ci
+        run: npm run biome:ci
 
   test:
     name: Test 🧪
