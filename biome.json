@@ -1,0 +1,227 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "noDuplicateClasses": "on",
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedKeys": "on",
+        "useSortedPackageJson": "on"
+      }
+    },
+    "enabled": true
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/node_modules/**",
+      "!**/dist/**",
+      "!**/storybook-static/**",
+      "!**/coverage/**",
+      "!**/playwright-report/**",
+      "!**/test-results/**",
+      "!/components/**",
+      "!/tailwind/**",
+      "!/icons/**",
+      "!src/styles/**",
+      "!**/chunk-*.{js,mjs}",
+      "!**/CHANGELOG.mdx",
+      "!**/.design-sync/**",
+      "!**/.ds-sync/**",
+      "!**/ds-bundle/**"
+    ]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "always",
+      "bracketSameLine": false,
+      "bracketSpacing": true,
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "none"
+    }
+  },
+  "json": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  },
+  "linter": {
+    "domains": {
+      "react": "recommended",
+      "test": "recommended"
+    },
+    "enabled": true,
+    "rules": {
+      "a11y": {
+        "noAccessKey": "warn",
+        "noAriaHiddenOnFocusable": "error",
+        "useAltText": "error",
+        "useAriaPropsForRole": "error",
+        "useButtonType": "warn",
+        "useHeadingContent": "error",
+        "useHtmlLang": "error",
+        "useKeyWithClickEvents": "warn",
+        "useKeyWithMouseEvents": "warn",
+        "useValidAnchor": "error",
+        "useValidAriaProps": "error",
+        "useValidAriaRole": "error",
+        "useValidAriaValues": "error"
+      },
+      "complexity": {
+        "noExtraBooleanCast": "error",
+        "noUselessCatch": "error",
+        "noUselessConstructor": "error",
+        "noUselessEmptyExport": "error",
+        "noUselessFragments": "warn",
+        "noUselessLabel": "error",
+        "noUselessRename": "error",
+        "noUselessSwitchCase": "error",
+        "noUselessTernary": "error",
+        "noUselessTypeConstraint": "error",
+        "useFlatMap": "warn",
+        "useOptionalChain": "warn"
+      },
+      "correctness": {
+        "noChildrenProp": "error",
+        "noRenderReturnValue": "error",
+        "noUnusedImports": "error",
+        "noUnusedVariables": "warn",
+        "noVoidTypeReturn": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error",
+        "useJsxKeyInIterable": "warn"
+      },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "noMisusedPromises": "error",
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "warn",
+          "options": {
+            "attributes": ["class", "className"],
+            "functions": ["classNames", "clsx", "cn"]
+          }
+        }
+      },
+      "preset": "none",
+      "security": {
+        "noBlankTarget": "error",
+        "noDangerouslySetInnerHtmlWithChildren": "error"
+      },
+      "style": {
+        "noNamespace": "error",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": {
+            "syntax": "shorthand"
+          }
+        },
+        "useConsistentBuiltinInstantiation": "error",
+        "useConst": "error",
+        "useDefaultSwitchClause": "warn",
+        "useTemplate": "warn"
+      },
+      "suspicious": {
+        "noArrayIndexKey": "warn",
+        "noCommentText": "error",
+        "noConsole": "warn",
+        "noDoubleEquals": "error",
+        "noDuplicateJsxProps": "error",
+        "noExplicitAny": "error",
+        "noExtraNonNullAssertion": "error",
+        "noMisleadingInstantiator": "error",
+        "noThenProperty": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "useNamespaceKeyword": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "assist": {
+        "actions": {
+          "source": {
+            "useSortedKeys": "off"
+          }
+        }
+      },
+      "includes": ["**/package.json", "**/tsconfig.json", "**/tsconfig.*.json"]
+    },
+    {
+      "includes": ["src/components/**/*.{ts,tsx}"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "~/components": "Nie importuj z barrela `~/components` wewnątrz src/components — użyj importu względnego lub subpath `~/components/<nazwa>`, aby zachować tree-shaking.",
+                  "~/components/index": "Nie importuj z barrela `~/components` wewnątrz src/components — użyj importu względnego lub subpath `~/components/<nazwa>`, aby zachować tree-shaking."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/components/index.tsx", "src/components/**/*.stories.tsx"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/*.stories.{ts,tsx}"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useValidAnchor": "off"
+          },
+          "correctness": {
+            "useHookAtTopLevel": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/scripts/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          }
+        }
+      }
+    }
+  ],
+  "root": true,
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
+  }
+}

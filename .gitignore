@@ -53,9 +53,6 @@ typings/
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
-.eslintcache
-
 # Optional REPL history
 .node_repl_history
 
@@ -109,9 +106,6 @@ jest-results.json
 # Develpment
 .vscode/
 .idea/
-
-# Ignore eslint results file
-eslint-results.sarif
 
 # Tailwindcss computed styles
 src/styles

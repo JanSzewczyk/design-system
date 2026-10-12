@@ -1,10 +1,9 @@
-import * as React from "react";
-
 import addonA11y from "@storybook/addon-a11y";
 import addonDocs from "@storybook/addon-docs";
 import { DocsContainer, type DocsContainerProps } from "@storybook/addon-docs/blocks";
 import { definePreview } from "@storybook/react-vite";
 import { DARK_MODE_EVENT_NAME } from "@storybook-community/storybook-dark-mode";
+import * as React from "react";
 
 import { Toaster } from "../src/components";
 import "../src/tailwind/global.css";
@@ -24,33 +23,7 @@ export function DarkModeDocsContainer(props: DocsContainerProps) {
 }
 
 export default definePreview({
-  parameters: {
-    darkMode: {
-      dark,
-      light,
-      current: "dark",
-      classTarget: "html",
-      stylePreview: true
-    },
-    options: {
-      storySort: {
-        order: ["Getting Started", ["Introduction"], "Components"]
-      }
-    },
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/
-      }
-    },
-    docs: {
-      controls: {
-        sort: "requiredFirst"
-      },
-      container: DarkModeDocsContainer
-    }
-  },
+  addons: [addonA11y(), addonDocs()],
   decorators: [
     (Story) => (
       <>
@@ -59,6 +32,32 @@ export default definePreview({
       </>
     )
   ],
-  addons: [addonA11y(), addonDocs()],
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/
+      }
+    },
+    darkMode: {
+      classTarget: "html",
+      current: "dark",
+      dark,
+      light,
+      stylePreview: true
+    },
+    docs: {
+      container: DarkModeDocsContainer,
+      controls: {
+        sort: "requiredFirst"
+      }
+    },
+    options: {
+      storySort: {
+        order: ["Getting Started", ["Introduction"], "Components"]
+      }
+    }
+  },
   tags: ["autodocs"]
 });

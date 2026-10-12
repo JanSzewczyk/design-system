@@ -11,10 +11,6 @@ const tags: PresetValue<TagsOptions | undefined> = {
 };
 
 export default defineMain({
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  features: {
-    experimentalTestSyntax: true
-  },
   addons: [
     "@storybook/addon-a11y",
     "@storybook/addon-vitest",
@@ -22,25 +18,29 @@ export default defineMain({
     "@storybook-community/storybook-dark-mode",
     "storybook-addon-tag-badges"
   ],
-  framework: "@storybook/react-vite",
   core: {
     builder: "@storybook/builder-vite",
     enableCrashReports: true
   },
-  typescript: {
-    reactDocgen: "react-docgen",
-    check: true
+  features: {
+    experimentalTestSyntax: true
   },
+  framework: "@storybook/react-vite",
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   tags,
+  typescript: {
+    check: true,
+    reactDocgen: "react-docgen"
+  },
   viteFinal: async (config) => {
     const { mergeConfig } = await import("vite");
     const tailwindcss = (await import("@tailwindcss/vite")).default();
     return mergeConfig(config, {
+      assetsInclude: ["**/*.md"],
       plugins: [tailwindcss],
       resolve: {
         tsconfigPaths: true
-      },
-      assetsInclude: ["**/*.md"]
+      }
     });
   }
 });

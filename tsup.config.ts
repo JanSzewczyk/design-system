@@ -1,14 +1,9 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  splitting: true,
+  bundle: true,
   clean: true,
   dts: true,
-  format: ["esm", "cjs"],
-  bundle: true,
-  treeshake: true,
-  minify: true,
-  outDir: "dist",
   entry: [
     // Barrel entry — keeps `import { X } from "@szum-tech/design-system"` working.
     "src/components/index.tsx",
@@ -34,5 +29,10 @@ export default defineConfig({
     /^@radix-ui\/.*/,
     /^@dnd-kit\/.*/,
     /^@base-ui\/.*/
-  ]
+  ],
+  format: ["esm", "cjs"],
+  minify: true,
+  outDir: "dist",
+  splitting: true,
+  treeshake: true
 });

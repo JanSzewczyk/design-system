@@ -33,8 +33,7 @@ This file contains project-specific configuration that agents and skills referen
 | Purpose | File |
 |---------|------|
 | Build config | `tsup.config.ts` |
-| ESLint config | `eslint.config.ts` |
-| Prettier config | `prettier.config.ts` |
+| Biome config (lint + format) | `biome.json` |
 | Dependencies | `package.json` |
 | TypeScript | `tsconfig.json` |
 | Tailwind CSS | `src/tailwind/` (global.css, palette.css, typography.css, etc.) |
