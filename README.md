@@ -222,6 +222,7 @@ For running the environment locally:
 - **Lint**: `npm run biome:lint`
 - **Format**: `npm run biome:format:fix`
 - **Test**: `npm run test` or `npm run test:ui`
+- **Unused code**: `npm run knip`
 
 ---
 

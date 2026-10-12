@@ -12,9 +12,11 @@ and modular exports for optimal tree-shaking.
 
 - React 19+ with TypeScript (strict mode)
 - Tailwind CSS 4+ with OKLCH color space
-- Radix UI for accessible primitives
+- Radix UI for accessible primitives (plus `@base-ui/react`, `@dnd-kit/*`, `embla-carousel-react`, and `motion`
+  for specific components like Sortable, Carousel, and animations)
 - CVA for type-safe variant styling
 - Biome for linting and formatting
+- Knip for unused files/exports/dependencies
 - Vitest + Playwright for testing
 - Storybook 10+ (CSF Next format) for documentation
 - tsup for bundling (ESM + CJS)
@@ -35,6 +37,7 @@ npm run test:ui          # Run tests with interactive UI
 npm run type-check       # TypeScript type checking
 npm run biome:lint       # Biome lint checking
 npm run biome:format     # Biome format checking
+npm run knip             # Unused files, exports, and dependencies
 npm run test             # All tests (unit + Storybook integration)
 npm run build            # Build library (tsup + CSS copy + post-build)
 ```
@@ -46,6 +49,7 @@ npm test                 # Run all tests
 npm run test:unit        # Unit tests only (happy-dom)
 npm run test:storybook   # Storybook integration tests (Playwright)
 npm run test:coverage    # Generate coverage report
+npm run test:ci          # All tests with coverage (used in CI)
 npx playwright install --with-deps  # Install Playwright browsers (required for integration tests)
 ```
 
@@ -263,7 +267,7 @@ OutlineVariant.test("Clicking item selects it", async ({ canvas, userEvent, step
 
 ## CI/CD
 
-**PR Checks** (`.github/workflows/pr-check.yml`): type-check, Biome (lint + format), unit tests, Storybook tests, Storybook build, library build, dependency review.
+**PR Checks** (`.github/workflows/pr-check.yml`): type-check, Biome (lint + format), Knip (unused code), unit tests, Storybook tests, Storybook build, library build, dependency review.
 
 **Publishing:** semantic-release on main branch, version bumps from conventional commits.
 

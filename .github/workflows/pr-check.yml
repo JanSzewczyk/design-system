@@ -34,6 +34,22 @@ jobs:
       - name: Biome Check 🌿
         run: npm run biome:ci
 
+  knip:
+    name: Knip ✂️
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code 📚
+        uses: actions/checkout@v7
+      - name: Set up Node 🟢
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      - name: Install packages ⚙️
+        run: npm ci
+      - name: Knip Check ✂️
+        run: npm run knip:ci
+
   test:
     name: Test 🧪
     runs-on: ubuntu-latest

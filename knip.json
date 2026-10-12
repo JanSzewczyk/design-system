@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/components/*/index.tsx"],
+  "ignoreDependencies": ["react-docgen", "tailwindcss", "tailwindcss-animate"],
+  "project": ["src/**/*.{ts,tsx}"]
+}

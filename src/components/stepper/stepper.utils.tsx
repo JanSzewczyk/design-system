@@ -52,7 +52,7 @@ export function wrapArray<T>(array: T[], startIndex: number) {
   return array.map<T>((_, index) => array[(startIndex + index) % array.length] as T);
 }
 
-export function getDirectionAwareKey(key: string, dir?: StepperDirection) {
+function getDirectionAwareKey(key: string, dir?: StepperDirection) {
   if (dir !== "rtl") return key;
   return key === "ArrowLeft" ? "ArrowRight" : key === "ArrowRight" ? "ArrowLeft" : key;
 }

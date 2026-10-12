@@ -5,9 +5,9 @@ export const OVERSCAN = 2;
 export const SCROLL_FPS = 12;
 export const DEBOUNCE_DELAY = 300;
 
-export const ROOT_NAME = "MasonryRoot";
+const ROOT_NAME = "MasonryRoot";
 export const VIEWPORT_NAME = "MasonryViewport";
-export const ITEM_NAME = "MasonryItem";
+const ITEM_NAME = "MasonryItem";
 
 export const MASONRY_ERROR = {
   [ROOT_NAME]: `\`${ROOT_NAME}\` components must be within \`${ROOT_NAME}\``,
