@@ -6,23 +6,23 @@ export const dialogContentVariants = cva(
     "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 "
   ],
   {
+    defaultVariants: {
+      width: "md"
+    },
     variants: {
       width: {
-        xs: "w-xs",
-        sm: "w-sm",
-        md: "w-md",
-        lg: "w-lg",
-        xl: "w-xl",
         "2xl": "w-2xl",
         "3xl": "w-3xl",
         "4xl": "w-4xl",
         "5xl": "w-5xl",
         "6xl": "w-6xl",
-        full: "w-full"
+        full: "w-full",
+        lg: "w-lg",
+        md: "w-md",
+        sm: "w-sm",
+        xl: "w-xl",
+        xs: "w-xs"
       }
-    },
-    defaultVariants: {
-      width: "md"
     }
   }
 );

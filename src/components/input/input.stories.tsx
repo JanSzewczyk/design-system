@@ -1,20 +1,17 @@
-import * as React from "react";
-
+import preview from "~/.storybook/preview";
 import { Input } from "./input";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Input",
   component: Input,
+  decorators: [(story) => <div className="max-w-lg">{story()}</div>],
   tags: ["autodocs", "new"],
-  decorators: [(story) => <div className="max-w-lg">{story()}</div>]
+  title: "Components/Input"
 });
 
 export const Example = meta.story({
   args: {
-    type: "email",
-    placeholder: "Email"
+    placeholder: "Email",
+    type: "email"
   }
 });
 
@@ -26,17 +23,17 @@ export const File = meta.story({
 
 export const Disabled = meta.story({
   args: {
-    type: "email",
+    disabled: true,
     placeholder: "Email",
-    disabled: true
+    type: "email"
   }
 });
 
 export const Invalid = meta.story({
   args: {
-    type: "email",
-    placeholder: "Email",
+    defaultValue: "incorrect@email.com",
     invalid: true,
-    defaultValue: "incorrect@email.com"
+    placeholder: "Email",
+    type: "email"
   }
 });

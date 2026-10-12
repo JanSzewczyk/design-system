@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -17,8 +15,10 @@ import {
   TagIcon,
   Trash2Icon
 } from "lucide-react";
+import * as React from "react";
 
 import { expect, screen, waitFor } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components/button";
 import {
   DropdownMenu,
@@ -36,37 +36,34 @@ import {
 import { Field, FieldDescription, FieldLabel } from "~/components/field";
 import { Input as InputField } from "~/components/input";
 import {
-  InputGroup as InputGroupRoot,
   InputGroupAddon,
   InputGroupButton,
-  InputGroupInput
+  InputGroupInput,
+  InputGroup as InputGroupRoot
 } from "~/components/input-group";
 import {
-  Popover as PopoverRoot,
   PopoverContent,
   PopoverDescription,
   PopoverHeader,
+  Popover as PopoverRoot,
   PopoverTitle,
   PopoverTrigger
 } from "~/components/popover";
-import { Select as SelectField, SelectContent, SelectGroup, SelectItem } from "~/components/select";
+import { SelectContent, Select as SelectField, SelectGroup, SelectItem } from "~/components/select";
 import { Textarea } from "~/components/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/tooltip";
-
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "./";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Button Group",
-  component: ButtonGroup,
-  subcomponents: { ButtonGroupText, ButtonGroupSeparator },
   argTypes: {
     orientation: {
       control: "select",
       options: ["horizontal", "vertical"]
     }
-  }
+  },
+  component: ButtonGroup,
+  subcomponents: { ButtonGroupSeparator, ButtonGroupText },
+  title: "Components/Button Group"
 });
 
 // ─── Main Demo ────────────────────────────────────────────────────────────────
@@ -78,7 +75,7 @@ export const EmailActions = meta.story({
     return (
       <ButtonGroup>
         <ButtonGroup className="hidden sm:flex">
-          <Button variant="outline" size="icon" aria-label="Go Back">
+          <Button aria-label="Go Back" size="icon" variant="outline">
             <ArrowLeftIcon />
           </Button>
         </ButtonGroup>
@@ -90,7 +87,7 @@ export const EmailActions = meta.story({
           <Button variant="outline">Snooze</Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="More Options">
+              <Button aria-label="More Options" size="icon" variant="outline">
                 <MoreHorizontalIcon />
               </Button>
             </DropdownMenuTrigger>
@@ -121,7 +118,7 @@ export const EmailActions = meta.story({
                     Label As...
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent>
-                    <DropdownMenuRadioGroup value={label} onValueChange={setLabel}>
+                    <DropdownMenuRadioGroup onValueChange={setLabel} value={label}>
                       <DropdownMenuRadioItem value="personal">Personal</DropdownMenuRadioItem>
                       <DropdownMenuRadioItem value="work">Work</DropdownMenuRadioItem>
                       <DropdownMenuRadioItem value="other">Other</DropdownMenuRadioItem>
@@ -170,10 +167,10 @@ export const VerticalOrientation = meta.story({
   render(args) {
     return (
       <ButtonGroup {...args} aria-label="Media controls" className="h-fit">
-        <Button variant="outline" size="icon" aria-label="Increase">
+        <Button aria-label="Increase" size="icon" variant="outline">
           <PlusIcon />
         </Button>
-        <Button variant="outline" size="icon" aria-label="Decrease">
+        <Button aria-label="Decrease" size="icon" variant="outline">
           <MinusIcon />
         </Button>
       </ButtonGroup>
@@ -198,16 +195,16 @@ export const Sizes = meta.story({
     return (
       <div className="flex flex-col items-start gap-8">
         <ButtonGroup aria-label="Small buttons">
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Small
           </Button>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Button
           </Button>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Group
           </Button>
-          <Button variant="outline" size="icon-sm" aria-label="Add small">
+          <Button aria-label="Add small" size="icon-sm" variant="outline">
             <PlusIcon />
           </Button>
         </ButtonGroup>
@@ -215,21 +212,21 @@ export const Sizes = meta.story({
           <Button variant="outline">Default</Button>
           <Button variant="outline">Button</Button>
           <Button variant="outline">Group</Button>
-          <Button variant="outline" size="icon" aria-label="Add default">
+          <Button aria-label="Add default" size="icon" variant="outline">
             <PlusIcon />
           </Button>
         </ButtonGroup>
         <ButtonGroup aria-label="Large buttons">
-          <Button variant="outline" size="lg">
+          <Button size="lg" variant="outline">
             Large
           </Button>
-          <Button variant="outline" size="lg">
+          <Button size="lg" variant="outline">
             Button
           </Button>
-          <Button variant="outline" size="lg">
+          <Button size="lg" variant="outline">
             Group
           </Button>
-          <Button variant="outline" size="icon-lg" aria-label="Add large">
+          <Button aria-label="Add large" size="icon-lg" variant="outline">
             <PlusIcon />
           </Button>
         </ButtonGroup>
@@ -258,11 +255,11 @@ export const Separator = meta.story({
   render() {
     return (
       <ButtonGroup>
-        <Button variant="secondary" size="sm">
+        <Button size="sm" variant="secondary">
           Copy
         </Button>
         <ButtonGroupSeparator />
-        <Button variant="secondary" size="sm">
+        <Button size="sm" variant="secondary">
           Paste
         </Button>
       </ButtonGroup>
@@ -288,7 +285,7 @@ export const SplitButton = meta.story({
       <ButtonGroup>
         <Button variant="secondary">Button</Button>
         <ButtonGroupSeparator />
-        <Button size="icon" variant="secondary" aria-label="Add item">
+        <Button aria-label="Add item" size="icon" variant="secondary">
           <PlusIcon />
         </Button>
       </ButtonGroup>
@@ -312,7 +309,7 @@ export const Input = meta.story({
     return (
       <ButtonGroup>
         <InputField placeholder="Search..." />
-        <Button variant="outline" aria-label="Search">
+        <Button aria-label="Search" variant="outline">
           <SearchIcon />
         </Button>
       </ButtonGroup>
@@ -337,7 +334,7 @@ export const Nested = meta.story({
     return (
       <ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline" size="icon" aria-label="Add">
+          <Button aria-label="Add" size="icon" variant="outline">
             <PlusIcon />
           </Button>
         </ButtonGroup>
@@ -347,7 +344,7 @@ export const Nested = meta.story({
             <InputGroupAddon align="inline-end">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <InputGroupButton size="xs" aria-label="Voice mode">
+                  <InputGroupButton aria-label="Voice mode" size="xs">
                     <AudioLinesIcon />
                   </InputGroupButton>
                 </TooltipTrigger>
@@ -404,7 +401,7 @@ export const Dropdown = meta.story({
         <Button variant="outline">Follow</Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="pl-2!" aria-label="More follow options">
+            <Button aria-label="More follow options" className="pl-2!" variant="outline">
               <ChevronDownIcon />
             </Button>
           </DropdownMenuTrigger>
@@ -443,9 +440,9 @@ Dropdown.test("Clicking dropdown trigger reveals menu items", async ({ canvas, u
 // ─── Select ───────────────────────────────────────────────────────────────────
 
 const CURRENCIES = [
-  { value: "$", label: "US Dollar" },
-  { value: "€", label: "Euro" },
-  { value: "£", label: "British Pound" }
+  { label: "US Dollar", value: "$" },
+  { label: "Euro", value: "€" },
+  { label: "British Pound", value: "£" }
 ];
 
 export const Select = meta.story({
@@ -455,7 +452,7 @@ export const Select = meta.story({
     return (
       <ButtonGroup>
         <ButtonGroup>
-          <SelectField value={currency} onValueChange={setCurrency} placeholder={currency}>
+          <SelectField onValueChange={setCurrency} placeholder={currency} value={currency}>
             <SelectContent className="min-w-24">
               <SelectGroup>
                 {CURRENCIES.map((c) => (
@@ -466,7 +463,7 @@ export const Select = meta.story({
               </SelectGroup>
             </SelectContent>
           </SelectField>
-          <InputField placeholder="10.00" pattern="[0-9]*" />
+          <InputField pattern="[0-9]*" placeholder="10.00" />
         </ButtonGroup>
         <ButtonGroup>
           <Button aria-label="Send" size="icon" variant="outline">
@@ -492,23 +489,23 @@ export const InputGroup = meta.story({
     return (
       <ButtonGroup>
         <ButtonGroup>
-          <Button variant="outline" size="icon" aria-label="Attach">
+          <Button aria-label="Attach" size="icon" variant="outline">
             <PlusIcon />
           </Button>
         </ButtonGroup>
         <ButtonGroup>
           <InputGroupRoot>
             <InputGroupInput
-              placeholder={voiceEnabled ? "Record and send audio..." : "Send a message..."}
               disabled={voiceEnabled}
+              placeholder={voiceEnabled ? "Record and send audio..." : "Send a message..."}
             />
             <InputGroupAddon align="inline-end">
               <InputGroupButton
+                aria-label="Toggle voice mode"
+                aria-pressed={voiceEnabled}
+                data-active={voiceEnabled}
                 onClick={() => setVoiceEnabled(!voiceEnabled)}
                 size="xs"
-                data-active={voiceEnabled}
-                aria-pressed={voiceEnabled}
-                aria-label="Toggle voice mode"
               >
                 <AudioLinesIcon />
               </InputGroupButton>
@@ -553,7 +550,7 @@ export const Popover = meta.story({
         </Button>
         <PopoverRoot>
           <PopoverTrigger asChild>
-            <Button variant="outline" size="icon" aria-label="Open Copilot options">
+            <Button aria-label="Open Copilot options" size="icon" variant="outline">
               <ChevronDownIcon />
             </Button>
           </PopoverTrigger>
@@ -563,10 +560,10 @@ export const Popover = meta.story({
               <PopoverDescription>Describe your task in natural language.</PopoverDescription>
             </PopoverHeader>
             <Field>
-              <FieldLabel htmlFor="copilot-task" className="sr-only">
+              <FieldLabel className="sr-only" htmlFor="copilot-task">
                 Task Description
               </FieldLabel>
-              <Textarea id="copilot-task" placeholder="I need to..." className="resize-none" />
+              <Textarea className="resize-none" id="copilot-task" placeholder="I need to..." />
               <FieldDescription>Copilot will open a pull request for review.</FieldDescription>
             </Field>
           </PopoverContent>

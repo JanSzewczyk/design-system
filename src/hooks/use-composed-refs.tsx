@@ -56,6 +56,5 @@ export function composeRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> 
  */
 export function useComposedRefs<T>(...refs: PossibleRef<T>[]): React.RefCallback<T> {
   // biome-ignore lint/correctness/useExhaustiveDependencies: we want to memoize by all values
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return React.useCallback(composeRefs(...refs), refs);
 }

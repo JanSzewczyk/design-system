@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 export type BreadcrumbLinkProps = React.ComponentProps<"a"> & {
@@ -11,6 +10,6 @@ export function BreadcrumbLink({ asChild, className, ...props }: BreadcrumbLinkP
   const Comp = asChild ? Slot : "a";
 
   return (
-    <Comp data-slot="breadcrumb-link" className={cn("hover:text-foreground transition-colors", className)} {...props} />
+    <Comp className={cn("transition-colors hover:text-foreground", className)} data-slot="breadcrumb-link" {...props} />
   );
 }

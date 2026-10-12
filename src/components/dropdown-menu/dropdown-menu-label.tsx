@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -11,9 +10,9 @@ export type DropdownMenuLabelProps = React.ComponentProps<typeof DropdownMenuPri
 export function DropdownMenuLabel({ className, inset, ...props }: DropdownMenuLabelProps) {
   return (
     <DropdownMenuPrimitive.Label
-      data-slot="dropdown-menu-label"
+      className={cn("px-1.5 py-1 font-medium text-muted-foreground text-xs data-inset:pl-7", className)}
       data-inset={inset}
-      className={cn("text-muted-foreground px-1.5 py-1 text-xs font-medium data-inset:pl-7", className)}
+      data-slot="dropdown-menu-label"
       {...props}
     />
   );

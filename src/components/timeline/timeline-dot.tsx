@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { useTimelineItemContext } from "~/components/timeline/timeline-item.context";
 import { cn } from "~/utils";
 
@@ -18,17 +17,17 @@ export function TimelineDot({ asChild = false, className, ...props }: TimelineDo
 
   return (
     <DotPrimitive
+      data-orientation={orientation}
       data-slot="timeline-dot"
       data-status={status}
-      data-orientation={orientation}
       {...props}
       className={cn(
         timelineDotVariants({
-          status,
-          orientation,
-          variant,
+          className,
           isAlternateRight,
-          className
+          orientation,
+          status,
+          variant
         })
       )}
     />

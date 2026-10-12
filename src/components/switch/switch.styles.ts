@@ -10,14 +10,14 @@ export const switchVariants = cva(
     "after:absolute after:-inset-x-3 after:-inset-y-2"
   ],
   {
+    defaultVariants: {
+      size: "default"
+    },
     variants: {
       size: {
         default: "h-[18.4px] w-8",
         sm: "h-3.5 w-6"
       }
-    },
-    defaultVariants: {
-      size: "default"
     }
   }
 );
@@ -28,14 +28,14 @@ export const switchThumbVariants = cva(
     "bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground"
   ],
   {
+    defaultVariants: {
+      size: "default"
+    },
     variants: {
       size: {
         default: "size-4 data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0",
         sm: "size-3 data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0"
       }
-    },
-    defaultVariants: {
-      size: "default"
     }
   }
 );

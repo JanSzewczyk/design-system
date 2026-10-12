@@ -1,7 +1,6 @@
-import * as React from "react";
-
 import { ChevronDownIcon } from "lucide-react";
 import { Select as SelectPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -35,39 +34,39 @@ export function Select({
   ...triggerProps
 }: SelectProps) {
   const rootProps = {
+    autoComplete,
     children,
-    disabled,
     defaultOpen,
     defaultValue,
-    value,
     dir,
-    open,
+    disabled,
     form,
     name,
     onOpenChange,
     onValueChange,
+    open,
     required,
-    autoComplete
+    value
   };
 
   return (
     <SelectPrimitive.Root data-slot="select" {...rootProps}>
       <SelectPrimitive.Trigger
-        data-slot="select-trigger"
         aria-invalid={triggerProps["aria-invalid"] || invalid ? true : undefined}
-        data-size={size}
         className={cn(
-          "border-input dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none",
+          "flex w-fit items-center justify-between gap-2 whitespace-nowrap rounded border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none transition-[color,box-shadow] dark:bg-input/30 dark:hover:bg-input/50",
           "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          "aria-invalid:ring-error/20 dark:aria-invalid:ring-error/40 aria-invalid:border-error",
+          "aria-invalid:border-error aria-invalid:ring-error/20 dark:aria-invalid:ring-error/40",
           "data-[size=default]:h-8 data-[size=sm]:h-7",
-          "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-          "[&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+          "[&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0",
           "data-[placeholder]:text-muted-foreground",
 
           className
         )}
+        data-size={size}
+        data-slot="select-trigger"
         {...triggerProps}
       >
         <SelectPrimitive.Value data-slot="select-value" placeholder={placeholder} />

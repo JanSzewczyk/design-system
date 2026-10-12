@@ -1,9 +1,7 @@
-import * as React from "react";
-
-import { Slot } from "radix-ui";
-
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Slot } from "radix-ui";
+import * as React from "react";
 import { cn } from "~/utils";
 
 import { animateLayoutChanges } from "./sortable.constants";
@@ -26,17 +24,17 @@ export function SortableItem({ value, className, asChild = false, disabled, chil
     listeners,
     isDragging: isSortableDragging
   } = useSortable({
-    id: value,
+    animateLayoutChanges,
     disabled: disabled || isOverlay,
-    animateLayoutChanges
+    id: value
   });
 
   if (isOverlay) {
     const Comp = asChild ? Slot.Root : "div";
 
     return (
-      <SortableItemContext.Provider value={{ listeners: undefined, isDragging: true, disabled: false }}>
-        <Comp data-slot="sortable-item" data-value={value} data-dragging={true} className={cn(className)} {...props}>
+      <SortableItemContext.Provider value={{ disabled: false, isDragging: true, listeners: undefined }}>
+        <Comp className={cn(className)} data-dragging={true} data-slot="sortable-item" data-value={value} {...props}>
           {children}
         </Comp>
       </SortableItemContext.Provider>
@@ -44,19 +42,19 @@ export function SortableItem({ value, className, asChild = false, disabled, chil
   }
 
   const style = {
-    transition,
-    transform: CSS.Transform.toString(transform)
+    transform: CSS.Transform.toString(transform),
+    transition
   } as React.CSSProperties;
 
   const Comp = asChild ? Slot.Root : "div";
 
   return (
-    <SortableItemContext.Provider value={{ listeners, isDragging: isSortableDragging, disabled }}>
+    <SortableItemContext.Provider value={{ disabled, isDragging: isSortableDragging, listeners }}>
       <Comp
+        data-disabled={disabled}
+        data-dragging={isSortableDragging}
         data-slot="sortable-item"
         data-value={value}
-        data-dragging={isSortableDragging}
-        data-disabled={disabled}
         ref={setNodeRef}
         style={style}
         {...attributes}

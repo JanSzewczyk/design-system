@@ -1,14 +1,12 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { useIsomorphicLayoutEffect } from "~/hooks";
 import { cn } from "~/utils";
-
-import { StepperItemContext, type StepperItemContextValue } from "./stepper-item.context";
 import { STEPPER_ITEM_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
 import { getDataState } from "./stepper.utils";
+import { StepperItemContext, type StepperItemContextValue } from "./stepper-item.context";
 
 export type StepperItemProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
@@ -34,7 +32,7 @@ export function StepperItem({
   const value = useStepperStore((state) => state.value);
 
   useIsomorphicLayoutEffect(() => {
-    store.addStep({ value: itemValue, completed, disabled, loading });
+    store.addStep({ completed, disabled, loading, value: itemValue });
 
     return () => {
       store.removeStep(itemValue);
@@ -42,7 +40,7 @@ export function StepperItem({
   }, [itemValue, completed, disabled, loading]);
 
   useIsomorphicLayoutEffect(() => {
-    store.setStep({ value: itemValue, completed, disabled, loading });
+    store.setStep({ completed, disabled, loading, value: itemValue });
   }, [itemValue, completed, disabled, loading]);
 
   const stepState = useStepperStore((state) => state.steps.get(itemValue));
@@ -51,8 +49,8 @@ export function StepperItem({
 
   const itemContextValue = React.useMemo<StepperItemContextValue>(
     () => ({
-      value: itemValue,
-      stepState
+      stepState,
+      value: itemValue
     }),
     [itemValue, stepState]
   );
@@ -62,26 +60,26 @@ export function StepperItem({
   return (
     <StepperItemContext.Provider value={itemContextValue}>
       <StepperItemPrimitive
-        data-disabled={stepState?.disabled ? "" : undefined}
-        data-orientation={orientation}
-        data-state={dataState}
-        data-slot="stepper-item"
-        dir={dir}
         className={cn(
           "group/step flex flex-1 flex-col justify-end data-[disabled]:opacity-50",
           "",
           // "group-data-[orientation=horizontal]/stepper-nav:flex-row group-data-[orientation=vertical]/stepper-nav:flex-col",
           className
         )}
+        data-disabled={stepState?.disabled ? "" : undefined}
+        data-orientation={orientation}
+        data-slot="stepper-item"
+        data-state={dataState}
+        dir={dir}
         {...props}
       >
         {children}
         <div
-          data-state={dataState}
           className={cn(
-            "bg-border h-1 w-full transition-colors duration-500",
+            "h-1 w-full bg-border transition-colors duration-500",
             "data-[state=active]:bg-primary data-[state=completed]:bg-success"
           )}
+          data-state={dataState}
         />
       </StepperItemPrimitive>
     </StepperItemContext.Provider>

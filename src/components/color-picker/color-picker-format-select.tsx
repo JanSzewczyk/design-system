@@ -29,11 +29,11 @@ export function ColorPickerFormatSelect(props: ColorPickerFormatSelectProps) {
     <Select
       data-slot="color-picker-format-select"
       {...selectProps}
-      value={format}
-      onValueChange={onFormatChange}
-      disabled={isDisabled}
-      size={size ?? "sm"}
       className={cn(className)}
+      disabled={isDisabled}
+      onValueChange={onFormatChange}
+      size={size ?? "sm"}
+      value={format}
     >
       <SelectContent>
         {COLOR_FORMATS.map((f) => (

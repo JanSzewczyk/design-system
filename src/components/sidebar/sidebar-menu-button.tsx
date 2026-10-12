@@ -1,12 +1,10 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/tooltip";
 import { cn } from "~/utils";
-
-import { type SidebarMenuButtonSizeType, type SidebarMenuButtonVariantType } from "./sidebar-menu-button.types";
 import { useSidebarContext } from "./sidebar.context";
 import { sidebarMenuButtonVariants } from "./sidebar.styles";
+import { type SidebarMenuButtonSizeType, type SidebarMenuButtonVariantType } from "./sidebar-menu-button.types";
 
 export type SidebarMenuButtonProps = React.ComponentProps<"button"> & {
   asChild?: boolean;
@@ -30,11 +28,11 @@ export function SidebarMenuButton({
 
   const button = (
     <Comp
-      data-slot="sidebar-menu-button"
+      className={cn(sidebarMenuButtonVariants({ size, variant }), className)}
+      data-active={isActive}
       data-sidebar="menu-button"
       data-size={size}
-      data-active={isActive}
-      className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
+      data-slot="sidebar-menu-button"
       {...props}
     />
   );
@@ -50,7 +48,7 @@ export function SidebarMenuButton({
   return (
     <Tooltip>
       <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent side="right" align="center" hidden={state !== "collapsed" || isMobile} {...tooltip} />
+      <TooltipContent align="center" hidden={state !== "collapsed" || isMobile} side="right" {...tooltip} />
     </Tooltip>
   );
 }

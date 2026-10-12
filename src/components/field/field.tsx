@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -11,10 +10,10 @@ export type FieldProps = React.ComponentProps<"div"> & VariantProps<typeof field
 export function Field({ className, orientation = "vertical", ...props }: FieldProps) {
   return (
     <div
-      role="group"
-      data-slot="field"
-      data-orientation={orientation}
       className={cn(fieldVariants({ orientation }), className)}
+      data-orientation={orientation}
+      data-slot="field"
+      role="group"
       {...props}
     />
   );

@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   AnchorIcon,
   AudioWaveformIcon,
@@ -39,7 +37,8 @@ import {
   UserCircleIcon,
   UsersIcon
 } from "lucide-react";
-
+import * as React from "react";
+import preview from "~/.storybook/preview";
 import {
   Avatar,
   AvatarFallback,
@@ -59,7 +58,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/components/dropdown-menu";
-
 import {
   Sidebar,
   SidebarContent,
@@ -83,18 +81,8 @@ import {
   useSidebar
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Sidebar",
   component: Sidebar,
-  tags: ["autodocs"],
-  parameters: {
-    docs: {
-      subtitle: "A composable sidebar navigation component with mobile support and collapsible states."
-    },
-    layout: "fullscreen"
-  },
   decorators: [
     (Story) => (
       <SidebarProvider>
@@ -102,7 +90,7 @@ const meta = preview.meta({
         <SidebarInset>
           <header className="flex h-14 items-center gap-2 border-b px-4">
             <SidebarTrigger />
-            <span className="text-sm font-medium">Main Content</span>
+            <span className="font-medium text-sm">Main Content</span>
           </header>
           <div className="flex flex-1 flex-col gap-4 p-6">
             <p className="text-muted-foreground text-sm">Select an item from the sidebar to get started.</p>
@@ -110,7 +98,15 @@ const meta = preview.meta({
         </SidebarInset>
       </SidebarProvider>
     )
-  ]
+  ],
+  parameters: {
+    docs: {
+      subtitle: "A composable sidebar navigation component with mobile support and collapsible states."
+    },
+    layout: "fullscreen"
+  },
+  tags: ["autodocs"],
+  title: "Components/Sidebar"
 });
 
 export const VariantSidebar = meta.story({
@@ -168,44 +164,27 @@ export const CollapsibleNone = meta.story({
 });
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "https://i.pravatar.cc/300"
-  },
-  navMain: [
+  documents: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: HomeIcon
+      icon: DatabaseIcon,
+      name: "Data Library",
+      url: "#"
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: AnchorIcon
+      icon: FileIcon,
+      name: "Reports",
+      url: "#"
     },
     {
-      title: "Analytics",
-      url: "#",
-      icon: ChartBarIcon
-    },
-    {
-      title: "Projects",
-      url: "#",
-      icon: FileIcon
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: UsersIcon
+      icon: FileIcon,
+      name: "Word Assistant",
+      url: "#"
     }
   ],
   navClouds: [
     {
-      title: "Capture",
       icon: CameraIcon,
       isActive: true,
-      url: "#",
       items: [
         {
           title: "Active Proposals",
@@ -215,27 +194,27 @@ const data = {
           title: "Archived",
           url: "#"
         }
-      ]
+      ],
+      title: "Capture",
+      url: "#"
     },
     {
+      icon: FileIcon,
+      items: [
+        {
+          title: "Active Proposals",
+          url: "#"
+        },
+        {
+          title: "Archived",
+          url: "#"
+        }
+      ],
       title: "Proposal",
-      icon: FileIcon,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#"
-        },
-        {
-          title: "Archived",
-          url: "#"
-        }
-      ]
+      url: "#"
     },
     {
-      title: "Prompts",
       icon: FileIcon,
-      url: "#",
       items: [
         {
           title: "Active Proposals",
@@ -245,43 +224,60 @@ const data = {
           title: "Archived",
           url: "#"
         }
-      ]
+      ],
+      title: "Prompts",
+      url: "#"
+    }
+  ],
+  navMain: [
+    {
+      icon: HomeIcon,
+      title: "Dashboard",
+      url: "#"
+    },
+    {
+      icon: AnchorIcon,
+      title: "Lifecycle",
+      url: "#"
+    },
+    {
+      icon: ChartBarIcon,
+      title: "Analytics",
+      url: "#"
+    },
+    {
+      icon: FileIcon,
+      title: "Projects",
+      url: "#"
+    },
+    {
+      icon: UsersIcon,
+      title: "Team",
+      url: "#"
     }
   ],
   navSecondary: [
     {
+      icon: SettingsIcon,
       title: "Settings",
-      url: "#",
-      icon: SettingsIcon
+      url: "#"
     },
     {
+      icon: HelpCircleIcon,
       title: "Get Help",
-      url: "#",
-      icon: HelpCircleIcon
+      url: "#"
     },
     {
+      icon: SearchIcon,
       title: "Search",
-      url: "#",
-      icon: SearchIcon
+      url: "#"
     }
   ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: DatabaseIcon
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: FileIcon
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: FileIcon
-    }
-  ]
+  user: {
+    avatar: "https://i.pravatar.cc/300",
+    email: "m@example.com",
+    name: "shadcn"
+  }
 };
 
 export const WithGroups = meta.story({
@@ -296,7 +292,7 @@ export const WithGroups = meta.story({
               <SidebarMenuButton asChild>
                 <a href="#">
                   <HammerIcon className="size-5!" />
-                  <span className="text-base font-semibold">Acme Inc.</span>
+                  <span className="font-semibold text-base">Acme Inc.</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -308,13 +304,13 @@ export const WithGroups = meta.story({
               <SidebarMenu>
                 <SidebarMenuItem className="flex items-center gap-2">
                   <SidebarMenuButton
+                    className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
                     tooltip="Quick Create"
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
                   >
                     <PlusCircleIcon />
                     <span>Quick Create</span>
                   </SidebarMenuButton>
-                  <Button size="icon" className="size-8 group-data-[collapsible=icon]:opacity-0" variant="outline">
+                  <Button className="size-8 group-data-[collapsible=icon]:opacity-0" size="icon" variant="outline">
                     <MailboxIcon />
                     <span className="sr-only">Inbox</span>
                   </Button>
@@ -346,15 +342,15 @@ export const WithGroups = meta.story({
                   </SidebarMenuButton>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <SidebarMenuAction showOnHover className="data-[state=open]:bg-accent">
+                      <SidebarMenuAction className="data-[state=open]:bg-accent" showOnHover>
                         <OptionIcon />
                         <span className="sr-only">More</span>
                       </SidebarMenuAction>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
+                      align={isMobile ? "end" : "start"}
                       className="w-24 rounded-lg"
                       side={isMobile ? "bottom" : "right"}
-                      align={isMobile ? "end" : "start"}
                     >
                       <DropdownMenuItem>
                         <FolderIcon />
@@ -407,35 +403,35 @@ export const WithGroups = meta.story({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton
-                    size="lg"
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                    size="lg"
                   >
                     <Avatar className="size-8 grayscale">
-                      <AvatarImage src={data.user.avatar} alt={data.user.name} />
+                      <AvatarImage alt={data.user.name} src={data.user.avatar} />
                       <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-medium">{data.user.name}</span>
-                      <span className="text-muted-foreground truncate text-xs">{data.user.email}</span>
+                      <span className="truncate text-muted-foreground text-xs">{data.user.email}</span>
                     </div>
                     <OptionIcon className="ml-auto size-4" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
+                  align="end"
                   className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded"
                   side={isMobile ? "bottom" : "right"}
-                  align="end"
                   sideOffset={4}
                 >
                   <DropdownMenuLabel className="p-0 font-normal">
                     <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                       <Avatar className="size-8">
-                        <AvatarImage src={data.user.avatar} alt={data.user.name} />
+                        <AvatarImage alt={data.user.name} src={data.user.avatar} />
                         <AvatarFallback>CN</AvatarFallback>
                       </Avatar>
                       <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="text-foreground truncate font-medium">{data.user.name}</span>
-                        <span className="text-muted-foreground truncate text-xs">{data.user.email}</span>
+                        <span className="truncate font-medium text-foreground">{data.user.name}</span>
+                        <span className="truncate text-muted-foreground text-xs">{data.user.email}</span>
                       </div>
                     </div>
                   </DropdownMenuLabel>
@@ -474,8 +470,6 @@ export const WithGroups = meta.story({
 const submenusData = {
   navMain: [
     {
-      title: "Getting Started",
-      url: "#",
       items: [
         {
           title: "Installation",
@@ -485,20 +479,20 @@ const submenusData = {
           title: "Project Structure",
           url: "#"
         }
-      ]
+      ],
+      title: "Getting Started",
+      url: "#"
     },
     {
-      title: "Build Your Application",
-      url: "#",
       items: [
         {
           title: "Routing",
           url: "#"
         },
         {
+          isActive: true,
           title: "Data Fetching",
-          url: "#",
-          isActive: true
+          url: "#"
         },
         {
           title: "Rendering",
@@ -540,11 +534,11 @@ const submenusData = {
           title: "Examples",
           url: "#"
         }
-      ]
+      ],
+      title: "Build Your Application",
+      url: "#"
     },
     {
-      title: "API Reference",
-      url: "#",
       items: [
         {
           title: "Components",
@@ -570,11 +564,11 @@ const submenusData = {
           title: "Edge Runtime",
           url: "#"
         }
-      ]
+      ],
+      title: "API Reference",
+      url: "#"
     },
     {
-      title: "Architecture",
-      url: "#",
       items: [
         {
           title: "Accessibility",
@@ -596,17 +590,19 @@ const submenusData = {
           title: "Turbopack",
           url: "#"
         }
-      ]
+      ],
+      title: "Architecture",
+      url: "#"
     },
     {
-      title: "Community",
-      url: "#",
       items: [
         {
           title: "Contribution Guide",
           url: "#"
         }
-      ]
+      ],
+      title: "Community",
+      url: "#"
     }
   ]
 };
@@ -618,9 +614,9 @@ export const WithSubmenus = meta.story({
         <SidebarHeader>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton size="lg" asChild>
+              <SidebarMenuButton asChild size="lg">
                 <a href="#">
-                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                     <GalleryVerticalEnd className="size-4" />
                   </div>
                   <div className="flex flex-col gap-0.5 leading-none">
@@ -638,7 +634,7 @@ export const WithSubmenus = meta.story({
               {submenusData.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url} className="font-medium">
+                    <a className="font-medium" href={item.url}>
                       {item.title}
                     </a>
                   </SidebarMenuButton>
@@ -667,32 +663,8 @@ export const WithSubmenus = meta.story({
 // -- WithCollapsibleSumMenus ----------------------------------------------------------
 
 const collapsibleData = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "https://i.pravatar.cc/300"
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise"
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveformIcon,
-      plan: "Startup"
-    },
-    {
-      name: "Evil Corp.",
-      logo: CommandIcon,
-      plan: "Free"
-    }
-  ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
       icon: SquareTerminalIcon,
       isActive: true,
       items: [
@@ -708,11 +680,11 @@ const collapsibleData = {
           title: "Settings",
           url: "#"
         }
-      ]
+      ],
+      title: "Playground",
+      url: "#"
     },
     {
-      title: "Models",
-      url: "#",
       icon: BotIcon,
       items: [
         {
@@ -727,11 +699,11 @@ const collapsibleData = {
           title: "Quantum",
           url: "#"
         }
-      ]
+      ],
+      title: "Models",
+      url: "#"
     },
     {
-      title: "Documentation",
-      url: "#",
       icon: BookOpen,
       items: [
         {
@@ -750,11 +722,11 @@ const collapsibleData = {
           title: "Changelog",
           url: "#"
         }
-      ]
+      ],
+      title: "Documentation",
+      url: "#"
     },
     {
-      title: "Settings",
-      url: "#",
       icon: Settings2Icon,
       items: [
         {
@@ -773,26 +745,50 @@ const collapsibleData = {
           title: "Limits",
           url: "#"
         }
-      ]
+      ],
+      title: "Settings",
+      url: "#"
     }
   ],
   projects: [
     {
+      icon: FrameIcon,
       name: "Design Engineering",
-      url: "#",
-      icon: FrameIcon
+      url: "#"
     },
     {
+      icon: PieChartIcon,
       name: "Sales & Marketing",
-      url: "#",
-      icon: PieChartIcon
+      url: "#"
     },
     {
+      icon: MapIcon,
       name: "Travel",
-      url: "#",
-      icon: MapIcon
+      url: "#"
     }
-  ]
+  ],
+  teams: [
+    {
+      logo: GalleryVerticalEnd,
+      name: "Acme Inc",
+      plan: "Enterprise"
+    },
+    {
+      logo: AudioWaveformIcon,
+      name: "Acme Corp.",
+      plan: "Startup"
+    },
+    {
+      logo: CommandIcon,
+      name: "Evil Corp.",
+      plan: "Free"
+    }
+  ],
+  user: {
+    avatar: "https://i.pravatar.cc/300",
+    email: "m@example.com",
+    name: "shadcn"
+  }
 };
 
 export const WithCollapsibleSumMenus = meta.story({
@@ -808,10 +804,10 @@ export const WithCollapsibleSumMenus = meta.story({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton
-                    size="lg"
                     className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                    size="lg"
                   >
-                    <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded">
+                    <div className="flex aspect-square size-8 items-center justify-center rounded bg-sidebar-primary text-sidebar-primary-foreground">
                       <activeTeam.logo className="size-4" />
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
@@ -822,14 +818,14 @@ export const WithCollapsibleSumMenus = meta.story({
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                   align="start"
+                  className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
                   side={isMobile ? "bottom" : "right"}
                   sideOffset={4}
                 >
                   <DropdownMenuLabel>Teams</DropdownMenuLabel>
                   {collapsibleData.teams.map((team, index) => (
-                    <DropdownMenuItem key={team.name} onClick={() => setActiveTeam(team)} className="gap-2 p-2">
+                    <DropdownMenuItem className="gap-2 p-2" key={team.name} onClick={() => setActiveTeam(team)}>
                       <div className="flex size-6 items-center justify-center rounded border">
                         <team.logo className="size-3.5 shrink-0" />
                       </div>
@@ -842,7 +838,7 @@ export const WithCollapsibleSumMenus = meta.story({
                     <div className="flex size-6 items-center justify-center rounded border bg-transparent">
                       <PlusIcon className="size-4" />
                     </div>
-                    <div className="text-muted-foreground font-medium">Add team</div>
+                    <div className="font-medium text-muted-foreground">Add team</div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -855,10 +851,10 @@ export const WithCollapsibleSumMenus = meta.story({
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
               {collapsibleData.navMain.map((item) => (
-                <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
+                <Collapsible asChild className="group/collapsible" defaultOpen={item.isActive} key={item.title}>
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton tooltip={item.title} isActive={item.isActive}>
+                      <SidebarMenuButton isActive={item.isActive} tooltip={item.title}>
                         {item.icon && <item.icon />}
                         <span>{item.title}</span>
                         <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -902,9 +898,9 @@ export const WithCollapsibleSumMenus = meta.story({
                       </SidebarMenuAction>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
+                      align={isMobile ? "end" : "start"}
                       className="w-48 rounded-lg"
                       side={isMobile ? "bottom" : "right"}
-                      align={isMobile ? "end" : "start"}
                     >
                       <DropdownMenuItem>
                         <FolderIcon className="text-muted-foreground" />

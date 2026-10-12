@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 export type TimelineTimeProps = React.ComponentProps<"time"> & {
@@ -11,6 +10,6 @@ export function TimelineTime({ asChild = false, className, ...props }: TimelineT
   const TimePrimitive = asChild ? Slot : "time";
 
   return (
-    <TimePrimitive data-slot="timeline-time" className={cn("text-muted-foreground text-xs", className)} {...props} />
+    <TimePrimitive className={cn("text-muted-foreground text-xs", className)} data-slot="timeline-time" {...props} />
   );
 }

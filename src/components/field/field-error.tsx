@@ -18,7 +18,7 @@ export function FieldError({ className, children, errors, ...props }: FieldError
 
     const uniqueErrors = [...new Map(errors.map((error) => [error?.message, error])).values()];
 
-    if (uniqueErrors?.length == 1) {
+    if (uniqueErrors?.length === 1) {
       return uniqueErrors[0]?.message;
     }
 
@@ -34,7 +34,7 @@ export function FieldError({ className, children, errors, ...props }: FieldError
   }
 
   return (
-    <div role="alert" data-slot="field-error" className={cn("text-error text-sm font-normal", className)} {...props}>
+    <div className={cn("font-normal text-error text-sm", className)} data-slot="field-error" role="alert" {...props}>
       {content}
     </div>
   );

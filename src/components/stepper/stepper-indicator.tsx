@@ -1,14 +1,12 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
-
-import { useStepperItemContext } from "./stepper-item.context";
 import { STEPPER_INDICATOR_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore } from "./stepper.store";
 import { type StepperDataState } from "./stepper.types";
 import { getDataState } from "./stepper.utils";
+import { useStepperItemContext } from "./stepper-item.context";
 
 export type StepperIndicatorProps = Omit<React.ComponentProps<"div">, "children"> & {
   asChild?: boolean;
@@ -31,16 +29,16 @@ export function StepperIndicator({ className, children, asChild, ref, ...props }
 
   return (
     <StepperIndicatorPrimitive
+      className={cn(
+        "relative flex size-6 shrink-0 items-center justify-center self-end overflow-hidden rounded-t border-border border-x border-t bg-muted text-muted-foreground text-xs transition-colors duration-500",
+        "data-[state=completed]:border-success data-[state=completed]:bg-success/50 data-[state=completed]:text-success-foreground",
+        "data-[state=active]:border-primary data-[state=active]:bg-primary/50 data-[state=active]:text-primary-foreground",
+        className
+      )}
       data-slot="stepper-indicator"
       data-state={dataState}
       dir={dir}
       ref={ref}
-      className={cn(
-        "bg-muted border-border text-muted-foreground relative flex size-6 shrink-0 items-center justify-center self-end overflow-hidden rounded-t border-x border-t text-xs transition-colors duration-500",
-        "data-[state=completed]:bg-success/50 data-[state=completed]:border-success data-[state=completed]:text-success-foreground",
-        "data-[state=active]:bg-primary/50 data-[state=active]:border-primary data-[state=active]:text-primary-foreground",
-        className
-      )}
       {...props}
     >
       <div className="absolute">

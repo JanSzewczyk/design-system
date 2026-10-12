@@ -1,9 +1,8 @@
 import * as React from "react";
 
 import { expect, screen, waitFor } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Button } from "../button";
-
 import {
   Popover,
   PopoverAnchor,
@@ -14,33 +13,23 @@ import {
   PopoverTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Popover",
-  component: Popover,
-  tags: ["autodocs"],
-  parameters: {
-    docs: {
-      subtitle:
-        "Popover component built on Radix UI primitives. Displays rich content in a portal overlay anchored to a trigger element. Supports controlled/uncontrolled modes, multiple placement options, and composable sub-components."
-    }
-  },
   argTypes: {
-    open: {
-      control: "boolean",
-      description: "The controlled open state of the popover. Must be used with `onOpenChange`.",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "undefined" }
-      }
-    },
     defaultOpen: {
       control: "boolean",
       description: "The open state when initially rendered. Use when not controlling state.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" }
+      }
+    },
+    modal: {
+      control: "boolean",
+      description:
+        "When true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
+      table: {
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" }
       }
     },
     onOpenChange: {
@@ -49,16 +38,24 @@ const meta = preview.meta({
         type: { summary: "(open: boolean) => void" }
       }
     },
-    modal: {
+    open: {
       control: "boolean",
-      description:
-        "When true, interaction with outside elements will be disabled and only popover content will be visible to screen readers.",
+      description: "The controlled open state of the popover. Must be used with `onOpenChange`.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: "undefined" },
+        type: { summary: "boolean" }
       }
     }
-  }
+  },
+  component: Popover,
+  parameters: {
+    docs: {
+      subtitle:
+        "Popover component built on Radix UI primitives. Displays rich content in a portal overlay anchored to a trigger element. Supports controlled/uncontrolled modes, multiple placement options, and composable sub-components."
+    }
+  },
+  tags: ["autodocs"],
+  title: "Components/Popover"
 });
 
 // -- Example ------------------------------------------------------------------
@@ -306,10 +303,10 @@ export const Controlled = meta.story({
 
     return (
       <div className="flex items-center gap-4">
-        <Button variant="outline" onClick={() => setOpen((prev) => !prev)}>
+        <Button onClick={() => setOpen((prev) => !prev)} variant="outline">
           Toggle: {open ? "Open" : "Closed"}
         </Button>
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover onOpenChange={setOpen} open={open}>
           <PopoverAnchor asChild>
             <Button>Anchor</Button>
           </PopoverAnchor>
@@ -355,16 +352,16 @@ export const WithCustomContent = meta.story({
         </PopoverHeader>
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between rounded-md border p-2">
-            <span className="text-sm font-medium">Email notifications</span>
-            <input type="checkbox" defaultChecked aria-label="Toggle email notifications" />
+            <span className="font-medium text-sm">Email notifications</span>
+            <input aria-label="Toggle email notifications" defaultChecked type="checkbox" />
           </div>
           <div className="flex items-center justify-between rounded-md border p-2">
-            <span className="text-sm font-medium">Push notifications</span>
-            <input type="checkbox" aria-label="Toggle push notifications" />
+            <span className="font-medium text-sm">Push notifications</span>
+            <input aria-label="Toggle push notifications" type="checkbox" />
           </div>
           <div className="flex items-center justify-between rounded-md border p-2">
-            <span className="text-sm font-medium">SMS notifications</span>
-            <input type="checkbox" aria-label="Toggle SMS notifications" />
+            <span className="font-medium text-sm">SMS notifications</span>
+            <input aria-label="Toggle SMS notifications" type="checkbox" />
           </div>
         </div>
       </PopoverContent>

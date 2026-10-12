@@ -1,22 +1,20 @@
-import path from "path";
-
-import { type Mock } from "vitest";
-
 import fs from "fs/promises";
+import path from "path";
+import { type Mock } from "vitest";
 
 import { collectComponentEntries, updateFilesWithText } from "./post-build";
 
 function dirent(name: string, isDir: boolean) {
-  return { name, isDirectory: () => isDir };
+  return { isDirectory: () => isDir, name };
 }
 
 // Mock fs module
 vi.mock("fs/promises", () => ({
   default: {
-    readFile: vi.fn(),
-    writeFile: vi.fn(),
+    copyFile: vi.fn().mockResolvedValue(undefined),
     readdir: vi.fn().mockResolvedValue([]),
-    copyFile: vi.fn().mockResolvedValue(undefined)
+    readFile: vi.fn(),
+    writeFile: vi.fn()
   }
 }));
 
@@ -354,8 +352,8 @@ export { Button } from "./button";`;
       // Arrange
       const filePaths = ["file1.js", "file2.js", "file3.js"];
       const mockContent = "export default {};";
-      let readOrder: Array<string> = [];
-      let writeOrder: Array<string> = [];
+      const readOrder: string[] = [];
+      const writeOrder: string[] = [];
 
       vi.mocked(fs.readFile).mockImplementation((path) => {
         readOrder.push(path as string);

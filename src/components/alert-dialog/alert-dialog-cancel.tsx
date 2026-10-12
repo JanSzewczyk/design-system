@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { Button, type ButtonProps } from "~/components/button";
 import { cn } from "~/utils";
@@ -15,8 +14,8 @@ export function AlertDialogCancel({
   ...props
 }: AlertDialogCancelProps) {
   return (
-    <Button variant={variant} size={size} asChild>
-      <AlertDialogPrimitive.Cancel data-slot="alert-dialog-cancel" className={cn(className)} {...props} />
+    <Button asChild size={size} variant={variant}>
+      <AlertDialogPrimitive.Cancel className={cn(className)} data-slot="alert-dialog-cancel" {...props} />
     </Button>
   );
 }

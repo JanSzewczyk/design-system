@@ -52,7 +52,7 @@ export function useFileUploadStore<T>(selector: (state: FileUploadStoreState) =>
     }
 
     const nextValue = selector(state);
-    lastValueRef.current = { value: nextValue, state };
+    lastValueRef.current = { state, value: nextValue };
     return nextValue;
   }, [store, selector, lastValueRef]);
 
@@ -81,8 +81,8 @@ export function createFileUploadStore(
   initialInvalid: boolean
 ): FileUploadStore {
   let state: FileUploadStoreState = {
-    files,
     dragOver: false,
+    files,
     invalid: initialInvalid
   };
 
@@ -207,13 +207,13 @@ export function createFileUploadStore(
   }
 
   return {
-    getState: () => state,
     dispatch: (action) => {
       state = reducer(state, action);
       for (const listener of listeners) {
         listener();
       }
     },
+    getState: () => state,
     subscribe: (listener) => {
       listeners.add(listener);
       return () => listeners.delete(listener);

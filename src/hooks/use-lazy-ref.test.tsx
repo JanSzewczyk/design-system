@@ -1,6 +1,5 @@
-import { describe, expect, test, vi } from "vitest";
-
 import { renderHook } from "@testing-library/react";
+import { describe, expect, test, vi } from "vitest";
 
 import { useLazyRef } from "./use-lazy-ref";
 
@@ -50,9 +49,9 @@ describe("useLazyRef", () => {
 
   test("should handle complex initialization functions", () => {
     const complexInit = vi.fn(() => ({
-      value: Math.random(),
+      method: () => "test",
       nested: { data: [1, 2, 3] },
-      method: () => "test"
+      value: Math.random()
     }));
 
     const { result } = renderHook(() => useLazyRef(complexInit));

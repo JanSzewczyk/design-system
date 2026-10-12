@@ -7,8 +7,8 @@ export type StepperDirection = Direction;
 export const StepperFocusIntent = {
   FIRST: "first",
   LAST: "last",
-  PREV: "prev",
-  NEXT: "next"
+  NEXT: "next",
+  PREV: "prev"
 } as const;
 export type StepperFocusIntent = (typeof StepperFocusIntent)[keyof typeof StepperFocusIntent];
 
@@ -31,9 +31,9 @@ export const StepperActivationMode = {
 export type StepperActivationMode = (typeof StepperActivationMode)[keyof typeof StepperActivationMode];
 
 export const StepperDataState = {
-  INACTIVE: "inactive",
   ACTIVE: "active",
-  COMPLETED: "completed"
+  COMPLETED: "completed",
+  INACTIVE: "inactive"
 } as const;
 export type StepperDataState = (typeof StepperDataState)[keyof typeof StepperDataState];
 

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 import { itemVariants } from "./item.styles";
@@ -16,10 +15,10 @@ export function Item({ className, variant = "default", size = "default", asChild
   const Comp = asChild ? Slot : "div";
   return (
     <Comp
+      className={cn(itemVariants({ className, size, variant }))}
+      data-size={size}
       data-slot="item"
       data-variant={variant}
-      data-size={size}
-      className={cn(itemVariants({ variant, size, className }))}
       {...props}
     />
   );

@@ -1,9 +1,8 @@
 import { InfoIcon, Trash2Icon } from "lucide-react";
 
 import { expect, screen, waitFor } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Button } from "../button";
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,22 +16,20 @@ import {
   AlertDialogTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Alert Dialog",
   component: AlertDialog,
   subcomponents: {
-    AlertDialogTrigger,
-    AlertDialogContent,
-    AlertDialogHeader,
-    AlertDialogFooter,
-    AlertDialogTitle,
-    AlertDialogDescription,
     AlertDialogAction,
     AlertDialogCancel,
-    AlertDialogMedia
-  }
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogMedia,
+    AlertDialogTitle,
+    AlertDialogTrigger
+  },
+  title: "Components/Alert Dialog"
 });
 
 export const BasicDialog = meta.story({

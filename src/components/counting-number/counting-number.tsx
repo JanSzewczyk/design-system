@@ -1,6 +1,5 @@
+import { animate, motion, type UseInViewOptions, useInView, useMotionValue } from "motion/react";
 import * as React from "react";
-
-import { animate, motion, useInView, type UseInViewOptions, useMotionValue } from "motion/react";
 import { cn } from "~/utils";
 
 export type CountingNumberProps = {
@@ -69,7 +68,7 @@ export function CountingNumber({
   ...props
 }: CountingNumberProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: inViewMargin });
+  const isInView = useInView(ref, { margin: inViewMargin, once });
   const [hasAnimated, setHasAnimated] = React.useState(false);
   const [display, setDisplay] = React.useState(from);
   const motionValue = useMotionValue(from);
@@ -87,8 +86,8 @@ export function CountingNumber({
       const timeout = setTimeout(function () {
         const controls = animate(motionValue, to, {
           duration,
-          onUpdate: (v) => setDisplay(v),
-          onComplete
+          onComplete,
+          onUpdate: (v) => setDisplay(v)
         });
         return function () {
           controls.stop();
@@ -98,11 +97,10 @@ export function CountingNumber({
         clearTimeout(timeout);
       };
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [shouldStart, from, to, duration, delay]
   );
   return (
-    <motion.span ref={ref} data-slot="counting-number" className={cn("inline-block", className)} {...props}>
+    <motion.span className={cn("inline-block", className)} data-slot="counting-number" ref={ref} {...props}>
       {format ? format(display) : Math.round(display)}
     </motion.span>
   );

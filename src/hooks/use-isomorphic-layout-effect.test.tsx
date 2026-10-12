@@ -1,8 +1,6 @@
-import * as React from "react";
-
-import { describe, expect, test, vi } from "vitest";
-
 import { renderHook } from "@testing-library/react";
+import * as React from "react";
+import { describe, expect, test, vi } from "vitest";
 
 import { useIsomorphicLayoutEffect } from "./use-isomorphic-layout-effect";
 

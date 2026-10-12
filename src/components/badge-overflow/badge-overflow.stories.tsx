@@ -1,18 +1,8 @@
+import preview from "~/.storybook/preview";
 import { Badge, type BadgeVariant } from "~/components/badge";
-
 import { BadgeOverflow } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Badge Overflow",
-  component: BadgeOverflow,
-  tags: ["autodocs"],
-  argTypes: {
-    lineCount: {
-      control: { type: "number", min: 1, max: 5 }
-    }
-  },
   args: {
     items: [
       "React",
@@ -29,7 +19,15 @@ const meta = preview.meta({
     ],
     lineCount: 1,
     renderBadge: (_item, label) => <Badge variant="outline">{label}</Badge>
-  }
+  },
+  argTypes: {
+    lineCount: {
+      control: { max: 5, min: 1, type: "number" }
+    }
+  },
+  component: BadgeOverflow,
+  tags: ["autodocs"],
+  title: "Components/Badge Overflow"
 });
 
 export const Example = meta.story({
@@ -43,7 +41,7 @@ export const Example = meta.story({
 export const CustomOverflow = meta.story({
   args: {
     renderOverflow: (count) => (
-      <Badge variant="secondary" className="bg-muted">
+      <Badge className="bg-muted" variant="secondary">
         +{count} more
       </Badge>
     )
@@ -83,6 +81,7 @@ export const ObjectItems = meta.story({
   render: () => (
     <div className="w-full max-w-50 rounded-lg border p-4">
       <BadgeOverflow
+        getBadgeLabel={(item) => item.name}
         items={[
           { id: 1, name: "Alpha", type: "default" },
           { id: 2, name: "Beta", type: "secondary" },
@@ -91,7 +90,6 @@ export const ObjectItems = meta.story({
           { id: 5, name: "Epsilon", type: "danger" },
           { id: 6, name: "Zeta", type: "info" }
         ]}
-        getBadgeLabel={(item) => item.name}
         renderBadge={(item, label) => <Badge variant={item.type as BadgeVariant}>{label}</Badge>}
       />
     </div>

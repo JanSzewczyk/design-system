@@ -1,6 +1,5 @@
-import React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import React from "react";
 import { useTimelineItemContext } from "~/components/timeline/timeline-item.context";
 import { cn } from "~/utils";
 
@@ -23,10 +22,10 @@ export function TimelineContent({ asChild = false, className, ...props }: Timeli
       {...props}
       className={cn(
         timelineContentVariants({
-          orientation,
-          variant,
+          className,
           isAlternateRight,
-          className
+          orientation,
+          variant
         })
       )}
     />

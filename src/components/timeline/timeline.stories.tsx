@@ -1,9 +1,7 @@
-import * as React from "react";
-
 import { Code, Layers, Rocket } from "lucide-react";
 
 import { expect, within } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import {
   Timeline,
   TimelineConnector,
@@ -16,96 +14,77 @@ import {
   TimelineTitle
 } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Timeline",
-  component: Timeline,
-  subcomponents: {
-    TimelineItem,
-    TimelineDot,
-    TimelineConnector,
-    TimelineContent,
-    TimelineHeader,
-    TimelineTitle,
-    TimelineDescription,
-    TimelineTime
-  },
-  tags: ["autodocs", "new", "todo", "test"],
   argTypes: {
+    activeIndex: {
+      control: { min: 0, type: "number" },
+      description: "Index of currently active step (0-based)"
+    },
+    dir: {
+      control: "select",
+      description: "Text direction",
+      options: ["ltr", "rtl"],
+      table: {
+        defaultValue: { summary: "ltr" }
+      }
+    },
     orientation: {
       control: "select",
-      options: ["vertical", "horizontal"],
       description: "The orientation of timeline",
+      options: ["vertical", "horizontal"],
       table: {
         defaultValue: { summary: "vertical" }
       }
     },
     variant: {
       control: "select",
-      options: ["default", "alternate"],
       description: "The visual variant of timeline",
+      options: ["default", "alternate"],
       table: {
         defaultValue: { summary: "default" }
       }
-    },
-    activeIndex: {
-      control: { type: "number", min: 0 },
-      description: "Index of currently active step (0-based)"
-    },
-    dir: {
-      control: "select",
-      options: ["ltr", "rtl"],
-      description: "Text direction",
-      table: {
-        defaultValue: { summary: "ltr" }
-      }
     }
-  }
+  },
+  component: Timeline,
+  subcomponents: {
+    TimelineConnector,
+    TimelineContent,
+    TimelineDescription,
+    TimelineDot,
+    TimelineHeader,
+    TimelineItem,
+    TimelineTime,
+    TimelineTitle
+  },
+  tags: ["autodocs", "new", "todo", "test"],
+  title: "Components/Timeline"
 });
 
 const timelineItems = [
   {
-    id: "project-kickoff",
-    dateTime: "2025-01-15",
     date: "January 15, 2025",
-    title: "Project Kickoff",
-    description: "Initial meeting to define scope."
+    dateTime: "2025-01-15",
+    description: "Initial meeting to define scope.",
+    id: "project-kickoff",
+    title: "Project Kickoff"
   },
   {
-    id: "design-phase",
-    dateTime: "2025-02-01",
     date: "February 1, 2025",
-    title: "Design Phase",
-    description: "Created wireframes and mockups."
+    dateTime: "2025-02-01",
+    description: "Created wireframes and mockups.",
+    id: "design-phase",
+    title: "Design Phase"
   },
   {
-    id: "development",
-    dateTime: "2025-03-01",
     date: "March 1, 2025",
-    title: "Development",
-    description: "Building core features."
+    dateTime: "2025-03-01",
+    description: "Building core features.",
+    id: "development",
+    title: "Development"
   }
 ];
 
 export const Example = meta.story({
-  render: () => (
-    <Timeline activeIndex={1}>
-      {timelineItems.map((item) => (
-        <TimelineItem key={item.id}>
-          <TimelineDot />
-          <TimelineConnector />
-          <TimelineContent>
-            <TimelineHeader>
-              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
-              <TimelineTitle>{item.title}</TimelineTitle>
-            </TimelineHeader>
-            <TimelineDescription>{item.description}</TimelineDescription>
-          </TimelineContent>
-        </TimelineItem>
-      ))}
-    </Timeline>
-  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -135,37 +114,10 @@ export const Example = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
-});
-
-const timelineItemsHorizontalTimeline = [
-  {
-    id: "research-and-planning",
-    dateTime: "2025-01",
-    date: "Jan - Mar",
-    title: "Q1",
-    description: "Research and planning"
   },
-  {
-    id: "development-sprint",
-    dateTime: "2025-04",
-    date: "Apr - Jun",
-    title: "Q2",
-    description: "Development sprint"
-  },
-  {
-    id: "beta-launch",
-    dateTime: "2025-07",
-    date: "Jul - Sep",
-    title: "Q3",
-    description: "Beta launch"
-  }
-];
-
-export const Horizontal = meta.story({
   render: () => (
-    <Timeline orientation="horizontal" activeIndex={1}>
-      {timelineItemsHorizontalTimeline.map((item) => (
+    <Timeline activeIndex={1}>
+      {timelineItems.map((item) => (
         <TimelineItem key={item.id}>
           <TimelineDot />
           <TimelineConnector />
@@ -179,7 +131,34 @@ export const Horizontal = meta.story({
         </TimelineItem>
       ))}
     </Timeline>
-  ),
+  )
+});
+
+const timelineItemsHorizontalTimeline = [
+  {
+    date: "Jan - Mar",
+    dateTime: "2025-01",
+    description: "Research and planning",
+    id: "research-and-planning",
+    title: "Q1"
+  },
+  {
+    date: "Apr - Jun",
+    dateTime: "2025-04",
+    description: "Development sprint",
+    id: "development-sprint",
+    title: "Q2"
+  },
+  {
+    date: "Jul - Sep",
+    dateTime: "2025-07",
+    description: "Beta launch",
+    id: "beta-launch",
+    title: "Q3"
+  }
+];
+
+export const Horizontal = meta.story({
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -204,37 +183,10 @@ export const Horizontal = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
-});
-
-const timelineItemsRTL = [
-  {
-    id: "registration-opened",
-    dateTime: "2025-01-01",
-    date: "January 1, 2025",
-    title: "Registration Opened",
-    description: "Online registration portal opens."
   },
-  {
-    id: "early-bird-deadline",
-    dateTime: "2025-02-15",
-    date: "February 15, 2025",
-    title: "Early Bird Deadline",
-    description: "Last day for early bird pricing."
-  },
-  {
-    id: "event-day",
-    dateTime: "2025-03-01",
-    date: "March 1, 2025",
-    title: "Event Day",
-    description: "Main event begins at 9:00 AM."
-  }
-];
-
-export const RTL = meta.story({
   render: () => (
-    <Timeline dir="rtl" activeIndex={1}>
-      {timelineItemsRTL.map((item) => (
+    <Timeline activeIndex={1} orientation="horizontal">
+      {timelineItemsHorizontalTimeline.map((item) => (
         <TimelineItem key={item.id}>
           <TimelineDot />
           <TimelineConnector />
@@ -248,7 +200,34 @@ export const RTL = meta.story({
         </TimelineItem>
       ))}
     </Timeline>
-  ),
+  )
+});
+
+const timelineItemsRTL = [
+  {
+    date: "January 1, 2025",
+    dateTime: "2025-01-01",
+    description: "Online registration portal opens.",
+    id: "registration-opened",
+    title: "Registration Opened"
+  },
+  {
+    date: "February 15, 2025",
+    dateTime: "2025-02-15",
+    description: "Last day for early bird pricing.",
+    id: "early-bird-deadline",
+    title: "Early Bird Deadline"
+  },
+  {
+    date: "March 1, 2025",
+    dateTime: "2025-03-01",
+    description: "Main event begins at 9:00 AM.",
+    id: "event-day",
+    title: "Event Day"
+  }
+];
+
+export const RTL = meta.story({
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -268,37 +247,10 @@ export const RTL = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
-});
-
-const timelineItemsAlternate = [
-  {
-    id: "project-kickoff",
-    dateTime: "2025-01-15",
-    date: "January 15, 2025",
-    title: "Project Kickoff",
-    description: "Initial meeting to define scope."
   },
-  {
-    id: "design-phase",
-    dateTime: "2025-02-01",
-    date: "February 1, 2025",
-    title: "Design Phase",
-    description: "Created wireframes and mockups."
-  },
-  {
-    id: "development",
-    dateTime: "2025-03-01",
-    date: "March 1, 2025",
-    title: "Development",
-    description: "Building core features."
-  }
-];
-
-export const Alternate = meta.story({
   render: () => (
-    <Timeline variant="alternate" activeIndex={1}>
-      {timelineItemsAlternate.map((item) => (
+    <Timeline activeIndex={1} dir="rtl">
+      {timelineItemsRTL.map((item) => (
         <TimelineItem key={item.id}>
           <TimelineDot />
           <TimelineConnector />
@@ -312,7 +264,34 @@ export const Alternate = meta.story({
         </TimelineItem>
       ))}
     </Timeline>
-  ),
+  )
+});
+
+const timelineItemsAlternate = [
+  {
+    date: "January 15, 2025",
+    dateTime: "2025-01-15",
+    description: "Initial meeting to define scope.",
+    id: "project-kickoff",
+    title: "Project Kickoff"
+  },
+  {
+    date: "February 1, 2025",
+    dateTime: "2025-02-01",
+    description: "Created wireframes and mockups.",
+    id: "design-phase",
+    title: "Design Phase"
+  },
+  {
+    date: "March 1, 2025",
+    dateTime: "2025-03-01",
+    description: "Building core features.",
+    id: "development",
+    title: "Development"
+  }
+];
+
+export const Alternate = meta.story({
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -333,37 +312,10 @@ export const Alternate = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
-});
-
-const timelineItemsHorizontalAlternate = [
-  {
-    id: "company-founded",
-    dateTime: "2023-06",
-    date: "June 2023",
-    title: "Company Founded",
-    description: "Started with a team of five."
   },
-  {
-    id: "series-a-funding",
-    dateTime: "2024-03",
-    date: "March 2024",
-    title: "Series A Funding",
-    description: "Raised $10M seed funding."
-  },
-  {
-    id: "product-launch",
-    dateTime: "2025-01",
-    date: "January 2025",
-    title: "Product Launch",
-    description: "Released MVP to beta testers."
-  }
-];
-
-export const HorizontalAlternate = meta.story({
   render: () => (
-    <Timeline variant="alternate" orientation="horizontal" activeIndex={1}>
-      {timelineItemsHorizontalAlternate.map((item) => (
+    <Timeline activeIndex={1} variant="alternate">
+      {timelineItemsAlternate.map((item) => (
         <TimelineItem key={item.id}>
           <TimelineDot />
           <TimelineConnector />
@@ -377,7 +329,34 @@ export const HorizontalAlternate = meta.story({
         </TimelineItem>
       ))}
     </Timeline>
-  ),
+  )
+});
+
+const timelineItemsHorizontalAlternate = [
+  {
+    date: "June 2023",
+    dateTime: "2023-06",
+    description: "Started with a team of five.",
+    id: "company-founded",
+    title: "Company Founded"
+  },
+  {
+    date: "March 2024",
+    dateTime: "2024-03",
+    description: "Raised $10M seed funding.",
+    id: "series-a-funding",
+    title: "Series A Funding"
+  },
+  {
+    date: "January 2025",
+    dateTime: "2025-01",
+    description: "Released MVP to beta testers.",
+    id: "product-launch",
+    title: "Product Launch"
+  }
+];
+
+export const HorizontalAlternate = meta.story({
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -403,44 +382,12 @@ export const HorizontalAlternate = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
-});
-
-const timelineItemsWithCustomDots = [
-  {
-    id: "project-kickoff",
-    dateTime: "2025-01-15",
-    date: "January 15, 2025",
-    title: "Project Kickoff",
-    description: "Initial meeting to define scope.",
-    icon: Rocket
   },
-  {
-    id: "design-phase",
-    dateTime: "2025-02-01",
-    date: "February 1, 2025",
-    title: "Design Phase",
-    description: "Created wireframes and mockups.",
-    icon: Layers
-  },
-  {
-    id: "development",
-    dateTime: "2025-03-01",
-    date: "March 1, 2025",
-    title: "Development",
-    description: "Building core features.",
-    icon: Code
-  }
-];
-
-export const WithCustomDots = meta.story({
   render: () => (
-    <Timeline activeIndex={1} className="[--timeline-dot-size:2rem]">
-      {timelineItemsWithCustomDots.map((item) => (
+    <Timeline activeIndex={1} orientation="horizontal" variant="alternate">
+      {timelineItemsHorizontalAlternate.map((item) => (
         <TimelineItem key={item.id}>
-          <TimelineDot>
-            <item.icon className="size-3.5" />
-          </TimelineDot>
+          <TimelineDot />
           <TimelineConnector />
           <TimelineContent>
             <TimelineHeader>
@@ -452,7 +399,37 @@ export const WithCustomDots = meta.story({
         </TimelineItem>
       ))}
     </Timeline>
-  ),
+  )
+});
+
+const timelineItemsWithCustomDots = [
+  {
+    date: "January 15, 2025",
+    dateTime: "2025-01-15",
+    description: "Initial meeting to define scope.",
+    icon: Rocket,
+    id: "project-kickoff",
+    title: "Project Kickoff"
+  },
+  {
+    date: "February 1, 2025",
+    dateTime: "2025-02-01",
+    description: "Created wireframes and mockups.",
+    icon: Layers,
+    id: "design-phase",
+    title: "Design Phase"
+  },
+  {
+    date: "March 1, 2025",
+    dateTime: "2025-03-01",
+    description: "Building core features.",
+    icon: Code,
+    id: "development",
+    title: "Development"
+  }
+];
+
+export const WithCustomDots = meta.story({
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -477,5 +454,24 @@ export const WithCustomDots = meta.story({
     await expect(timelineItems[0]).toHaveAttribute("data-status", "completed");
     await expect(timelineItems[1]).toHaveAttribute("data-status", "active");
     await expect(timelineItems[2]).toHaveAttribute("data-status", "pending");
-  }
+  },
+  render: () => (
+    <Timeline activeIndex={1} className="[--timeline-dot-size:2rem]">
+      {timelineItemsWithCustomDots.map((item) => (
+        <TimelineItem key={item.id}>
+          <TimelineDot>
+            <item.icon className="size-3.5" />
+          </TimelineDot>
+          <TimelineConnector />
+          <TimelineContent>
+            <TimelineHeader>
+              <TimelineTime dateTime={item.dateTime}>{item.date}</TimelineTime>
+              <TimelineTitle>{item.title}</TimelineTitle>
+            </TimelineHeader>
+            <TimelineDescription>{item.description}</TimelineDescription>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
+    </Timeline>
+  )
 });

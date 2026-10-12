@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { Button, type ButtonProps } from "~/components/button";
 import { cn } from "~/utils";
@@ -15,8 +14,8 @@ export function AlertDialogAction({
   ...props
 }: AlertDialogActionProps) {
   return (
-    <Button variant={variant} size={size} asChild>
-      <AlertDialogPrimitive.Action data-slot="alert-dialog-action" className={cn(className)} {...props} />
+    <Button asChild size={size} variant={variant}>
+      <AlertDialogPrimitive.Action className={cn(className)} data-slot="alert-dialog-action" {...props} />
     </Button>
   );
 }

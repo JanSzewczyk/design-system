@@ -1,13 +1,11 @@
+import { Slot as SlotPrimitive } from "radix-ui";
 import * as React from "react";
 
-import { Slot as SlotPrimitive } from "radix-ui";
-
 import { cn } from "~/utils";
-
-import { FileUploadItemContext } from "./file-upload-item.context";
 import { ITEM_NAME } from "./file-upload.constants";
 import { useFileUploadContext } from "./file-upload.context";
 import { useFileUploadStore } from "./file-upload.store";
+import { FileUploadItemContext } from "./file-upload-item.context";
 
 export type FileUploadItemProps = React.ComponentProps<"div"> & {
   value: File;
@@ -33,12 +31,12 @@ export function FileUploadItem(props: FileUploadItemProps) {
 
   const itemContext = React.useMemo(
     () => ({
-      id,
       fileState,
+      id,
+      messageId,
       nameId,
       sizeId,
-      statusId,
-      messageId
+      statusId
     }),
     [id, fileState, statusId, nameId, sizeId, messageId]
   );
@@ -58,19 +56,19 @@ export function FileUploadItem(props: FileUploadItemProps) {
   return (
     <FileUploadItemContext.Provider value={itemContext}>
       <ItemPrimitive
-        role="listitem"
-        id={id}
-        aria-setsize={fileCount}
-        aria-posinset={fileIndex}
         aria-describedby={`${nameId} ${sizeId} ${statusId} ${fileState.error ? messageId : ""}`}
         aria-labelledby={nameId}
+        aria-posinset={fileIndex}
+        aria-setsize={fileCount}
         data-slot="file-upload-item"
         dir={context.dir}
+        id={id}
+        role="listitem"
         {...itemProps}
         className={cn("relative flex items-center gap-2.5 rounded border p-3", className)}
       >
         {props.children}
-        <span id={statusId} className="sr-only">
+        <span className="sr-only" id={statusId}>
           {statusText}
         </span>
       </ItemPrimitive>

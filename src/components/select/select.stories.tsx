@@ -1,14 +1,11 @@
-import * as React from "react";
-
-import { Select, SelectItem, SelectContent, SelectGroup, SelectLabel } from ".";
-
 import preview from "~/.storybook/preview";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel } from ".";
 
 const meta = preview.meta({
-  title: "Components/Select",
   component: Select,
+  decorators: [(story) => <div className="max-w-md">{story()}</div>],
   tags: ["autodocs", "beta"],
-  decorators: [(story) => <div className="max-w-md">{story()}</div>]
+  title: "Components/Select"
 });
 
 export const Example = meta.story({
@@ -47,7 +44,7 @@ export const DefaultValue = meta.story({
 
 export const Disabled = meta.story({
   render: () => (
-    <Select disabled defaultValue="apple" placeholder="Select a fruit">
+    <Select defaultValue="apple" disabled placeholder="Select a fruit">
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
@@ -64,7 +61,7 @@ export const Disabled = meta.story({
 
 export const Invalid = meta.story({
   render: () => (
-    <Select invalid defaultValue="apple" placeholder="Select a fruit">
+    <Select defaultValue="apple" invalid placeholder="Select a fruit">
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Fruits</SelectLabel>
@@ -82,8 +79,8 @@ export const Invalid = meta.story({
 export const Sizes = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
-      <Select size="sm" placeholder="Small"></Select>
-      <Select size="default" placeholder="Default"></Select>
+      <Select placeholder="Small" size="sm"></Select>
+      <Select placeholder="Default" size="default"></Select>
     </div>
   )
 });

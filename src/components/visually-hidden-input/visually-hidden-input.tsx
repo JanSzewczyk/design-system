@@ -22,8 +22,8 @@ export function VisuallyHiddenInput<T = InputValue>(props: VisuallyHiddenInputPr
     value: T | boolean | undefined;
     previous: T | boolean | undefined;
   }>({
-    value: isCheckInput ? checked : value,
-    previous: isCheckInput ? checked : value
+    previous: isCheckInput ? checked : value,
+    value: isCheckInput ? checked : value
   });
 
   const prevValue = React.useMemo(() => {
@@ -47,8 +47,8 @@ export function VisuallyHiddenInput<T = InputValue>(props: VisuallyHiddenInputPr
     }
 
     setControlSize({
-      width: control.offsetWidth,
-      height: control.offsetHeight
+      height: control.offsetHeight,
+      width: control.offsetWidth
     });
 
     if (typeof window === "undefined") return;
@@ -72,7 +72,7 @@ export function VisuallyHiddenInput<T = InputValue>(props: VisuallyHiddenInputPr
         height = control.offsetHeight;
       }
 
-      setControlSize({ width, height });
+      setControlSize({ height, width });
     });
 
     resizeObserver.observe(control, { box: "border-box" });
@@ -128,11 +128,11 @@ export function VisuallyHiddenInput<T = InputValue>(props: VisuallyHiddenInputPr
     <input
       type={type}
       {...inputProps}
-      ref={inputRef}
       aria-hidden={isCheckInput}
-      tabIndex={-1}
       defaultChecked={isCheckInput ? checked : undefined}
+      ref={inputRef}
       style={composedStyle}
+      tabIndex={-1}
     />
   );
 }

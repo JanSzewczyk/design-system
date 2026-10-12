@@ -1,6 +1,5 @@
+import { type MotionProps, motion, type UseInViewOptions, useInView, type Variants } from "motion/react";
 import * as React from "react";
-
-import { motion, type MotionProps, useInView, type UseInViewOptions, type Variants } from "motion/react";
 import { cn } from "~/utils";
 
 import { type WordRotateAnimationStyle } from "./word-rotate.types";
@@ -41,7 +40,7 @@ export function WordRotate({
   ...props
 }: WordRotateProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: inViewMargin as UseInViewOptions["margin"] });
+  const isInView = useInView(ref, { margin: inViewMargin as UseInViewOptions["margin"], once });
   const [hasAnimated, setHasAnimated] = React.useState<boolean>(false);
   const [currentWord, setCurrentWord] = React.useState<number>(0);
   const [show, setShow] = React.useState<boolean>(true);
@@ -49,7 +48,6 @@ export function WordRotate({
   // Animation variants
   const variants: Record<string, Variants> = {
     fade: {
-      initial: { opacity: 0 },
       animate: {
         opacity: 1,
         transition: {
@@ -63,81 +61,18 @@ export function WordRotate({
           duration: 0.3,
           ease: [0.4, 0.0, 1, 1] // Faster exit
         }
-      }
-    },
-    "slide-up": {
-      initial: { opacity: 0, y: 24 },
-      animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          type: "spring",
-          stiffness: 300,
-          damping: 25,
-          mass: 0.8
-        }
       },
-      exit: {
-        opacity: 0,
-        y: -24,
-        transition: {
-          duration: 0.25,
-          ease: [0.4, 0.0, 1, 1]
-        }
-      }
-    },
-    "slide-down": {
-      initial: { opacity: 0, y: -24 },
-      animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          type: "spring",
-          stiffness: 300,
-          damping: 25,
-          mass: 0.8
-        }
-      },
-      exit: {
-        opacity: 0,
-        y: 24,
-        transition: {
-          duration: 0.25,
-          ease: [0.4, 0.0, 1, 1]
-        }
-      }
-    },
-    scale: {
-      initial: { opacity: 0, scale: 0.8 },
-      animate: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-          type: "spring",
-          stiffness: 400,
-          damping: 30,
-          mass: 0.6
-        }
-      },
-      exit: {
-        opacity: 0,
-        scale: 0.9,
-        transition: {
-          duration: 0.2,
-          ease: [0.4, 0.0, 1, 1]
-        }
-      }
+      initial: { opacity: 0 }
     },
     flip: {
-      initial: { opacity: 0, rotateX: 90 },
       animate: {
         opacity: 1,
         rotateX: 0,
         transition: {
-          type: "spring",
-          stiffness: 200,
           damping: 20,
-          mass: 1
+          mass: 1,
+          stiffness: 200,
+          type: "spring"
         }
       },
       exit: {
@@ -147,7 +82,71 @@ export function WordRotate({
           duration: 0.3,
           ease: [0.4, 0.0, 1, 1]
         }
-      }
+      },
+      initial: { opacity: 0, rotateX: 90 }
+    },
+    scale: {
+      animate: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          damping: 30,
+          mass: 0.6,
+          stiffness: 400,
+          type: "spring"
+        }
+      },
+      exit: {
+        opacity: 0,
+        scale: 0.9,
+        transition: {
+          duration: 0.2,
+          ease: [0.4, 0.0, 1, 1]
+        }
+      },
+      initial: { opacity: 0, scale: 0.8 }
+    },
+    "slide-down": {
+      animate: {
+        opacity: 1,
+        transition: {
+          damping: 25,
+          mass: 0.8,
+          stiffness: 300,
+          type: "spring"
+        },
+        y: 0
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.25,
+          ease: [0.4, 0.0, 1, 1]
+        },
+        y: 24
+      },
+      initial: { opacity: 0, y: -24 }
+    },
+    "slide-up": {
+      animate: {
+        opacity: 1,
+        transition: {
+          damping: 25,
+          mass: 0.8,
+          stiffness: 300,
+          type: "spring"
+        },
+        y: 0
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.25,
+          ease: [0.4, 0.0, 1, 1]
+        },
+        y: -24
+      },
+      initial: { opacity: 0, y: 24 }
     }
   };
 
@@ -186,22 +185,22 @@ export function WordRotate({
 
   return (
     <motion.span
-      ref={ref}
-      data-slot="word-rotate"
       className={cn("inline-block overflow-hidden align-bottom leading-none", containerClassName)}
+      data-slot="word-rotate"
+      ref={ref}
       {...props}
     >
       <motion.span
-        key={currentWord}
-        initial="initial"
         animate={show ? "animate" : "exit"}
+        className={cn("inline-block", className)}
         exit="exit"
-        variants={variants[animationStyle]}
-        transition={{ duration: 0.5 }}
+        initial="initial"
+        key={currentWord}
         style={{
           perspective: animationStyle === "flip" ? 1000 : undefined
         }}
-        className={cn("inline-block", className)}
+        transition={{ duration: 0.5 }}
+        variants={variants[animationStyle]}
       >
         {words[currentWord]}
       </motion.span>

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
+import * as React from "react";
 
 export type ComboboxProps = React.ComponentProps<typeof ComboboxPrimitive.Root>;
 

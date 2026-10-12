@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 export type AlertDialogProps = React.ComponentProps<typeof AlertDialogPrimitive.Root>;
 

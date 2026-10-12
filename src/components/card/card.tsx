@@ -7,11 +7,11 @@ export type CardProps = React.ComponentProps<"div">;
 export function Card({ className, ...props }: CardProps) {
   return (
     <div
-      data-slot="card"
       className={cn(
-        "bg-card text-card-foreground border-border flex flex-col gap-6 rounded border py-6 shadow-sm",
+        "flex flex-col gap-6 rounded border border-border bg-card py-6 text-card-foreground shadow-sm",
         className
       )}
+      data-slot="card"
       {...props}
     />
   );

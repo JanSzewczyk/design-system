@@ -1,24 +1,38 @@
-import * as React from "react";
+import { type Meta, type StoryObj } from "@storybook/react-vite";
 
 import { ArrowUpRightIcon, BellIcon, CloudIcon, FolderIcon, RefreshCcwIcon, SearchIcon, UsersIcon } from "lucide-react";
-
-import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 import { Avatar, AvatarFallback, AvatarImage, Button, Input } from "~/components";
 
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "./index";
 
 const meta = {
-  title: "Components/Empty",
   component: Empty,
-  subcomponents: { EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia },
-  tags: ["autodocs", "new"]
+  subcomponents: { EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle },
+  tags: ["autodocs", "new"],
+  title: "Components/Empty"
 } satisfies Meta<typeof Empty>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Example: Story = {
+  play: async ({ canvas, canvasElement, step }) => {
+    await step("Empty container is rendered", async () => {
+      const empty = canvasElement.querySelector('[data-slot="empty"]');
+      await expect(empty).toBeInTheDocument();
+    });
+
+    await step("Title and description are visible", async () => {
+      await expect(canvas.getByText("No Projects Yet")).toBeVisible();
+      await expect(canvas.getByText(/You haven't created any projects yet/)).toBeVisible();
+    });
+
+    await step("Action buttons are visible", async () => {
+      await expect(canvas.getByRole("button", { name: "Create Project" })).toBeVisible();
+      await expect(canvas.getByRole("button", { name: "Import Project" })).toBeVisible();
+    });
+  },
   render: () => (
     <Empty>
       <EmptyHeader>
@@ -36,32 +50,23 @@ export const Example: Story = {
           <Button variant="outline">Import Project</Button>
         </div>
       </EmptyContent>
-      <Button variant="link" asChild className="text-muted-foreground" size="sm">
+      <Button asChild className="text-muted-foreground" size="sm" variant="link">
         <a href="#">
           Learn More <ArrowUpRightIcon />
         </a>
       </Button>
     </Empty>
-  ),
-  play: async ({ canvas, canvasElement, step }) => {
-    await step("Empty container is rendered", async () => {
-      const empty = canvasElement.querySelector('[data-slot="empty"]');
-      await expect(empty).toBeInTheDocument();
-    });
-
-    await step("Title and description are visible", async () => {
-      await expect(canvas.getByText("No Projects Yet")).toBeVisible();
-      await expect(canvas.getByText(/You haven't created any projects yet/)).toBeVisible();
-    });
-
-    await step("Action buttons are visible", async () => {
-      await expect(canvas.getByRole("button", { name: "Create Project" })).toBeVisible();
-      await expect(canvas.getByRole("button", { name: "Import Project" })).toBeVisible();
-    });
-  }
+  )
 };
 
 export const WithBorder: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Empty with border has border class", async () => {
+      const empty = canvasElement.querySelector('[data-slot="empty"]');
+      await expect(empty).toHaveClass("border");
+      await expect(empty).not.toHaveClass("border-dashed");
+    });
+  },
   render: () => (
     <Empty border>
       <EmptyHeader>
@@ -72,22 +77,22 @@ export const WithBorder: Story = {
         <EmptyDescription>Upload files to your cloud storage to access them anywhere.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           Upload Files
         </Button>
       </EmptyContent>
     </Empty>
-  ),
-  play: async ({ canvasElement, step }) => {
-    await step("Empty with border has border class", async () => {
-      const empty = canvasElement.querySelector('[data-slot="empty"]');
-      await expect(empty).toHaveClass("border");
-      await expect(empty).not.toHaveClass("border-dashed");
-    });
-  }
+  )
 };
 
 export const WithDashedBorder: Story = {
+  play: async ({ canvasElement, step }) => {
+    await step("Empty with dashed border has both border classes", async () => {
+      const empty = canvasElement.querySelector('[data-slot="empty"]');
+      await expect(empty).toHaveClass("border");
+      await expect(empty).toHaveClass("border-dashed");
+    });
+  },
   render: () => (
     <Empty border="dashed">
       <EmptyHeader>
@@ -98,24 +103,17 @@ export const WithDashedBorder: Story = {
         <EmptyDescription>Upload files to your cloud storage to access them anywhere.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           Upload Files
         </Button>
       </EmptyContent>
     </Empty>
-  ),
-  play: async ({ canvasElement, step }) => {
-    await step("Empty with dashed border has both border classes", async () => {
-      const empty = canvasElement.querySelector('[data-slot="empty"]');
-      await expect(empty).toHaveClass("border");
-      await expect(empty).toHaveClass("border-dashed");
-    });
-  }
+  )
 };
 
 export const Background: Story = {
   render: () => (
-    <Empty className="from-muted/50 to-background h-full bg-gradient-to-b from-30%">
+    <Empty className="h-full bg-gradient-to-b from-30% from-muted/50 to-background">
       <EmptyHeader>
         <EmptyMedia variant="icon">
           <BellIcon />
@@ -124,7 +122,7 @@ export const Background: Story = {
         <EmptyDescription>You&apos;re all caught up. New notifications will appear here.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           <RefreshCcwIcon />
           Refresh
         </Button>
@@ -135,12 +133,18 @@ export const Background: Story = {
 
 export const EmptyAvatar: Story = {
   name: "Avatar",
+  play: async ({ canvasElement, step }) => {
+    await step("EmptyMedia with default variant has correct data attribute", async () => {
+      const media = canvasElement.querySelector('[data-slot="empty-icon"]');
+      await expect(media).toHaveAttribute("data-variant", "default");
+    });
+  },
   render: () => (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="default">
           <Avatar>
-            <AvatarImage src="https://github.com/JanSzewczyk.png" className="grayscale" />
+            <AvatarImage className="grayscale" src="https://github.com/JanSzewczyk.png" />
             <AvatarFallback>LR</AvatarFallback>
           </Avatar>
         </EmptyMedia>
@@ -153,13 +157,7 @@ export const EmptyAvatar: Story = {
         <Button size="sm">Leave Message</Button>
       </EmptyContent>
     </Empty>
-  ),
-  play: async ({ canvasElement, step }) => {
-    await step("EmptyMedia with default variant has correct data attribute", async () => {
-      const media = canvasElement.querySelector('[data-slot="empty-icon"]');
-      await expect(media).toHaveAttribute("data-variant", "default");
-    });
-  }
+  )
 };
 
 export const SearchResults: Story = {
@@ -200,6 +198,18 @@ export const NoUsers: Story = {
 
 export const EmptyInput: Story = {
   name: "Input",
+  play: async ({ canvas, step }) => {
+    await step("Input is rendered and visible", async () => {
+      const input = canvas.getByPlaceholderText("Try searching for pages...");
+      await expect(input).toBeVisible();
+    });
+
+    await step("Link in description is rendered", async () => {
+      const link = canvas.getByRole("link", { name: "Contact support" });
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute("href", "#");
+    });
+  },
   render: () => (
     <Empty>
       <EmptyHeader>
@@ -215,37 +225,11 @@ export const EmptyInput: Story = {
         </EmptyDescription>
       </EmptyContent>
     </Empty>
-  ),
-  play: async ({ canvas, step }) => {
-    await step("Input is rendered and visible", async () => {
-      const input = canvas.getByPlaceholderText("Try searching for pages...");
-      await expect(input).toBeVisible();
-    });
-
-    await step("Link in description is rendered", async () => {
-      const link = canvas.getByRole("link", { name: "Contact support" });
-      await expect(link).toBeVisible();
-      await expect(link).toHaveAttribute("href", "#");
-    });
-  }
+  )
 };
 
 // Test-only stories for comprehensive testing
 export const DataAttributesTest: Story = {
-  render: () => (
-    <Empty>
-      <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <FolderIcon />
-        </EmptyMedia>
-        <EmptyTitle>Test Title</EmptyTitle>
-        <EmptyDescription>Test description text.</EmptyDescription>
-      </EmptyHeader>
-      <EmptyContent>
-        <Button>Test Action</Button>
-      </EmptyContent>
-    </Empty>
-  ),
   play: async ({ canvas, canvasElement, step }) => {
     await step("Empty has correct data-slot attribute", async () => {
       const empty = canvasElement.querySelector('[data-slot="empty"]');
@@ -281,29 +265,24 @@ export const DataAttributesTest: Story = {
       await expect(content).toBeInTheDocument();
       await expect(content).toHaveAttribute("data-slot", "empty-content");
     });
-  }
+  },
+  render: () => (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <FolderIcon />
+        </EmptyMedia>
+        <EmptyTitle>Test Title</EmptyTitle>
+        <EmptyDescription>Test description text.</EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button>Test Action</Button>
+      </EmptyContent>
+    </Empty>
+  )
 };
 
 export const BorderVariantsTest: Story = {
-  render: () => (
-    <div className="flex flex-col gap-8">
-      <Empty data-testid="empty-no-border">
-        <EmptyHeader>
-          <EmptyTitle>No Border</EmptyTitle>
-        </EmptyHeader>
-      </Empty>
-      <Empty border data-testid="empty-solid-border">
-        <EmptyHeader>
-          <EmptyTitle>Solid Border</EmptyTitle>
-        </EmptyHeader>
-      </Empty>
-      <Empty border="dashed" data-testid="empty-dashed-border">
-        <EmptyHeader>
-          <EmptyTitle>Dashed Border</EmptyTitle>
-        </EmptyHeader>
-      </Empty>
-    </div>
-  ),
   play: async ({ canvasElement, step }) => {
     await step("Empty without border prop has no border class", async () => {
       const empty = canvasElement.querySelector('[data-testid="empty-no-border"]');
@@ -322,30 +301,29 @@ export const BorderVariantsTest: Story = {
       await expect(empty).toHaveClass("border");
       await expect(empty).toHaveClass("border-dashed");
     });
-  }
-};
-
-export const MediaVariantsTest: Story = {
+  },
   render: () => (
     <div className="flex flex-col gap-8">
-      <Empty>
+      <Empty data-testid="empty-no-border">
         <EmptyHeader>
-          <EmptyMedia variant="default" data-testid="media-default">
-            <FolderIcon className="text-muted-foreground size-16" />
-          </EmptyMedia>
-          <EmptyTitle>Default Media Variant</EmptyTitle>
+          <EmptyTitle>No Border</EmptyTitle>
         </EmptyHeader>
       </Empty>
-      <Empty>
+      <Empty border data-testid="empty-solid-border">
         <EmptyHeader>
-          <EmptyMedia variant="icon" data-testid="media-icon">
-            <FolderIcon />
-          </EmptyMedia>
-          <EmptyTitle>Icon Media Variant</EmptyTitle>
+          <EmptyTitle>Solid Border</EmptyTitle>
+        </EmptyHeader>
+      </Empty>
+      <Empty border="dashed" data-testid="empty-dashed-border">
+        <EmptyHeader>
+          <EmptyTitle>Dashed Border</EmptyTitle>
         </EmptyHeader>
       </Empty>
     </div>
-  ),
+  )
+};
+
+export const MediaVariantsTest: Story = {
   play: async ({ canvasElement, step }) => {
     await step("EmptyMedia with default variant has correct attributes", async () => {
       const media = canvasElement.querySelector('[data-testid="media-default"]');
@@ -358,27 +336,30 @@ export const MediaVariantsTest: Story = {
       await expect(media).toHaveAttribute("data-variant", "icon");
       await expect(media).toHaveClass("bg-muted");
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-col gap-8">
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia data-testid="media-default" variant="default">
+            <FolderIcon className="size-16 text-muted-foreground" />
+          </EmptyMedia>
+          <EmptyTitle>Default Media Variant</EmptyTitle>
+        </EmptyHeader>
+      </Empty>
+      <Empty>
+        <EmptyHeader>
+          <EmptyMedia data-testid="media-icon" variant="icon">
+            <FolderIcon />
+          </EmptyMedia>
+          <EmptyTitle>Icon Media Variant</EmptyTitle>
+        </EmptyHeader>
+      </Empty>
+    </div>
+  )
 };
 
 export const AllSubcomponentsTest: Story = {
-  render: () => (
-    <Empty border>
-      <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <SearchIcon />
-        </EmptyMedia>
-        <EmptyTitle>Complete Empty State</EmptyTitle>
-        <EmptyDescription>
-          This tests all subcomponents together. <a href="#">Learn more</a>
-        </EmptyDescription>
-      </EmptyHeader>
-      <EmptyContent>
-        <Button>Primary Action</Button>
-        <Button variant="outline">Secondary Action</Button>
-      </EmptyContent>
-    </Empty>
-  ),
   play: async ({ canvas, canvasElement, step }) => {
     await step("All structural elements are present", async () => {
       await expect(canvasElement.querySelector('[data-slot="empty"]')).toBeInTheDocument();
@@ -412,5 +393,22 @@ export const AllSubcomponentsTest: Story = {
       const empty = canvasElement.querySelector('[data-slot="empty"]');
       await expect(empty).toHaveClass("border");
     });
-  }
+  },
+  render: () => (
+    <Empty border>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <SearchIcon />
+        </EmptyMedia>
+        <EmptyTitle>Complete Empty State</EmptyTitle>
+        <EmptyDescription>
+          This tests all subcomponents together. <a href="#">Learn more</a>
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <Button>Primary Action</Button>
+        <Button variant="outline">Secondary Action</Button>
+      </EmptyContent>
+    </Empty>
+  )
 };

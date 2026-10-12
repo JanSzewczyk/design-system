@@ -2,9 +2,8 @@ import * as React from "react";
 
 import { Button } from "~/components/button";
 import { cn } from "~/utils";
-
-import { inputGroupButtonVariants } from "./input-group-button.styles";
 import { type InputGroupButtonSizeType } from "./input-group.types";
+import { inputGroupButtonVariants } from "./input-group-button.styles";
 
 export type InputGroupButtonProps = Omit<React.ComponentProps<typeof Button>, "size"> & {
   size?: InputGroupButtonSizeType;
@@ -19,10 +18,10 @@ export function InputGroupButton({
 }: InputGroupButtonProps) {
   return (
     <Button
-      type={type}
-      data-size={size}
-      variant={variant}
       className={cn(inputGroupButtonVariants({ size }), className)}
+      data-size={size}
+      type={type}
+      variant={variant}
       {...props}
     />
   );

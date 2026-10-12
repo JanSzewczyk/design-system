@@ -9,7 +9,7 @@ interface UseValidationLogProps {
 export function useValidationLog({ check, scope, message }: UseValidationLogProps) {
   React.useEffect(() => {
     if (!check) {
-      // eslint-disable-next-line no-console
+      // biome-ignore lint/suspicious/noConsole: intentional dev-time validation warning
       console.error(
         `%c[Szum Tech-Design System]%c\n ${scope}%c\n ${message}`,
         "color: #ef4444; font-weight: bold;",

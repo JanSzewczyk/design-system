@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { expect, fn, screen, waitFor } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components";
-
 import {
   ColorPicker,
   ColorPickerAlphaSlider,
@@ -16,57 +16,55 @@ import {
   ColorPickerTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Color Picker",
+  args: {
+    onFormatChange: fn(),
+    onValueChange: fn()
+  },
+  argTypes: {
+    defaultFormat: {
+      control: "select",
+      options: ["hex", "rgb", "hsl", "hsb"]
+    },
+    defaultValue: { control: "color" },
+    disabled: { control: "boolean" },
+    inline: { control: "boolean" },
+    onFormatChange: { control: false },
+    onValueChange: { control: false },
+    readOnly: { control: "boolean" },
+    required: { control: "boolean" },
+    value: { control: "color" }
+  },
   component: ColorPicker,
-  tags: ["autodocs"],
   parameters: {
     docs: {
       subtitle:
         "A composable color picker built with a store-backed state machine. Supports inline and popover modes, multiple color formats (HEX, RGB, HSL, HSB), alpha transparency, eye dropper, and form integration."
     }
   },
-  argTypes: {
-    defaultValue: { control: "color" },
-    value: { control: "color" },
-    disabled: { control: "boolean" },
-    readOnly: { control: "boolean" },
-    required: { control: "boolean" },
-    inline: { control: "boolean" },
-    defaultFormat: {
-      control: "select",
-      options: ["hex", "rgb", "hsl", "hsb"]
-    },
-    onValueChange: { control: false },
-    onFormatChange: { control: false }
-  },
-  args: {
-    onValueChange: fn(),
-    onFormatChange: fn()
-  }
+  tags: ["autodocs"],
+  title: "Components/Color Picker"
 });
 
 export const InlineColorPicker = meta.story({
-  name: "Inline Color Picker",
   args: {
-    inline: true,
-    defaultValue: "#3b82f6"
+    defaultValue: "#3b82f6",
+    inline: true
   },
+  name: "Inline Color Picker",
   render(args) {
     return (
       <ColorPicker
-        defaultValue={args.defaultValue}
-        onValueChange={args.onValueChange}
-        onFormatChange={args.onFormatChange}
-        inline={args.inline}
         defaultFormat="hex"
+        defaultValue={args.defaultValue}
+        inline={args.inline}
+        onFormatChange={args.onFormatChange}
+        onValueChange={args.onValueChange}
       >
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <ColorPickerSwatch className="size-8" />
-            <span className="text-sm font-medium">Selected Color</span>
+            <span className="font-medium text-sm">Selected Color</span>
           </div>
           <div className="flex flex-col gap-4 rounded border p-4">
             <ColorPickerArea />
@@ -159,14 +157,14 @@ export const ControlledState = meta.story({
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <ColorPicker
-            value={color}
+            defaultFormat="hex"
+            onOpenChange={setIsOpen}
             onValueChange={setColor}
             open={isOpen}
-            onOpenChange={setIsOpen}
-            defaultFormat="hex"
+            value={color}
           >
             <ColorPickerTrigger asChild>
-              <Button variant="outline" startIcon={<ColorPickerSwatch className="size-4" />}>
+              <Button startIcon={<ColorPickerSwatch className="size-4" />} variant="outline">
                 Pick Color
               </Button>
             </ColorPickerTrigger>
@@ -186,22 +184,22 @@ export const ControlledState = meta.story({
             </ColorPickerContent>
           </ColorPicker>
 
-          <Button variant="outline" onClick={onReset}>
+          <Button onClick={onReset} variant="outline">
             Reset
           </Button>
         </div>
 
         <div className="flex flex-col gap-2">
-          <h4 className="text-sm font-medium">Preset Colors</h4>
+          <h4 className="font-medium text-sm">Preset Colors</h4>
           <div className="flex flex-wrap gap-2">
             {presetColors.map((presetColor) => (
               <button
-                key={presetColor}
-                type="button"
-                className="hover:border-border focus:border-ring size-8 rounded border-2 border-transparent focus:outline-none"
-                style={{ backgroundColor: presetColor }}
-                onClick={() => onPresetSelect(presetColor)}
                 aria-label={`Select color ${presetColor}`}
+                className="size-8 rounded border-2 border-transparent hover:border-border focus:border-ring focus:outline-none"
+                key={presetColor}
+                onClick={() => onPresetSelect(presetColor)}
+                style={{ backgroundColor: presetColor }}
+                type="button"
               />
             ))}
           </div>

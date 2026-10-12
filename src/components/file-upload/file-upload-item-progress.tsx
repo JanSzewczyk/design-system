@@ -1,11 +1,9 @@
+import { Slot as SlotPrimitive } from "radix-ui";
 import * as React from "react";
 
-import { Slot as SlotPrimitive } from "radix-ui";
-
 import { cn } from "~/utils";
-
-import { useFileUploadItemContext } from "./file-upload-item.context";
 import { ITEM_PROGRESS_NAME } from "./file-upload.constants";
+import { useFileUploadItemContext } from "./file-upload-item.context";
 
 export type FileUploadItemProgressProps = React.ComponentProps<"div"> & {
   variant?: "linear" | "circular" | "fill";
@@ -34,34 +32,34 @@ export function FileUploadItemProgress(props: FileUploadItemProgressProps) {
 
       return (
         <ItemProgressPrimitive
-          role="progressbar"
-          aria-valuemin={0}
+          aria-labelledby={itemContext.nameId}
           aria-valuemax={100}
+          aria-valuemin={0}
           aria-valuenow={itemContext.fileState.progress}
           aria-valuetext={`${itemContext.fileState.progress}%`}
-          aria-labelledby={itemContext.nameId}
           data-slot="file-upload-progress"
+          role="progressbar"
           {...progressProps}
           className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2", className)}
         >
           <svg
             className="-rotate-90 transform"
-            width={size}
-            height={size}
-            viewBox={`0 0 ${size} ${size}`}
             fill="none"
+            height={size}
             stroke="currentColor"
+            viewBox={`0 0 ${size} ${size}`}
+            width={size}
           >
-            <circle className="text-primary/20" strokeWidth="2" cx={size / 2} cy={size / 2} r={(size - 4) / 2} />
+            <circle className="text-primary/20" cx={size / 2} cy={size / 2} r={(size - 4) / 2} strokeWidth="2" />
             <circle
               className="text-primary transition-[stroke-dashoffset] duration-300 ease-linear"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeDasharray={circumference}
-              strokeDashoffset={strokeDashoffset}
               cx={size / 2}
               cy={size / 2}
               r={(size - 4) / 2}
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+              strokeWidth="2"
             />
           </svg>
         </ItemProgressPrimitive>
@@ -74,15 +72,15 @@ export function FileUploadItemProgress(props: FileUploadItemProgressProps) {
 
       return (
         <ItemProgressPrimitive
-          role="progressbar"
-          aria-valuemin={0}
+          aria-labelledby={itemContext.nameId}
           aria-valuemax={100}
+          aria-valuemin={0}
           aria-valuenow={progressPercentage}
           aria-valuetext={`${progressPercentage}%`}
-          aria-labelledby={itemContext.nameId}
           data-slot="file-upload-progress"
+          role="progressbar"
           {...progressProps}
-          className={cn("bg-primary/50 absolute inset-0 transition-[clip-path] duration-300 ease-linear", className)}
+          className={cn("absolute inset-0 bg-primary/50 transition-[clip-path] duration-300 ease-linear", className)}
           style={{
             clipPath: `inset(${topInset}% 0% 0% 0%)`
           }}
@@ -93,18 +91,18 @@ export function FileUploadItemProgress(props: FileUploadItemProgressProps) {
     default:
       return (
         <ItemProgressPrimitive
-          role="progressbar"
-          aria-valuemin={0}
+          aria-labelledby={itemContext.nameId}
           aria-valuemax={100}
+          aria-valuemin={0}
           aria-valuenow={itemContext.fileState.progress}
           aria-valuetext={`${itemContext.fileState.progress}%`}
-          aria-labelledby={itemContext.nameId}
           data-slot="file-upload-progress"
+          role="progressbar"
           {...progressProps}
-          className={cn("bg-primary/20 relative h-1.5 w-full overflow-hidden rounded-full", className)}
+          className={cn("relative h-1.5 w-full overflow-hidden rounded-full bg-primary/20", className)}
         >
           <div
-            className="bg-primary h-full w-full flex-1 transition-transform duration-300 ease-linear"
+            className="h-full w-full flex-1 bg-primary transition-transform duration-300 ease-linear"
             style={{
               transform: `translateX(-${100 - itemContext.fileState.progress}%)`
             }}

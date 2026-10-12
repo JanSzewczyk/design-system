@@ -7,15 +7,15 @@ import preview from "~/.storybook/preview";
 const HeadingText = "Lorem ipsum dolor sit amet.";
 const SampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
-function TypographyStories({ classes, text = SampleText }: { classes: Array<string>; text?: string }) {
+function TypographyStories({ classes, text = SampleText }: { classes: string[]; text?: string }) {
   return (
     <div className="grid grid-cols-[auto_1fr] gap-x-8 gap-y-4">
       {classes.map((className) => (
         <React.Fragment key={className}>
           <div className="flex items-center">
             <div>
-              <div className="text-body-lg font-semibold">Class Name:</div>
-              <code className="text-code whitespace-nowrap">{className}</code>
+              <div className="font-semibold text-body-lg">Class Name:</div>
+              <code className="whitespace-nowrap text-code">{className}</code>
             </div>
           </div>
           <div className="flex items-start justify-start">

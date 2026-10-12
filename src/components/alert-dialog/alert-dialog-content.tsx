@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -18,9 +17,9 @@ export function AlertDialogContent({ className, size = "default", ...props }: Al
     <AlertDialogPortal>
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
-        data-slot="alert-dialog-content"
-        data-size={size}
         className={cn(alertDialogContentVariants({ size }), className)}
+        data-size={size}
+        data-slot="alert-dialog-content"
         {...props}
       />
     </AlertDialogPortal>

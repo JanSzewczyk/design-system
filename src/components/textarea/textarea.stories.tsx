@@ -1,15 +1,11 @@
-import * as React from "react";
-
-import { within, expect } from "storybook/test";
-
+import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Textarea } from "./textarea";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Textarea",
   component: Textarea,
-  tags: ["autodocs", "beta"]
+  tags: ["autodocs", "beta"],
+  title: "Components/Textarea"
 });
 
 export const Default = meta.story({
@@ -24,13 +20,6 @@ export const Default = meta.story({
 });
 
 export const Base = meta.story({
-  render: (args) => (
-    <div className="w-full max-w-sm space-y-4">
-      <Textarea {...args} />
-      <Textarea placeholder="With Placeholder" {...args} />
-      <Textarea defaultValue="With default value" {...args} />
-    </div>
-  ),
   args: {},
   play: async ({ canvas }) => {
     const textareas = canvas.getAllByRole("textbox");
@@ -46,17 +35,17 @@ export const Base = meta.story({
     const defaultValueTextarea = canvas.getByDisplayValue("With default value");
     await expect(defaultValueTextarea).toBeInTheDocument();
     await expect(defaultValueTextarea).toHaveValue("With default value");
-  }
-});
-
-export const Disabled = meta.story({
+  },
   render: (args) => (
     <div className="w-full max-w-sm space-y-4">
       <Textarea {...args} />
       <Textarea placeholder="With Placeholder" {...args} />
       <Textarea defaultValue="With default value" {...args} />
     </div>
-  ),
+  )
+});
+
+export const Disabled = meta.story({
   args: {
     disabled: true
   },
@@ -73,17 +62,17 @@ export const Disabled = meta.story({
     await userEvent.click(firstTextarea);
     await userEvent.type(firstTextarea, "This should not work");
     await expect(firstTextarea).toHaveValue("");
-  }
-});
-
-export const Invalid = meta.story({
+  },
   render: (args) => (
     <div className="w-full max-w-sm space-y-4">
       <Textarea {...args} />
       <Textarea placeholder="With Placeholder" {...args} />
       <Textarea defaultValue="With default value" {...args} />
     </div>
-  ),
+  )
+});
+
+export const Invalid = meta.story({
   args: {
     invalid: true
   },
@@ -97,13 +86,20 @@ export const Invalid = meta.story({
       // Check if invalid prop is applied (this might need adjustment based on your implementation)
       await expect(textarea).toHaveAttribute("aria-invalid", "true");
     }
-  }
+  },
+  render: (args) => (
+    <div className="w-full max-w-sm space-y-4">
+      <Textarea {...args} />
+      <Textarea placeholder="With Placeholder" {...args} />
+      <Textarea defaultValue="With default value" {...args} />
+    </div>
+  )
 });
 
 export const ReadOnly = meta.story({
   args: {
-    readOnly: true,
-    defaultValue: "This is read-only content"
+    defaultValue: "This is read-only content",
+    readOnly: true
   },
   play: async ({ canvas, userEvent }) => {
     const textarea = canvas.getByRole("textbox");
@@ -159,13 +155,6 @@ export const FocusAndBlur = meta.story({
 });
 
 export const KeyboardNavigation = meta.story({
-  render: () => (
-    <div className="space-y-4">
-      <input placeholder="Previous element" />
-      <Textarea placeholder="Textarea for keyboard test" />
-      <button>Next element</button>
-    </div>
-  ),
   play: async ({ canvas, userEvent }) => {
     const input = canvas.getByPlaceholderText("Previous element");
     const textarea = canvas.getByPlaceholderText("Textarea for keyboard test");
@@ -186,7 +175,14 @@ export const KeyboardNavigation = meta.story({
     // Shift+Tab back to textarea
     await userEvent.tab({ shift: true });
     await expect(textarea).toHaveFocus();
-  }
+  },
+  render: () => (
+    <div className="space-y-4">
+      <input placeholder="Previous element" />
+      <Textarea placeholder="Textarea for keyboard test" />
+      <button>Next element</button>
+    </div>
+  )
 });
 
 export const MaxLength = meta.story({
@@ -213,8 +209,8 @@ export const MaxLength = meta.story({
 
 export const Required = meta.story({
   args: {
-    required: true,
-    placeholder: "This field is required"
+    placeholder: "This field is required",
+    required: true
   },
   play: async ({ canvas }) => {
     const textarea = canvas.getByRole("textbox");

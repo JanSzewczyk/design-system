@@ -1,8 +1,7 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
-import { useTimelineItemContext } from "~/components/timeline/timeline-item.context";
+import * as React from "react";
 import { useTimelineStore } from "~/components/timeline/timeline.store";
+import { useTimelineItemContext } from "~/components/timeline/timeline-item.context";
 import { cn } from "~/utils";
 
 import { TIMELINE_CONNECTOR_NAME } from "./timeline.constants";
@@ -31,18 +30,18 @@ export function TimelineConnector({ asChild = false, forceMount, className, ...p
   return (
     <ConnectorPrimitive
       aria-hidden="true"
-      data-slot="timeline-connector"
       data-completed={isConnectorCompleted ? "" : undefined}
-      data-status={status}
       data-orientation={orientation}
+      data-slot="timeline-connector"
+      data-status={status}
       {...props}
       className={cn(
         timelineConnectorVariants({
+          className,
+          isAlternateRight,
           isCompleted: isConnectorCompleted,
           orientation,
-          variant,
-          isAlternateRight,
-          className
+          variant
         })
       )}
     />

@@ -1,8 +1,6 @@
-import { createRef, type Ref } from "react";
-
-import { describe, expect, test, vi } from "vitest";
-
 import { renderHook } from "@testing-library/react";
+import { createRef, type Ref } from "react";
+import { describe, expect, test, vi } from "vitest";
 
 import { useComposedRefs } from "./use-composed-refs";
 

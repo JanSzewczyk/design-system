@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { PanelLeftIcon } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "~/components/button";
 import { cn } from "~/utils";
@@ -14,15 +13,15 @@ export function SidebarTrigger({ className, onClick, ...props }: SidebarTriggerP
 
   return (
     <Button
+      className={cn(className)}
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon-sm"
-      className={cn(className)}
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
       }}
+      size="icon-sm"
+      variant="ghost"
       {...props}
     >
       <PanelLeftIcon className="cn-rtl-flip" />

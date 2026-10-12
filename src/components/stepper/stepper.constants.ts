@@ -16,12 +16,12 @@ export const STEPPER_EVENT_OPTIONS = { bubbles: false, cancelable: true };
 export const STEPPER_ARROW_KEYS = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 
 export const STEPPER_MAP_KEY_TO_FOCUS_INTENT: Record<string, StepperFocusIntent> = {
-  ArrowLeft: "prev",
-  ArrowUp: "prev",
-  ArrowRight: "next",
   ArrowDown: "next",
-  PageUp: "first",
+  ArrowLeft: "prev",
+  ArrowRight: "next",
+  ArrowUp: "prev",
+  End: "last",
   Home: "first",
   PageDown: "last",
-  End: "last"
+  PageUp: "first"
 };

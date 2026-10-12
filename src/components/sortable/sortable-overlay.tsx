@@ -1,8 +1,6 @@
-import * as React from "react";
-
-import { createPortal } from "react-dom";
-
 import { DragOverlay, type UniqueIdentifier } from "@dnd-kit/core";
+import * as React from "react";
+import { createPortal } from "react-dom";
 import { cn } from "~/utils";
 
 import { dropAnimationConfig, SORTABLE_OVERLAY_NAME } from "./sortable.constants";
@@ -25,9 +23,9 @@ export function SortableOverlay({ children, className, ...props }: SortableOverl
 
   return createPortal(
     <DragOverlay
+      className={cn("z-50", activeId && "cursor-grabbing", className)}
       dropAnimation={dropAnimationConfig}
       modifiers={modifiers}
-      className={cn("z-50", activeId && "cursor-grabbing", className)}
       {...props}
     >
       <IsOverlayContext.Provider value={true}>{content}</IsOverlayContext.Provider>

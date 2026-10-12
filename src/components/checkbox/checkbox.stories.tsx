@@ -1,15 +1,11 @@
 import * as React from "react";
 
 import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components";
-
 import { Checkbox } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Checkbox",
-  component: Checkbox,
   argTypes: {
     checked: {
       control: "boolean",
@@ -23,27 +19,21 @@ const meta = preview.meta({
       control: "boolean",
       description: "When true, prevents interaction with checkbox"
     },
-    required: {
-      control: "boolean",
-      description: "When true, indicates that user must check checkbox before submitting"
-    },
     name: {
       control: "text",
       description: "The name of checkbox (used in form submission)"
+    },
+    required: {
+      control: "boolean",
+      description: "When true, indicates that user must check checkbox before submitting"
     }
   },
-  tags: ["autodocs", "new"]
+  component: Checkbox,
+  tags: ["autodocs", "new"],
+  title: "Components/Checkbox"
 });
 
 export const Default = meta.story({
-  render: () => (
-    <div className="flex items-center gap-2">
-      <Checkbox name="asd asd as dasd" required />
-      <label htmlFor="terms" className="cursor-pointer text-sm">
-        Accept terms and conditions
-      </label>
-    </div>
-  ),
   play: async ({ canvas, userEvent }) => {
     const checkbox = canvas.getByRole("checkbox");
 
@@ -57,43 +47,35 @@ export const Default = meta.story({
     // Click to uncheck
     await userEvent.click(checkbox);
     await expect(checkbox).toHaveAttribute("data-state", "unchecked");
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-2">
+      <Checkbox name="asd asd as dasd" required />
+      <label className="cursor-pointer text-sm" htmlFor="terms">
+        Accept terms and conditions
+      </label>
+    </div>
+  )
 });
 
 export const Checked = meta.story({
-  render: () => (
-    <div className="flex items-center gap-2">
-      <Checkbox id="checked" defaultChecked />
-      <label htmlFor="checked" className="cursor-pointer text-sm">
-        Already checked
-      </label>
-    </div>
-  ),
   play: async ({ canvas }) => {
     const checkbox = canvas.getByRole("checkbox");
 
     // Verify initially checked
     await expect(checkbox).toHaveAttribute("data-state", "checked");
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-2">
+      <Checkbox defaultChecked id="checked" />
+      <label className="cursor-pointer text-sm" htmlFor="checked">
+        Already checked
+      </label>
+    </div>
+  )
 });
 
 export const Disabled = meta.story({
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
-        <Checkbox id="disabled-unchecked" disabled />
-        <label htmlFor="disabled-unchecked" className="cursor-not-allowed text-sm opacity-50">
-          Disabled (unchecked)
-        </label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="disabled-checked" disabled defaultChecked />
-        <label htmlFor="disabled-checked" className="cursor-not-allowed text-sm opacity-50">
-          Disabled (checked)
-        </label>
-      </div>
-    </div>
-  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const checkboxes = canvas.getAllByRole("checkbox");
@@ -107,45 +89,44 @@ export const Disabled = meta.story({
 
     // Verify checked state for second checkbox
     await expect(checkboxes[1]).toHaveAttribute("data-state", "checked");
-  }
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2">
+        <Checkbox disabled id="disabled-unchecked" />
+        <label className="cursor-not-allowed text-sm opacity-50" htmlFor="disabled-unchecked">
+          Disabled (unchecked)
+        </label>
+      </div>
+      <div className="flex items-center gap-2">
+        <Checkbox defaultChecked disabled id="disabled-checked" />
+        <label className="cursor-not-allowed text-sm opacity-50" htmlFor="disabled-checked">
+          Disabled (checked)
+        </label>
+      </div>
+    </div>
+  )
 });
 
 export const Invalid = meta.story({
-  render: () => (
-    <div className="flex items-center gap-2">
-      <Checkbox id="invalid" aria-invalid />
-      <label htmlFor="invalid" className="cursor-pointer text-sm">
-        This field is required
-      </label>
-    </div>
-  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const checkbox = canvas.getByRole("checkbox");
 
     // Verify aria-invalid attribute is present
     await expect(checkbox).toHaveAttribute("aria-invalid", "true");
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-2">
+      <Checkbox aria-invalid id="invalid" />
+      <label className="cursor-pointer text-sm" htmlFor="invalid">
+        This field is required
+      </label>
+    </div>
+  )
 });
 
 export const Controlled = meta.story({
-  render: function ControlledCheckbox() {
-    const [checked, setChecked] = React.useState(false);
-
-    return (
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <Checkbox id="controlled" checked={checked} onCheckedChange={(value) => setChecked(!!value)} />
-          <label htmlFor="controlled" className="cursor-pointer text-sm">
-            Controlled checkbox
-          </label>
-        </div>
-        <p className="text-muted-foreground text-xs">
-          State: <span className="font-medium">{checked ? "Checked" : "Unchecked"}</span>
-        </p>
-      </div>
-    );
-  },
   play: async ({ canvas, userEvent }) => {
     const checkbox = canvas.getByRole("checkbox");
     const stateText = canvas.getByText(/State:/);
@@ -163,21 +144,45 @@ export const Controlled = meta.story({
     await userEvent.click(checkbox);
     await expect(checkbox).toHaveAttribute("data-state", "unchecked");
     await expect(stateText).toHaveTextContent("State: Unchecked");
+  },
+  render: function ControlledCheckbox() {
+    const [checked, setChecked] = React.useState(false);
+
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2">
+          <Checkbox checked={checked} id="controlled" onCheckedChange={(value) => setChecked(!!value)} />
+          <label className="cursor-pointer text-sm" htmlFor="controlled">
+            Controlled checkbox
+          </label>
+        </div>
+        <p className="text-muted-foreground text-xs">
+          State: <span className="font-medium">{checked ? "Checked" : "Unchecked"}</span>
+        </p>
+      </div>
+    );
   }
 });
 
 export const WithForm = meta.story({
+  play: async ({ canvas }) => {
+    // Verify form attributes
+    await expect(canvas.getByRole("checkbox", { name: /Subscribe to newsletter/ })).toBeVisible();
+
+    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeVisible();
+    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeRequired();
+  },
   render: () => (
     <form className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
         <Checkbox id="newsletter" name="newsletter" value="subscribed" />
-        <label htmlFor="newsletter" className="cursor-pointer text-sm">
+        <label className="cursor-pointer text-sm" htmlFor="newsletter">
           Subscribe to newsletter
         </label>
       </div>
       <div className="flex items-center gap-2">
         <Checkbox id="terms-form" name="terms" required />
-        <label htmlFor="terms-form" className="cursor-pointer text-sm">
+        <label className="cursor-pointer text-sm" htmlFor="terms-form">
           I agree to terms and conditions <span className="text-error">*</span>
         </label>
       </div>
@@ -185,32 +190,10 @@ export const WithForm = meta.story({
         Submit
       </Button>
     </form>
-  ),
-  play: async ({ canvas }) => {
-    // Verify form attributes
-    await expect(canvas.getByRole("checkbox", { name: /Subscribe to newsletter/ })).toBeVisible();
-
-    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeVisible();
-    await expect(canvas.getByRole("checkbox", { name: /I agree to terms and conditions */ })).toBeRequired();
-  }
+  )
 });
 
 export const MultipleCheckboxes = meta.story({
-  render: () => (
-    <div className="flex flex-col gap-3">
-      <p className="text-sm font-medium">Select your interests:</p>
-      <div className="flex flex-col gap-2">
-        {["Technology", "Design", "Science", "Sports", "Music"].map((interest) => (
-          <div key={interest} className="flex items-center gap-2">
-            <Checkbox id={interest.toLowerCase()} name="interests" value={interest.toLowerCase()} />
-            <label htmlFor={interest.toLowerCase()} className="cursor-pointer text-sm">
-              {interest}
-            </label>
-          </div>
-        ))}
-      </div>
-    </div>
-  ),
   play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
 
@@ -226,54 +209,25 @@ export const MultipleCheckboxes = meta.story({
     await expect(checkboxes[2]).toHaveAttribute("data-state", "checked");
     await expect(checkboxes[3]).toHaveAttribute("data-state", "unchecked");
     await expect(checkboxes[4]).toHaveAttribute("data-state", "unchecked");
-  }
+  },
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <p className="font-medium text-sm">Select your interests:</p>
+      <div className="flex flex-col gap-2">
+        {["Technology", "Design", "Science", "Sports", "Music"].map((interest) => (
+          <div className="flex items-center gap-2" key={interest}>
+            <Checkbox id={interest.toLowerCase()} name="interests" value={interest.toLowerCase()} />
+            <label className="cursor-pointer text-sm" htmlFor={interest.toLowerCase()}>
+              {interest}
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 });
 
 export const Indeterminate = meta.story({
-  render: function IndeterminateCheckbox() {
-    const [selectedItems, setSelectedItems] = React.useState<string[]>(["item-1"]);
-
-    const allItems = ["item-1", "item-2", "item-3"];
-    const allChecked = selectedItems.length === allItems.length;
-    const isIndeterminate = selectedItems.length > 0 && selectedItems.length < allItems.length;
-
-    const handleSelectAll = (checked: boolean) => {
-      setSelectedItems(checked ? allItems : []);
-    };
-
-    const handleSelectItem = (item: string, checked: boolean) => {
-      setSelectedItems((prev) => (checked ? [...prev, item] : prev.filter((i) => i !== item)));
-    };
-
-    return (
-      <div className="flex flex-col gap-3">
-        <div className="flex items-center gap-2 border-b pb-2">
-          <Checkbox
-            id="select-all"
-            checked={isIndeterminate ? "indeterminate" : allChecked}
-            onCheckedChange={handleSelectAll}
-          />
-          <label htmlFor="select-all" className="cursor-pointer text-sm font-medium">
-            Select All
-          </label>
-        </div>
-        <div className="flex flex-col gap-2 pl-6">
-          {allItems.map((item) => (
-            <div key={item} className="flex items-center gap-2">
-              <Checkbox
-                id={item}
-                checked={selectedItems.includes(item)}
-                onCheckedChange={(checked) => handleSelectItem(item, checked === true || checked === "indeterminate")}
-              />
-              <label htmlFor={item} className="cursor-pointer text-sm">
-                {item.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  },
   play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
     const selectAllCheckbox = checkboxes[0];
@@ -295,32 +249,54 @@ export const Indeterminate = meta.story({
     await expect(checkboxes[1]).toHaveAttribute("data-state", "unchecked");
     await expect(checkboxes[2]).toHaveAttribute("data-state", "unchecked");
     await expect(checkboxes[3]).toHaveAttribute("data-state", "unchecked");
+  },
+  render: function IndeterminateCheckbox() {
+    const [selectedItems, setSelectedItems] = React.useState<string[]>(["item-1"]);
+
+    const allItems = ["item-1", "item-2", "item-3"];
+    const allChecked = selectedItems.length === allItems.length;
+    const isIndeterminate = selectedItems.length > 0 && selectedItems.length < allItems.length;
+
+    const handleSelectAll = (checked: boolean) => {
+      setSelectedItems(checked ? allItems : []);
+    };
+
+    const handleSelectItem = (item: string, checked: boolean) => {
+      setSelectedItems((prev) => (checked ? [...prev, item] : prev.filter((i) => i !== item)));
+    };
+
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-2 border-b pb-2">
+          <Checkbox
+            checked={isIndeterminate ? "indeterminate" : allChecked}
+            id="select-all"
+            onCheckedChange={handleSelectAll}
+          />
+          <label className="cursor-pointer font-medium text-sm" htmlFor="select-all">
+            Select All
+          </label>
+        </div>
+        <div className="flex flex-col gap-2 pl-6">
+          {allItems.map((item) => (
+            <div className="flex items-center gap-2" key={item}>
+              <Checkbox
+                checked={selectedItems.includes(item)}
+                id={item}
+                onCheckedChange={(checked) => handleSelectItem(item, checked === true || checked === "indeterminate")}
+              />
+              <label className="cursor-pointer text-sm" htmlFor={item}>
+                {item.replace("-", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 });
 
 export const KeyboardNavigation = meta.story({
-  render: () => (
-    <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <Checkbox id="keyboard-1" />
-        <label htmlFor="keyboard-1" className="cursor-pointer text-sm">
-          Option 1
-        </label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="keyboard-2" />
-        <label htmlFor="keyboard-2" className="cursor-pointer text-sm">
-          Option 2
-        </label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="keyboard-3" />
-        <label htmlFor="keyboard-3" className="cursor-pointer text-sm">
-          Option 3
-        </label>
-      </div>
-    </div>
-  ),
   play: async ({ canvas, userEvent }) => {
     const checkboxes = canvas.getAllByRole("checkbox");
 
@@ -343,5 +319,27 @@ export const KeyboardNavigation = meta.story({
     // Check with Space
     await userEvent.keyboard(" ");
     await expect(checkboxes[1]).toHaveAttribute("data-state", "checked");
-  }
+  },
+  render: () => (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <Checkbox id="keyboard-1" />
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-1">
+          Option 1
+        </label>
+      </div>
+      <div className="flex items-center gap-2">
+        <Checkbox id="keyboard-2" />
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-2">
+          Option 2
+        </label>
+      </div>
+      <div className="flex items-center gap-2">
+        <Checkbox id="keyboard-3" />
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-3">
+          Option 3
+        </label>
+      </div>
+    </div>
+  )
 });

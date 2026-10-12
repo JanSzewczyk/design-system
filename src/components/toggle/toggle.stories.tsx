@@ -1,31 +1,11 @@
-import * as React from "react";
-
 import { BoldIcon, BookmarkIcon, ItalicIcon } from "lucide-react";
 
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Toggle } from "./toggle";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Toggle",
-  component: Toggle,
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "outline"],
-      description: "Visual style of the toggle"
-    },
-    size: {
-      control: "select",
-      options: ["sm", "default", "lg"],
-      description: "Size of the toggle"
-    },
-    pressed: {
-      control: "boolean",
-      description: "Controlled pressed state"
-    },
     defaultPressed: {
       control: "boolean",
       description: "Initial pressed state (uncontrolled)"
@@ -33,17 +13,33 @@ const meta = preview.meta({
     disabled: {
       control: "boolean",
       description: "Disable the toggle"
+    },
+    pressed: {
+      control: "boolean",
+      description: "Controlled pressed state"
+    },
+    size: {
+      control: "select",
+      description: "Size of the toggle",
+      options: ["sm", "default", "lg"]
+    },
+    variant: {
+      control: "select",
+      description: "Visual style of the toggle",
+      options: ["default", "outline"]
     }
-  }
+  },
+  component: Toggle,
+  title: "Components/Toggle"
 });
 
 export const ToggleStory = meta.story({
-  name: "Toggle",
   args: {
+    "aria-label": "Toggle bookmark",
     size: "sm",
-    variant: "outline",
-    "aria-label": "Toggle bookmark"
+    variant: "outline"
   },
+  name: "Toggle",
   render(args) {
     return (
       <Toggle {...args}>
@@ -92,8 +88,8 @@ ToggleStory.test("Enter key toggles the state", async ({ canvas, userEvent }) =>
 
 export const Outline = meta.story({
   args: {
-    variant: "outline",
-    "aria-label": "Toggle bold"
+    "aria-label": "Toggle bold",
+    variant: "outline"
   },
   render(args) {
     return (
@@ -106,10 +102,10 @@ export const Outline = meta.story({
 });
 
 export const WithText = meta.story({
-  name: "With Text",
   args: {
     "aria-label": "Toggle italic"
   },
+  name: "With Text",
   render(args) {
     return (
       <Toggle {...args}>
@@ -123,15 +119,15 @@ export const WithText = meta.story({
 export const Sizes = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
-      <Toggle variant="outline" size="sm" aria-label="Toggle small">
+      <Toggle aria-label="Toggle small" size="sm" variant="outline">
         <ItalicIcon />
         Small
       </Toggle>
-      <Toggle variant="outline" size="default" aria-label="Toggle default">
+      <Toggle aria-label="Toggle default" size="default" variant="outline">
         <ItalicIcon />
         Default
       </Toggle>
-      <Toggle variant="outline" size="lg" aria-label="Toggle large">
+      <Toggle aria-label="Toggle large" size="lg" variant="outline">
         <ItalicIcon />
         Large
       </Toggle>
@@ -142,10 +138,10 @@ export const Sizes = meta.story({
 export const Disabled = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
-      <Toggle disabled aria-label="Toggle default disabled">
+      <Toggle aria-label="Toggle default disabled" disabled>
         Default
       </Toggle>
-      <Toggle variant="outline" disabled aria-label="Toggle outline disabled">
+      <Toggle aria-label="Toggle outline disabled" disabled variant="outline">
         Outline
       </Toggle>
     </div>
@@ -167,11 +163,11 @@ Disabled.test("Disabled toggles are not interactive", async ({ canvas, step }) =
 });
 
 export const DefaultPressed = meta.story({
-  name: "Default Pressed",
   args: {
-    defaultPressed: true,
-    "aria-label": "Toggle italic"
+    "aria-label": "Toggle italic",
+    defaultPressed: true
   },
+  name: "Default Pressed",
   render(args) {
     return (
       <Toggle {...args}>

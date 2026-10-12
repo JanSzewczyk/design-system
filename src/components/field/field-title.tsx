@@ -7,11 +7,11 @@ export type FieldTitleProps = React.ComponentProps<"div">;
 export function FieldTitle({ className, ...props }: FieldTitleProps) {
   return (
     <div
-      data-slot="field-label"
       className={cn(
-        "flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50",
+        "flex w-fit items-center gap-2 font-medium text-sm group-data-[disabled=true]/field:opacity-50",
         className
       )}
+      data-slot="field-label"
       {...props}
     />
   );

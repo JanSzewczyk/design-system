@@ -1,27 +1,23 @@
-import * as React from "react";
-
 import { AlertCircleIcon, InfoIcon, RocketIcon, TerminalIcon, TriangleAlertIcon } from "lucide-react";
 
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Alert, AlertDescription, AlertTitle } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Alert",
-  component: Alert,
-  tags: ["autodocs", "new"],
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "destructive"],
       description: "The visual style variant of the alert",
+      options: ["default", "destructive"],
       table: {
         defaultValue: { summary: "default" }
       }
     }
-  }
+  },
+  component: Alert,
+  tags: ["autodocs", "new"],
+  title: "Components/Alert"
 });
 
 export const Example = meta.story({
@@ -55,14 +51,14 @@ export const Default = meta.story({
 
 export const Destructive = meta.story({
   args: {
-    variant: "destructive",
     children: (
       <>
         <AlertCircleIcon />
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
       </>
-    )
+    ),
+    variant: "destructive"
   }
 });
 
@@ -157,13 +153,6 @@ export const LongContent = meta.story({
 });
 
 export const DataAttributes = meta.story({
-  render: () => (
-    <Alert>
-      <TerminalIcon />
-      <AlertTitle>Check data-slot attributes</AlertTitle>
-      <AlertDescription>Each component has a data-slot attribute for styling and testing.</AlertDescription>
-    </Alert>
-  ),
   play: async ({ canvas, step }) => {
     await step("Alert has correct data-slot attribute", async () => {
       const alert = canvas.getByRole("alert");
@@ -179,24 +168,17 @@ export const DataAttributes = meta.story({
       const description = canvas.getByText(/Each component has a data-slot/);
       await expect(description).toHaveAttribute("data-slot", "alert-description");
     });
-  }
+  },
+  render: () => (
+    <Alert>
+      <TerminalIcon />
+      <AlertTitle>Check data-slot attributes</AlertTitle>
+      <AlertDescription>Each component has a data-slot attribute for styling and testing.</AlertDescription>
+    </Alert>
+  )
 });
 
 export const InteractionTest = meta.story({
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Alert>
-        <TerminalIcon />
-        <AlertTitle>Default Alert Title</AlertTitle>
-        <AlertDescription>Default alert description text.</AlertDescription>
-      </Alert>
-      <Alert variant="destructive">
-        <AlertCircleIcon />
-        <AlertTitle>Destructive Alert Title</AlertTitle>
-        <AlertDescription>Destructive alert description text.</AlertDescription>
-      </Alert>
-    </div>
-  ),
   play: async ({ canvas, step }) => {
     await step("Both alert variants are rendered with correct role", async () => {
       const alerts = canvas.getAllByRole("alert");
@@ -222,5 +204,19 @@ export const InteractionTest = meta.story({
       await expect(destructiveTitle).toBeVisible();
       await expect(destructiveDescription).toBeVisible();
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Alert>
+        <TerminalIcon />
+        <AlertTitle>Default Alert Title</AlertTitle>
+        <AlertDescription>Default alert description text.</AlertDescription>
+      </Alert>
+      <Alert variant="destructive">
+        <AlertCircleIcon />
+        <AlertTitle>Destructive Alert Title</AlertTitle>
+        <AlertDescription>Destructive alert description text.</AlertDescription>
+      </Alert>
+    </div>
+  )
 });

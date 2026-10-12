@@ -9,8 +9,8 @@ export function CarouselContent({ className, ...props }: CarouselContentProps) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" data-slot="carousel-content">
-      <div className={carouselContentVariants({ orientation, className })} {...props} />
+    <div className="overflow-hidden" data-slot="carousel-content" ref={carouselRef}>
+      <div className={carouselContentVariants({ className, orientation })} {...props} />
     </div>
   );
 }

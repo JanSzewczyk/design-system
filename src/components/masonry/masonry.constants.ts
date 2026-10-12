@@ -16,12 +16,12 @@ export const MASONRY_ERROR = {
 } as const;
 
 export const NODE_COLOR = {
-  RED: 0,
   BLACK: 1,
+  RED: 0,
   SENTINEL: 2
 } as const;
 
 export const NODE_OPERATION = {
-  REMOVE: 0,
-  PRESERVE: 1
+  PRESERVE: 1,
+  REMOVE: 0
 } as const;

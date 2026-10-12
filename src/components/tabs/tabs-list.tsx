@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Tabs as TabsPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -14,9 +13,9 @@ export type TabsListProps = React.ComponentProps<typeof TabsPrimitive.List> & {
 export function TabsList({ className, variant = "default", ...props }: TabsListProps) {
   return (
     <TabsPrimitive.List
+      className={cn(tabsListVariants({ variant }), className)}
       data-slot="tabs-list"
       data-variant={variant}
-      className={cn(tabsListVariants({ variant }), className)}
       {...props}
     />
   );

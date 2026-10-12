@@ -1,13 +1,10 @@
-import React from "react";
-
+import preview from "~/.storybook/preview";
 import { Avatar, AvatarFallback, AvatarImage } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Avatar",
   component: Avatar,
-  tags: ["autodocs", "beta"]
+  tags: ["autodocs", "beta"],
+  title: "Components/Avatar"
 });
 
 export const Image = meta.story({

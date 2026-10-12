@@ -1,18 +1,17 @@
+import preview from "~/.storybook/preview";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Accordion",
   component: Accordion,
-  subcomponents: { AccordionItem, AccordionTrigger, AccordionContent },
-  tags: ["autodocs"]
+  subcomponents: { AccordionContent, AccordionItem, AccordionTrigger },
+  tags: ["autodocs"],
+  title: "Components/Accordion"
 });
 
 export const Single = meta.story({
   args: {
-    type: "single",
-    collapsible: true
+    collapsible: true,
+    type: "single"
   },
   render: (args) => (
     <Accordion {...args} className="w-full">
@@ -36,8 +35,8 @@ export const Single = meta.story({
 
 export const Multiple = meta.story({
   args: {
-    type: "multiple",
-    defaultValue: ["item-1"]
+    defaultValue: ["item-1"],
+    type: "multiple"
   },
   render: (args) => (
     <Accordion {...args} className="w-full">

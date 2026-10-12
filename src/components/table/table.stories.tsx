@@ -1,7 +1,7 @@
 import { MoreHorizontalIcon } from "lucide-react";
 
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Button } from "../button";
 import {
   DropdownMenu,
@@ -10,58 +10,55 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "../dropdown-menu";
-
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Table",
-  component: Table
+  component: Table,
+  title: "Components/Table"
 });
 
 const invoices = [
   {
     invoice: "INV001",
+    paymentMethod: "Credit Card",
     paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card"
+    totalAmount: "$250.00"
   },
   {
     invoice: "INV002",
+    paymentMethod: "PayPal",
     paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal"
+    totalAmount: "$150.00"
   },
   {
     invoice: "INV003",
+    paymentMethod: "Bank Transfer",
     paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer"
+    totalAmount: "$350.00"
   },
   {
     invoice: "INV004",
+    paymentMethod: "Credit Card",
     paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card"
+    totalAmount: "$450.00"
   },
   {
     invoice: "INV005",
+    paymentMethod: "PayPal",
     paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal"
+    totalAmount: "$550.00"
   },
   {
     invoice: "INV006",
+    paymentMethod: "Bank Transfer",
     paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer"
+    totalAmount: "$200.00"
   },
   {
     invoice: "INV007",
+    paymentMethod: "Credit Card",
     paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card"
+    totalAmount: "$300.00"
   }
 ];
 
@@ -261,7 +258,7 @@ export const Actions = meta.story({
             <TableCell className="text-right">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="size-8">
+                  <Button className="size-8" size="icon" variant="ghost">
                     <MoreHorizontalIcon />
                     <span className="sr-only">Open menu</span>
                   </Button>
@@ -281,7 +278,7 @@ export const Actions = meta.story({
             <TableCell className="text-right">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="size-8">
+                  <Button className="size-8" size="icon" variant="ghost">
                     <MoreHorizontalIcon />
                     <span className="sr-only">Open menu</span>
                   </Button>
@@ -301,7 +298,7 @@ export const Actions = meta.story({
             <TableCell className="text-right">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon" className="size-8">
+                  <Button className="size-8" size="icon" variant="ghost">
                     <MoreHorizontalIcon />
                     <span className="sr-only">Open menu</span>
                   </Button>
@@ -325,9 +322,9 @@ export const FullTable = meta.story({
   name: "Full Table",
   render() {
     const invoices = [
-      { id: "INV001", status: "Paid", method: "Credit Card", amount: "$250.00" },
-      { id: "INV002", status: "Pending", method: "PayPal", amount: "$150.00" },
-      { id: "INV003", status: "Unpaid", method: "Bank Transfer", amount: "$350.00" }
+      { amount: "$250.00", id: "INV001", method: "Credit Card", status: "Paid" },
+      { amount: "$150.00", id: "INV002", method: "PayPal", status: "Pending" },
+      { amount: "$350.00", id: "INV003", method: "Bank Transfer", status: "Unpaid" }
     ];
 
     return (

@@ -1,11 +1,10 @@
+import { Upload, UploadIcon, XIcon } from "lucide-react";
 import * as React from "react";
 
-import { Upload, UploadIcon, XIcon } from "lucide-react";
-
 import { expect, fn } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components/button";
 import { Toaster, toast } from "~/components/toaster";
-
 import {
   FileUpload,
   FileUploadClear,
@@ -21,39 +20,37 @@ import {
   useFileUploadStore
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/File Upload",
+  args: {
+    onAccept: fn(),
+    onFileAccept: fn(),
+    onFileReject: fn(),
+    onValueChange: fn()
+  },
+  argTypes: {
+    accept: { control: "text" },
+    disabled: { control: "boolean" },
+    invalid: { control: "boolean" },
+    maxFiles: { control: "number" },
+    maxSize: { control: "number" },
+    multiple: { control: "boolean" },
+    onAccept: { control: false },
+    onFileAccept: { control: false },
+    onFileReject: { control: false },
+    onFileValidate: { control: false },
+    onUpload: { control: false },
+    onValueChange: { control: false },
+    required: { control: "boolean" }
+  },
   component: FileUpload,
-  tags: ["autodocs"],
   parameters: {
     docs: {
       subtitle:
         "A composable file upload component with drag-and-drop, file validation, upload progress, and accessible sub-components."
     }
   },
-  argTypes: {
-    accept: { control: "text" },
-    maxFiles: { control: "number" },
-    maxSize: { control: "number" },
-    disabled: { control: "boolean" },
-    invalid: { control: "boolean" },
-    multiple: { control: "boolean" },
-    required: { control: "boolean" },
-    onValueChange: { control: false },
-    onAccept: { control: false },
-    onFileAccept: { control: false },
-    onFileReject: { control: false },
-    onFileValidate: { control: false },
-    onUpload: { control: false }
-  },
-  args: {
-    onValueChange: fn(),
-    onAccept: fn(),
-    onFileAccept: fn(),
-    onFileReject: fn()
-  }
+  tags: ["autodocs"],
+  title: "Components/File Upload"
 });
 
 export default meta;
@@ -71,7 +68,7 @@ function DefaultFileList() {
           <FileUploadItemMetadata />
           <FileUploadItemProgress />
           <FileUploadItemDelete asChild>
-            <Button variant="ghost" size="icon-sm" aria-label={`Remove ${file.name}`}>
+            <Button aria-label={`Remove ${file.name}`} size="icon-sm" variant="ghost">
               ✕
             </Button>
           </FileUploadItemDelete>
@@ -84,30 +81,30 @@ function DefaultFileList() {
 // ─── Basic Dropzone ──────────────────────────────────────────────────────────
 
 export const BasicDropzone = meta.story({
-  name: "Basic Dropzone",
   args: {
     multiple: true
   },
+  name: "Basic Dropzone",
   render(args) {
     return (
       <FileUpload
-        multiple={args.multiple}
+        className="w-full max-w-md"
         disabled={args.disabled}
-        onValueChange={args.onValueChange}
+        multiple={args.multiple}
         onAccept={args.onAccept}
         onFileAccept={args.onFileAccept}
         onFileReject={args.onFileReject}
-        className="w-full max-w-md"
+        onValueChange={args.onValueChange}
       >
         <FileUploadDropzone>
           <div className="flex flex-col items-center gap-1 text-center">
-            <p className="text-sm font-medium">Drop files here or click to browse</p>
+            <p className="font-medium text-sm">Drop files here or click to browse</p>
             <p className="text-muted-foreground text-xs">Any file type accepted</p>
           </div>
         </FileUploadDropzone>
         <DefaultFileList />
         <FileUploadClear asChild>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Clear all
           </Button>
         </FileUploadClear>
@@ -141,7 +138,7 @@ function ProgressFileList() {
             <FileUploadItemProgress variant="linear" />
           </div>
           <FileUploadItemDelete asChild>
-            <Button variant="ghost" size="icon-sm" aria-label={`Remove ${file.name}`}>
+            <Button aria-label={`Remove ${file.name}`} size="icon-sm" variant="ghost">
               ✕
             </Button>
           </FileUploadItemDelete>
@@ -184,10 +181,10 @@ export const WithProgress = meta.story({
     );
 
     return (
-      <FileUpload multiple onUpload={onUpload} className="w-full max-w-md">
+      <FileUpload className="w-full max-w-md" multiple onUpload={onUpload}>
         <FileUploadDropzone>
           <div className="flex flex-col items-center gap-1 text-center">
-            <p className="text-sm font-medium">Drop files to start uploading</p>
+            <p className="font-medium text-sm">Drop files to start uploading</p>
             <p className="text-muted-foreground text-xs">Progress will animate automatically</p>
           </div>
         </FileUploadDropzone>
@@ -211,13 +208,13 @@ function LogoUploadInner() {
   if (currentFile) {
     return (
       <FileUploadList>
-        <FileUploadItem value={currentFile.file} className="relative size-24 overflow-hidden rounded border-0 p-0">
+        <FileUploadItem className="relative size-24 overflow-hidden rounded border-0 p-0" value={currentFile.file}>
           <FileUploadItemPreview className="size-full rounded border-0" />
-          <FileUploadItemProgress variant="circular" size={96} />
+          <FileUploadItemProgress size={96} variant="circular" />
           <FileUploadItemDelete asChild>
             <button
-              className="bg-background/80 absolute right-0 bottom-0 flex size-6 items-center justify-center rounded border text-xs"
               aria-label="Remove logo"
+              className="absolute right-0 bottom-0 flex size-6 items-center justify-center rounded border bg-background/80 text-xs"
             >
               ✕
             </button>
@@ -240,10 +237,10 @@ export const LogoUpload = meta.story({
   name: "Logo Upload",
   render(args) {
     return (
-      <FileUpload accept="image/*" maxFiles={1} onFileReject={args.onFileReject} className="items-center">
+      <FileUpload accept="image/*" className="items-center" maxFiles={1} onFileReject={args.onFileReject}>
         <LogoUploadInner />
         <FileUploadTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Upload Logo
           </Button>
         </FileUploadTrigger>
@@ -274,7 +271,7 @@ function MultipleFileList() {
           <FileUploadItemPreview />
           <FileUploadItemMetadata />
           <FileUploadItemDelete asChild>
-            <Button variant="ghost" size="icon-sm" aria-label={`Remove ${file.name}`}>
+            <Button aria-label={`Remove ${file.name}`} size="icon-sm" variant="ghost">
               ✕
             </Button>
           </FileUploadItemDelete>
@@ -289,21 +286,21 @@ export const MultipleFiles = meta.story({
   render(args) {
     return (
       <FileUpload
-        multiple
+        className="w-full max-w-md"
         maxFiles={3}
+        multiple
         onFileReject={args.onFileReject}
         onValueChange={args.onValueChange}
-        className="w-full max-w-md"
       >
         <FileUploadDropzone>
           <div className="flex flex-col items-center gap-1 text-center">
-            <p className="text-sm font-medium">Upload up to 3 files</p>
+            <p className="font-medium text-sm">Upload up to 3 files</p>
             <p className="text-muted-foreground text-xs">4th file will be rejected</p>
           </div>
         </FileUploadDropzone>
         <MultipleFileList />
         <FileUploadClear asChild>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Clear all
           </Button>
         </FileUploadClear>
@@ -330,7 +327,7 @@ function ControlledFileList({ files }: { files: File[] }) {
             <FileUploadItemPreview />
             <FileUploadItemMetadata />
             <FileUploadItemDelete asChild>
-              <Button variant="ghost" size="icon-sm" aria-label={`Remove ${file.name}`}>
+              <Button aria-label={`Remove ${file.name}`} size="icon-sm" variant="ghost">
                 ✕
               </Button>
             </FileUploadItemDelete>
@@ -338,7 +335,7 @@ function ControlledFileList({ files }: { files: File[] }) {
         ))}
       </FileUploadList>
       <div className="text-muted-foreground text-sm">
-        <span className="text-foreground font-medium">Files in state:</span>{" "}
+        <span className="font-medium text-foreground">Files in state:</span>{" "}
         {files.length === 0 ? "none" : files.map((f) => f.name).join(", ")}
       </div>
     </>
@@ -352,10 +349,10 @@ export const ControlledState = meta.story({
 
     return (
       <div className="flex w-full max-w-md flex-col gap-4">
-        <FileUpload multiple value={files} onValueChange={setFiles} className="w-full">
+        <FileUpload className="w-full" multiple onValueChange={setFiles} value={files}>
           <FileUploadDropzone>
             <div className="flex flex-col items-center gap-1 text-center">
-              <p className="text-sm font-medium">Controlled file upload</p>
+              <p className="font-medium text-sm">Controlled file upload</p>
               <p className="text-muted-foreground text-xs">State managed externally</p>
             </div>
           </FileUploadDropzone>
@@ -363,7 +360,7 @@ export const ControlledState = meta.story({
         </FileUpload>
 
         {files.length > 0 && (
-          <Button variant="outline" size="sm" onClick={() => setFiles([])}>
+          <Button onClick={() => setFiles([])} size="sm" variant="outline">
             Reset state
           </Button>
         )}
@@ -415,25 +412,25 @@ export const WithValidation = meta.story({
 
     return (
       <FileUpload
-        value={files}
-        onValueChange={setFiles}
-        onFileValidate={onFileValidate}
-        onFileReject={onFileReject}
         accept="image/*"
-        maxFiles={2}
         className="w-full max-w-md"
+        maxFiles={2}
         multiple
+        onFileReject={onFileReject}
+        onFileValidate={onFileValidate}
+        onValueChange={setFiles}
+        value={files}
       >
         <FileUploadDropzone>
           <div className="flex flex-col items-center gap-1">
             <div className="flex items-center justify-center rounded-full border p-2.5">
-              <Upload className="text-muted-foreground size-6" />
+              <Upload className="size-6 text-muted-foreground" />
             </div>
-            <p className="text-sm font-medium">Drag & drop files here</p>
+            <p className="font-medium text-sm">Drag & drop files here</p>
             <p className="text-muted-foreground text-xs">Or click to browse (max 2 files)</p>
           </div>
           <FileUploadTrigger asChild>
-            <Button variant="outline" size="sm" className="mt-2 w-fit">
+            <Button className="mt-2 w-fit" size="sm" variant="outline">
               Browse files
             </Button>
           </FileUploadTrigger>
@@ -444,7 +441,7 @@ export const WithValidation = meta.story({
               <FileUploadItemPreview />
               <FileUploadItemMetadata />
               <FileUploadItemDelete asChild>
-                <Button variant="ghost" size="icon" className="size-7">
+                <Button className="size-7" size="icon" variant="ghost">
                   <XIcon />
                 </Button>
               </FileUploadItemDelete>
@@ -505,36 +502,36 @@ export const DirectUpload = meta.story({
 
     return (
       <FileUpload
-        value={files}
-        onValueChange={setFiles}
-        onUpload={onUpload}
-        onFileReject={onFileReject}
-        maxFiles={2}
         className="w-full max-w-md"
+        maxFiles={2}
         multiple
+        onFileReject={onFileReject}
+        onUpload={onUpload}
+        onValueChange={setFiles}
+        value={files}
       >
         <FileUploadDropzone>
           <div className="flex flex-col items-center gap-1 text-center">
             <div className="flex items-center justify-center rounded-full border p-2.5">
-              <UploadIcon className="text-muted-foreground size-6" />
+              <UploadIcon className="size-6 text-muted-foreground" />
             </div>
-            <p className="text-sm font-medium">Drag & drop files here</p>
+            <p className="font-medium text-sm">Drag & drop files here</p>
             <p className="text-muted-foreground text-xs">Or click to browse (max 2 files)</p>
           </div>
           <FileUploadTrigger asChild>
-            <Button variant="outline" size="sm" className="mt-2 w-fit">
+            <Button className="mt-2 w-fit" size="sm" variant="outline">
               Browse files
             </Button>
           </FileUploadTrigger>
         </FileUploadDropzone>
         <FileUploadList>
           {files.map((file, index) => (
-            <FileUploadItem key={index} value={file} className="flex-col">
+            <FileUploadItem className="flex-col" key={index} value={file}>
               <div className="flex w-full items-center gap-2">
                 <FileUploadItemPreview />
                 <FileUploadItemMetadata />
                 <FileUploadItemDelete asChild>
-                  <Button variant="ghost" size="icon" className="size-7">
+                  <Button className="size-7" size="icon" variant="ghost">
                     <XIcon />
                   </Button>
                 </FileUploadItemDelete>
@@ -611,38 +608,38 @@ export const CircularProgress = meta.story({
     return (
       <>
         <FileUpload
-          value={files}
-          onValueChange={setFiles}
+          className="w-full max-w-md"
           maxFiles={10}
           maxSize={5 * 1024 * 1024}
-          className="w-full max-w-md"
-          onUpload={onUpload}
-          onFileReject={onFileReject}
           multiple
+          onFileReject={onFileReject}
+          onUpload={onUpload}
+          onValueChange={setFiles}
+          value={files}
         >
           <FileUploadDropzone>
             <div className="flex flex-col items-center gap-1 text-center">
               <div className="flex items-center justify-center rounded-full border p-2.5">
-                <UploadIcon className="text-muted-foreground size-6" />
+                <UploadIcon className="size-6 text-muted-foreground" />
               </div>
-              <p className="text-sm font-medium">Drag & drop files here</p>
+              <p className="font-medium text-sm">Drag & drop files here</p>
               <p className="text-muted-foreground text-xs">Or click to browse (max 10 files, up to 5MB each)</p>
             </div>
             <FileUploadTrigger asChild>
-              <Button variant="outline" size="sm" className="mt-2 w-fit">
+              <Button className="mt-2 w-fit" size="sm" variant="outline">
                 Browse files
               </Button>
             </FileUploadTrigger>
           </FileUploadDropzone>
           <FileUploadList orientation="horizontal">
             {files.map((file, index) => (
-              <FileUploadItem key={index} value={file} className="p-0">
+              <FileUploadItem className="p-0" key={index} value={file}>
                 <FileUploadItemPreview className="size-20 [&>svg]:size-12">
-                  <FileUploadItemProgress variant="circular" size={40} />
+                  <FileUploadItemProgress size={40} variant="circular" />
                 </FileUploadItemPreview>
                 <FileUploadItemMetadata className="sr-only" />
                 <FileUploadItemDelete asChild>
-                  <Button variant="secondary" size="icon" className="absolute -top-1 -right-1 size-5 rounded-full">
+                  <Button className="absolute -top-1 -right-1 size-5 rounded-full" size="icon" variant="secondary">
                     <XIcon className="size-3" />
                   </Button>
                 </FileUploadItemDelete>
@@ -719,38 +716,38 @@ export const FillProgress = meta.story({
     return (
       <>
         <FileUpload
-          value={files}
-          onValueChange={setFiles}
+          className="w-full max-w-md"
           maxFiles={10}
           maxSize={5 * 1024 * 1024}
-          className="w-full max-w-md"
-          onUpload={onUpload}
-          onFileReject={onFileReject}
           multiple
+          onFileReject={onFileReject}
+          onUpload={onUpload}
+          onValueChange={setFiles}
+          value={files}
         >
           <FileUploadDropzone>
             <div className="flex flex-col items-center gap-1 text-center">
               <div className="flex items-center justify-center rounded-full border p-2.5">
-                <UploadIcon className="text-muted-foreground size-6" />
+                <UploadIcon className="size-6 text-muted-foreground" />
               </div>
-              <p className="text-sm font-medium">Drag & drop files here</p>
+              <p className="font-medium text-sm">Drag & drop files here</p>
               <p className="text-muted-foreground text-xs">Or click to browse (max 10 files, up to 5MB each)</p>
             </div>
             <FileUploadTrigger asChild>
-              <Button variant="outline" size="sm" className="mt-2 w-fit">
+              <Button className="mt-2 w-fit" size="sm" variant="outline">
                 Browse files
               </Button>
             </FileUploadTrigger>
           </FileUploadDropzone>
           <FileUploadList orientation="horizontal">
             {files.map((file, index) => (
-              <FileUploadItem key={index} value={file} className="p-0">
+              <FileUploadItem className="p-0" key={index} value={file}>
                 <FileUploadItemPreview className="size-20">
                   <FileUploadItemProgress variant="fill" />
                 </FileUploadItemPreview>
                 <FileUploadItemMetadata className="sr-only" />
                 <FileUploadItemDelete asChild>
-                  <Button variant="secondary" size="icon" className="absolute -top-1 -right-1 size-5 rounded-full">
+                  <Button className="absolute -top-1 -right-1 size-5 rounded-full" size="icon" variant="secondary">
                     <XIcon className="size-3" />
                   </Button>
                 </FileUploadItemDelete>

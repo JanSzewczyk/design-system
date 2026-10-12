@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Switch as SwitchPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -13,8 +12,8 @@ export type SwitchProps = React.ComponentProps<typeof SwitchPrimitive.Root> & {
 
 export function Switch({ className, size = "default", ...props }: SwitchProps) {
   return (
-    <SwitchPrimitive.Root data-slot="switch" className={cn(switchVariants({ size }), className)} {...props}>
-      <SwitchPrimitive.Thumb data-slot="switch-thumb" className={switchThumbVariants({ size })} />
+    <SwitchPrimitive.Root className={cn(switchVariants({ size }), className)} data-slot="switch" {...props}>
+      <SwitchPrimitive.Thumb className={switchThumbVariants({ size })} data-slot="switch-thumb" />
     </SwitchPrimitive.Root>
   );
 }

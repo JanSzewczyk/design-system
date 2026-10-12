@@ -11,20 +11,20 @@ export const toggleVariants = cva(
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
   ],
   {
+    defaultVariants: {
+      size: "default",
+      variant: "default"
+    },
     variants: {
+      size: {
+        default: "h-8 min-w-8 px-2.5",
+        lg: "h-9 min-w-9 px-2.5",
+        sm: "h-7 min-w-7 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3.5"
+      },
       variant: {
         default: "bg-transparent",
         outline: "border border-input bg-transparent hover:bg-muted"
-      },
-      size: {
-        sm: "h-7 min-w-7 px-2.5 text-xs [&_svg:not([class*='size-'])]:size-3.5",
-        default: "h-8 min-w-8 px-2.5",
-        lg: "h-9 min-w-9 px-2.5"
       }
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default"
     }
   }
 );

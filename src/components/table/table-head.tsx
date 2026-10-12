@@ -7,11 +7,11 @@ export type TableHeadProps = React.ComponentProps<"th">;
 export function TableHead({ className, ...props }: TableHeadProps) {
   return (
     <th
-      data-slot="table-head"
       className={cn(
-        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0",
+        "h-10 whitespace-nowrap px-2 text-left align-middle font-medium text-foreground [&:has([role=checkbox])]:pr-0",
         className
       )}
+      data-slot="table-head"
       {...props}
     />
   );

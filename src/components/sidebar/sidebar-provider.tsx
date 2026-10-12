@@ -58,13 +58,14 @@ export function SidebarProvider({
   const state = open ? "expanded" : "collapsed";
 
   const contextValue = React.useMemo<SidebarContextValue>(
-    () => ({ state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar }),
+    () => ({ isMobile, open, openMobile, setOpen, setOpenMobile, state, toggleSidebar }),
     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   );
 
   return (
     <SidebarContext.Provider value={contextValue}>
       <div
+        className={cn("group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar", className)}
         data-slot="sidebar-wrapper"
         style={
           {
@@ -73,7 +74,6 @@ export function SidebarProvider({
             ...style
           } as React.CSSProperties
         }
-        className={cn("group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full", className)}
         {...props}
       >
         {children}

@@ -1,10 +1,8 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
-
-import { useFileUploadItemContext } from "./file-upload-item.context";
+import * as React from "react";
 import { ITEM_DELETE_NAME } from "./file-upload.constants";
 import { useFileUploadStoreContext } from "./file-upload.store";
+import { useFileUploadItemContext } from "./file-upload-item.context";
 
 export type FileUploadItemDeleteProps = React.ComponentProps<"button"> & {
   asChild?: boolean;
@@ -23,8 +21,8 @@ export function FileUploadItemDelete(props: FileUploadItemDeleteProps) {
       if (!itemContext.fileState || event.defaultPrevented) return;
 
       store.dispatch({
-        type: "REMOVE_FILE",
-        file: itemContext.fileState.file
+        file: itemContext.fileState.file,
+        type: "REMOVE_FILE"
       });
     },
     [store, itemContext.fileState, onClickProp]
@@ -36,10 +34,10 @@ export function FileUploadItemDelete(props: FileUploadItemDeleteProps) {
 
   return (
     <ItemDeletePrimitive
-      type="button"
       aria-controls={itemContext.id}
       aria-describedby={itemContext.nameId}
       data-slot="file-upload-item-delete"
+      type="button"
       {...deleteProps}
       onClick={onClick}
     />

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 import { STEPPER_CONTENT_NAME } from "./stepper.constants";
@@ -37,14 +36,14 @@ export function StepperContent({
 
   return (
     <ContentPrimitive
+      aria-labelledby={triggerId}
+      className={cn("w-full", className, !isActive && forceMount && "hidden")}
+      data-slot="stepper-content"
+      data-state={value}
+      dir={context.dir}
+      hidden={!isActive && forceMount}
       id={contentId}
       role="tabpanel"
-      data-state={value}
-      aria-labelledby={triggerId}
-      data-slot="stepper-content"
-      dir={context.dir}
-      className={cn("w-full", className, !isActive && forceMount && "hidden")}
-      hidden={!isActive && forceMount}
       {...props}
     />
   );

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { PipetteIcon } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "~/components/button";
 
@@ -44,10 +43,10 @@ export function ColorPickerEyeDropper(props: ColorPickerEyeDropperProps) {
     <Button
       data-slot="color-picker-eye-dropper"
       {...buttonProps}
-      variant="outline"
-      size={size}
-      onClick={onEyeDropper}
       disabled={isDisabled}
+      onClick={onEyeDropper}
+      size={size}
+      variant="outline"
     >
       {children ?? <PipetteIcon />}
     </Button>

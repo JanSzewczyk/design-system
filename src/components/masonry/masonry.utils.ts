@@ -21,8 +21,8 @@ export function addInterval(treeNode: MasonryTreeNode, high: number, index: numb
     node = node.next;
   }
 
-  if (!prevNode) treeNode.list = { index, high, next: node };
-  if (prevNode) prevNode.next = { index, high, next: prevNode.next };
+  if (!prevNode) treeNode.list = { high, index, next: node };
+  if (prevNode) prevNode.next = { high, index, next: prevNode.next };
 
   return true;
 }
@@ -49,14 +49,14 @@ export function removeInterval(treeNode: MasonryTreeNode, index: number): NodeOp
 }
 
 export const SENTINEL_NODE: MasonryTreeNode = {
+  color: NODE_COLOR.SENTINEL,
+  high: 0,
+  left: undefined as unknown as MasonryTreeNode,
+  list: undefined as unknown as MasonryListNode,
   low: 0,
   max: 0,
-  high: 0,
-  color: NODE_COLOR.SENTINEL,
   parent: undefined as unknown as MasonryTreeNode,
-  right: undefined as unknown as MasonryTreeNode,
-  left: undefined as unknown as MasonryTreeNode,
-  list: undefined as unknown as MasonryListNode
+  right: undefined as unknown as MasonryTreeNode
 };
 
 SENTINEL_NODE.parent = SENTINEL_NODE;
@@ -277,14 +277,14 @@ export function createIntervalTree(): MasonryIntervalTree {
       }
 
       const z: MasonryTreeNode = {
-        low,
-        high,
-        max: high,
         color: NODE_COLOR.RED,
-        parent: y,
+        high,
         left: SENTINEL_NODE,
-        right: SENTINEL_NODE,
-        list: { index, high, next: null }
+        list: { high, index, next: null },
+        low,
+        max: high,
+        parent: y,
+        right: SENTINEL_NODE
       };
 
       if (y === SENTINEL_NODE) {
@@ -395,12 +395,12 @@ export function onDeepMemo<T extends unknown[], U>(
       cache = obj as unknown as MasonryCache;
     }
     return {
+      get(k: MasonryCacheKey): unknown | undefined {
+        return cache.get(k);
+      },
       set(k: MasonryCacheKey, v: unknown): unknown {
         cache.set(k, v);
         return v;
-      },
-      get(k: MasonryCacheKey): unknown | undefined {
-        return cache.get(k);
       }
     };
   }

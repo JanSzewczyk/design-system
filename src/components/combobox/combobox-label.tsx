@@ -6,8 +6,8 @@ export type ComboboxLabelProps = ComboboxPrimitive.GroupLabel.Props;
 export function ComboboxLabel({ className, ...props }: ComboboxLabelProps) {
   return (
     <ComboboxPrimitive.GroupLabel
+      className={cn("px-2 py-1.5 text-muted-foreground text-xs", className)}
       data-slot="combobox-label"
-      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
       {...props}
     />
   );

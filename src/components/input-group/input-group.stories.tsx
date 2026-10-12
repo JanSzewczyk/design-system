@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -16,8 +14,10 @@ import {
   StarIcon,
   UserIcon
 } from "lucide-react";
+import * as React from "react";
 
 import { expect, screen, waitFor } from "storybook/test";
+import preview from "~/.storybook/preview";
 import {
   Field,
   FieldDescription,
@@ -36,15 +36,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/components/dropdown-menu";
-
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Input Group",
   component: InputGroup,
-  decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>]
+  decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>],
+  title: "Components/Input Group"
 });
 
 // Helper: find the InputGroup element (data-slot="input-group") among all role="group" elements.
@@ -109,7 +106,7 @@ export const AlignInlineEnd = meta.story({
     <Field>
       <FieldLabel htmlFor="ig-inline-end">Password</FieldLabel>
       <InputGroup>
-        <InputGroupInput id="ig-inline-end" type="password" placeholder="Enter password" />
+        <InputGroupInput id="ig-inline-end" placeholder="Enter password" type="password" />
         <InputGroupAddon align="inline-end">
           <EyeOffIcon />
         </InputGroupAddon>
@@ -143,13 +140,13 @@ export const AlignBlockStart = meta.story({
         <FieldLabel htmlFor="ig-block-start-textarea">Textarea</FieldLabel>
         <InputGroup>
           <InputGroupTextarea
+            className="font-mono text-sm"
             id="ig-block-start-textarea"
             placeholder="console.log('Hello, world!');"
-            className="font-mono text-sm"
           />
           <InputGroupAddon align="block-start">
             <InputGroupText className="font-mono">script.js</InputGroupText>
-            <InputGroupButton size="icon-xs" className="ml-auto" aria-label="Copy">
+            <InputGroupButton aria-label="Copy" className="ml-auto" size="icon-xs">
               <CopyIcon />
             </InputGroupButton>
           </InputGroupAddon>
@@ -195,7 +192,7 @@ export const AlignBlockEnd = meta.story({
           <InputGroupTextarea id="ig-block-end-textarea" placeholder="Write a comment..." />
           <InputGroupAddon align="block-end">
             <InputGroupText>0/280</InputGroupText>
-            <InputGroupButton variant="default" size="sm" className="ml-auto">
+            <InputGroupButton className="ml-auto" size="sm" variant="default">
               Post
             </InputGroupButton>
           </InputGroupAddon>
@@ -222,8 +219,8 @@ AlignBlockEnd.test("post button in block-end addon is visible", async ({ canvas 
 });
 
 export const IconStory = meta.story({
-  name: "Icon",
   decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>],
+  name: "Icon",
   render: () => (
     <div className="grid gap-6">
       <InputGroup>
@@ -233,7 +230,7 @@ export const IconStory = meta.story({
         </InputGroupAddon>
       </InputGroup>
       <InputGroup>
-        <InputGroupInput type="email" placeholder="Enter your email" />
+        <InputGroupInput placeholder="Enter your email" type="email" />
         <InputGroupAddon>
           <MailIcon />
         </InputGroupAddon>
@@ -339,7 +336,7 @@ export const ButtonStory = meta.story({
         <InputGroup>
           <InputGroupInput placeholder="https://x.com/shadcn" readOnly />
           <InputGroupAddon align="inline-end">
-            <InputGroupButton size="icon-xs" aria-label="Copy" onClick={handleCopy}>
+            <InputGroupButton aria-label="Copy" onClick={handleCopy} size="icon-xs">
               {isCopied ? <CheckIcon /> : <CopyIcon />}
             </InputGroupButton>
           </InputGroupAddon>
@@ -348,7 +345,7 @@ export const ButtonStory = meta.story({
           <Popover>
             <PopoverTrigger asChild>
               <InputGroupAddon>
-                <InputGroupButton variant="secondary" size="icon-xs" aria-label="Info">
+                <InputGroupButton aria-label="Info" size="icon-xs" variant="secondary">
                   <InfoIcon />
                 </InputGroupButton>
               </InputGroupAddon>
@@ -360,10 +357,10 @@ export const ButtonStory = meta.story({
           </Popover>
           <InputGroupInput placeholder="https://" />
           <InputGroupAddon align="inline-end">
-            <InputGroupButton size="icon-xs" aria-label="Toggle favorite" onClick={() => setIsFavorite(!isFavorite)}>
+            <InputGroupButton aria-label="Toggle favorite" onClick={() => setIsFavorite(!isFavorite)} size="icon-xs">
               <StarIcon
-                data-active={isFavorite}
                 className="data-[active=true]:fill-blue-600 data-[active=true]:stroke-blue-600"
+                data-active={isFavorite}
               />
             </InputGroupButton>
           </InputGroupAddon>
@@ -433,7 +430,7 @@ export const DropdownStory = meta.story({
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <InputGroupButton variant="ghost" size="icon-xs" aria-label="More">
+              <InputGroupButton aria-label="More" size="icon-xs" variant="ghost">
                 <MoreHorizontalIcon />
               </InputGroupButton>
             </DropdownMenuTrigger>
@@ -452,7 +449,7 @@ export const DropdownStory = meta.story({
         <InputGroupAddon align="inline-end">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <InputGroupButton variant="ghost" className="pr-1.5! text-xs">
+              <InputGroupButton className="pr-1.5! text-xs" variant="ghost">
                 Search In... <ChevronDownIcon className="size-3" />
               </InputGroupButton>
             </DropdownMenuTrigger>
@@ -533,23 +530,23 @@ SpinnerStory.test("all inputs are visible", async ({ canvas }) => {
 });
 
 export const CodeEditorTextarea = meta.story({
-  name: "Textarea",
   decorators: [(Story) => <div className="w-full max-w-md">{Story()}</div>],
+  name: "Textarea",
   render: () => (
     <InputGroup>
-      <InputGroupTextarea placeholder="console.log('Hello, world!');" className="min-h-50" />
+      <InputGroupTextarea className="min-h-50" placeholder="console.log('Hello, world!');" />
       <InputGroupAddon align="block-end" className="border-t">
         <InputGroupText>Line 1, Column 1</InputGroupText>
-        <InputGroupButton size="sm" className="ml-auto" variant="default" aria-label="Run">
+        <InputGroupButton aria-label="Run" className="ml-auto" size="sm" variant="default">
           Run <PlayIcon />
         </InputGroupButton>
       </InputGroupAddon>
       <InputGroupAddon align="block-start" className="border-b">
-        <InputGroupText className="font-mono font-medium">script.js</InputGroupText>
-        <InputGroupButton className="ml-auto" size="icon-xs" aria-label="Refresh">
+        <InputGroupText className="font-medium font-mono">script.js</InputGroupText>
+        <InputGroupButton aria-label="Refresh" className="ml-auto" size="icon-xs">
           <RefreshCwIcon />
         </InputGroupButton>
-        <InputGroupButton variant="ghost" size="icon-xs" aria-label="Copy">
+        <InputGroupButton aria-label="Copy" size="icon-xs" variant="ghost">
           <CopyIcon />
         </InputGroupButton>
       </InputGroupAddon>
@@ -586,7 +583,7 @@ export const Disabled = meta.story({
           <UserIcon />
         </InputGroupText>
       </InputGroupAddon>
-      <InputGroupInput placeholder="Username" disabled />
+      <InputGroupInput disabled placeholder="Username" />
     </InputGroup>
   )
 });
@@ -604,7 +601,7 @@ Disabled.test("input is disabled", async ({ canvas }) => {
 export const Invalid = meta.story({
   render: () => (
     <InputGroup invalid>
-      <InputGroupInput placeholder="Email" aria-invalid="true" />
+      <InputGroupInput aria-invalid="true" placeholder="Email" />
     </InputGroup>
   )
 });

@@ -1,20 +1,16 @@
-import * as React from "react";
-
 import { ArrowDownSquare, ArrowUpRightIcon } from "lucide-react";
-
+import preview from "~/.storybook/preview";
 import { Button } from "./button";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Button",
-  component: Button,
   argTypes: {
     children: {
       control: "text"
     }
   },
-  tags: ["autodocs", "beta"]
+  component: Button,
+  tags: ["autodocs", "beta"],
+  title: "Components/Button"
 });
 
 export const Variants = meta.story({
@@ -33,22 +29,22 @@ export const Variants = meta.story({
 export const Disabled = meta.story({
   render: () => (
     <div className="flex flex-col items-start gap-8 sm:flex-row">
-      <Button variant="default" disabled>
+      <Button disabled variant="default">
         Default
       </Button>
-      <Button variant="secondary" disabled>
+      <Button disabled variant="secondary">
         Secondary
       </Button>
-      <Button variant="outline" disabled>
+      <Button disabled variant="outline">
         Outline
       </Button>
-      <Button variant="ghost" disabled>
+      <Button disabled variant="ghost">
         Ghost
       </Button>
-      <Button variant="link" disabled>
+      <Button disabled variant="link">
         Link
       </Button>
-      <Button variant="error" disabled>
+      <Button disabled variant="error">
         Error
       </Button>
     </div>
@@ -62,7 +58,7 @@ export const Sizes = meta.story({
         <Button size="xs" variant="outline">
           XSmall
         </Button>
-        <Button size="icon-xs" aria-label="Submit" variant="outline">
+        <Button aria-label="Submit" size="icon-xs" variant="outline">
           <ArrowUpRightIcon />
         </Button>
       </div>
@@ -70,21 +66,21 @@ export const Sizes = meta.story({
         <Button size="sm" variant="outline">
           Small
         </Button>
-        <Button size="icon-sm" aria-label="Submit" variant="outline">
+        <Button aria-label="Submit" size="icon-sm" variant="outline">
           <ArrowUpRightIcon />
         </Button>
       </div>
       <div className="flex items-start gap-2">
         <Button variant="outline">Default</Button>
-        <Button size="icon" aria-label="Submit" variant="outline">
+        <Button aria-label="Submit" size="icon" variant="outline">
           <ArrowUpRightIcon />
         </Button>
       </div>
       <div className="flex items-start gap-2">
-        <Button variant="outline" size="lg">
+        <Button size="lg" variant="outline">
           Large
         </Button>
-        <Button size="icon-lg" aria-label="Submit" variant="outline">
+        <Button aria-label="Submit" size="icon-lg" variant="outline">
           <ArrowUpRightIcon />
         </Button>
       </div>
@@ -112,13 +108,13 @@ export const WithIcon = meta.story({
 export const Loading = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Button variant="outline" loading>
+      <Button loading variant="outline">
         LEFT LOADING
       </Button>
       <Button loading loadingPosition="end">
         RIGHT LOADING
       </Button>
-      <Button size="icon" loading>
+      <Button loading size="icon">
         <ArrowUpRightIcon />
       </Button>
     </div>
@@ -134,12 +130,12 @@ export const AsLink = meta.story({
       <Button asChild disabled>
         <a href="">Icon button - disabled</a>
       </Button>
-      <Button size="icon" asChild>
+      <Button asChild size="icon">
         <a href="">
           <ArrowUpRightIcon />
         </a>
       </Button>
-      <Button size="icon" asChild disabled>
+      <Button asChild disabled size="icon">
         <a href="">
           <ArrowUpRightIcon />
         </a>

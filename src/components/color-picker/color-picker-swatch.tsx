@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -44,9 +43,9 @@ export function ColorPickerSwatch(props: ColorPickerSwatchProps) {
 
   return (
     <SwatchPrimitive
-      role="img"
       aria-label={ariaLabel}
       data-slot="color-picker-swatch"
+      role="img"
       {...swatchProps}
       className={cn("box-border size-8 rounded-sm border shadow-sm", context.disabled && "opacity-50", className)}
       style={{ ...backgroundStyle, forcedColorAdjust: "none" }}

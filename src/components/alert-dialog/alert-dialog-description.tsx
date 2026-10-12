@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -9,11 +8,11 @@ export type AlertDialogDescriptionProps = React.ComponentProps<typeof AlertDialo
 export function AlertDialogDescription({ className, ...props }: AlertDialogDescriptionProps) {
   return (
     <AlertDialogPrimitive.Description
-      data-slot="alert-dialog-description"
       className={cn(
-        "text-muted-foreground *:[a]:hover:text-foreground text-sm text-balance md:text-pretty *:[a]:underline *:[a]:underline-offset-3",
+        "text-balance text-muted-foreground text-sm md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
         className
       )}
+      data-slot="alert-dialog-description"
       {...props}
     />
   );

@@ -1,6 +1,5 @@
-import path from "path";
-
 import fs from "fs/promises";
+import path from "path";
 
 export async function updateFilesWithText(filePaths, text) {
   for (const filePath of filePaths) {
@@ -30,8 +29,8 @@ async function copyDts(dir: string) {
 // Collect every component entry file (barrel + per-component `index.js`/`index.cjs`).
 // esbuild strips the "use client" directive during bundling, so it must be re-added to
 // each client boundary — now one per component, not just the barrel.
-export async function collectComponentEntries(dir: string): Promise<Array<string>> {
-  const result: Array<string> = [];
+export async function collectComponentEntries(dir: string): Promise<string[]> {
+  const result: string[] = [];
   const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);

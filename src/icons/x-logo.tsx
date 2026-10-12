@@ -3,12 +3,12 @@ import * as React from "react";
 export function XLogoIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      id="Layer_1"
-      width="24px"
       height="24px"
+      id="Layer_1"
+      version="1.1"
       viewBox="0 0 24 24"
+      width="24px"
+      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path

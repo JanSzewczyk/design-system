@@ -1,13 +1,11 @@
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Tabs",
   component: Tabs,
-  subcomponents: { TabsList, TabsTrigger, TabsContent }
+  subcomponents: { TabsContent, TabsList, TabsTrigger },
+  title: "Components/Tabs"
 });
 
 // ---------------------------------------------------------------------------
@@ -18,7 +16,7 @@ export const TabsStory = meta.story({
   name: "Tabs",
   render() {
     return (
-      <Tabs defaultValue="overview" className="w-140">
+      <Tabs className="w-140" defaultValue="overview">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -27,8 +25,8 @@ export const TabsStory = meta.story({
         </TabsList>
         <TabsContent value="overview">
           <div className="rounded-lg border p-4">
-            <h3 className="text-lg font-semibold">Overview</h3>
-            <p className="text-muted-foreground mt-2 text-sm">
+            <h3 className="font-semibold text-lg">Overview</h3>
+            <p className="mt-2 text-muted-foreground text-sm">
               View your key metrics and recent project activity. Track progress across all your active projects.
             </p>
             <p className="mt-2 text-sm">You have 12 active projects and 3 pending tasks.</p>
@@ -36,8 +34,8 @@ export const TabsStory = meta.story({
         </TabsContent>
         <TabsContent value="analytics">
           <div className="rounded-lg border p-4">
-            <h3 className="text-lg font-semibold">Analytics</h3>
-            <p className="text-muted-foreground mt-2 text-sm">
+            <h3 className="font-semibold text-lg">Analytics</h3>
+            <p className="mt-2 text-muted-foreground text-sm">
               Track performance and user engagement metrics. Monitor trends and identify growth opportunities.
             </p>
             <p className="mt-2 text-sm">Page views are up 25% compared to last month.</p>
@@ -45,8 +43,8 @@ export const TabsStory = meta.story({
         </TabsContent>
         <TabsContent value="reports">
           <div className="rounded-lg border p-4">
-            <h3 className="text-lg font-semibold">Reports</h3>
-            <p className="text-muted-foreground mt-2 text-sm">
+            <h3 className="font-semibold text-lg">Reports</h3>
+            <p className="mt-2 text-muted-foreground text-sm">
               Generate and download your detailed reports. Export data in multiple formats for analysis.
             </p>
             <p className="mt-2 text-sm">You have 5 reports ready and available to export.</p>
@@ -54,8 +52,8 @@ export const TabsStory = meta.story({
         </TabsContent>
         <TabsContent value="settings">
           <div className="rounded-lg border p-4">
-            <h3 className="text-lg font-semibold">Settings</h3>
-            <p className="text-muted-foreground mt-2 text-sm">
+            <h3 className="font-semibold text-lg">Settings</h3>
+            <p className="mt-2 text-muted-foreground text-sm">
               Manage your account preferences and options. Customize your experience to fit your needs.
             </p>
             <p className="mt-2 text-sm">Configure notifications, security, and themes.</p>
@@ -108,7 +106,7 @@ TabsStory.test("Clicking Settings tab shows Settings content", async ({ canvas, 
 export const LineVariant = meta.story({
   render() {
     return (
-      <Tabs defaultValue="overview" className="w-125">
+      <Tabs className="w-125" defaultValue="overview">
         <TabsList variant="line">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -154,7 +152,7 @@ LineVariant.test("Clicking Analytics tab switches content", async ({ canvas, use
 export const VerticalOrientation = meta.story({
   render() {
     return (
-      <Tabs defaultValue="account" orientation="vertical" className="w-150">
+      <Tabs className="w-150" defaultValue="account" orientation="vertical">
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="password">Password</TabsTrigger>
@@ -202,10 +200,10 @@ VerticalOrientation.test("Clicking Password tab activates it", async ({ canvas, 
 export const WithDisabled = meta.story({
   render() {
     return (
-      <Tabs defaultValue="home" className="w-96">
+      <Tabs className="w-96" defaultValue="home">
         <TabsList>
           <TabsTrigger value="home">Home</TabsTrigger>
-          <TabsTrigger value="settings" disabled>
+          <TabsTrigger disabled value="settings">
             Settings
           </TabsTrigger>
         </TabsList>
@@ -243,38 +241,38 @@ WithDisabled.test("Settings tab has data-state=inactive", async ({ canvas }) => 
 export const WithIcons = meta.story({
   render() {
     return (
-      <Tabs defaultValue="preview" className="w-96">
+      <Tabs className="w-96" defaultValue="preview">
         <TabsList>
           <TabsTrigger value="preview">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
+              aria-hidden="true"
               fill="none"
+              height="16"
               stroke="currentColor"
-              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              aria-hidden="true"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <rect height="16" rx="2" width="20" x="2" y="4" />
               <path d="M6 8h.01M2 12h20" />
             </svg>
             Preview
           </TabsTrigger>
           <TabsTrigger value="code">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
+              aria-hidden="true"
               fill="none"
+              height="16"
               stroke="currentColor"
-              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              aria-hidden="true"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <polyline points="16 18 22 12 16 6" />
               <polyline points="8 6 2 12 8 18" />

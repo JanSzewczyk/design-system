@@ -1,10 +1,9 @@
 import * as React from "react";
 
 import { useIsomorphicLayoutEffect } from "~/hooks";
-
-import { MasonryItem, type MasonryItemElement, type MasonryItemProps } from "./masonry-item";
 import { VIEWPORT_NAME } from "./masonry.constants";
 import { useMasonryContext } from "./masonry.context";
+import { MasonryItem, type MasonryItemElement, type MasonryItemProps } from "./masonry-item";
 
 export type MasonryItemPropsWithRef = MasonryItemProps & {
   ref: React.Ref<MasonryItemElement | null>;
@@ -43,11 +42,11 @@ export function MasonryViewport({ children, style, ref, ...props }: MasonryViewp
   const visibleItemStyle = React.useMemo(
     (): React.CSSProperties => ({
       position: "absolute",
-      writingMode: "horizontal-tb",
+      transform: context.isScrolling ? "translateZ(0)" : undefined,
       visibility: "visible",
       width: context.columnWidth,
-      transform: context.isScrolling ? "translateZ(0)" : undefined,
-      willChange: context.isScrolling ? "transform" : undefined
+      willChange: context.isScrolling ? "transform" : undefined,
+      writingMode: "horizontal-tb"
     }),
     [context.columnWidth, context.isScrolling]
   );
@@ -55,9 +54,9 @@ export function MasonryViewport({ children, style, ref, ...props }: MasonryViewp
   const hiddenItemStyle = React.useMemo(
     (): React.CSSProperties => ({
       position: "absolute",
-      writingMode: "horizontal-tb",
       visibility: "hidden",
       width: context.columnWidth,
+      writingMode: "horizontal-tb",
       zIndex: -1000
     }),
     [context.columnWidth]
@@ -69,8 +68,8 @@ export function MasonryViewport({ children, style, ref, ...props }: MasonryViewp
 
     const itemStyle = {
       ...visibleItemStyle,
-      top,
       left,
+      top,
       ...child.props.style
     };
 
@@ -147,13 +146,13 @@ export function MasonryViewport({ children, style, ref, ...props }: MasonryViewp
 
   const containerStyle = React.useMemo(
     () => ({
-      position: "relative" as const,
-      width: "100%",
-      maxWidth: "100%",
       height: Math.ceil(estimatedHeight),
       maxHeight: Math.ceil(estimatedHeight),
-      willChange: context.isScrolling ? "contents" : undefined,
+      maxWidth: "100%",
       pointerEvents: context.isScrolling ? ("none" as const) : undefined,
+      position: "relative" as const,
+      width: "100%",
+      willChange: context.isScrolling ? "contents" : undefined,
       ...style
     }),
     [context.isScrolling, estimatedHeight, style]
@@ -164,7 +163,7 @@ export function MasonryViewport({ children, style, ref, ...props }: MasonryViewp
   }
 
   return (
-    <div ref={ref} style={containerStyle} data-version={mounted ? layoutVersion : undefined} {...props}>
+    <div data-version={mounted ? layoutVersion : undefined} ref={ref} style={containerStyle} {...props}>
       {positionedChildren}
     </div>
   );

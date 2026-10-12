@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Dialog as SheetPrimitive } from "radix-ui";
+import * as React from "react";
 
 export type SheetCloseProps = React.ComponentProps<typeof SheetPrimitive.Close>;
 

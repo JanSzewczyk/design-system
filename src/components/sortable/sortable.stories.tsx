@@ -1,26 +1,22 @@
+import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from "lucide-react";
 import * as React from "react";
 
-import { FileTextIcon, GripVerticalIcon, ImageIcon, MusicIcon, VideoIcon } from "lucide-react";
-
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Badge, type BadgeVariant, Card, CardContent } from "~/components";
 import { cn } from "~/utils";
-
 import { toast } from "../toaster";
-
 import { Sortable, SortableItem, SortableItemHandle } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Sortable",
   component: Sortable,
-  tags: ["autodocs"],
   parameters: {
     docs: {
       subtitle: "A composable drag-and-drop sortable component built on @dnd-kit."
     }
-  }
+  },
+  tags: ["autodocs"],
+  title: "Components/Sortable"
 });
 
 interface SortableItem {
@@ -32,39 +28,39 @@ interface SortableItem {
 }
 const defaultItems: SortableItem[] = [
   {
-    id: "1",
-    title: "Product Demo",
     description: "Main product image",
-    type: "image",
-    size: "2.4 MB"
+    id: "1",
+    size: "2.4 MB",
+    title: "Product Demo",
+    type: "image"
   },
   {
-    id: "2",
-    title: "Product Specification",
     description: "Technical details document",
-    type: "document",
-    size: "1.2 MB"
-  },
-  {
-    id: "3",
-    title: "Product Demo Video",
-    description: "How to use the product",
-    type: "video",
-    size: "15.7 MB"
-  },
-  {
-    id: "4",
-    title: "Product Audio Guide",
-    description: "Audio instructions",
-    type: "audio",
-    size: "8.3 MB"
-  },
-  {
-    id: "5",
+    id: "2",
+    size: "1.2 MB",
     title: "Product Specification",
+    type: "document"
+  },
+  {
+    description: "How to use the product",
+    id: "3",
+    size: "15.7 MB",
+    title: "Product Demo Video",
+    type: "video"
+  },
+  {
+    description: "Audio instructions",
+    id: "4",
+    size: "8.3 MB",
+    title: "Product Audio Guide",
+    type: "audio"
+  },
+  {
     description: "Additional product view",
-    type: "image",
-    size: "3.1 MB"
+    id: "5",
+    size: "3.1 MB",
+    title: "Product Specification",
+    type: "image"
   }
 ];
 const getTypeIcon = (type: SortableItem["type"]) => {
@@ -109,22 +105,22 @@ export const List = meta.story({
     return (
       <div className="mx-auto w-full max-w-xl space-y-8 p-6">
         <Sortable
-          value={items}
-          onValueChange={handleValueChange}
-          getItemValue={getItemValue}
-          strategy="vertical"
           className="space-y-2"
+          getItemValue={getItemValue}
+          onValueChange={handleValueChange}
+          strategy="vertical"
+          value={items}
         >
           {items.map((item) => (
             <SortableItem key={item.id} value={item.id}>
-              <div className="bg-background flex items-center gap-3 rounded border p-3 transition-colors">
+              <div className="flex items-center gap-3 rounded border bg-background p-3 transition-colors">
                 <SortableItemHandle className="text-muted-foreground hover:text-foreground">
                   <GripVerticalIcon className="size-4" />
                 </SortableItemHandle>
-                <div className="text-muted-foreground flex items-center gap-2">{getTypeIcon(item.type)}</div>
+                <div className="flex items-center gap-2 text-muted-foreground">{getTypeIcon(item.type)}</div>
                 <div className="min-w-0 flex-1">
-                  <h4 className="truncate text-sm font-medium">{item.title}</h4>
-                  <p className="text-muted-foreground truncate text-xs">{item.description}</p>
+                  <h4 className="truncate font-medium text-sm">{item.title}</h4>
+                  <p className="truncate text-muted-foreground text-xs">{item.description}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant={getTypeColor(item.type)}>{item.type}</Badge>
@@ -184,76 +180,76 @@ interface GridItem {
 }
 const defaultGridItems: GridItem[] = [
   {
-    id: "1",
-    title: "Hero Image",
     description: "Main banner image",
-    type: "image",
+    id: "1",
+    priority: "high",
     size: "2.4 MB",
-    priority: "high"
+    title: "Hero Image",
+    type: "image"
   },
   {
-    id: "2",
-    title: "Product Specs",
     description: "Technical documentation",
-    type: "document",
+    id: "2",
+    priority: "medium",
     size: "1.2 MB",
-    priority: "medium"
+    title: "Product Specs",
+    type: "document"
   },
   {
-    id: "3",
-    title: "Demo Video",
     description: "Product demonstration",
-    type: "video",
+    id: "3",
+    priority: "high",
     size: "15.7 MB",
-    priority: "high"
+    title: "Demo Video",
+    type: "video"
   },
   {
-    id: "4",
-    title: "Audio Guide",
     description: "Voice instructions",
-    type: "audio",
+    id: "4",
+    priority: "low",
     size: "8.3 MB",
-    priority: "low"
+    title: "Audio Guide",
+    type: "audio"
   },
   {
-    id: "5",
-    title: "Gallery Photo 1",
     description: "Product view 1",
-    type: "image",
+    id: "5",
+    priority: "medium",
     size: "3.1 MB",
-    priority: "medium"
+    title: "Gallery Photo 1",
+    type: "image"
   },
   {
-    id: "6",
-    title: "Gallery Photo 2",
     description: "Product view 2",
-    type: "image",
+    id: "6",
+    priority: "medium",
     size: "2.8 MB",
-    priority: "medium"
+    title: "Gallery Photo 2",
+    type: "image"
   },
   {
-    id: "7",
-    title: "User Manual",
     description: "Installation guide",
-    type: "document",
+    id: "7",
+    priority: "high",
     size: "4.2 MB",
-    priority: "high"
+    title: "User Manual",
+    type: "document"
   },
   {
-    id: "8",
-    title: "Background Music",
     description: "Ambient soundtrack",
-    type: "audio",
+    id: "8",
+    priority: "low",
     size: "12.1 MB",
-    priority: "low"
+    title: "Background Music",
+    type: "audio"
   },
   {
-    id: "9",
-    title: "Feature Highlight",
     description: "Key product features",
-    type: "audio",
+    id: "9",
+    priority: "high",
     size: "N/A",
-    priority: "high"
+    title: "Feature Highlight",
+    type: "audio"
   }
 ];
 const getItemSize = (type: GridItem["type"]) => {
@@ -283,28 +279,28 @@ export const Grid = meta.story({
     return (
       <div className="mx-auto w-full max-w-2xl space-y-6 p-4">
         <Sortable
-          value={items}
-          onValueChange={handleValueChange}
-          getItemValue={getItemValue}
-          strategy="grid"
           className="grid auto-rows-fr grid-cols-3 gap-3"
+          getItemValue={getItemValue}
+          onValueChange={handleValueChange}
+          strategy="grid"
+          value={items}
         >
           {items.map((item) => (
             <SortableItem key={item.id} value={item.id}>
               <div
                 className={cn(
-                  "group bg-background hover:bg-accent/50 relative cursor-pointer rounded-md border p-3 transition-colors",
+                  "group relative cursor-pointer rounded-md border bg-background p-3 transition-colors hover:bg-accent/50",
                   getItemSize(item.type),
                   "flex min-h-25 flex-col"
                 )}
                 onClick={() => {}}
               >
-                <SortableItemHandle className="text-muted-foreground hover:text-foreground absolute inset-e-1.5 top-2.5 z-10 opacity-0 transition-opacity group-hover:opacity-100">
+                <SortableItemHandle className="absolute inset-e-1.5 top-2.5 z-10 text-muted-foreground opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100">
                   <GripVerticalIcon className="h-3.5 w-3.5" />
                 </SortableItemHandle>
                 <div className="min-w-0 flex-1">
-                  <h4 className="truncate text-sm font-medium">{item.title}</h4>
-                  <p className="text-muted-foreground mt-0.5 truncate text-xs">{item.description}</p>
+                  <h4 className="truncate font-medium text-sm">{item.title}</h4>
+                  <p className="mt-0.5 truncate text-muted-foreground text-xs">{item.description}</p>
                 </div>
                 <div className="mt-2 flex items-center justify-between">
                   <Badge variant={getTypeColor(item.type)}>{item.type}</Badge>
@@ -415,11 +411,11 @@ export const Nested = meta.story({
     return (
       <div className="mx-auto w-full max-w-sm space-y-6 p-6">
         <Sortable
-          value={optionGroups}
-          onValueChange={handleParentReorder}
-          getItemValue={getParentValue}
-          strategy="vertical"
           className="space-y-4"
+          getItemValue={getParentValue}
+          onValueChange={handleParentReorder}
+          strategy="vertical"
+          value={optionGroups}
         >
           {optionGroups.map((group) => (
             <SortableItem key={group.id} value={group.id}>
@@ -427,23 +423,23 @@ export const Nested = meta.story({
                 <CardContent className="p-0">
                   {/* Group Header */}
                   <div className="mb-2 flex items-center gap-2">
-                    <SortableItemHandle className="text-muted-foreground hover:text-foreground cursor-grab">
+                    <SortableItemHandle className="cursor-grab text-muted-foreground hover:text-foreground">
                       <GripVerticalIcon className="h-4 w-4" />
                     </SortableItemHandle>
-                    <h3 className="text-sm font-semibold">{group.name}</h3>
+                    <h3 className="font-semibold text-sm">{group.name}</h3>
                   </div>
                   {/* Option Values - Child Level */}
                   <Sortable
-                    value={group.values}
-                    onValueChange={(newValues) => handleChildReorder(group.id, newValues)}
-                    getItemValue={getChildValue}
-                    strategy="vertical"
                     className="space-y-2"
+                    getItemValue={getChildValue}
+                    onValueChange={(newValues) => handleChildReorder(group.id, newValues)}
+                    strategy="vertical"
+                    value={group.values}
                   >
                     {group.values.map((value) => (
                       <SortableItem key={value.id} value={value.id}>
-                        <div className="border-border flex items-center gap-2 rounded-md border p-1.5">
-                          <SortableItemHandle className="text-muted-foreground hover:text-foreground cursor-grab">
+                        <div className="flex items-center gap-2 rounded-md border border-border p-1.5">
+                          <SortableItemHandle className="cursor-grab text-muted-foreground hover:text-foreground">
                             <GripVerticalIcon className="h-4 w-4" />
                           </SortableItemHandle>
                           <span className="flex-1 text-sm">{value.value}</span>

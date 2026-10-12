@@ -1,6 +1,5 @@
-import React from "react";
-
 import { Select as SelectPrimitive } from "radix-ui";
+import React from "react";
 
 import { cn } from "~/utils";
 
@@ -9,8 +8,8 @@ export type SelectSeparatorProps = React.ComponentProps<typeof SelectPrimitive.S
 export function SelectSeparator({ className, ...props }: SelectSeparatorProps) {
   return (
     <SelectPrimitive.Separator
+      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
       data-slot="select-separator"
-      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
       {...props}
     />
   );

@@ -1,23 +1,21 @@
 import { SearchIcon } from "lucide-react";
-
+import preview from "~/.storybook/preview";
 import {
+  Button,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
   Kbd,
   KbdGroup,
-  Button,
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
-  InputGroup,
-  InputGroupInput,
-  InputGroupAddon
+  TooltipTrigger
 } from "~/components";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Kbd",
   component: Kbd,
-  decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>]
+  decorators: [(Story) => <div className="w-full max-w-sm">{Story()}</div>],
+  title: "Components/Kbd"
 });
 
 export const KbdStory = meta.story({
@@ -64,7 +62,7 @@ export const ButtonStory = meta.story({
     return (
       <Button variant="outline">
         Accept{" "}
-        <Kbd data-icon="inline-end" className="translate-x-0.5">
+        <Kbd className="translate-x-0.5" data-icon="inline-end">
           ⏎
         </Kbd>
       </Button>

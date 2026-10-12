@@ -1,12 +1,10 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
-
-import { useStepperItemContext } from "./stepper-item.context";
 import { STEPPER_TITLE_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { getId } from "./stepper.utils";
+import { useStepperItemContext } from "./stepper-item.context";
 
 export type StepperTitleProps = React.ComponentProps<"h3"> & {
   asChild?: boolean;
@@ -22,10 +20,10 @@ export function StepperTitle({ className, asChild = false, ...props }: StepperTi
 
   return (
     <TitlePrimitive
-      id={titleId}
+      className={cn("font-medium text-sm leading-none", className)}
       data-slot="stepper-title"
       dir={context.dir}
-      className={cn("text-sm leading-none font-medium", className)}
+      id={titleId}
       {...props}
     />
   );

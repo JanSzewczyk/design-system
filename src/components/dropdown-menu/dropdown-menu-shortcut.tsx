@@ -7,11 +7,11 @@ export type DropdownMenuShortcutProps = React.ComponentProps<"span">;
 export function DropdownMenuShortcut({ className, ...props }: DropdownMenuShortcutProps) {
   return (
     <span
-      data-slot="dropdown-menu-shortcut"
       className={cn(
-        "text-muted-foreground group-focus/dropdown-menu-item:text-accent-foreground ml-auto text-xs tracking-widest",
+        "ml-auto text-muted-foreground text-xs tracking-widest group-focus/dropdown-menu-item:text-accent-foreground",
         className
       )}
+      data-slot="dropdown-menu-shortcut"
       {...props}
     />
   );
