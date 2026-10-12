@@ -14,6 +14,7 @@ and modular exports for optimal tree-shaking.
 - Tailwind CSS 4+ with OKLCH color space
 - Radix UI for accessible primitives
 - CVA for type-safe variant styling
+- Biome for linting and formatting
 - Vitest + Playwright for testing
 - Storybook 10+ (CSF Next format) for documentation
 - tsup for bundling (ESM + CJS)
@@ -32,8 +33,8 @@ npm run test:ui          # Run tests with interactive UI
 
 ```bash
 npm run type-check       # TypeScript type checking
-npm run lint             # ESLint checking
-npm run prettier:check   # Code formatting check
+npm run lint             # Biome lint checking
+npm run format:check     # Biome format checking
 npm run test             # All tests (unit + Storybook integration)
 npm run build            # Build library (tsup + CSS copy + post-build)
 ```
@@ -51,8 +52,9 @@ npx playwright install --with-deps  # Install Playwright browsers (required for 
 ### Fixes
 
 ```bash
-npm run lint:fix         # Auto-fix ESLint issues
-npm run prettier:write   # Auto-format code
+npm run lint:fix         # Auto-fix Biome lint issues
+npm run format            # Auto-format code with Biome
+npm run check:fix         # Apply lint + format + assist fixes in one pass
 ```
 
 ## Architecture
@@ -261,7 +263,7 @@ OutlineVariant.test("Clicking item selects it", async ({ canvas, userEvent, step
 
 ## CI/CD
 
-**PR Checks** (`.github/workflows/pr-check.yml`): type-check, prettier, ESLint, unit tests, Storybook tests, Storybook build, library build, dependency review.
+**PR Checks** (`.github/workflows/pr-check.yml`): type-check, Biome (lint + format), unit tests, Storybook tests, Storybook build, library build, dependency review.
 
 **Publishing:** semantic-release on main branch, version bumps from conventional commits.
 

@@ -4,10 +4,9 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    reporters: process.env.CI ? ["dot", "github-actions"] : ["tree"],
     coverage: {
-      provider: "v8",
       include: ["src/**/*.{ts,tsx}"],
+      provider: "v8",
       reporter: ["text", "html", "json-summary", "json"],
       reportOnFailure: true
     },
@@ -18,10 +17,10 @@ export default defineConfig({
           tsconfigPaths: true
         },
         test: {
-          name: "unit",
+          environment: "happy-dom",
           globals: true,
           include: ["**\/*.{test,spec}.{ts,js,tsx,jsx}"],
-          environment: "happy-dom",
+          name: "unit",
           setupFiles: ["src/tests/unit/vitest.setup.ts"]
         }
       },
@@ -31,21 +30,22 @@ export default defineConfig({
           tsconfigPaths: true
         },
         test: {
-          name: "storybook",
-          exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**"],
           browser: {
             enabled: true,
-            provider: playwright(),
             instances: [
               {
                 browser: "chromium",
                 headless: true
               }
-            ]
+            ],
+            provider: playwright()
           },
+          exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**"],
+          name: "storybook",
           setupFiles: ["src/tests/integration/vitest.setup.ts"]
         }
       }
-    ]
+    ],
+    reporters: process.env.CI ? ["dot", "github-actions"] : ["tree"]
   }
 });

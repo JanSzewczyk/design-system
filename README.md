@@ -219,7 +219,8 @@ For running the environment locally:
 
 - **Build**: `npm run build`
 - **Storybook**: `npm run storybook:dev`
-- **Lint**: `npm run lint`
+- **Lint**: `npm run lint` (Biome)
+- **Format**: `npm run format` (Biome)
 - **Test**: `npm run test` or `npm run test:ui`
 
 ---
