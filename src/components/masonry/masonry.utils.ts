@@ -10,7 +10,7 @@ import {
   type NodeOperation
 } from "./masonry.types";
 
-export function addInterval(treeNode: MasonryTreeNode, high: number, index: number): boolean {
+function addInterval(treeNode: MasonryTreeNode, high: number, index: number): boolean {
   let node: MasonryListNode | null = treeNode.list;
   let prevNode: MasonryListNode | undefined;
 
@@ -27,7 +27,7 @@ export function addInterval(treeNode: MasonryTreeNode, high: number, index: numb
   return true;
 }
 
-export function removeInterval(treeNode: MasonryTreeNode, index: number): NodeOperation | undefined {
+function removeInterval(treeNode: MasonryTreeNode, index: number): NodeOperation | undefined {
   let node: MasonryListNode | null = treeNode.list;
   if (node.index === index) {
     if (node.next === null) return NODE_OPERATION.REMOVE;
@@ -48,7 +48,7 @@ export function removeInterval(treeNode: MasonryTreeNode, index: number): NodeOp
   }
 }
 
-export const SENTINEL_NODE: MasonryTreeNode = {
+const SENTINEL_NODE: MasonryTreeNode = {
   color: NODE_COLOR.SENTINEL,
   high: 0,
   left: undefined as unknown as MasonryTreeNode,
@@ -63,7 +63,7 @@ SENTINEL_NODE.parent = SENTINEL_NODE;
 SENTINEL_NODE.left = SENTINEL_NODE;
 SENTINEL_NODE.right = SENTINEL_NODE;
 
-export function updateMax(node: MasonryTreeNode) {
+function updateMax(node: MasonryTreeNode) {
   const max = node.high;
   if (node.left === SENTINEL_NODE && node.right === SENTINEL_NODE) node.max = max;
   else if (node.left === SENTINEL_NODE) node.max = Math.max(node.right.max, max);
@@ -71,7 +71,7 @@ export function updateMax(node: MasonryTreeNode) {
   else node.max = Math.max(Math.max(node.left.max, node.right.max), max);
 }
 
-export function updateMaxUp(node: MasonryTreeNode) {
+function updateMaxUp(node: MasonryTreeNode) {
   let x = node;
 
   while (x.parent !== SENTINEL_NODE) {
@@ -80,7 +80,7 @@ export function updateMaxUp(node: MasonryTreeNode) {
   }
 }
 
-export function rotateLeft(tree: MasonryTree, x: MasonryTreeNode) {
+function rotateLeft(tree: MasonryTree, x: MasonryTreeNode) {
   if (x.right === SENTINEL_NODE) return;
   const y = x.right;
   x.right = y.left;
@@ -98,7 +98,7 @@ export function rotateLeft(tree: MasonryTree, x: MasonryTreeNode) {
   updateMax(y);
 }
 
-export function rotateRight(tree: MasonryTree, x: MasonryTreeNode) {
+function rotateRight(tree: MasonryTree, x: MasonryTreeNode) {
   if (x.left === SENTINEL_NODE) return;
   const y = x.left;
   x.left = y.right;
@@ -116,7 +116,7 @@ export function rotateRight(tree: MasonryTree, x: MasonryTreeNode) {
   updateMax(y);
 }
 
-export function replaceNode(tree: MasonryTree, x: MasonryTreeNode, y: MasonryTreeNode) {
+function replaceNode(tree: MasonryTree, x: MasonryTreeNode, y: MasonryTreeNode) {
   if (x.parent === SENTINEL_NODE) {
     tree.root = y;
   } else if (x === x.parent.left) {
@@ -127,7 +127,7 @@ export function replaceNode(tree: MasonryTree, x: MasonryTreeNode, y: MasonryTre
   y.parent = x.parent;
 }
 
-export function fixRemove(tree: MasonryTree, node: MasonryTreeNode) {
+function fixRemove(tree: MasonryTree, node: MasonryTreeNode) {
   let x = node;
   let w: MasonryTreeNode;
 
@@ -192,7 +192,7 @@ export function fixRemove(tree: MasonryTree, node: MasonryTreeNode) {
   x.color = NODE_COLOR.BLACK;
 }
 
-export function minimumTree(node: MasonryTreeNode) {
+function minimumTree(node: MasonryTreeNode) {
   let current = node;
   while (current.left !== SENTINEL_NODE) {
     current = current.left;
@@ -200,7 +200,7 @@ export function minimumTree(node: MasonryTreeNode) {
   return current;
 }
 
-export function fixInsert(tree: MasonryTree, node: MasonryTreeNode) {
+function fixInsert(tree: MasonryTree, node: MasonryTreeNode) {
   let current = node;
   let y: MasonryTreeNode;
 

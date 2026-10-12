@@ -1,8 +1,6 @@
 import { Tooltip as TooltipPrimitive } from "radix-ui";
 import * as React from "react";
 
-export type TooltipProviderProps = React.ComponentProps<typeof TooltipPrimitive.Provider>;
-
 export function TooltipProvider({
   delayDuration = 0,
   ...props

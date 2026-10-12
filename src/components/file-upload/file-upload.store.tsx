@@ -11,7 +11,7 @@ export type FileUploadStoreState = {
   invalid: boolean;
 };
 
-export type FileUploadStoreAction =
+type FileUploadStoreAction =
   | { type: "ADD_FILES"; files: File[] }
   | { type: "SET_FILES"; files: File[] }
   | { type: "SET_PROGRESS"; file: File; progress: number }

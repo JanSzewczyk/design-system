@@ -35,6 +35,7 @@ npm run test:ui          # Run tests with interactive UI
 npm run type-check       # TypeScript type checking
 npm run biome:lint       # Biome lint checking
 npm run biome:format     # Biome format checking
+npm run knip             # Unused files, exports, and dependencies
 npm run test             # All tests (unit + Storybook integration)
 npm run build            # Build library (tsup + CSS copy + post-build)
 ```
@@ -263,7 +264,7 @@ OutlineVariant.test("Clicking item selects it", async ({ canvas, userEvent, step
 
 ## CI/CD
 
-**PR Checks** (`.github/workflows/pr-check.yml`): type-check, Biome (lint + format), unit tests, Storybook tests, Storybook build, library build, dependency review.
+**PR Checks** (`.github/workflows/pr-check.yml`): type-check, Biome (lint + format), Knip (unused code), unit tests, Storybook tests, Storybook build, library build, dependency review.
 
 **Publishing:** semantic-release on main branch, version bumps from conventional commits.
 
