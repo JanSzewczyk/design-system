@@ -431,7 +431,7 @@ export function useScroller({ offset = 0, fps = SCROLL_FPS }: { offset?: number;
   return { isScrolling, scrollTop: Math.max(0, scrollY - offset) };
 }
 
-export function useThrottle<State>(
+function useThrottle<State>(
   initialState: State | (() => State),
   options: {
     fps?: number;
