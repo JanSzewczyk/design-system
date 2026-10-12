@@ -4,12 +4,12 @@ export function hexToRgb(hex: string, alpha?: number): ColorValue {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: Number.parseInt(result[1] ?? "0", 16),
-        g: Number.parseInt(result[2] ?? "0", 16),
+        a: alpha ?? 1,
         b: Number.parseInt(result[3] ?? "0", 16),
-        a: alpha ?? 1
+        g: Number.parseInt(result[2] ?? "0", 16),
+        r: Number.parseInt(result[1] ?? "0", 16)
       }
-    : { r: 0, g: 0, b: 0, a: alpha ?? 1 };
+    : { a: alpha ?? 1, b: 0, g: 0, r: 0 };
 }
 
 export function rgbToHex(color: ColorValue): string {
@@ -49,10 +49,10 @@ export function rgbToHsv(color: ColorValue): HSVColorValue {
   const s = max === 0 ? 0 : diff / max;
 
   return {
+    a: color.a,
     h,
     s: Math.round(s * 100),
-    v: Math.round(max * 100),
-    a: color.a
+    v: Math.round(max * 100)
   };
 }
 
@@ -116,10 +116,10 @@ export function hsvToRgb(hsv: HSVColorValue): ColorValue {
   }
 
   return {
-    r: Math.round(r * 255),
-    g: Math.round(g * 255),
+    a: hsv.a,
     b: Math.round(b * 255),
-    a: hsv.a
+    g: Math.round(g * 255),
+    r: Math.round(r * 255)
   };
 }
 
@@ -153,8 +153,8 @@ export function rgbToHsl(color: ColorValue): { h: number; s: number; l: number }
 
   return {
     h: Math.round(h * 360),
-    s: Math.round(s * 100),
-    l: Math.round(l * 100)
+    l: Math.round(l * 100),
+    s: Math.round(s * 100)
   };
 }
 
@@ -198,10 +198,10 @@ export function hslToRgb(hsl: { h: number; s: number; l: number }, alpha = 1): C
   }
 
   return {
-    r: Math.round((r + m) * 255),
-    g: Math.round((g + m) * 255),
+    a: alpha,
     b: Math.round((b + m) * 255),
-    a: alpha
+    g: Math.round((g + m) * 255),
+    r: Math.round((r + m) * 255)
   };
 }
 
@@ -237,10 +237,10 @@ export function parseColorString(value: string): ColorValue | null {
   const rgbMatch = trimmed.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)$/);
   if (rgbMatch) {
     return {
-      r: Number.parseInt(rgbMatch[1] ?? "0", 10),
-      g: Number.parseInt(rgbMatch[2] ?? "0", 10),
+      a: rgbMatch[4] ? Number.parseFloat(rgbMatch[4]) : 1,
       b: Number.parseInt(rgbMatch[3] ?? "0", 10),
-      a: rgbMatch[4] ? Number.parseFloat(rgbMatch[4]) : 1
+      g: Number.parseInt(rgbMatch[2] ?? "0", 10),
+      r: Number.parseInt(rgbMatch[1] ?? "0", 10)
     };
   }
 
@@ -280,10 +280,10 @@ export function parseColorString(value: string): ColorValue | null {
     }
 
     return {
-      r: Math.round((r + m) * 255),
-      g: Math.round((g + m) * 255),
+      a,
       b: Math.round((b + m) * 255),
-      a
+      g: Math.round((g + m) * 255),
+      r: Math.round((r + m) * 255)
     };
   }
 
@@ -293,7 +293,7 @@ export function parseColorString(value: string): ColorValue | null {
     const s = Number.parseInt(hsbMatch[2] ?? "0", 10);
     const v = Number.parseInt(hsbMatch[3] ?? "0", 10);
     const a = hsbMatch[4] ? Number.parseFloat(hsbMatch[4]) : 1;
-    return hsvToRgb({ h, s, v, a });
+    return hsvToRgb({ a, h, s, v });
   }
 
   return null;

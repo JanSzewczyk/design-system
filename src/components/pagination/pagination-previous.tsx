@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { ChevronLeftIcon } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -10,8 +9,8 @@ export type PaginationPreviousProps = React.ComponentProps<typeof PaginationLink
 
 export function PaginationPrevious({ className, text = "Previous", ...props }: PaginationPreviousProps) {
   return (
-    <PaginationLink aria-label="Go to previous page" size="default" className={cn("pl-1.5!", className)} {...props}>
-      <ChevronLeftIcon data-icon="inline-start" className="cn-rtl-flip" />
+    <PaginationLink aria-label="Go to previous page" className={cn("pl-1.5!", className)} size="default" {...props}>
+      <ChevronLeftIcon className="cn-rtl-flip" data-icon="inline-start" />
       <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   );

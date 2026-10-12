@@ -18,8 +18,8 @@ export type HeaderProps = React.ComponentProps<"header"> & {
 export function Header({ children, variant = "container", ...props }: HeaderProps) {
   return (
     <header
+      className="sticky top-0 z-50 w-full border-border/40 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60"
       data-slot="header"
-      className="border-border/40 bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur"
       {...props}
     >
       <div className={cn("flex h-16 items-center", variant === "container" ? "container" : "w-full px-4 sm:px-8")}>

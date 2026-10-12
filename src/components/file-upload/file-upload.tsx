@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Direction as DirectionPrimitive, Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { useAsRef } from "~/hooks/use-as-ref";
 import { useLazyRef } from "~/hooks/use-lazy-ref";
@@ -79,22 +78,21 @@ export function FileUpload(props: FileUploadProps) {
   const isControlled = value !== undefined;
 
   const propsRef = useAsRef({
-    onValueChange,
     onAccept,
     onFileAccept,
     onFileReject,
     onFileValidate,
-    onUpload
+    onUpload,
+    onValueChange
   });
 
   const store = React.useMemo(
     () => createFileUploadStore(listeners, files, urlCache, propsRef, invalid),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listeners, files, urlCache, propsRef]
   );
 
   React.useEffect(() => {
-    store.dispatch({ type: "SET_INVALID", invalid });
+    store.dispatch({ invalid, type: "SET_INVALID" });
   }, [store, invalid]);
 
   const acceptTypes = React.useMemo(() => accept?.split(",").map((t) => t.trim()) ?? null, [accept]);
@@ -106,9 +104,9 @@ export function FileUpload(props: FileUploadProps) {
       frame = requestAnimationFrame(() => {
         frame = 0;
         store.dispatch({
-          type: "SET_PROGRESS",
           file,
-          progress: Math.min(Math.max(0, progress), 100)
+          progress: Math.min(Math.max(0, progress), 100),
+          type: "SET_PROGRESS"
         });
       });
     };
@@ -116,9 +114,9 @@ export function FileUpload(props: FileUploadProps) {
 
   React.useEffect(() => {
     if (isControlled) {
-      store.dispatch({ type: "SET_FILES", files: value });
+      store.dispatch({ files: value, type: "SET_FILES" });
     } else if (defaultValue && defaultValue.length > 0 && !store.getState().files.size) {
-      store.dispatch({ type: "SET_FILES", files: defaultValue });
+      store.dispatch({ files: defaultValue, type: "SET_FILES" });
     }
   }, [value, defaultValue, isControlled, store]);
 
@@ -137,35 +135,35 @@ export function FileUpload(props: FileUploadProps) {
     async (filesToUpload: File[]) => {
       try {
         for (const file of filesToUpload) {
-          store.dispatch({ type: "SET_PROGRESS", file, progress: 0 });
+          store.dispatch({ file, progress: 0, type: "SET_PROGRESS" });
         }
 
         if (propsRef.current.onUpload) {
           await propsRef.current.onUpload(filesToUpload, {
-            onProgress,
-            onSuccess: (file) => {
-              store.dispatch({ type: "SET_SUCCESS", file });
-            },
             onError: (file, error) => {
               store.dispatch({
-                type: "SET_ERROR",
+                error: error.message ?? "Upload failed",
                 file,
-                error: error.message ?? "Upload failed"
+                type: "SET_ERROR"
               });
+            },
+            onProgress,
+            onSuccess: (file) => {
+              store.dispatch({ file, type: "SET_SUCCESS" });
             }
           });
         } else {
           for (const file of filesToUpload) {
-            store.dispatch({ type: "SET_SUCCESS", file });
+            store.dispatch({ file, type: "SET_SUCCESS" });
           }
         }
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : "Upload failed";
         for (const file of filesToUpload) {
           store.dispatch({
-            type: "SET_ERROR",
+            error: errorMessage,
             file,
-            error: errorMessage
+            type: "SET_ERROR"
           });
         }
       }
@@ -254,14 +252,14 @@ export function FileUpload(props: FileUploadProps) {
       }
 
       if (hasInvalid) {
-        store.dispatch({ type: "SET_INVALID", invalid: true });
+        store.dispatch({ invalid: true, type: "SET_INVALID" });
         setTimeout(() => {
-          store.dispatch({ type: "SET_INVALID", invalid: false });
+          store.dispatch({ invalid: false, type: "SET_INVALID" });
         }, 2000);
       }
 
       if (acceptedFiles.length > 0) {
-        store.dispatch({ type: "ADD_FILES", files: acceptedFiles });
+        store.dispatch({ files: acceptedFiles, type: "ADD_FILES" });
 
         if (isControlled && propsRef.current.onValueChange) {
           const currentFiles = Array.from(store.getState().files.values()).map((f) => f.file);
@@ -297,13 +295,13 @@ export function FileUpload(props: FileUploadProps) {
 
   const contextValue = React.useMemo(
     () => ({
-      dropzoneId,
-      inputId,
-      listId,
-      labelId,
       dir,
       disabled,
+      dropzoneId,
+      inputId,
       inputRef,
+      labelId,
+      listId,
       urlCache
     }),
     [dropzoneId, inputId, listId, labelId, dir, disabled, urlCache]
@@ -323,21 +321,21 @@ export function FileUpload(props: FileUploadProps) {
         >
           {children}
           <input
-            type="file"
-            id={inputId}
-            aria-labelledby={labelId}
-            aria-describedby={dropzoneId}
-            ref={inputRef}
-            tabIndex={-1}
             accept={accept}
-            name={name}
+            aria-describedby={dropzoneId}
+            aria-labelledby={labelId}
             className="sr-only"
             disabled={disabled}
+            id={inputId}
             multiple={multiple}
-            required={required}
+            name={name}
             onChange={onInputChange}
+            ref={inputRef}
+            required={required}
+            tabIndex={-1}
+            type="file"
           />
-          <div id={labelId} className="sr-only">
+          <div className="sr-only" id={labelId}>
             {label ?? "File upload"}
           </div>
         </RootPrimitive>

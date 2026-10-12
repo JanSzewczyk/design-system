@@ -1,28 +1,24 @@
-import * as React from "react";
-
 import Autoplay from "embla-carousel-autoplay";
-
+import * as React from "react";
+import preview from "~/.storybook/preview";
 import { Card } from "~/components/card";
-
 import { Carousel } from "./carousel";
+import { type CarouselApi } from "./carousel.context";
 import { CarouselContent } from "./carousel-content";
 import { CarouselItem } from "./carousel-item";
 import { CarouselNext } from "./carousel-next";
 import { CarouselPrevious } from "./carousel-previous";
-import { type CarouselApi } from "./carousel.context";
-
-import preview from "~/.storybook/preview";
 
 const meta = preview.meta({
-  title: "Components/Carousel",
-  component: Carousel,
-  tags: ["autodocs"],
   argTypes: {
     orientation: {
       control: "select",
       options: ["horizontal", "vertical"]
     }
-  }
+  },
+  component: Carousel,
+  tags: ["autodocs"],
+  title: "Components/Carousel"
 });
 
 export const Horizontal = meta.story({
@@ -34,7 +30,7 @@ export const Horizontal = meta.story({
             <CarouselItem key={index}>
               <div className="p-1">
                 <Card className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                  <span className="font-semibold text-4xl">{index + 1}</span>
                 </Card>
               </div>
             </CarouselItem>
@@ -62,10 +58,10 @@ export const Vertical = meta.story({
       >
         <CarouselContent className="-mt-1 h-[200px]">
           {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="basis-1/2 pt-1">
+            <CarouselItem className="basis-1/2 pt-1" key={index}>
               <div className="p-1">
                 <Card className="flex h-[100px] items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
+                  <span className="font-semibold text-3xl">{index + 1}</span>
                 </Card>
               </div>
             </CarouselItem>
@@ -89,10 +85,10 @@ export const Sizes = meta.story({
       <Carousel {...args} className="w-full max-w-48 sm:max-w-xs md:max-w-sm">
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="basis-1/2 lg:basis-1/3">
+            <CarouselItem className="basis-1/2 lg:basis-1/3" key={index}>
               <div className="p-1">
                 <Card className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
+                  <span className="font-semibold text-3xl">{index + 1}</span>
                 </Card>
               </div>
             </CarouselItem>
@@ -111,10 +107,10 @@ export const Spacing = meta.story({
       <Carousel {...args} className="w-full max-w-48 sm:max-w-xs md:max-w-sm">
         <CarouselContent className="-ml-1">
           {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem key={index} className="basis-1/2 pl-1 lg:basis-1/3">
+            <CarouselItem className="basis-1/2 pl-1 lg:basis-1/3" key={index}>
               <div className="p-1">
                 <Card className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-2xl font-semibold">{index + 1}</span>
+                  <span className="font-semibold text-2xl">{index + 1}</span>
                 </Card>
               </div>
             </CarouselItem>
@@ -148,12 +144,12 @@ export const Api = meta.story({
 
     return (
       <div className="mx-auto max-w-40 sm:max-w-xs">
-        <Carousel {...args} setApi={setApi} className="w-full max-w-xs">
+        <Carousel {...args} className="w-full max-w-xs" setApi={setApi}>
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
                 <Card className="m-px flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                  <span className="font-semibold text-4xl">{index + 1}</span>
                 </Card>
               </CarouselItem>
             ))}
@@ -161,7 +157,7 @@ export const Api = meta.story({
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-        <div className="text-muted-foreground py-2 text-center text-sm">
+        <div className="py-2 text-center text-muted-foreground text-sm">
           Slide {current} of {count}
         </div>
       </div>
@@ -177,17 +173,17 @@ export const Plugin = meta.story({
       <div className="flex justify-center px-12">
         <Carousel
           {...args}
-          plugins={[plugin.current]}
           className="w-full max-w-40 sm:max-w-xs"
           onMouseEnter={plugin.current.stop}
           onMouseLeave={() => plugin.current.reset()}
+          plugins={[plugin.current]}
         >
           <CarouselContent>
             {Array.from({ length: 5 }).map((_, index) => (
               <CarouselItem key={index}>
                 <div className="p-1">
                   <Card className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-4xl font-semibold">{index + 1}</span>
+                    <span className="font-semibold text-4xl">{index + 1}</span>
                   </Card>
                 </div>
               </CarouselItem>
@@ -215,8 +211,8 @@ export const Rtl = meta.story({
     <div className="flex justify-center px-12">
       <Carousel
         {...args}
-        dir="rtl"
         className="w-full max-w-48 sm:max-w-xs"
+        dir="rtl"
         opts={{
           direction: "rtl"
         }}
@@ -225,8 +221,8 @@ export const Rtl = meta.story({
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem key={index}>
               <div className="p-1">
-                <Card dir="rtl" className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{toArabicNumerals(index + 1)}</span>
+                <Card className="flex aspect-square items-center justify-center p-6" dir="rtl">
+                  <span className="font-semibold text-4xl">{toArabicNumerals(index + 1)}</span>
                 </Card>
               </div>
             </CarouselItem>

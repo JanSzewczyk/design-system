@@ -1,8 +1,8 @@
+import { BadgeCheckIcon, ChevronRightIcon, ExternalLinkIcon, Plus, PlusIcon, ShieldAlertIcon } from "lucide-react";
 import * as React from "react";
 
-import { BadgeCheckIcon, ChevronRightIcon, ExternalLinkIcon, Plus, PlusIcon, ShieldAlertIcon } from "lucide-react";
-
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import {
   Avatar,
   AvatarFallback,
@@ -15,48 +15,17 @@ import {
   ItemSeparator
 } from "~/components";
 import { Button } from "~/components/button";
-
 import { Item } from "./item";
 import { ItemMedia } from "./item-media";
 import { ItemTitle } from "./item-title";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Item",
   component: Item,
-  tags: ["autodocs", "new"]
+  tags: ["autodocs", "new"],
+  title: "Components/Item"
 });
 
 export const Example = meta.story({
-  render: () => (
-    <div className="flex w-full max-w-md flex-col gap-6">
-      <Item variant="outline">
-        <ItemContent>
-          <ItemTitle>Basic Item</ItemTitle>
-          <ItemDescription>A simple item with title and description.</ItemDescription>
-        </ItemContent>
-        <ItemActions>
-          <Button variant="outline" size="sm">
-            Action
-          </Button>
-        </ItemActions>
-      </Item>
-      <Item variant="outline" size="sm" asChild>
-        <a href="#">
-          <ItemMedia>
-            <BadgeCheckIcon className="size-5" />
-          </ItemMedia>
-          <ItemContent>
-            <ItemTitle>Your profile has been verified.</ItemTitle>
-          </ItemContent>
-          <ItemActions>
-            <ChevronRightIcon className="size-4" />
-          </ItemActions>
-        </a>
-      </Item>
-    </div>
-  ),
   play: async ({ canvas }) => {
     // Test that title renders as h4 element
     const title = canvas.getByText("Basic Item");
@@ -71,7 +40,35 @@ export const Example = meta.story({
     // Test that item container is a div
     const item = canvas.getByText("Basic Item").closest("div");
     await expect(item).toBeVisible();
-  }
+  },
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-6">
+      <Item variant="outline">
+        <ItemContent>
+          <ItemTitle>Basic Item</ItemTitle>
+          <ItemDescription>A simple item with title and description.</ItemDescription>
+        </ItemContent>
+        <ItemActions>
+          <Button size="sm" variant="outline">
+            Action
+          </Button>
+        </ItemActions>
+      </Item>
+      <Item asChild size="sm" variant="outline">
+        <a href="#">
+          <ItemMedia>
+            <BadgeCheckIcon className="size-5" />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>Your profile has been verified.</ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <ChevronRightIcon className="size-4" />
+          </ItemActions>
+        </a>
+      </Item>
+    </div>
+  )
 });
 
 export const Variants = meta.story({
@@ -83,7 +80,7 @@ export const Variants = meta.story({
           <ItemDescription>Standard styling with subtle background and borders.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Open
           </Button>
         </ItemActions>
@@ -94,7 +91,7 @@ export const Variants = meta.story({
           <ItemDescription>Outlined style with clear borders and transparent background.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Open
           </Button>
         </ItemActions>
@@ -105,7 +102,7 @@ export const Variants = meta.story({
           <ItemDescription>Subdued appearance with muted colors for secondary content.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Open
           </Button>
         </ItemActions>
@@ -123,12 +120,12 @@ export const Size = meta.story({
           <ItemDescription>A simple item with title and description.</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm">
+          <Button size="sm" variant="outline">
             Action
           </Button>
         </ItemActions>
       </Item>
-      <Item variant="outline" size="sm" asChild>
+      <Item asChild size="sm" variant="outline">
         <a href="#">
           <ItemMedia>
             <BadgeCheckIcon className="size-5" />
@@ -182,24 +179,24 @@ export const AvatarStory = meta.story({
           <ItemDescription>Last seen 5 months ago</ItemDescription>
         </ItemContent>
         <ItemActions>
-          <Button size="icon-sm" variant="outline" className="rounded-full" aria-label="Invite">
+          <Button aria-label="Invite" className="rounded-full" size="icon-sm" variant="outline">
             <Plus />
           </Button>
         </ItemActions>
       </Item>
       <Item variant="outline">
         <ItemMedia>
-          <div className="*:data-[slot=avatar]:ring-background flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:grayscale">
+          <div className="flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:grayscale">
             <Avatar className="hidden sm:flex">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage alt="@shadcn" src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
             <Avatar className="hidden sm:flex">
-              <AvatarImage src="https://github.com/maxleiter.png" alt="@maxleiter" />
+              <AvatarImage alt="@maxleiter" src="https://github.com/maxleiter.png" />
               <AvatarFallback>LR</AvatarFallback>
             </Avatar>
             <Avatar>
-              <AvatarImage src="https://github.com/evilrabbit.png" alt="@evilrabbit" />
+              <AvatarImage alt="@evilrabbit" src="https://github.com/evilrabbit.png" />
               <AvatarFallback>ER</AvatarFallback>
             </Avatar>
           </div>
@@ -220,22 +217,22 @@ export const AvatarStory = meta.story({
 
 const music = [
   {
-    title: "Midnight City Lights",
-    artist: "Neon Dreams",
     album: "Electric Nights",
-    duration: "3:45"
+    artist: "Neon Dreams",
+    duration: "3:45",
+    title: "Midnight City Lights"
   },
   {
-    title: "Coffee Shop Conversations",
-    artist: "The Morning Brew",
     album: "Urban Stories",
-    duration: "4:05"
+    artist: "The Morning Brew",
+    duration: "4:05",
+    title: "Coffee Shop Conversations"
   },
   {
-    title: "Digital Rain",
-    artist: "Cyber Symphony",
     album: "Binary Beats",
-    duration: "3:30"
+    artist: "Cyber Symphony",
+    duration: "3:30",
+    title: "Digital Rain"
   }
 ];
 
@@ -244,15 +241,15 @@ export const Image = meta.story({
     <div className="flex w-full max-w-md flex-col gap-6">
       <ItemGroup className="gap-4">
         {music.map((song) => (
-          <Item key={song.title} variant="outline" asChild role="listitem">
+          <Item asChild key={song.title} role="listitem" variant="outline">
             <a href="#">
               <ItemMedia variant="image">
                 <img
-                  src={`https://avatar.vercel.sh/${song.title}`}
                   alt={song.title}
-                  width={32}
-                  height={32}
                   className="object-cover grayscale"
+                  height={32}
+                  src={`https://avatar.vercel.sh/${song.title}`}
+                  width={32}
                 />
               </ItemMedia>
               <ItemContent>
@@ -274,19 +271,19 @@ export const Image = meta.story({
 
 const people = [
   {
-    username: "shadcn",
     avatar: "https://github.com/shadcn.png",
-    email: "shadcn@vercel.com"
+    email: "shadcn@vercel.com",
+    username: "shadcn"
   },
   {
-    username: "maxleiter",
     avatar: "https://github.com/maxleiter.png",
-    email: "maxleiter@vercel.com"
+    email: "maxleiter@vercel.com",
+    username: "maxleiter"
   },
   {
-    username: "evilrabbit",
     avatar: "https://github.com/evilrabbit.png",
-    email: "evilrabbit@vercel.com"
+    email: "evilrabbit@vercel.com",
+    username: "evilrabbit"
   }
 ];
 
@@ -299,7 +296,7 @@ export const Group = meta.story({
             <Item>
               <ItemMedia>
                 <Avatar>
-                  <AvatarImage src={person.avatar} className="grayscale" />
+                  <AvatarImage className="grayscale" src={person.avatar} />
                   <AvatarFallback>{person.username.charAt(0)}</AvatarFallback>
                 </Avatar>
               </ItemMedia>
@@ -308,7 +305,7 @@ export const Group = meta.story({
                 <ItemDescription>{person.email}</ItemDescription>
               </ItemContent>
               <ItemActions>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button className="rounded-full" size="icon" variant="ghost">
                   <PlusIcon />
                 </Button>
               </ItemActions>
@@ -323,22 +320,22 @@ export const Group = meta.story({
 
 const models = [
   {
-    name: "v0-1.5-sm",
+    credit: "Valeria Reverdo on Unsplash",
     description: "Everyday tasks and UI generation.",
     image: "https://images.unsplash.com/photo-1650804068570-7fb2e3dbf888?q=80&w=640&auto=format&fit=crop",
-    credit: "Valeria Reverdo on Unsplash"
+    name: "v0-1.5-sm"
   },
   {
-    name: "v0-1.5-lg",
+    credit: "Michael Oeser on Unsplash",
     description: "Advanced thinking or reasoning.",
     image: "https://images.unsplash.com/photo-1610280777472-54133d004c8c?q=80&w=640&auto=format&fit=crop",
-    credit: "Michael Oeser on Unsplash"
+    name: "v0-1.5-lg"
   },
   {
-    name: "v0-2.0-mini",
+    credit: "Cherry Laithang on Unsplash",
     description: "Open Source model for everyone.",
     image: "https://images.unsplash.com/photo-1602146057681-08560aee8cde?q=80&w=640&auto=format&fit=crop",
-    credit: "Cherry Laithang on Unsplash"
+    name: "v0-2.0-mini"
   }
 ];
 
@@ -350,11 +347,11 @@ export const Header = meta.story({
           <Item key={model.name} variant="outline">
             <ItemHeader>
               <img
-                src={model.image}
                 alt={model.name}
-                width={128}
-                height={128}
                 className="aspect-square w-full rounded-sm object-cover"
+                height={128}
+                src={model.image}
+                width={128}
               />
             </ItemHeader>
             <ItemContent>
@@ -382,8 +379,8 @@ export const Link = meta.story({
           </ItemActions>
         </a>
       </Item>
-      <Item variant="outline" asChild>
-        <a href="#" target="_blank" rel="noopener noreferrer">
+      <Item asChild variant="outline">
+        <a href="#" rel="noopener noreferrer" target="_blank">
           <ItemContent>
             <ItemTitle>External resource</ItemTitle>
             <ItemDescription>Opens in a new tab with security attributes.</ItemDescription>

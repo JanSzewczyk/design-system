@@ -1,13 +1,11 @@
+import { Slot as SlotPrimitive } from "radix-ui";
 import * as React from "react";
 
-import { Slot as SlotPrimitive } from "radix-ui";
-
 import { cn } from "~/utils";
-
-import { useFileUploadItemContext } from "./file-upload-item.context";
 import { ITEM_METADATA_NAME } from "./file-upload.constants";
 import { useFileUploadContext } from "./file-upload.context";
 import { formatBytes } from "./file-upload.utils";
+import { useFileUploadItemContext } from "./file-upload-item.context";
 
 export type FileUploadItemMetadataProps = React.ComponentProps<"div"> & {
   asChild?: boolean;
@@ -34,19 +32,19 @@ export function FileUploadItemMetadata(props: FileUploadItemMetadataProps) {
       {children ?? (
         <>
           <span
+            className={cn("truncate font-medium text-sm", size === "sm" && "font-normal text-[13px] leading-snug")}
             id={itemContext.nameId}
-            className={cn("truncate text-sm font-medium", size === "sm" && "text-[13px] leading-snug font-normal")}
           >
             {itemContext.fileState.file.name}
           </span>
           <span
+            className={cn("truncate text-muted-foreground text-xs", size === "sm" && "text-[11px] leading-snug")}
             id={itemContext.sizeId}
-            className={cn("text-muted-foreground truncate text-xs", size === "sm" && "text-[11px] leading-snug")}
           >
             {formatBytes(itemContext.fileState.file.size)}
           </span>
           {itemContext.fileState.error && (
-            <span id={itemContext.messageId} className="text-destructive text-xs">
+            <span className="text-destructive text-xs" id={itemContext.messageId}>
               {itemContext.fileState.error}
             </span>
           )}

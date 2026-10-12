@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 
 import { STEPPER_NEXT_TRIGGER_NAME } from "./stepper.constants";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
@@ -40,10 +39,10 @@ export function StepperNextTrigger({ asChild = false, onClick, disabled, ...prop
 
   return (
     <StepperNextTriggerPrimitive
-      type="button"
       data-slot="stepper-next-trigger"
       disabled={isDisabled}
       onClick={handleClick}
+      type="button"
       {...props}
     />
   );

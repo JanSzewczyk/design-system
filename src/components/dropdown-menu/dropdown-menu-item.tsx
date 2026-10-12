@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -14,17 +13,17 @@ export type DropdownMenuItemProps = React.ComponentProps<typeof DropdownMenuPrim
 export function DropdownMenuItem({ className, inset, variant = "default", ...props }: DropdownMenuItemProps) {
   return (
     <DropdownMenuPrimitive.Item
-      data-slot="dropdown-menu-item"
-      data-inset={inset}
-      data-variant={variant}
       className={cn(
-        "group/dropdown-menu-item relative flex cursor-default items-center gap-1.5 rounded px-1.5 py-1 text-sm outline-hidden select-none data-inset:pl-7",
+        "group/dropdown-menu-item relative flex cursor-default select-none items-center gap-1.5 rounded px-1.5 py-1 text-sm outline-hidden data-inset:pl-7",
         "focus:bg-accent focus:text-accent-foreground not-data-[variant=error]:focus:**:text-accent-foreground",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
-        "data-[variant=error]:text-error data-[variant=error]:*:[svg]:text-error dark:data-[variant=error]:focus:bg-error/20 data-[variant=error]:focus:bg-error/10 data-[variant=error]:focus:text-error",
-        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "data-[variant=error]:text-error data-[variant=error]:focus:bg-error/10 data-[variant=error]:focus:text-error dark:data-[variant=error]:focus:bg-error/20 data-[variant=error]:*:[svg]:text-error",
+        "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
         className
       )}
+      data-inset={inset}
+      data-slot="dropdown-menu-item"
+      data-variant={variant}
       {...props}
     />
   );

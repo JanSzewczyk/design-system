@@ -8,9 +8,9 @@ export type SidebarInputProps = React.ComponentProps<typeof Input>;
 export function SidebarInput({ className, ...props }: SidebarInputProps) {
   return (
     <Input
-      data-slot="sidebar-input"
+      className={cn("h-8 w-full bg-background shadow-none", className)}
       data-sidebar="input"
-      className={cn("bg-background h-8 w-full shadow-none", className)}
+      data-slot="sidebar-input"
       {...props}
     />
   );

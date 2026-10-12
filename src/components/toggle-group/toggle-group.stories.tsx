@@ -1,47 +1,44 @@
+import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
 import * as React from "react";
 
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "lucide-react";
-
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { ToggleGroup, ToggleGroupItem } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Toggle Group",
-  component: ToggleGroup,
-  subcomponents: { ToggleGroupItem },
   argTypes: {
-    type: {
-      control: "select",
-      options: ["single", "multiple"],
-      description: "Whether a single or multiple items can be selected at a time"
+    disabled: {
+      control: "boolean",
+      description: "Disable all items"
     },
-    variant: {
+    orientation: {
       control: "select",
-      options: ["default", "outline"],
-      description: "Visual style of toggle items"
+      description: "Layout direction of the group",
+      options: ["horizontal", "vertical"]
     },
     size: {
       control: "select",
-      options: ["sm", "default", "lg"],
-      description: "Size of toggle items"
+      description: "Size of toggle items",
+      options: ["sm", "default", "lg"]
     },
     spacing: {
       control: "number",
       description: "Gap between items in spacing scale units. Use 0 to join items without gap."
     },
-    orientation: {
+    type: {
       control: "select",
-      options: ["horizontal", "vertical"],
-      description: "Layout direction of the group"
+      description: "Whether a single or multiple items can be selected at a time",
+      options: ["single", "multiple"]
     },
-    disabled: {
-      control: "boolean",
-      description: "Disable all items"
+    variant: {
+      control: "select",
+      description: "Visual style of toggle items",
+      options: ["default", "outline"]
     }
-  }
+  },
+  component: ToggleGroup,
+  subcomponents: { ToggleGroupItem },
+  title: "Components/Toggle Group"
 });
 
 // ─── Visual Stories ────────────────────────────────────────────────────────────
@@ -54,13 +51,13 @@ export const FormattingToolbar = meta.story({
   render(args) {
     return (
       <ToggleGroup {...args}>
-        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
           <ItalicIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <ToggleGroupItem aria-label="Toggle underline" value="underline">
           <UnderlineIcon />
         </ToggleGroupItem>
       </ToggleGroup>
@@ -119,9 +116,9 @@ FormattingToolbar.test("Clicking a selected item deselects it", async ({ canvas,
 
 export const Outline = meta.story({
   args: {
+    defaultValue: "all",
     type: "single",
-    variant: "outline",
-    defaultValue: "all"
+    variant: "outline"
   },
   render(args) {
     return (
@@ -156,13 +153,13 @@ Outline.test("Clicking another item deselects the current one", async ({ canvas,
 export const Sizes = meta.story({
   render: () => (
     <div className="flex flex-col gap-4">
-      <ToggleGroup type="single" variant="outline" size="sm">
+      <ToggleGroup size="sm" type="single" variant="outline">
         <ToggleGroupItem value="top">Top</ToggleGroupItem>
         <ToggleGroupItem value="bottom">Bottom</ToggleGroupItem>
         <ToggleGroupItem value="left">Left</ToggleGroupItem>
         <ToggleGroupItem value="right">Right</ToggleGroupItem>
       </ToggleGroup>
-      <ToggleGroup type="single" variant="outline" size="default">
+      <ToggleGroup size="default" type="single" variant="outline">
         <ToggleGroupItem value="top">Top</ToggleGroupItem>
         <ToggleGroupItem value="bottom">Bottom</ToggleGroupItem>
         <ToggleGroupItem value="left">Left</ToggleGroupItem>
@@ -187,11 +184,11 @@ Sizes.test("Items inherit size from root via data-size", async ({ canvas }) => {
 
 export const Spacing = meta.story({
   args: {
-    type: "single",
-    variant: "outline",
+    defaultValue: "top",
     size: "sm",
     spacing: 2,
-    defaultValue: "top"
+    type: "single",
+    variant: "outline"
   },
   render(args) {
     return (
@@ -214,21 +211,21 @@ Spacing.test("Items have data-spacing matching root spacing prop", async ({ canv
 
 export const Vertical = meta.story({
   args: {
-    type: "multiple",
+    defaultValue: ["bold", "italic"],
     orientation: "vertical",
     spacing: 1,
-    defaultValue: ["bold", "italic"]
+    type: "multiple"
   },
   render(args) {
     return (
       <ToggleGroup {...args}>
-        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
           <ItalicIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <ToggleGroupItem aria-label="Toggle underline" value="underline">
           <UnderlineIcon />
         </ToggleGroupItem>
       </ToggleGroup>
@@ -253,19 +250,19 @@ Vertical.test("Default values are pre-selected on mount", async ({ canvas }) => 
 
 export const AllDisabled = meta.story({
   args: {
-    type: "multiple",
-    disabled: true
+    disabled: true,
+    type: "multiple"
   },
   render(args) {
     return (
       <ToggleGroup {...args}>
-        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
           <ItalicIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <ToggleGroupItem aria-label="Toggle underline" value="underline">
           <UnderlineIcon />
         </ToggleGroupItem>
       </ToggleGroup>
@@ -294,29 +291,29 @@ export const Custom = meta.story({
     return (
       <div className="flex flex-col items-center gap-4">
         <ToggleGroup
-          type="single"
-          variant="outline"
-          spacing={2}
-          size="lg"
-          value={fontWeight}
           onValueChange={(value) => {
             if (value) setFontWeight(value);
           }}
+          size="lg"
+          spacing={2}
+          type="single"
+          value={fontWeight}
+          variant="outline"
         >
-          <ToggleGroupItem value="light" aria-label="Font weight light" className="h-auto flex-col px-4 py-2">
-            <span className="text-2xl font-light">Aa</span>
+          <ToggleGroupItem aria-label="Font weight light" className="h-auto flex-col px-4 py-2" value="light">
+            <span className="font-light text-2xl">Aa</span>
             <span className="text-xs">Light</span>
           </ToggleGroupItem>
-          <ToggleGroupItem value="normal" aria-label="Font weight normal" className="h-auto flex-col px-4 py-2">
-            <span className="text-2xl font-normal">Aa</span>
+          <ToggleGroupItem aria-label="Font weight normal" className="h-auto flex-col px-4 py-2" value="normal">
+            <span className="font-normal text-2xl">Aa</span>
             <span className="text-xs">Normal</span>
           </ToggleGroupItem>
-          <ToggleGroupItem value="medium" aria-label="Font weight medium" className="h-auto flex-col px-4 py-2">
-            <span className="text-2xl font-medium">Aa</span>
+          <ToggleGroupItem aria-label="Font weight medium" className="h-auto flex-col px-4 py-2" value="medium">
+            <span className="font-medium text-2xl">Aa</span>
             <span className="text-xs">Medium</span>
           </ToggleGroupItem>
-          <ToggleGroupItem value="bold" aria-label="Font weight bold" className="h-auto flex-col px-4 py-2">
-            <span className="text-2xl font-bold">Aa</span>
+          <ToggleGroupItem aria-label="Font weight bold" className="h-auto flex-col px-4 py-2" value="bold">
+            <span className="font-bold text-2xl">Aa</span>
             <span className="text-xs">Bold</span>
           </ToggleGroupItem>
         </ToggleGroup>
@@ -343,19 +340,19 @@ Custom.test("Selecting an item updates the controlled state display", async ({ c
 
 export const MultiplePreselected = meta.story({
   args: {
-    type: "multiple",
-    defaultValue: ["bold", "underline"]
+    defaultValue: ["bold", "underline"],
+    type: "multiple"
   },
   render(args) {
     return (
       <ToggleGroup {...args}>
-        <ToggleGroupItem value="bold" aria-label="Toggle bold">
+        <ToggleGroupItem aria-label="Toggle bold" value="bold">
           <BoldIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="italic" aria-label="Toggle italic">
+        <ToggleGroupItem aria-label="Toggle italic" value="italic">
           <ItalicIcon />
         </ToggleGroupItem>
-        <ToggleGroupItem value="underline" aria-label="Toggle underline">
+        <ToggleGroupItem aria-label="Toggle underline" value="underline">
           <UnderlineIcon />
         </ToggleGroupItem>
       </ToggleGroup>

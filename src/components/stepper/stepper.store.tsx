@@ -37,18 +37,37 @@ export function createStepperStore(
   onValidate?: (value: string, direction: StepperNavigationDirection) => boolean | Promise<boolean>
 ): Store {
   const store: Store = {
-    subscribe: (cb) => {
-      if (listenersRef.current) {
-        listenersRef.current.add(cb);
-        return () => listenersRef.current?.delete(cb);
+    addStep: (newStep) => {
+      const state = stateRef.current;
+      if (state) {
+        state.steps = new Map(state.steps);
+        state.steps.set(newStep.value, newStep);
+        onValueAdd?.(newStep.value);
+        store.notify();
       }
-      return () => {};
     },
     getState: () =>
       stateRef.current ?? {
         steps: new Map(),
         value: undefined
       },
+    hasValidation: () => !!onValidate,
+    notify: () => {
+      if (listenersRef.current) {
+        for (const cb of listenersRef.current) {
+          cb();
+        }
+      }
+    },
+    removeStep: (value) => {
+      const state = stateRef.current;
+      if (state) {
+        state.steps = new Map(state.steps);
+        state.steps.delete(value);
+        onValueRemove?.(value);
+        store.notify();
+      }
+    },
     setState: (key, value) => {
       const state = stateRef.current;
       if (!state || Object.is(state[key], value)) return;
@@ -78,25 +97,6 @@ export function createStepperStore(
         return false;
       }
     },
-    hasValidation: () => !!onValidate,
-    addStep: (newStep) => {
-      const state = stateRef.current;
-      if (state) {
-        state.steps = new Map(state.steps);
-        state.steps.set(newStep.value, newStep);
-        onValueAdd?.(newStep.value);
-        store.notify();
-      }
-    },
-    removeStep: (value) => {
-      const state = stateRef.current;
-      if (state) {
-        state.steps = new Map(state.steps);
-        state.steps.delete(value);
-        onValueRemove?.(value);
-        store.notify();
-      }
-    },
     setStep: ({ value, disabled, loading, completed }) => {
       const state = stateRef.current;
       if (state) {
@@ -114,12 +114,12 @@ export function createStepperStore(
         }
       }
     },
-    notify: () => {
+    subscribe: (cb) => {
       if (listenersRef.current) {
-        for (const cb of listenersRef.current) {
-          cb();
-        }
+        listenersRef.current.add(cb);
+        return () => listenersRef.current?.delete(cb);
       }
+      return () => {};
     }
   };
 

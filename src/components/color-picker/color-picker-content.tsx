@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { PopoverContent } from "~/components/popover";
 import { cn } from "~/utils";
@@ -30,8 +29,8 @@ export function ColorPickerContent(props: ColorPickerContentProps) {
 
   return (
     <PopoverContent
-      data-slot="color-picker-content"
       asChild={asChild}
+      data-slot="color-picker-content"
       {...popoverContentProps}
       className={cn("flex w-[340px] flex-col gap-4 p-4", className)}
     >

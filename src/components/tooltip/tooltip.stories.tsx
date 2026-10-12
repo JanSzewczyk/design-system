@@ -1,20 +1,15 @@
 import * as React from "react";
 
 import { expect, fn, within } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Button } from "../button";
-
 import { Tooltip, TooltipContent, TooltipTrigger } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Tooltip",
-  component: Tooltip,
   args: {
     onOpenChange: fn()
   },
-  tags: ["autodocs", "beta"],
+  component: Tooltip,
   parameters: {
     docs: {
       description: {
@@ -22,7 +17,9 @@ const meta = preview.meta({
           "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it. Built on Radix UI Tooltip primitive."
       }
     }
-  }
+  },
+  tags: ["autodocs", "beta"],
+  title: "Components/Tooltip"
 });
 
 export const Example = meta.story({
@@ -84,10 +81,10 @@ export const Controlled = meta.story({
 
     return (
       <div className="flex items-center gap-4">
-        <Button variant="outline" onClick={() => setOpen(!open)}>
+        <Button onClick={() => setOpen(!open)} variant="outline">
           Toggle: {open ? "Open" : "Closed"}
         </Button>
-        <Tooltip open={open} onOpenChange={setOpen}>
+        <Tooltip onOpenChange={setOpen} open={open}>
           <TooltipTrigger asChild>
             <Button>Controlled trigger</Button>
           </TooltipTrigger>
@@ -99,14 +96,6 @@ export const Controlled = meta.story({
 });
 
 export const InteractionTest = meta.story({
-  render: () => (
-    <Tooltip defaultOpen>
-      <TooltipTrigger asChild>
-        <Button data-testid="tooltip-trigger">Trigger</Button>
-      </TooltipTrigger>
-      <TooltipContent data-testid="tooltip-content">Tooltip content</TooltipContent>
-    </Tooltip>
-  ),
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     const body = within(document.body);
@@ -121,18 +110,18 @@ export const InteractionTest = meta.story({
       await expect(content).toBeInTheDocument();
       await expect(content).toHaveAttribute("data-slot", "tooltip-content");
     });
-  }
+  },
+  render: () => (
+    <Tooltip defaultOpen>
+      <TooltipTrigger asChild>
+        <Button data-testid="tooltip-trigger">Trigger</Button>
+      </TooltipTrigger>
+      <TooltipContent data-testid="tooltip-content">Tooltip content</TooltipContent>
+    </Tooltip>
+  )
 });
 
 export const HoverInteractionTest = meta.story({
-  render: () => (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button data-testid="hover-trigger">Hover trigger</Button>
-      </TooltipTrigger>
-      <TooltipContent data-testid="hover-content">Hover tooltip</TooltipContent>
-    </Tooltip>
-  ),
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement);
     const body = within(document.body);
@@ -153,5 +142,13 @@ export const HoverInteractionTest = meta.story({
       const content = body.getByTestId("hover-content");
       await expect(content).toHaveAttribute("data-state", "closed");
     });
-  }
+  },
+  render: () => (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button data-testid="hover-trigger">Hover trigger</Button>
+      </TooltipTrigger>
+      <TooltipContent data-testid="hover-content">Hover tooltip</TooltipContent>
+    </Tooltip>
+  )
 });

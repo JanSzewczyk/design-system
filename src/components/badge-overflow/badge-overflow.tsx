@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { useComposedRefs } from "~/hooks";
 import { cn } from "~/utils";
@@ -120,7 +119,7 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
 
   const { visibleItems, hiddenCount } = React.useMemo(() => {
     if (!containerWidth || items.length === 0 || badgeWidths.size === 0) {
-      return { visibleItems: items, hiddenCount: 0 };
+      return { hiddenCount: 0, visibleItems: items };
     }
 
     let currentLineWidth = 0;
@@ -160,8 +159,8 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
     }
 
     return {
-      visibleItems: visible,
-      hiddenCount: Math.max(0, items.length - visible.length)
+      hiddenCount: Math.max(0, items.length - visible.length),
+      visibleItems: visible
     };
   }, [items, getBadgeLabel, containerWidth, lineCount, badgeGap, overflowBadgeWidth, badgeWidths]);
 
@@ -169,14 +168,14 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
 
   return (
     <React.Fragment>
-      <div ref={measureRef} className="pointer-events-none invisible absolute flex flex-wrap" style={{ gap: badgeGap }}>
+      <div className="pointer-events-none invisible absolute flex flex-wrap" ref={measureRef} style={{ gap: badgeGap }}>
         {items.map((item, index) => (
           <React.Fragment key={index}>{renderBadge(item, getBadgeLabel(item))}</React.Fragment>
         ))}
         {renderOverflow ? (
           renderOverflow(99)
         ) : (
-          <div className="inline-flex h-5 shrink-0 items-center rounded-md border px-1.5 text-xs font-semibold">
+          <div className="inline-flex h-5 shrink-0 items-center rounded-md border px-1.5 font-semibold text-xs">
             +99
           </div>
         )}
@@ -185,8 +184,8 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
         <Component
           data-slot="badge-overflow"
           {...rootProps}
-          ref={composedRef}
           className={cn("flex flex-wrap", className)}
+          ref={composedRef}
           style={{
             gap: badgeGap,
             ...style
@@ -199,7 +198,7 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
             (renderOverflow ? (
               renderOverflow(hiddenCount)
             ) : (
-              <div className="inline-flex h-5 shrink-0 items-center rounded-md border px-1.5 text-xs font-semibold">
+              <div className="inline-flex h-5 shrink-0 items-center rounded-md border px-1.5 font-semibold text-xs">
                 +{hiddenCount}
               </div>
             ))}
@@ -208,8 +207,8 @@ export function BadgeOverflow<T = string>(props: BadgeOverflowProps<T>) {
         <Component
           data-slot="badge-overflow"
           {...rootProps}
-          ref={composedRef}
           className={cn("flex flex-wrap", className)}
+          ref={composedRef}
           style={{
             gap: badgeGap,
             minHeight: placeholderHeight,

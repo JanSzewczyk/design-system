@@ -1,13 +1,11 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { type MasonryItemElement } from "~/components/masonry/masonry-item";
 import { useComposedRefs, useIsomorphicLayoutEffect } from "~/hooks";
-
-import { MasonryViewport } from "./masonry-viewport";
 import { COLUMN_WIDTH, GAP, ITEM_HEIGHT, OVERSCAN, SCROLL_FPS } from "./masonry.constants";
 import { MasonryContext, type MasonryContextValue } from "./masonry.context";
 import { useDebouncedWindowSize, useMasonryPositioner, useResizeObserver, useScroller } from "./masonry.hooks";
+import { MasonryViewport } from "./masonry-viewport";
 
 /**
  * Props for the Masonry component
@@ -152,8 +150,8 @@ export function Masonry(props: MasonryProps) {
 
   const size = useDebouncedWindowSize({
     containerRef,
-    defaultWidth,
-    defaultHeight
+    defaultHeight,
+    defaultWidth
   });
 
   const [containerPosition, setContainerPosition] = React.useState<{
@@ -181,18 +179,18 @@ export function Masonry(props: MasonryProps) {
   }, [containerPosition, size]);
 
   const positioner = useMasonryPositioner({
-    width: containerPosition.width ?? size.width,
-    columnWidth,
-    columnGap,
-    rowGap,
     columnCount,
+    columnGap,
+    columnWidth,
+    linear,
     maxColumnCount,
-    linear
+    rowGap,
+    width: containerPosition.width ?? size.width
   });
   const resizeObserver = useResizeObserver(positioner);
   const { scrollTop, isScrolling } = useScroller({
-    offset: containerPosition.offset,
-    fps: scrollFps
+    fps: scrollFps,
+    offset: containerPosition.offset
   });
 
   const itemMap = React.useRef(new WeakMap<MasonryItemElement, number>()).current;
@@ -214,16 +212,16 @@ export function Masonry(props: MasonryProps) {
 
   const contextValue = React.useMemo<MasonryContextValue>(
     () => ({
+      columnWidth: positioner.columnWidth,
+      fallback,
+      isScrolling,
+      itemHeight,
+      onItemRegister,
+      overscan,
       positioner,
       resizeObserver,
-      columnWidth: positioner.columnWidth,
-      onItemRegister,
       scrollTop,
-      windowHeight: size.height,
-      itemHeight,
-      overscan,
-      fallback,
-      isScrolling
+      windowHeight: size.height
     }),
     [positioner, resizeObserver, onItemRegister, scrollTop, size.height, itemHeight, overscan, fallback, isScrolling]
   );
@@ -237,9 +235,9 @@ export function Masonry(props: MasonryProps) {
         data-slot="masonry"
         ref={composedRef}
         style={{
+          height: "100%",
           position: "relative",
           width: "100%",
-          height: "100%",
           ...style
         }}
       >

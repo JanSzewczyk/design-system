@@ -1,63 +1,61 @@
 import * as React from "react";
-
-import { Masonry, MasonryItem } from ".";
-
 import preview from "~/.storybook/preview";
+import { Masonry, MasonryItem } from ".";
 
 // Sample data for masonry items
 const generateItems = (count: number) =>
   Array.from({ length: count }, (_, i) => ({
-    id: i,
+    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
     height: Math.floor(Math.random() * 300) + 150,
-    color: `hsl(${Math.random() * 360}, 70%, 60%)`
+    id: i
   }));
 
 const meta = preview.meta({
-  title: "Components/Masonry",
-  component: Masonry,
-  subcomponents: { MasonryItem },
   argTypes: {
-    columnWidth: {
-      control: { type: "number", min: 100, max: 500, step: 50 },
-      description: "Width of each column in pixels"
-    },
     columnCount: {
-      control: { type: "number", min: 1, max: 6, step: 1 },
+      control: { max: 6, min: 1, step: 1, type: "number" },
       description: "Fixed number of columns"
     },
-    maxColumnCount: {
-      control: { type: "number", min: 1, max: 10, step: 1 },
-      description: "Maximum number of columns allowed"
+    columnWidth: {
+      control: { max: 500, min: 100, step: 50, type: "number" },
+      description: "Width of each column in pixels"
     },
     gap: {
       control: "number",
       description: "Gap between items (px)"
     },
     itemHeight: {
-      control: { type: "number", min: 100, max: 500, step: 50 },
+      control: { max: 500, min: 100, step: 50, type: "number" },
       description: "Default height for items before measurement"
-    },
-    overscan: {
-      control: { type: "number", min: 0, max: 500, step: 50 },
-      description: "Pixels to render outside visible viewport"
-    },
-    scrollFps: {
-      control: { type: "number", min: 1, max: 60, step: 1 },
-      description: "Scroll event sampling rate (fps)"
     },
     linear: {
       control: "boolean",
       description: "Use linear positioning instead of shortest column"
+    },
+    maxColumnCount: {
+      control: { max: 10, min: 1, step: 1, type: "number" },
+      description: "Maximum number of columns allowed"
+    },
+    overscan: {
+      control: { max: 500, min: 0, step: 50, type: "number" },
+      description: "Pixels to render outside visible viewport"
+    },
+    scrollFps: {
+      control: { max: 60, min: 1, step: 1, type: "number" },
+      description: "Scroll event sampling rate (fps)"
     }
   },
-  tags: ["autodocs", "beta"],
+  component: Masonry,
   decorators: [
     (Story) => (
-      <div style={{ height: "600px", width: "100%", overflow: "auto" }}>
+      <div style={{ height: "600px", overflow: "auto", width: "100%" }}>
         <Story />
       </div>
     )
-  ]
+  ],
+  subcomponents: { MasonryItem },
+  tags: ["autodocs", "beta"],
+  title: "Components/Masonry"
 });
 
 /**
@@ -74,15 +72,15 @@ export const Basic = meta.story({
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
+                alignItems: "center",
                 backgroundColor: item.color,
                 borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 color: "white",
+                display: "flex",
+                fontSize: "24px",
                 fontWeight: "bold",
-                fontSize: "24px"
+                height: `${item.height}px`,
+                justifyContent: "center"
               }}
             >
               {item.id + 1}
@@ -108,13 +106,13 @@ export const CustomColumnWidth = meta.story({
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
                 backgroundColor: item.color,
                 borderRadius: "8px",
+                height: `${item.height}px`,
                 padding: "16px"
               }}
             >
-              <h3 style={{ margin: 0, color: "white" }}>Item {item.id + 1}</h3>
+              <h3 style={{ color: "white", margin: 0 }}>Item {item.id + 1}</h3>
             </div>
           </MasonryItem>
         ))}
@@ -136,15 +134,15 @@ export const FixedColumns = meta.story({
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
+                alignItems: "center",
                 backgroundColor: item.color,
                 borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 color: "white",
+                display: "flex",
+                fontSize: "18px",
                 fontWeight: "bold",
-                fontSize: "18px"
+                height: `${item.height}px`,
+                justifyContent: "center"
               }}
             >
               Item {item.id + 1}
@@ -170,11 +168,11 @@ export const WithCustomGap = meta.story({
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
                 backgroundColor: item.color,
                 borderRadius: "12px",
-                padding: "16px",
-                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                height: `${item.height}px`,
+                padding: "16px"
               }}
             >
               <div style={{ color: "white", fontWeight: "bold" }}>Item {item.id + 1}</div>
@@ -195,20 +193,20 @@ export const LinearMode = meta.story({
     const items = generateItems(20);
 
     return (
-      <Masonry linear columnCount={3}>
+      <Masonry columnCount={3} linear>
         {items.map((item) => (
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
+                alignItems: "center",
                 backgroundColor: item.color,
                 borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 color: "white",
+                display: "flex",
+                fontSize: "20px",
                 fontWeight: "bold",
-                fontSize: "20px"
+                height: `${item.height}px`,
+                justifyContent: "center"
               }}
             >
               {item.id + 1}
@@ -226,9 +224,9 @@ export const LinearMode = meta.story({
 export const ImageGallery = meta.story({
   render: () => {
     const images = Array.from({ length: 25 }, (_, i) => ({
+      height: Math.floor(Math.random() * 300) + 200,
       id: i,
-      width: 400,
-      height: Math.floor(Math.random() * 300) + 200
+      width: 400
     }));
 
     return (
@@ -236,13 +234,13 @@ export const ImageGallery = meta.story({
         {images.map((img) => (
           <MasonryItem key={img.id}>
             <img
-              src={`https://picsum.photos/seed/${img.id}/${img.width}/${img.height}`}
               alt={`Gallery item ${img.id + 1}`}
+              src={`https://picsum.photos/seed/${img.id}/${img.width}/${img.height}`}
               style={{
-                width: "100%",
-                height: "auto",
+                borderRadius: "8px",
                 display: "block",
-                borderRadius: "8px"
+                height: "auto",
+                width: "100%"
               }}
             />
           </MasonryItem>
@@ -261,19 +259,19 @@ export const WithMaxColumns = meta.story({
     const items = generateItems(30);
 
     return (
-      <Masonry columnWidth={180} maxColumnCount={5} gap={16}>
+      <Masonry columnWidth={180} gap={16} maxColumnCount={5}>
         {items.map((item) => (
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
                 backgroundColor: item.color,
                 borderRadius: "8px",
+                height: `${item.height}px`,
                 padding: "16px"
               }}
             >
-              <h4 style={{ margin: 0, color: "white" }}>Card {item.id + 1}</h4>
-              <p style={{ margin: "8px 0 0", color: "rgba(255,255,255,0.8)", fontSize: "14px" }}>
+              <h4 style={{ color: "white", margin: 0 }}>Card {item.id + 1}</h4>
+              <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "14px", margin: "8px 0 0" }}>
                 This is a sample card content
               </p>
             </div>
@@ -298,15 +296,15 @@ export const LargeDataset = meta.story({
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
+                alignItems: "center",
                 backgroundColor: item.color,
                 borderRadius: "8px",
+                color: "white",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
                 fontWeight: "bold",
+                height: `${item.height}px`,
+                justifyContent: "center",
                 padding: "16px"
               }}
             >
@@ -343,12 +341,12 @@ export const WithFallback = meta.story({
         fallback={
           <div
             style={{
-              display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              height: "400px",
+              color: "#666",
+              display: "flex",
               fontSize: "18px",
-              color: "#666"
+              height: "400px",
+              justifyContent: "center"
             }}
           >
             Loading items...
@@ -361,15 +359,15 @@ export const WithFallback = meta.story({
               <MasonryItem key={item.id}>
                 <div
                   style={{
-                    height: `${item.height}px`,
+                    alignItems: "center",
                     backgroundColor: item.color,
                     borderRadius: "8px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
                     color: "white",
+                    display: "flex",
+                    fontSize: "24px",
                     fontWeight: "bold",
-                    fontSize: "24px"
+                    height: `${item.height}px`,
+                    justifyContent: "center"
                   }}
                 >
                   {item.id + 1}
@@ -390,16 +388,16 @@ export const Responsive = meta.story({
     const items = generateItems(30);
 
     return (
-      <Masonry columnWidth={220} maxColumnCount={6} gap={20}>
+      <Masonry columnWidth={220} gap={20} maxColumnCount={6}>
         {items.map((item) => (
           <MasonryItem key={item.id}>
             <div
               style={{
-                height: `${item.height}px`,
                 backgroundColor: item.color,
                 borderRadius: "12px",
-                padding: "20px",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                height: `${item.height}px`,
+                padding: "20px"
               }}
             >
               <div style={{ color: "white" }}>

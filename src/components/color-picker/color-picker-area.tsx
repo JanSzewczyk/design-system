@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { useComposedRefs } from "~/hooks";
 import { useAsRef } from "~/hooks/use-as-ref";
@@ -49,10 +48,10 @@ export function ColorPickerArea(props: ColorPickerAreaProps) {
       const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       const y = Math.max(0, Math.min(1, 1 - (clientY - rect.top) / rect.height));
       const newHsv = {
+        a: hsv?.a ?? 1,
         h: hsv?.h ?? 0,
         s: Math.round(x * 100),
-        v: Math.round(y * 100),
-        a: hsv?.a ?? 1
+        v: Math.round(y * 100)
       };
       store.setHsv(newHsv);
       store.setColor(hsvToRgb(newHsv));
@@ -92,7 +91,7 @@ export function ColorPickerArea(props: ColorPickerAreaProps) {
   );
 
   const hue = hsv?.h ?? 0;
-  const backgroundHue = hsvToRgb({ h: hue, s: 100, v: 100, a: 1 });
+  const backgroundHue = hsvToRgb({ a: 1, h: hue, s: 100, v: 100 });
   const AreaPrimitive = asChild ? SlotPrimitive.Slot : "div";
 
   return (
@@ -104,10 +103,10 @@ export function ColorPickerArea(props: ColorPickerAreaProps) {
         context.disabled && "pointer-events-none opacity-50",
         className
       )}
-      ref={composedRef}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
+      ref={composedRef}
     >
       <div className="absolute inset-0 overflow-hidden rounded-sm">
         <div

@@ -1,13 +1,11 @@
+import { Slot as SlotPrimitive } from "radix-ui";
 import * as React from "react";
 
-import { Slot as SlotPrimitive } from "radix-ui";
-
 import { cn } from "~/utils";
-
-import { useFileUploadItemContext } from "./file-upload-item.context";
 import { ITEM_PREVIEW_NAME } from "./file-upload.constants";
 import { useFileUploadContext } from "./file-upload.context";
 import { getFileIcon } from "./file-upload.utils";
+import { useFileUploadItemContext } from "./file-upload-item.context";
 
 export type FileUploadItemPreviewProps = React.ComponentProps<"div"> & {
   render?: (file: File, fallback: () => React.ReactNode) => React.ReactNode;
@@ -29,10 +27,7 @@ export function FileUploadItemPreview(props: FileUploadItemPreviewProps) {
           context.urlCache.set(file, url);
         }
 
-        return (
-          // biome-ignore lint/performance/noImgElement: dynamic file URLs from user uploads don't work well with Next.js Image optimization
-          <img src={url} alt={file.name} className="size-full object-cover" />
-        );
+        return <img alt={file.name} className="size-full object-cover" src={url} />;
       }
 
       return getFileIcon(file);
@@ -61,7 +56,7 @@ export function FileUploadItemPreview(props: FileUploadItemPreviewProps) {
       data-slot="file-upload-preview"
       {...previewProps}
       className={cn(
-        "bg-accent/50 relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded border [&>svg]:size-10",
+        "relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded border bg-accent/50 [&>svg]:size-10",
         className
       )}
     >

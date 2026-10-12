@@ -2,7 +2,7 @@ import React from "react";
 
 import { DEBOUNCE_DELAY, SCROLL_FPS } from "./masonry.constants";
 import { type ItemElement, type MasonryPositioner, type MasonryPositionerItem } from "./masonry.types";
-import { createIntervalTree, onDeepMemo, onRafSchedule, type OnRafScheduleReturn } from "./masonry.utils";
+import { createIntervalTree, type OnRafScheduleReturn, onDeepMemo, onRafSchedule } from "./masonry.utils";
 
 export type UseMasonryPositionerOptions = {
   width: number;
@@ -62,8 +62,25 @@ export function useMasonryPositioner(
     }
 
     return {
+      all(): MasonryPositionerItem[] {
+        return items.filter(Boolean) as MasonryPositionerItem[];
+      },
       columnCount: computedColumnCount,
       columnWidth: computedColumnWidth,
+      estimateHeight: (itemCount, defaultItemHeight): number => {
+        const tallestColumn = Math.max(0, Math.max.apply(null, columnHeights));
+
+        return itemCount === intervalTree.size
+          ? tallestColumn
+          : tallestColumn + Math.ceil((itemCount - intervalTree.size) / computedColumnCount) * defaultItemHeight;
+      },
+      get: (index: number) => items[index],
+      range: (low, high, onItemRender) =>
+        intervalTree.search(low, high, (index: number, top: number) => {
+          const item = items[index];
+          if (!item) return;
+          onItemRender(index, item.left, top);
+        }),
       set: (index: number, height = 0) => {
         let columnIndex = 0;
 
@@ -110,14 +127,20 @@ export function useMasonryPositioner(
         columnItemsList.push(index);
 
         items[index] = {
-          left: columnIndex * (computedColumnWidth + columnGap),
-          top,
+          columnIndex,
           height,
-          columnIndex
+          left: columnIndex * (computedColumnWidth + columnGap),
+          top
         };
         intervalTree.insert(top, top + height, index);
       },
-      get: (index: number) => items[index],
+      shortestColumn: () => {
+        if (columnHeights.length > 1) return Math.min.apply(null, columnHeights);
+        return columnHeights[0] ?? 0;
+      },
+      size(): number {
+        return intervalTree.size;
+      },
       update: (updates: number[]) => {
         const columns: (number | undefined)[] = new Array(computedColumnCount);
         let i = 0;
@@ -179,29 +202,6 @@ export function useMasonryPositioner(
             intervalTree.insert(item.top, item.top + item.height, currentIndex);
           }
         }
-      },
-      range: (low, high, onItemRender) =>
-        intervalTree.search(low, high, (index: number, top: number) => {
-          const item = items[index];
-          if (!item) return;
-          onItemRender(index, item.left, top);
-        }),
-      estimateHeight: (itemCount, defaultItemHeight): number => {
-        const tallestColumn = Math.max(0, Math.max.apply(null, columnHeights));
-
-        return itemCount === intervalTree.size
-          ? tallestColumn
-          : tallestColumn + Math.ceil((itemCount - intervalTree.size) / computedColumnCount) * defaultItemHeight;
-      },
-      shortestColumn: () => {
-        if (columnHeights.length > 1) return Math.min.apply(null, columnHeights);
-        return columnHeights[0] ?? 0;
-      },
-      size(): number {
-        return intervalTree.size;
-      },
-      all(): MasonryPositionerItem[] {
-        return items.filter(Boolean) as MasonryPositionerItem[];
       }
     };
   }, [width, columnWidth, columnGap, rowGap, columnCount, maxColumnCount, linear]);
@@ -246,11 +246,11 @@ export function useDebouncedWindowSize(options: DebouncedWindowSizeOptions) {
 
   const getDocumentSize = React.useCallback(() => {
     if (typeof document === "undefined") {
-      return { width: defaultWidth, height: defaultHeight };
+      return { height: defaultHeight, width: defaultWidth };
     }
     return {
-      width: document.documentElement.clientWidth,
-      height: document.documentElement.clientHeight
+      height: document.documentElement.clientHeight,
+      width: document.documentElement.clientWidth
     };
   }, [defaultWidth, defaultHeight]);
 
@@ -274,8 +274,8 @@ export function useDebouncedWindowSize(options: DebouncedWindowSizeOptions) {
     function onResize() {
       if (containerRef.current) {
         setDebouncedSize({
-          width: containerRef.current.offsetWidth,
-          height: document.documentElement.clientHeight
+          height: document.documentElement.clientHeight,
+          width: containerRef.current.offsetWidth
         });
       } else {
         setDebouncedSize(getDocumentSize());
@@ -371,13 +371,10 @@ export function useResizeObserver(positioner: MasonryPositioner) {
   return resizeObserver;
 }
 
-export function useScroller({
-  offset = 0,
-  fps = SCROLL_FPS
-}: {
-  offset?: number;
-  fps?: number;
-} = {}): { scrollTop: number; isScrolling: boolean } {
+export function useScroller({ offset = 0, fps = SCROLL_FPS }: { offset?: number; fps?: number } = {}): {
+  scrollTop: number;
+  isScrolling: boolean;
+} {
   const [scrollY, setScrollY] = useThrottle(
     typeof globalThis.window === "undefined"
       ? 0
@@ -431,7 +428,7 @@ export function useScroller({
     };
   }, [fps]);
 
-  return { scrollTop: Math.max(0, scrollY - offset), isScrolling };
+  return { isScrolling, scrollTop: Math.max(0, scrollY - offset) };
 }
 
 export function useThrottle<State>(

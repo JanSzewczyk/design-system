@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 import { type Button } from "../button";
@@ -24,9 +23,9 @@ export function PaginationLink({
   return (
     <Comp
       aria-current={isActive ? "page" : undefined}
-      data-slot="pagination-link"
+      className={cn(buttonVariants({ size, variant: isActive ? "outline" : "ghost" }), className)}
       data-active={isActive}
-      className={cn(buttonVariants({ variant: isActive ? "outline" : "ghost", size }), className)}
+      data-slot="pagination-link"
       {...props}
     >
       {children}

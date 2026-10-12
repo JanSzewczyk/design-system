@@ -1,7 +1,6 @@
-import * as React from "react";
-
 import { useDirection } from "@radix-ui/react-direction";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { type TimelineStore, TimelineStoreContext } from "~/components/timeline/timeline.store";
 import { getItemStatus, getSortedEntries } from "~/components/timeline/timeline.utils";
 import { useLazyRef } from "~/hooks";
@@ -43,9 +42,22 @@ export function Timeline({
 
   const store = React.useMemo<TimelineStore>(() => {
     return {
-      subscribe: (cb) => {
-        listenersRef.current.add(cb);
-        return () => listenersRef.current.delete(cb);
+      getItemIndex: (id: string) => {
+        const entries = Array.from(stateRef.current.items.entries());
+        const sortedEntries = getSortedEntries(entries);
+        return sortedEntries.findIndex(([key]) => key === id);
+      },
+      getNextItemStatus: (id: string, activeIndex?: number): TimelineStatus | undefined => {
+        const entries = Array.from(stateRef.current.items.entries());
+        const sortedEntries = getSortedEntries(entries);
+
+        const currentIndex = sortedEntries.findIndex(([key]) => key === id);
+        if (currentIndex === -1 || currentIndex === sortedEntries.length - 1) {
+          return undefined;
+        }
+
+        const nextItemIndex = currentIndex + 1;
+        return getItemStatus(nextItemIndex, activeIndex);
       },
       getState: () => stateRef.current,
       notify: () => {
@@ -61,32 +73,19 @@ export function Timeline({
         stateRef.current.items.delete(id);
         store.notify();
       },
-      getNextItemStatus: (id: string, activeIndex?: number): TimelineStatus | undefined => {
-        const entries = Array.from(stateRef.current.items.entries());
-        const sortedEntries = getSortedEntries(entries);
-
-        const currentIndex = sortedEntries.findIndex(([key]) => key === id);
-        if (currentIndex === -1 || currentIndex === sortedEntries.length - 1) {
-          return undefined;
-        }
-
-        const nextItemIndex = currentIndex + 1;
-        return getItemStatus(nextItemIndex, activeIndex);
-      },
-      getItemIndex: (id: string) => {
-        const entries = Array.from(stateRef.current.items.entries());
-        const sortedEntries = getSortedEntries(entries);
-        return sortedEntries.findIndex(([key]) => key === id);
+      subscribe: (cb) => {
+        listenersRef.current.add(cb);
+        return () => listenersRef.current.delete(cb);
       }
     };
   }, [listenersRef, stateRef]);
 
   const contextValue = React.useMemo<TimelineContextValue>(
     () => ({
+      activeIndex,
       dir,
       orientation,
-      variant,
-      activeIndex
+      variant
     }),
     [dir, orientation, variant, activeIndex]
   );
@@ -97,13 +96,13 @@ export function Timeline({
     <TimelineStoreContext.Provider value={store}>
       <TimelineContext.Provider value={contextValue}>
         <RootPrimitive
-          role="list"
-          data-slot="timeline"
           data-orientation={orientation}
+          data-slot="timeline"
           data-variant={variant}
           dir={dir}
+          role="list"
           {...props}
-          className={cn(timelineVariants({ orientation, variant, className }))}
+          className={cn(timelineVariants({ className, orientation, variant }))}
         />
       </TimelineContext.Provider>
     </TimelineStoreContext.Provider>

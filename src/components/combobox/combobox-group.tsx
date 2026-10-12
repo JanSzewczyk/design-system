@@ -4,5 +4,5 @@ import { cn } from "~/utils";
 export type ComboboxGroupProps = ComboboxPrimitive.Group.Props;
 
 export function ComboboxGroup({ className, ...props }: ComboboxGroupProps) {
-  return <ComboboxPrimitive.Group data-slot="combobox-group" className={cn(className)} {...props} />;
+  return <ComboboxPrimitive.Group className={cn(className)} data-slot="combobox-group" {...props} />;
 }

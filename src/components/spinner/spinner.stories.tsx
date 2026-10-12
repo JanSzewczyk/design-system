@@ -1,19 +1,16 @@
-import * as React from "react";
-
 import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Spinner } from "~/components";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Spinner",
-  component: Spinner,
   argTypes: {
     className: {
       control: "text"
     }
   },
-  tags: ["autodocs", "new"]
+  component: Spinner,
+  tags: ["autodocs", "new"],
+  title: "Components/Spinner"
 });
 
 export const Default = meta.story({
@@ -31,26 +28,6 @@ export const Default = meta.story({
 });
 
 export const Sizes = meta.story({
-  render: () => (
-    <div className="flex items-center gap-8">
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-4" />
-        <span className="text-xs text-gray-300">Small (16px)</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-6" />
-        <span className="text-xs text-gray-300">Medium (24px)</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-8" />
-        <span className="text-xs text-gray-300">Large (32px)</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-12" />
-        <span className="text-xs text-gray-300">Extra Large (48px)</span>
-      </div>
-    </div>
-  ),
   play: async ({ canvas }) => {
     // Test that all spinners are rendered
     const spinners = canvas.getAllByRole("status");
@@ -67,34 +44,30 @@ export const Sizes = meta.story({
     await expect(canvas.getByText("Medium (24px)")).toBeVisible();
     await expect(canvas.getByText("Large (32px)")).toBeVisible();
     await expect(canvas.getByText("Extra Large (48px)")).toBeVisible();
-  }
-});
-
-export const Colors = meta.story({
+  },
   render: () => (
     <div className="flex items-center gap-8">
       <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-8 text-gray-100" />
-        <span className="text-xs text-gray-100">Default</span>
+        <Spinner className="size-4" />
+        <span className="text-gray-300 text-xs">Small (16px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Spinner className="text-primary-500 size-8" />
-        <span className="text-xs text-gray-100">Primary</span>
+        <Spinner className="size-6" />
+        <span className="text-gray-300 text-xs">Medium (24px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Spinner className="text-success-500 size-8" />
-        <span className="text-xs text-gray-100">Success</span>
+        <Spinner className="size-8" />
+        <span className="text-gray-300 text-xs">Large (32px)</span>
       </div>
       <div className="flex flex-col items-center gap-2">
-        <Spinner className="text-warning-500 size-8" />
-        <span className="text-xs text-gray-100">Warning</span>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="text-error-500 size-8" />
-        <span className="text-xs text-gray-100">Error</span>
+        <Spinner className="size-12" />
+        <span className="text-gray-300 text-xs">Extra Large (48px)</span>
       </div>
     </div>
-  ),
+  )
+});
+
+export const Colors = meta.story({
   play: async ({ canvas }) => {
     // Test that all spinners are rendered
     const spinners = canvas.getAllByRole("status");
@@ -112,11 +85,34 @@ export const Colors = meta.story({
     await expect(canvas.getByText("Success")).toBeVisible();
     await expect(canvas.getByText("Warning")).toBeVisible();
     await expect(canvas.getByText("Error")).toBeVisible();
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-8">
+      <div className="flex flex-col items-center gap-2">
+        <Spinner className="size-8 text-gray-100" />
+        <span className="text-gray-100 text-xs">Default</span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <Spinner className="size-8 text-primary-500" />
+        <span className="text-gray-100 text-xs">Primary</span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <Spinner className="size-8 text-success-500" />
+        <span className="text-gray-100 text-xs">Success</span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <Spinner className="size-8 text-warning-500" />
+        <span className="text-gray-100 text-xs">Warning</span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <Spinner className="size-8 text-error-500" />
+        <span className="text-gray-100 text-xs">Error</span>
+      </div>
+    </div>
+  )
 });
 
 export const WithCustomClassName = meta.story({
-  render: () => <Spinner className="size-16 text-blue-500" data-testid="custom-spinner" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -126,11 +122,11 @@ export const WithCustomClassName = meta.story({
     await expect(spinner).toHaveClass("size-16");
     await expect(spinner).toHaveClass("text-blue-500");
     await expect(spinner).toHaveClass("animate-spin");
-  }
+  },
+  render: () => <Spinner className="size-16 text-blue-500" data-testid="custom-spinner" />
 });
 
 export const WithCustomProps = meta.story({
-  render: () => <Spinner strokeWidth={3} data-testid="custom-props-spinner" />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -138,20 +134,11 @@ export const WithCustomProps = meta.story({
     const spinner = canvas.getByTestId("custom-props-spinner");
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveAttribute("stroke-width", "3");
-  }
+  },
+  render: () => <Spinner data-testid="custom-props-spinner" strokeWidth={3} />
 });
 
 export const InButton = meta.story({
-  render: () => (
-    <button
-      type="button"
-      className="bg-primary text-primary-foreground inline-flex items-center gap-2 rounded-md px-4 py-2"
-      disabled
-    >
-      <Spinner className="size-4" />
-      Loading...
-    </button>
-  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -165,15 +152,20 @@ export const InButton = meta.story({
     const spinner = canvas.getByRole("status");
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveClass("animate-spin");
-  }
+  },
+  render: () => (
+    <button
+      className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground"
+      disabled
+      type="button"
+    >
+      <Spinner className="size-4" />
+      Loading...
+    </button>
+  )
 });
 
 export const CenteredInCard = meta.story({
-  render: () => (
-    <div className="bg-app-foreground flex h-48 w-64 items-center justify-center rounded-lg border border-gray-800 p-6 shadow-sm">
-      <Spinner className="size-8" />
-    </div>
-  ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -181,5 +173,10 @@ export const CenteredInCard = meta.story({
     const spinner = canvas.getByRole("status");
     await expect(spinner).toBeVisible();
     await expect(spinner).toHaveClass("animate-spin");
-  }
+  },
+  render: () => (
+    <div className="flex h-48 w-64 items-center justify-center rounded-lg border border-gray-800 bg-app-foreground p-6 shadow-sm">
+      <Spinner className="size-8" />
+    </div>
+  )
 });

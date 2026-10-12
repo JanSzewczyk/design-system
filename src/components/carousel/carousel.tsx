@@ -1,8 +1,7 @@
+import useEmblaCarousel from "embla-carousel-react";
 import * as React from "react";
 
-import useEmblaCarousel from "embla-carousel-react";
-
-import { CarouselContext, type CarouselApi, type CarouselOptions, type CarouselPlugin } from "./carousel.context";
+import { type CarouselApi, CarouselContext, type CarouselOptions, type CarouselPlugin } from "./carousel.context";
 import { carouselVariants } from "./carousel.styles";
 
 export type CarouselProps = React.ComponentProps<"div"> & {
@@ -78,22 +77,22 @@ export function Carousel({
   return (
     <CarouselContext.Provider
       value={{
-        carouselRef,
         api: api,
+        canScrollNext,
+        canScrollPrev,
+        carouselRef,
         opts,
         orientation: orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
-        scrollPrev,
         scrollNext,
-        canScrollPrev,
-        canScrollNext
+        scrollPrev
       }}
     >
       <div
-        onKeyDownCapture={handleKeyDown}
-        className={carouselVariants({ orientation, className })}
-        role="region"
         aria-roledescription="carousel"
+        className={carouselVariants({ className, orientation })}
         data-slot="carousel"
+        onKeyDownCapture={handleKeyDown}
+        role="region"
         {...props}
       >
         {children}

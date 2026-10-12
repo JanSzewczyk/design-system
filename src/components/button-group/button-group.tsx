@@ -12,10 +12,10 @@ export type ButtonGroupProps = React.ComponentProps<"div"> & {
 export function ButtonGroup({ className, orientation, ...props }: ButtonGroupProps) {
   return (
     <div
-      role="group"
-      data-slot="button-group"
-      data-orientation={orientation}
       className={cn(buttonGroupVariants({ orientation }), className)}
+      data-orientation={orientation}
+      data-slot="button-group"
+      role="group"
       {...props}
     />
   );

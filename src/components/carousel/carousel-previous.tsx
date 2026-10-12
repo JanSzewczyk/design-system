@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { ArrowLeft } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "~/components/button";
 import { cn } from "~/utils";
@@ -14,9 +13,6 @@ export function CarouselPrevious({ className, variant = "outline", size = "icon"
 
   return (
     <Button
-      data-slot="carousel-previous"
-      variant={variant}
-      size={size}
       className={cn(
         "absolute size-8 rounded-full",
         orientation === "horizontal"
@@ -24,8 +20,11 @@ export function CarouselPrevious({ className, variant = "outline", size = "icon"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
+      data-slot="carousel-previous"
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      size={size}
+      variant={variant}
       {...props}
     >
       <ArrowLeft />

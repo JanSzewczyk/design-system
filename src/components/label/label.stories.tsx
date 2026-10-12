@@ -1,15 +1,11 @@
-import * as React from "react";
-
+import preview from "~/.storybook/preview";
 import { Checkbox } from "~/components/checkbox";
-
 import { Label } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Label",
   component: Label,
-  tags: ["autodocs", "beta"]
+  tags: ["autodocs", "beta"],
+  title: "Components/Label"
 });
 
 export const Example = meta.story({

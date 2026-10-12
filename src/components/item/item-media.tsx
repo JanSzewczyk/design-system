@@ -11,9 +11,9 @@ export type ItemMediaProps = React.ComponentProps<"div"> & {
 export function ItemMedia({ className, variant = "default", ...props }: ItemMediaProps) {
   return (
     <div
+      className={cn(itemMediaVariants({ variant }), className)}
       data-slot="item-media"
       data-variant={variant}
-      className={cn(itemMediaVariants({ variant }), className)}
       {...props}
     />
   );

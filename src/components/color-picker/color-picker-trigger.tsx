@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { Button } from "~/components/button";
 import { PopoverTrigger } from "~/components/popover";

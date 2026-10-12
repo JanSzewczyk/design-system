@@ -1,6 +1,5 @@
-import React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import React from "react";
 import { cn } from "~/utils";
 
 import { useStepperStore } from "./stepper.store";
@@ -16,9 +15,9 @@ export function StepperPanel({ children, asChild = false, className, ...props }:
 
   return (
     <StepperPanelPrimitive
+      className={cn("w-full", className)}
       data-slot="stepper-panel"
       data-state={currentValue}
-      className={cn("w-full", className)}
       {...props}
     >
       {children}

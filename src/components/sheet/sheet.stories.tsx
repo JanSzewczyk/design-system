@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import { expect, screen, waitFor } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components";
-
 import {
   Sheet,
   SheetClose,
@@ -14,33 +14,23 @@ import {
   SheetTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Sheet",
-  component: Sheet,
-  tags: ["autodocs"],
-  parameters: {
-    docs: {
-      subtitle:
-        "Sheet component built on Radix UI primitives. Provides a side panel that slides in from any edge of screen. Supports top, right, bottom, and left positions with customizable close button behavior."
-    }
-  },
   argTypes: {
-    open: {
-      control: "boolean",
-      description: "The controlled open state of sheet. Must be used with `onOpenChange`.",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "undefined" }
-      }
-    },
     defaultOpen: {
       control: "boolean",
       description: "The open state of sheet when it is initially rendered. Use when not controlling state.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" }
+      }
+    },
+    modal: {
+      control: "boolean",
+      description:
+        "When true, interaction with outside elements will be disabled and only sheet content will be visible to screen readers.",
+      table: {
+        defaultValue: { summary: "true" },
+        type: { summary: "boolean" }
       }
     },
     onOpenChange: {
@@ -49,16 +39,24 @@ const meta = preview.meta({
         type: { summary: "(open: boolean) => void" }
       }
     },
-    modal: {
+    open: {
       control: "boolean",
-      description:
-        "When true, interaction with outside elements will be disabled and only sheet content will be visible to screen readers.",
+      description: "The controlled open state of sheet. Must be used with `onOpenChange`.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" }
+        defaultValue: { summary: "undefined" },
+        type: { summary: "boolean" }
       }
     }
-  }
+  },
+  component: Sheet,
+  parameters: {
+    docs: {
+      subtitle:
+        "Sheet component built on Radix UI primitives. Provides a side panel that slides in from any edge of screen. Supports top, right, bottom, and left positions with customizable close button behavior."
+    }
+  },
+  tags: ["autodocs"],
+  title: "Components/Sheet"
 });
 
 const BasicSheetContent = () => (
@@ -243,7 +241,7 @@ export const SheetWithoutCloseButton = meta.story({
         </SheetHeader>
         <div className="py-4">
           <p>You can close this sheet using:</p>
-          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
+          <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground text-sm">
             <li>The Cancel button below</li>
             <li>The Escape key</li>
             <li>Clicking outside sheet</li>
@@ -331,7 +329,7 @@ export const SheetControlled = meta.story({
         <Button color="neutral" onClick={() => setOpen(false)}>
           Close Controlled Sheet
         </Button>
-        <Sheet open={open} onOpenChange={setOpen}>
+        <Sheet onOpenChange={setOpen} open={open}>
           <SheetContent>
             <SheetHeader>
               <SheetTitle>Controlled Sheet</SheetTitle>

@@ -1,6 +1,5 @@
-import { describe, expect, test, vi, beforeEach, afterEach, type Mock } from "vitest";
-
 import { renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from "vitest";
 
 import { useValidationLog } from "./use-validation-log";
 
@@ -19,8 +18,8 @@ describe("useValidationLog", () => {
     renderHook(() =>
       useValidationLog({
         check: true,
-        scope: "TestScope",
-        message: "Test message"
+        message: "Test message",
+        scope: "TestScope"
       })
     );
 
@@ -31,8 +30,8 @@ describe("useValidationLog", () => {
     renderHook(() =>
       useValidationLog({
         check: false,
-        scope: "TestScope",
-        message: "Test message"
+        message: "Test message",
+        scope: "TestScope"
       })
     );
 
@@ -52,8 +51,8 @@ describe("useValidationLog", () => {
     renderHook(() =>
       useValidationLog({
         check: false,
-        scope,
-        message
+        message,
+        scope
       })
     );
 
@@ -76,8 +75,8 @@ describe("useValidationLog", () => {
       ({ check }) =>
         useValidationLog({
           check,
-          scope: "TestScope",
-          message: "Test message"
+          message: "Test message",
+          scope: "TestScope"
         }),
       { initialProps: { check: true } }
     );
@@ -93,8 +92,8 @@ describe("useValidationLog", () => {
       ({ check }) =>
         useValidationLog({
           check,
-          scope: "TestScope",
-          message: "Test message"
+          message: "Test message",
+          scope: "TestScope"
         }),
       { initialProps: { check: false } }
     );
@@ -110,15 +109,15 @@ describe("useValidationLog", () => {
       ({ scope, message }) =>
         useValidationLog({
           check: false,
-          scope,
-          message
+          message,
+          scope
         }),
-      { initialProps: { scope: "Scope1", message: "Message1" } }
+      { initialProps: { message: "Message1", scope: "Scope1" } }
     );
 
     expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
 
-    rerender({ scope: "Scope2", message: "Message2" });
+    rerender({ message: "Message2", scope: "Scope2" });
     expect(consoleErrorSpy).toHaveBeenCalledTimes(2);
     expect(consoleErrorSpy).toHaveBeenLastCalledWith(
       expect.stringContaining("Scope2"),

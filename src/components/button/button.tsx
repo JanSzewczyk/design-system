@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { Spinner } from "~/components/spinner";
 import { cn } from "~/utils";
 
@@ -66,24 +65,24 @@ export function Button({
 
   return (
     <Comp
-      data-slot="button"
       aria-disabled={isDisabled || undefined}
       className={cn(buttonVariants({ fullWidth, size, variant }), className)}
+      data-size={size}
+      data-slot="button"
       data-state={loading ? "loading" : undefined}
+      data-variant={variant}
       disabled={!asChild ? isDisabled : undefined}
       tabIndex={isDisabled && asChild ? -1 : undefined}
       type={Comp === "button" ? type : undefined}
-      data-size={size}
-      data-variant={variant}
       {...props}
     >
       <ButtonContent
-        loading={loading}
-        size={size}
-        loadingPosition={loadingPosition}
-        startIcon={startIcon}
-        endIcon={endIcon}
         asChild={asChild}
+        endIcon={endIcon}
+        loading={loading}
+        loadingPosition={loadingPosition}
+        size={size}
+        startIcon={startIcon}
       >
         {children}
       </ButtonContent>

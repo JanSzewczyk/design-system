@@ -1,18 +1,15 @@
-import * as React from "react";
-
 import { BadgeCheckIcon, ShieldCheckIcon, StarIcon, XIcon } from "lucide-react";
 
 import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Badge } from "~/components";
 import { BadgeButton } from "~/components/badge/badge-button";
 import { BadgeDot } from "~/components/badge/badge-dot";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Badge",
   component: Badge,
-  tags: ["autodocs", "beta"]
+  tags: ["autodocs", "beta"],
+  title: "Components/Badge"
 });
 
 export const Example = meta.story({
@@ -27,7 +24,7 @@ export const Example = meta.story({
         <Badge variant="error">Destructive</Badge>
       </div>
       <div className="flex w-full flex-wrap gap-2">
-        <Badge variant="secondary" className="bg-success text-success-foreground">
+        <Badge className="bg-success text-success-foreground" variant="secondary">
           <BadgeCheckIcon />
           Verified
         </Badge>
@@ -155,7 +152,7 @@ export const RemoveButton = meta.story({
 export const CustomStyles = meta.story({
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <Badge variant="secondary" className="bg-success text-success-foreground">
+      <Badge className="bg-success text-success-foreground" variant="secondary">
         <BadgeCheckIcon />
         Custom Success
       </Badge>
@@ -166,7 +163,7 @@ export const CustomStyles = meta.story({
       <Badge className="h-5 min-w-5 rounded-full px-1 font-mono tabular-nums" variant="outline">
         20+
       </Badge>
-      <Badge className="rounded-sm tracking-wider uppercase" variant="outline">
+      <Badge className="rounded-sm uppercase tracking-wider" variant="outline">
         New
       </Badge>
     </div>
@@ -177,43 +174,27 @@ export const NotificationBadges = meta.story({
   render: () => (
     <div className="flex flex-wrap items-center gap-8">
       <div className="relative">
-        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Messages</button>
+        <button className="rounded-lg bg-primary px-4 py-2 text-primary-foreground">Messages</button>
         <Badge className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">3</Badge>
       </div>
       <div className="relative">
-        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Notifications</button>
+        <button className="rounded-lg bg-primary px-4 py-2 text-primary-foreground">Notifications</button>
         <Badge
-          variant="error"
           className="absolute -top-2 -right-2 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums"
+          variant="error"
         >
           99+
         </Badge>
       </div>
       <div className="relative">
-        <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2">Updates</button>
-        <Badge className="border-background absolute -top-1 -right-1 size-2 rounded-full border-2 p-0" />
+        <button className="rounded-lg bg-primary px-4 py-2 text-primary-foreground">Updates</button>
+        <Badge className="absolute -top-1 -right-1 size-2 rounded-full border-2 border-background p-0" />
       </div>
     </div>
   )
 });
 
 export const AsLink = meta.story({
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Badge asChild>
-        <a href="#default">Clickable Default</a>
-      </Badge>
-      <Badge variant="secondary" asChild>
-        <a href="#secondary">Clickable Secondary</a>
-      </Badge>
-      <Badge variant="outline" asChild>
-        <a href="#outline">Clickable Outline</a>
-      </Badge>
-      <Badge variant="error" asChild>
-        <a href="#error">Clickable Error</a>
-      </Badge>
-    </div>
-  ),
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -233,35 +214,40 @@ export const AsLink = meta.story({
       await expect(outlineLink).toHaveAttribute("href", "#outline");
       await expect(errorLink).toHaveAttribute("href", "#error");
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge asChild>
+        <a href="#default">Clickable Default</a>
+      </Badge>
+      <Badge asChild variant="secondary">
+        <a href="#secondary">Clickable Secondary</a>
+      </Badge>
+      <Badge asChild variant="outline">
+        <a href="#outline">Clickable Outline</a>
+      </Badge>
+      <Badge asChild variant="error">
+        <a href="#error">Clickable Error</a>
+      </Badge>
+    </div>
+  )
 });
 
 export const DataAttributes = meta.story({
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Badge>Check data-slot</Badge>
-    </div>
-  ),
   play: async ({ canvas, step }) => {
     await step("Badge has correct data-slot attribute", async () => {
       const badge = canvas.getByText("Check data-slot");
       await expect(badge).toHaveAttribute("data-slot", "badge");
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge>Check data-slot</Badge>
+    </div>
+  )
 });
 
 export const InteractionTest = meta.story({
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Badge>Primary Badge</Badge>
-      <Badge variant="secondary">Secondary Badge</Badge>
-      <Badge variant="error">Error Badge</Badge>
-      <Badge variant="outline">Outline Badge</Badge>
-      <Badge asChild>
-        <button type="button">Clickable Badge</button>
-      </Badge>
-    </div>
-  ),
   play: async ({ canvas, step, userEvent }) => {
     await step("All badge variants are rendered", async () => {
       const primarytBadge = canvas.getByText("Primary Badge");
@@ -287,5 +273,16 @@ export const InteractionTest = meta.story({
 
       await userEvent.click(clickableBadge);
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Badge>Primary Badge</Badge>
+      <Badge variant="secondary">Secondary Badge</Badge>
+      <Badge variant="error">Error Badge</Badge>
+      <Badge variant="outline">Outline Badge</Badge>
+      <Badge asChild>
+        <button type="button">Clickable Badge</button>
+      </Badge>
+    </div>
+  )
 });

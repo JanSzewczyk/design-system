@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { type Meta, type StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 
@@ -8,22 +6,7 @@ import { Button } from "../button";
 import { Toaster, toast } from ".";
 
 const meta = {
-  title: "Components/Toaster",
-  component: Toaster,
   argTypes: {
-    position: {
-      control: "select",
-      options: ["top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"],
-      description: "Position of the toast notifications"
-    },
-    expand: {
-      control: "boolean",
-      description: "Toasts will be expanded by default"
-    },
-    richColors: {
-      control: "boolean",
-      description: "Makes error and success state more colorful"
-    },
     closeButton: {
       control: "boolean",
       description: "Show close button on toasts"
@@ -32,12 +15,27 @@ const meta = {
       control: "number",
       description: "Default duration in milliseconds for all toasts"
     },
+    expand: {
+      control: "boolean",
+      description: "Toasts will be expanded by default"
+    },
+    position: {
+      control: "select",
+      description: "Position of the toast notifications",
+      options: ["top-left", "top-center", "top-right", "bottom-left", "bottom-center", "bottom-right"]
+    },
+    richColors: {
+      control: "boolean",
+      description: "Makes error and success state more colorful"
+    },
     visibleToasts: {
       control: "number",
       description: "Maximum number of visible toasts"
     }
   },
-  tags: ["autodocs", "test", "new"]
+  component: Toaster,
+  tags: ["autodocs", "test", "new"],
+  title: "Components/Toaster"
 } satisfies Meta<typeof Toaster>;
 export default meta;
 
@@ -120,11 +118,11 @@ export const WithAction: Story = {
       <Button
         onClick={() =>
           toast.success("File uploaded", {
-            description: "report.pdf has been uploaded",
             action: {
               label: "View",
               onClick: () => toast.info("View clicked")
-            }
+            },
+            description: "report.pdf has been uploaded"
           })
         }
       >
@@ -190,9 +188,9 @@ export const PromiseToast: Story = {
 
     const handlePromise = () => {
       toast.promise(mockPromise(), {
+        error: "Error loading user data",
         loading: "Loading user data...",
-        success: "User data loaded successfully",
-        error: "Error loading user data"
+        success: "User data loaded successfully"
       });
     };
 
@@ -256,33 +254,6 @@ export const CustomIcons: Story = {
 };
 
 export const InteractionTest: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Button data-testid="default-toast" onClick={() => toast("Default toast message")}>
-        Default Toast
-      </Button>
-      <Button data-testid="success-toast" onClick={() => toast.success("Success message")}>
-        Success Toast
-      </Button>
-      <Button data-testid="error-toast" onClick={() => toast.error("Error message")}>
-        Error Toast
-      </Button>
-      <Button
-        data-testid="action-toast"
-        onClick={() =>
-          toast("Action toast", {
-            action: {
-              label: "Undo",
-              onClick: () => toast.info("Undo clicked")
-            }
-          })
-        }
-      >
-        Toast with Action
-      </Button>
-      <Toaster />
-    </div>
-  ),
   play: async ({ canvas, canvasElement, step, userEvent }) => {
     await step("All trigger buttons are rendered and clickable", async () => {
       const defaultButton = canvas.getByTestId("default-toast");
@@ -322,5 +293,32 @@ export const InteractionTest: Story = {
       const toasterElement = canvasElement.querySelector("ol");
       await expect(toasterElement).toBeInTheDocument();
     });
-  }
+  },
+  render: () => (
+    <div className="flex flex-wrap gap-4">
+      <Button data-testid="default-toast" onClick={() => toast("Default toast message")}>
+        Default Toast
+      </Button>
+      <Button data-testid="success-toast" onClick={() => toast.success("Success message")}>
+        Success Toast
+      </Button>
+      <Button data-testid="error-toast" onClick={() => toast.error("Error message")}>
+        Error Toast
+      </Button>
+      <Button
+        data-testid="action-toast"
+        onClick={() =>
+          toast("Action toast", {
+            action: {
+              label: "Undo",
+              onClick: () => toast.info("Undo clicked")
+            }
+          })
+        }
+      >
+        Toast with Action
+      </Button>
+      <Toaster />
+    </div>
+  )
 };

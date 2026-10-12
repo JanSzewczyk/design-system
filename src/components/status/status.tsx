@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { statusVariants } from "~/components/status/status.styles";
 import { type StatusVariant } from "~/components/status/status.types";
 import { cn } from "~/utils";

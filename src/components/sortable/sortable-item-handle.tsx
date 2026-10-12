@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -25,9 +24,9 @@ export function SortableItemHandle({
 
   return (
     <Comp
-      data-slot="sortable-item-handle"
-      data-dragging={isDragging}
       data-disabled={disabled}
+      data-dragging={isDragging}
+      data-slot="sortable-item-handle"
       {...listeners}
       className={cn(cursor && (isDragging ? "cursor-grabbing!" : "cursor-grab!"), className)}
       {...props}

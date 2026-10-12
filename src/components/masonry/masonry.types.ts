@@ -50,7 +50,7 @@ export type MasonryPositioner = {
   size: () => number;
   estimateHeight: (itemCount: number, defaultItemHeight: number) => number;
   shortestColumn: () => number;
-  all: () => Array<MasonryPositionerItem>;
+  all: () => MasonryPositionerItem[];
 };
 
 export type MasonryPositionerItem = {

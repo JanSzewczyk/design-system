@@ -12,8 +12,8 @@ export type ToggleGroupContextValue = {
 };
 
 export const ToggleGroupContext = React.createContext<ToggleGroupContextValue>({
+  orientation: "horizontal",
   size: "default",
-  variant: "default",
   spacing: 0,
-  orientation: "horizontal"
+  variant: "default"
 });

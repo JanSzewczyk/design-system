@@ -7,9 +7,9 @@ export type SidebarGroupContentProps = React.ComponentProps<"div">;
 export function SidebarGroupContent({ className, ...props }: SidebarGroupContentProps) {
   return (
     <div
-      data-slot="sidebar-group-content"
-      data-sidebar="group-content"
       className={cn("w-full text-sm", className)}
+      data-sidebar="group-content"
+      data-slot="sidebar-group-content"
       {...props}
     />
   );

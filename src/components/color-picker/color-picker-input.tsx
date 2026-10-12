@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
 import { Input } from "~/components/input";
 import { cn } from "~/utils";
@@ -36,19 +35,19 @@ export function ColorPickerInput(props: ColorPickerInputProps) {
   );
 
   if (format === "hex") {
-    return <HexInput color={color} onColorChange={onColorChange} context={context} {...props} />;
+    return <HexInput color={color} context={context} onColorChange={onColorChange} {...props} />;
   }
 
   if (format === "rgb") {
-    return <RgbInput color={color} onColorChange={onColorChange} context={context} {...props} />;
+    return <RgbInput color={color} context={context} onColorChange={onColorChange} {...props} />;
   }
 
   if (format === "hsl") {
-    return <HslInput color={color} onColorChange={onColorChange} context={context} {...props} />;
+    return <HslInput color={color} context={context} onColorChange={onColorChange} {...props} />;
   }
 
   if (format === "hsb") {
-    return <HsbInput hsv={hsv} onColorChange={onColorChange} context={context} {...props} />;
+    return <HsbInput context={context} hsv={hsv} onColorChange={onColorChange} {...props} />;
   }
 }
 
@@ -56,7 +55,7 @@ interface InputGroupItemProps extends React.ComponentProps<typeof Input>, Varian
 
 function InputGroupItem({ className, position, ...props }: InputGroupItemProps) {
   return (
-    <Input data-slot="color-picker-input" className={cn(inputGroupItemVariants({ position, className }))} {...props} />
+    <Input className={cn(inputGroupItemVariants({ className, position }))} data-slot="color-picker-input" {...props} />
   );
 }
 
@@ -99,40 +98,40 @@ function HexInput(props: FormatInputProps) {
         aria-label="Hex color value"
         position="isolated"
         {...inputProps}
-        placeholder="#000000"
         className={cn("font-code", className)}
-        value={hexValue}
-        onChange={onHexChange}
         disabled={context.disabled}
+        onChange={onHexChange}
+        placeholder="#000000"
+        value={hexValue}
       />
     );
   }
 
   return (
-    <div data-slot="color-picker-input-wrapper" className={cn("flex flex-1 items-center", className)}>
+    <div className={cn("flex flex-1 items-center", className)} data-slot="color-picker-input-wrapper">
       <InputGroupItem
         aria-label="Hex color value"
         position="first"
         {...inputProps}
-        placeholder="#000000"
-        className="font-code flex-1"
-        value={hexValue}
-        onChange={onHexChange}
+        className="flex-1 font-code"
         disabled={context.disabled}
+        onChange={onHexChange}
+        placeholder="#000000"
+        value={hexValue}
       />
       <InputGroupItem
         aria-label="Alpha transparency percentage"
         position="last"
         {...inputProps}
-        placeholder="100"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="100"
         className="w-14"
-        value={alphaValue}
-        onChange={onAlphaChange}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="100"
+        min="0"
+        onChange={onAlphaChange}
+        pattern="[0-9]*"
+        placeholder="100"
+        value={alphaValue}
       />
     </div>
   );
@@ -159,63 +158,63 @@ function RgbInput(props: FormatInputProps) {
   );
 
   return (
-    <div data-slot="color-picker-input-wrapper" className={cn("flex flex-1 items-center", className)}>
+    <div className={cn("flex flex-1 items-center", className)} data-slot="color-picker-input-wrapper">
       <InputGroupItem
         aria-label="Red color component (0-255)"
         position="first"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="255"
         className="w-14"
-        value={rValue}
-        onChange={onChannelChange("r", 255)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="255"
+        min="0"
+        onChange={onChannelChange("r", 255)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={rValue}
       />
       <InputGroupItem
         aria-label="Green color component (0-255)"
         position="middle"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="255"
         className="w-14"
-        value={gValue}
-        onChange={onChannelChange("g", 255)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="255"
+        min="0"
+        onChange={onChannelChange("g", 255)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={gValue}
       />
       <InputGroupItem
         aria-label="Blue color component (0-255)"
         position={withoutAlpha ? "last" : "middle"}
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="255"
         className="w-14"
-        value={bValue}
-        onChange={onChannelChange("b", 255)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="255"
+        min="0"
+        onChange={onChannelChange("b", 255)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={bValue}
       />
       {!withoutAlpha && (
         <InputGroupItem
           aria-label="Alpha transparency percentage"
           position="last"
           {...inputProps}
-          placeholder="100"
-          inputMode="numeric"
-          pattern="[0-9]*"
-          min="0"
-          max="100"
           className="w-14"
-          value={alphaValue}
-          onChange={onChannelChange("a", 100, true)}
           disabled={context.disabled}
+          inputMode="numeric"
+          max="100"
+          min="0"
+          onChange={onChannelChange("a", 100, true)}
+          pattern="[0-9]*"
+          placeholder="100"
+          value={alphaValue}
         />
       )}
     </div>
@@ -251,63 +250,63 @@ function HslInput(props: FormatInputProps) {
   );
 
   return (
-    <div data-slot="color-picker-input-wrapper" className={cn("flex items-center", className)}>
+    <div className={cn("flex items-center", className)} data-slot="color-picker-input-wrapper">
       <InputGroupItem
         aria-label="Hue degree (0-360)"
         position="first"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="360"
         className="w-14"
-        value={hsl.h}
-        onChange={onHslChannelChange("h", 360)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="360"
+        min="0"
+        onChange={onHslChannelChange("h", 360)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsl.h}
       />
       <InputGroupItem
         aria-label="Saturation percentage (0-100)"
         position="middle"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="100"
         className="w-14"
-        value={hsl.s}
-        onChange={onHslChannelChange("s", 100)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="100"
+        min="0"
+        onChange={onHslChannelChange("s", 100)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsl.s}
       />
       <InputGroupItem
         aria-label="Lightness percentage (0-100)"
         position={withoutAlpha ? "last" : "middle"}
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="100"
         className="w-14"
-        value={hsl.l}
-        onChange={onHslChannelChange("l", 100)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="100"
+        min="0"
+        onChange={onHslChannelChange("l", 100)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsl.l}
       />
       {!withoutAlpha && (
         <InputGroupItem
           aria-label="Alpha transparency percentage"
           position="last"
           {...inputProps}
-          placeholder="100"
-          inputMode="numeric"
-          pattern="[0-9]*"
-          min="0"
-          max="100"
           className="w-14"
-          value={alphaValue}
-          onChange={onAlphaChange}
           disabled={context.disabled}
+          inputMode="numeric"
+          max="100"
+          min="0"
+          onChange={onAlphaChange}
+          pattern="[0-9]*"
+          placeholder="100"
+          value={alphaValue}
         />
       )}
     </div>
@@ -347,63 +346,63 @@ function HsbInput(props: HsbInputProps) {
   );
 
   return (
-    <div data-slot="color-picker-input-wrapper" className={cn("flex items-center", className)}>
+    <div className={cn("flex items-center", className)} data-slot="color-picker-input-wrapper">
       <InputGroupItem
         aria-label="Hue degree (0-360)"
         position="first"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="360"
         className="w-14"
-        value={hsv?.h ?? 0}
-        onChange={onHsvChannelChange("h", 360)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="360"
+        min="0"
+        onChange={onHsvChannelChange("h", 360)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsv?.h ?? 0}
       />
       <InputGroupItem
         aria-label="Saturation percentage (0-100)"
         position="middle"
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="100"
         className="w-14"
-        value={hsv?.s ?? 0}
-        onChange={onHsvChannelChange("s", 100)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="100"
+        min="0"
+        onChange={onHsvChannelChange("s", 100)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsv?.s ?? 0}
       />
       <InputGroupItem
         aria-label="Brightness percentage (0-100)"
         position={withoutAlpha ? "last" : "middle"}
         {...inputProps}
-        placeholder="0"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        min="0"
-        max="100"
         className="w-14"
-        value={hsv?.v ?? 0}
-        onChange={onHsvChannelChange("v", 100)}
         disabled={context.disabled}
+        inputMode="numeric"
+        max="100"
+        min="0"
+        onChange={onHsvChannelChange("v", 100)}
+        pattern="[0-9]*"
+        placeholder="0"
+        value={hsv?.v ?? 0}
       />
       {!withoutAlpha && (
         <InputGroupItem
           aria-label="Alpha transparency percentage"
           position="last"
           {...inputProps}
-          placeholder="100"
-          inputMode="numeric"
-          pattern="[0-9]*"
-          min="0"
-          max="100"
           className="w-14"
-          value={alphaValue}
-          onChange={onAlphaChange}
           disabled={context.disabled}
+          inputMode="numeric"
+          max="100"
+          min="0"
+          onChange={onAlphaChange}
+          pattern="[0-9]*"
+          placeholder="100"
+          value={alphaValue}
         />
       )}
     </div>

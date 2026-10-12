@@ -10,6 +10,9 @@ export const buttonGroupVariants = cva(
     "[&>input]:flex-1"
   ],
   {
+    defaultVariants: {
+      orientation: "horizontal"
+    },
     variants: {
       orientation: {
         horizontal:
@@ -17,9 +20,6 @@ export const buttonGroupVariants = cva(
         vertical:
           "flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b!"
       }
-    },
-    defaultVariants: {
-      orientation: "horizontal"
     }
   }
 );

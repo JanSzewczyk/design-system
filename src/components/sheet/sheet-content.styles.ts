@@ -6,27 +6,11 @@ export const sheetContentStyles = cva(
     "data-[state=open]:slide-in data-[state=closed]:slide-out"
   ],
   {
+    defaultVariants: {
+      side: "right"
+    },
     variants: {
       side: {
-        top: [
-          "data-[side=top]:data-[state=open]:slide-in-from-top-10",
-          "data-[side=top]:data-[state=closed]:slide-out-to-top-10",
-          "data-[side=top]:inset-x-0",
-          "data-[side=top]:top-0",
-          "data-[side=top]:h-auto",
-          "data-[side=top]:border-b",
-          "data-[side=top]:max-h-[90vh]"
-        ],
-        right: [
-          "data-[side=right]:data-[state=open]:slide-in-from-right-10",
-          "data-[side=right]:data-[state=closed]:slide-out-to-right-10",
-          "data-[side=right]:inset-y-0",
-          "data-[side=right]:right-0",
-          "data-[side=right]:h-full",
-          "data-[side=right]:border-l",
-          "data-[side=right]:w-3/4",
-          "data-[side=right]:sm:max-w-sm"
-        ],
         bottom: [
           "data-[side=bottom]:data-[state=open]:slide-in-from-bottom-10",
           "data-[side=bottom]:data-[state=closed]:slide-out-to-bottom-10",
@@ -45,11 +29,27 @@ export const sheetContentStyles = cva(
           "data-[side=left]:border-r",
           "data-[side=left]:w-3/4",
           "data-[side=left]:sm:max-w-sm"
+        ],
+        right: [
+          "data-[side=right]:data-[state=open]:slide-in-from-right-10",
+          "data-[side=right]:data-[state=closed]:slide-out-to-right-10",
+          "data-[side=right]:inset-y-0",
+          "data-[side=right]:right-0",
+          "data-[side=right]:h-full",
+          "data-[side=right]:border-l",
+          "data-[side=right]:w-3/4",
+          "data-[side=right]:sm:max-w-sm"
+        ],
+        top: [
+          "data-[side=top]:data-[state=open]:slide-in-from-top-10",
+          "data-[side=top]:data-[state=closed]:slide-out-to-top-10",
+          "data-[side=top]:inset-x-0",
+          "data-[side=top]:top-0",
+          "data-[side=top]:h-auto",
+          "data-[side=top]:border-b",
+          "data-[side=top]:max-h-[90vh]"
         ]
       }
-    },
-    defaultVariants: {
-      side: "right"
     }
   }
 );

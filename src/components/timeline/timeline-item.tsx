@@ -1,10 +1,9 @@
-import * as React from "react";
-
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import { Slot } from "@radix-ui/react-slot";
-import { TimelineItemContext, type TimelineItemContextValue } from "~/components/timeline/timeline-item.context";
+import * as React from "react";
 import { useTimelineStore, useTimelineStoreContext } from "~/components/timeline/timeline.store";
 import { getItemStatus } from "~/components/timeline/timeline.utils";
+import { TimelineItemContext, type TimelineItemContextValue } from "~/components/timeline/timeline-item.context";
 import { useIsomorphicLayoutEffect } from "~/hooks";
 import { cn } from "~/utils";
 
@@ -45,7 +44,7 @@ export function TimelineItem({ asChild = false, className, id, ref, ...props }: 
   const isAlternateRight = variant === "alternate" && itemIndex % 2 === 1;
 
   const itemContextValue = React.useMemo<TimelineItemContextValue>(
-    () => ({ id: itemId, status, isAlternateRight }),
+    () => ({ id: itemId, isAlternateRight, status }),
     [itemId, status, isAlternateRight]
   );
 
@@ -54,24 +53,24 @@ export function TimelineItem({ asChild = false, className, id, ref, ...props }: 
   return (
     <TimelineItemContext.Provider value={itemContextValue}>
       <ItemPrimitive
-        role="listitem"
         aria-current={status === "active" ? "step" : undefined}
+        data-alternate-right={isAlternateRight ? "" : undefined}
+        data-orientation={orientation}
         data-slot="timeline-item"
         data-status={status}
-        data-orientation={orientation}
-        data-alternate-right={isAlternateRight ? "" : undefined}
-        id={itemId}
         dir={dir}
+        id={itemId}
+        role="listitem"
         {...props}
-        ref={composedRef}
         className={cn(
           timelineItemVariants({
-            orientation,
-            variant,
+            className,
             isAlternateRight,
-            className
+            orientation,
+            variant
           })
         )}
+        ref={composedRef}
       />
     </TimelineItemContext.Provider>
   );

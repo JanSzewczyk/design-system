@@ -3,253 +3,253 @@ import { cva } from "class-variance-authority";
 export const timelineVariants = cva(
   "relative flex [--timeline-connector-thickness:0.125rem] [--timeline-dot-size:0.875rem]",
   {
-    variants: {
-      orientation: {
-        vertical: "flex-col",
-        horizontal: "flex-row items-start"
-      },
-      variant: {
-        default: "",
-        alternate: ""
-      }
-    },
     compoundVariants: [
       {
+        class: "gap-6",
         orientation: "vertical",
-        variant: "default",
-        class: "gap-6"
+        variant: "default"
       },
       {
+        class: "gap-8",
         orientation: "horizontal",
-        variant: "default",
-        class: "gap-8"
+        variant: "default"
       },
       {
+        class: "relative w-full gap-3",
         orientation: "vertical",
-        variant: "alternate",
-        class: "relative w-full gap-3"
+        variant: "alternate"
       },
       {
+        class: "items-center gap-4",
         orientation: "horizontal",
-        variant: "alternate",
-        class: "items-center gap-4"
+        variant: "alternate"
       }
     ],
     defaultVariants: {
       orientation: "vertical",
       variant: "default"
+    },
+    variants: {
+      orientation: {
+        horizontal: "flex-row items-start",
+        vertical: "flex-col"
+      },
+      variant: {
+        alternate: "",
+        default: ""
+      }
     }
   }
 );
 
 export const timelineItemVariants = cva("relative flex", {
-  variants: {
-    orientation: {
-      vertical: "",
-      horizontal: ""
-    },
-    variant: {
-      default: "",
-      alternate: ""
-    },
-    isAlternateRight: {
-      true: "",
-      false: ""
-    }
-  },
   compoundVariants: [
     {
+      class: "gap-3 pb-8 last:pb-0",
       orientation: "vertical",
-      variant: "default",
-      class: "gap-3 pb-8 last:pb-0"
+      variant: "default"
     },
     {
+      class: "flex-col gap-3",
       orientation: "horizontal",
-      variant: "default",
-      class: "flex-col gap-3"
+      variant: "default"
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      class: "w-1/2 gap-3 pr-6 pb-12 last:pb-0",
       isAlternateRight: false,
-      class: "w-1/2 gap-3 pr-6 pb-12 last:pb-0"
-    },
-    {
       orientation: "vertical",
-      variant: "alternate",
-      isAlternateRight: true,
-      class: "ml-auto w-1/2 flex-row-reverse gap-3 pb-12 pl-6 last:pb-0"
+      variant: "alternate"
     },
     {
+      class: "ml-auto w-1/2 flex-row-reverse gap-3 pb-12 pl-6 last:pb-0",
+      isAlternateRight: true,
+      orientation: "vertical",
+      variant: "alternate"
+    },
+    {
+      class: "grid min-w-0 grid-rows-[1fr_auto_1fr] gap-3",
       orientation: "horizontal",
-      variant: "alternate",
-      class: "grid min-w-0 grid-rows-[1fr_auto_1fr] gap-3"
+      variant: "alternate"
     }
   ],
   defaultVariants: {
+    isAlternateRight: false,
     orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false
+    variant: "default"
+  },
+  variants: {
+    isAlternateRight: {
+      false: "",
+      true: ""
+    },
+    orientation: {
+      horizontal: "",
+      vertical: ""
+    },
+    variant: {
+      alternate: "",
+      default: ""
+    }
   }
 });
 
 export const timelineContentVariants = cva("flex-1", {
-  variants: {
-    orientation: {
-      vertical: "",
-      horizontal: ""
-    },
-    variant: {
-      default: "",
-      alternate: ""
-    },
-    isAlternateRight: {
-      true: "",
-      false: ""
-    }
-  },
   compoundVariants: [
     {
-      variant: "alternate",
+      class: "text-right",
+      isAlternateRight: false,
       orientation: "vertical",
-      isAlternateRight: false,
-      class: "text-right"
+      variant: "alternate"
     },
     {
-      variant: "alternate",
-      orientation: "horizontal",
+      class: "row-start-3 pt-2",
       isAlternateRight: false,
-      class: "row-start-3 pt-2"
+      orientation: "horizontal",
+      variant: "alternate"
     },
     {
-      variant: "alternate",
-      orientation: "horizontal",
+      class: "row-start-1 pb-2",
       isAlternateRight: true,
-      class: "row-start-1 pb-2"
+      orientation: "horizontal",
+      variant: "alternate"
     }
   ],
   defaultVariants: {
+    isAlternateRight: false,
     orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false
+    variant: "default"
+  },
+  variants: {
+    isAlternateRight: {
+      false: "",
+      true: ""
+    },
+    orientation: {
+      horizontal: "",
+      vertical: ""
+    },
+    variant: {
+      alternate: "",
+      default: ""
+    }
   }
 });
 
 export const timelineDotVariants = cva(
   "relative z-10 flex size-(--timeline-dot-size) shrink-0 items-center justify-center rounded-full border-2 bg-background",
   {
-    variants: {
-      status: {
-        completed: "border-primary",
-        active: "border-primary",
-        pending: "border-border"
-      },
-      orientation: {
-        vertical: "",
-        horizontal: ""
-      },
-      variant: {
-        default: "",
-        alternate: ""
-      },
-      isAlternateRight: {
-        true: "",
-        false: ""
-      }
-    },
     compoundVariants: [
       {
-        variant: "alternate",
-        orientation: "vertical",
+        class: "absolute -right-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background",
         isAlternateRight: false,
-        class: "absolute -right-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background"
-      },
-      {
-        variant: "alternate",
         orientation: "vertical",
+        variant: "alternate"
+      },
+      {
+        class: "absolute -left-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background",
         isAlternateRight: true,
-        class: "absolute -left-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] bg-background"
+        orientation: "vertical",
+        variant: "alternate"
       },
       {
-        variant: "alternate",
+        class: "row-start-2 bg-background",
         orientation: "horizontal",
-        class: "row-start-2 bg-background"
+        variant: "alternate"
       },
       {
-        variant: "alternate",
+        class: "bg-background",
         status: "completed",
-        class: "bg-background"
+        variant: "alternate"
       },
       {
-        variant: "alternate",
+        class: "bg-background",
         status: "active",
-        class: "bg-background"
+        variant: "alternate"
       }
     ],
     defaultVariants: {
-      status: "pending",
+      isAlternateRight: false,
       orientation: "vertical",
-      variant: "default",
-      isAlternateRight: false
+      status: "pending",
+      variant: "default"
+    },
+    variants: {
+      isAlternateRight: {
+        false: "",
+        true: ""
+      },
+      orientation: {
+        horizontal: "",
+        vertical: ""
+      },
+      status: {
+        active: "border-primary",
+        completed: "border-primary",
+        pending: "border-border"
+      },
+      variant: {
+        alternate: "",
+        default: ""
+      }
     }
   }
 );
 
 export const timelineConnectorVariants = cva("absolute z-0", {
-  variants: {
-    isCompleted: {
-      true: "bg-primary",
-      false: "bg-border"
-    },
-    orientation: {
-      vertical: "",
-      horizontal: ""
-    },
-    variant: {
-      default: "",
-      alternate: ""
-    },
-    isAlternateRight: {
-      true: "",
-      false: ""
-    }
-  },
   compoundVariants: [
     {
-      orientation: "vertical",
-      variant: "default",
       class:
-        "start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-(--timeline-connector-thickness)"
+        "start-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] top-3 h-[calc(100%+0.5rem)] w-(--timeline-connector-thickness)",
+      orientation: "vertical",
+      variant: "default"
     },
     {
+      class:
+        "start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]",
       orientation: "horizontal",
-      variant: "default",
-      class:
-        "start-3 top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]"
+      variant: "default"
     },
     {
-      orientation: "vertical",
-      variant: "alternate",
+      class: "top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)",
       isAlternateRight: false,
-      class: "top-2 -right-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)"
-    },
-    {
       orientation: "vertical",
-      variant: "alternate",
-      isAlternateRight: true,
-      class: "top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)"
+      variant: "alternate"
     },
     {
-      orientation: "horizontal",
-      variant: "alternate",
+      class: "top-2 -left-[calc(var(--timeline-connector-thickness)/2)] h-full w-(--timeline-connector-thickness)",
+      isAlternateRight: true,
+      orientation: "vertical",
+      variant: "alternate"
+    },
+    {
       class:
-        "top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]"
+        "top-[calc(var(--timeline-dot-size)/2-var(--timeline-connector-thickness)/2)] left-3 row-start-2 h-(--timeline-connector-thickness) w-[calc(100%+0.5rem)]",
+      orientation: "horizontal",
+      variant: "alternate"
     }
   ],
   defaultVariants: {
+    isAlternateRight: false,
     isCompleted: false,
     orientation: "vertical",
-    variant: "default",
-    isAlternateRight: false
+    variant: "default"
+  },
+  variants: {
+    isAlternateRight: {
+      false: "",
+      true: ""
+    },
+    isCompleted: {
+      false: "bg-border",
+      true: "bg-primary"
+    },
+    orientation: {
+      horizontal: "",
+      vertical: ""
+    },
+    variant: {
+      alternate: "",
+      default: ""
+    }
   }
 });

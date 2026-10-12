@@ -1,10 +1,8 @@
-import * as React from "react";
-
 import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button, Input, Label, Select, SelectContent, SelectItem, Textarea } from "~/components";
 import { Checkbox } from "~/components/checkbox";
 import { RadioGroup, RadioGroupItem } from "~/components/radio-group";
-
 import {
   Field,
   FieldContent,
@@ -18,13 +16,11 @@ import {
   FieldTitle
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Field",
   component: Field,
+  decorators: [(Story) => <div className="w-full max-w-md">{Story()}</div>],
   tags: ["autodocs", "new"],
-  decorators: [(Story) => <div className="w-full max-w-md">{Story()}</div>]
+  title: "Components/Field"
 });
 
 export const Example = meta.story({
@@ -90,8 +86,8 @@ export const Example = meta.story({
           <FieldDescription>The billing address associated with your payment method</FieldDescription>
           <FieldGroup>
             <Field orientation="horizontal">
-              <Checkbox id="checkout-7j9-same-as-shipping-wgm" defaultChecked />
-              <FieldLabel htmlFor="checkout-7j9-same-as-shipping-wgm" className="font-normal">
+              <Checkbox defaultChecked id="checkout-7j9-same-as-shipping-wgm" />
+              <FieldLabel className="font-normal" htmlFor="checkout-7j9-same-as-shipping-wgm">
                 Same as shipping address
               </FieldLabel>
             </Field>
@@ -102,16 +98,16 @@ export const Example = meta.story({
             <Field>
               <FieldLabel htmlFor="checkout-7j9-optional-comments">Comments</FieldLabel>
               <Textarea
+                className="resize-none"
                 id="checkout-7j9-optional-comments"
                 placeholder="Add any additional comments"
-                className="resize-none"
               />
             </Field>
           </FieldGroup>
         </FieldSet>
         <Field orientation="horizontal">
           <Button type="submit">Submit</Button>
-          <Button variant="outline" type="button">
+          <Button type="button" variant="outline">
             Cancel
           </Button>
         </Field>
@@ -127,13 +123,13 @@ export const InputStory = meta.story({
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="username">Username</FieldLabel>
-          <Input id="username" type="text" placeholder="Max Leiter" />
+          <Input id="username" placeholder="Max Leiter" type="text" />
           <FieldDescription>Choose a unique username for your account.</FieldDescription>
         </Field>
         <Field>
           <FieldLabel htmlFor="password">Password</FieldLabel>
           <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-          <Input id="password" type="password" placeholder="********" />
+          <Input id="password" placeholder="********" type="password" />
         </Field>
       </FieldGroup>
     </FieldSet>
@@ -186,16 +182,16 @@ export const FieldsetStory = meta.story({
       <FieldGroup>
         <Field>
           <FieldLabel htmlFor="street">Street Address</FieldLabel>
-          <Input id="street" type="text" placeholder="123 Main St" />
+          <Input id="street" placeholder="123 Main St" type="text" />
         </Field>
         <div className="grid grid-cols-2 gap-4">
           <Field>
             <FieldLabel htmlFor="city">City</FieldLabel>
-            <Input id="city" type="text" placeholder="New York" />
+            <Input id="city" placeholder="New York" type="text" />
           </Field>
           <Field>
             <FieldLabel htmlFor="zip">Postal Code</FieldLabel>
-            <Input id="zip" type="text" placeholder="90502" />
+            <Input id="zip" placeholder="90502" type="text" />
           </Field>
         </div>
       </FieldGroup>
@@ -213,25 +209,25 @@ export const CheckboxStory = meta.story({
         <FieldGroup className="gap-3">
           <Field orientation="horizontal">
             <Checkbox id="finder-pref-9k2-hard-disks-ljj" />
-            <FieldLabel htmlFor="finder-pref-9k2-hard-disks-ljj" className="font-normal" defaultChecked>
+            <FieldLabel className="font-normal" defaultChecked htmlFor="finder-pref-9k2-hard-disks-ljj">
               Hard disks
             </FieldLabel>
           </Field>
           <Field orientation="horizontal">
             <Checkbox id="finder-pref-9k2-external-disks-1yg" />
-            <FieldLabel htmlFor="finder-pref-9k2-external-disks-1yg" className="font-normal">
+            <FieldLabel className="font-normal" htmlFor="finder-pref-9k2-external-disks-1yg">
               External disks
             </FieldLabel>
           </Field>
           <Field orientation="horizontal">
             <Checkbox id="finder-pref-9k2-cds-dvds-fzt" />
-            <FieldLabel htmlFor="finder-pref-9k2-cds-dvds-fzt" className="font-normal">
+            <FieldLabel className="font-normal" htmlFor="finder-pref-9k2-cds-dvds-fzt">
               CDs, DVDs, and iPods
             </FieldLabel>
           </Field>
           <Field orientation="horizontal">
             <Checkbox id="finder-pref-9k2-connected-servers-6l2" />
-            <FieldLabel htmlFor="finder-pref-9k2-connected-servers-6l2" className="font-normal">
+            <FieldLabel className="font-normal" htmlFor="finder-pref-9k2-connected-servers-6l2">
               Connected servers
             </FieldLabel>
           </Field>
@@ -239,7 +235,7 @@ export const CheckboxStory = meta.story({
       </FieldSet>
       <FieldSeparator />
       <Field orientation="horizontal">
-        <Checkbox id="finder-pref-9k2-sync-folders-nep" defaultChecked />
+        <Checkbox defaultChecked id="finder-pref-9k2-sync-folders-nep" />
         <FieldContent>
           <FieldLabel htmlFor="finder-pref-9k2-sync-folders-nep">Sync Desktop & Documents folders</FieldLabel>
           <FieldDescription>
@@ -264,7 +260,7 @@ export const ChoiceCard = meta.story({
               <FieldTitle>Kubernetes</FieldTitle>
               <FieldDescription>Run GPU workloads on a K8s configured cluster.</FieldDescription>
             </FieldContent>
-            <Checkbox value="kubernetes" id="kubernetes-r2h" />
+            <Checkbox id="kubernetes-r2h" value="kubernetes" />
           </Field>
         </FieldLabel>
         <FieldLabel htmlFor="vm-z4k">
@@ -273,7 +269,7 @@ export const ChoiceCard = meta.story({
               <FieldTitle>Virtual Machine</FieldTitle>
               <FieldDescription>Access a VM configured cluster to run GPU workloads.</FieldDescription>
             </FieldContent>
-            <Checkbox value="vm" id="vm-z4k" />
+            <Checkbox id="vm-z4k" value="vm" />
           </Field>
         </FieldLabel>
       </FieldSet>
@@ -289,20 +285,20 @@ export const RadioStory = meta.story({
       <FieldDescription>Yearly and lifetime plans offer significant savings.</FieldDescription>
       <RadioGroup defaultValue="monthly">
         <Field orientation="horizontal">
-          <RadioGroupItem value="monthly" id="plan-monthly" />
-          <FieldLabel htmlFor="plan-monthly" className="font-normal">
+          <RadioGroupItem id="plan-monthly" value="monthly" />
+          <FieldLabel className="font-normal" htmlFor="plan-monthly">
             Monthly ($9.99/month)
           </FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <RadioGroupItem value="yearly" id="plan-yearly" />
-          <FieldLabel htmlFor="plan-yearly" className="font-normal">
+          <RadioGroupItem id="plan-yearly" value="yearly" />
+          <FieldLabel className="font-normal" htmlFor="plan-yearly">
             Yearly ($99.99/year)
           </FieldLabel>
         </Field>
         <Field orientation="horizontal">
-          <RadioGroupItem value="lifetime" id="plan-lifetime" />
-          <FieldLabel htmlFor="plan-lifetime" className="font-normal">
+          <RadioGroupItem id="plan-lifetime" value="lifetime" />
+          <FieldLabel className="font-normal" htmlFor="plan-lifetime">
             Lifetime ($299.99)
           </FieldLabel>
         </Field>
@@ -325,7 +321,7 @@ export const ChoiceCardRadioButtons = meta.story({
                 <FieldTitle>Kubernetes</FieldTitle>
                 <FieldDescription>Run GPU workloads on a K8s configured cluster.</FieldDescription>
               </FieldContent>
-              <RadioGroupItem value="kubernetes" id="kubernetes-r2h" />
+              <RadioGroupItem id="kubernetes-r2h" value="kubernetes" />
             </Field>
           </FieldLabel>
           <FieldLabel htmlFor="vm-z4k">
@@ -334,7 +330,7 @@ export const ChoiceCardRadioButtons = meta.story({
                 <FieldTitle>Virtual Machine</FieldTitle>
                 <FieldDescription>Access a VM configured cluster to run GPU workloads.</FieldDescription>
               </FieldContent>
-              <RadioGroupItem value="vm" id="vm-z4k" />
+              <RadioGroupItem id="vm-z4k" value="vm" />
             </Field>
           </FieldLabel>
         </RadioGroup>
@@ -344,6 +340,11 @@ export const ChoiceCardRadioButtons = meta.story({
 });
 
 export const Horizontal = meta.story({
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const group = canvas.getByRole("group");
+    await expect(group).toHaveAttribute("data-orientation", "horizontal");
+  },
   render: () => (
     <Field orientation="horizontal">
       <FieldLabel htmlFor="name">Name</FieldLabel>
@@ -351,12 +352,7 @@ export const Horizontal = meta.story({
         <Input id="name" placeholder="John Doe" />
       </FieldContent>
     </Field>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const group = canvas.getByRole("group");
-    await expect(group).toHaveAttribute("data-orientation", "horizontal");
-  }
+  )
 });
 
 export const Responsive = meta.story({
@@ -396,11 +392,17 @@ export const WithSeparatorAndLegend = meta.story({
 });
 
 export const ErrorDeduplication = meta.story({
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // Should render only the unique messages (2)
+    const messages = canvas.getAllByText(/Password/);
+    await expect(messages.length >= 2).toBe(true);
+  },
   render: () => (
     <Field>
       <FieldLabel htmlFor="password">Password</FieldLabel>
       <FieldContent>
-        <Input id="password" type="password" placeholder="••••••••" invalid />
+        <Input id="password" invalid placeholder="••••••••" type="password" />
         <FieldError
           errors={[
             { message: "Password is required" },
@@ -411,11 +413,5 @@ export const ErrorDeduplication = meta.story({
         />
       </FieldContent>
     </Field>
-  ),
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    // Should render only the unique messages (2)
-    const messages = canvas.getAllByText(/Password/);
-    await expect(messages.length >= 2).toBe(true);
-  }
+  )
 });

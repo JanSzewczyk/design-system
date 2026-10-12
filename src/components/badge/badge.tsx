@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { badgeVariants } from "~/components/badge/badge.styles";
 import { cn } from "~/utils";
@@ -12,5 +11,5 @@ export type BadgeProps = React.ComponentProps<"span"> & { variant?: BadgeVariant
 export function Badge({ className, variant = "primary", asChild = false, ...props }: BadgeProps) {
   const Comp = asChild ? SlotPrimitive.Slot : "span";
 
-  return <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />;
+  return <Comp className={cn(badgeVariants({ variant }), className)} data-slot="badge" {...props} />;
 }

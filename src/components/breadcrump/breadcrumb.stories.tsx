@@ -1,7 +1,7 @@
 import { ChevronDownIcon, DotIcon } from "lucide-react";
 
 import { expect, screen, waitFor } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "../dropdown-menu";
-
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -20,19 +19,17 @@ import {
   BreadcrumbSeparator
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Breadcrumb",
   component: Breadcrumb,
   subcomponents: {
-    BreadcrumbList,
+    BreadcrumbEllipsis,
     BreadcrumbItem,
     BreadcrumbLink,
+    BreadcrumbList,
     BreadcrumbPage,
-    BreadcrumbSeparator,
-    BreadcrumbEllipsis
-  }
+    BreadcrumbSeparator
+  },
+  title: "Components/Breadcrumb"
 });
 
 // ---------------------------------------------------------------------------

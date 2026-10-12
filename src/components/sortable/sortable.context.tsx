@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { type DraggableSyntheticListeners, type Modifiers, type UniqueIdentifier } from "@dnd-kit/core";
+import * as React from "react";
 
 import { SORTABLE_ITEM_NAME, SORTABLE_ROOT_NAME } from "./sortable.constants";
 

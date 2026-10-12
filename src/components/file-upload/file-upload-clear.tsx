@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { CLEAR_NAME } from "./file-upload.constants";
 import { useFileUploadContext } from "./file-upload.context";
@@ -39,10 +38,10 @@ export function FileUploadClear(props: FileUploadClearProps) {
 
   return (
     <ClearPrimitive
-      type="button"
       aria-controls={context.listId}
-      data-slot="file-upload-clear"
       data-disabled={isDisabled ? "" : undefined}
+      data-slot="file-upload-clear"
+      type="button"
       {...clearProps}
       disabled={isDisabled}
       onClick={onClick}

@@ -1,37 +1,34 @@
-import * as React from "react";
-
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { ColorSwatch } from "~/components";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Color Swatch",
-  component: ColorSwatch,
-  tags: ["autodocs", "new"],
   argTypes: {
+    asChild: {
+      control: "boolean",
+      description: "Whether to render as a child element using Radix Slot"
+    },
     color: {
       control: "color",
       description: "The color to display in the swatch"
-    },
-    size: {
-      control: "select",
-      options: ["sm", "default", "lg"],
-      description: "Size of the color swatch"
     },
     disabled: {
       control: "boolean",
       description: "Whether the swatch is disabled"
     },
+    size: {
+      control: "select",
+      description: "Size of the color swatch",
+      options: ["sm", "default", "lg"]
+    },
     withoutTransparency: {
       control: "boolean",
       description: "Whether to hide the transparency checkerboard pattern for colors with alpha"
-    },
-    asChild: {
-      control: "boolean",
-      description: "Whether to render as a child element using Radix Slot"
     }
-  }
+  },
+  component: ColorSwatch,
+  tags: ["autodocs", "new"],
+  title: "Components/Color Swatch"
 });
 
 export const Default = meta.story({
@@ -43,9 +40,9 @@ export const Default = meta.story({
 export const Sizes = meta.story({
   render: () => (
     <div className="flex items-center gap-4">
-      <ColorSwatch size="sm" color="#3b82f6" />
-      <ColorSwatch size="default" color="#3b82f6" />
-      <ColorSwatch size="lg" color="#3b82f6" />
+      <ColorSwatch color="#3b82f6" size="sm" />
+      <ColorSwatch color="#3b82f6" size="default" />
+      <ColorSwatch color="#3b82f6" size="lg" />
     </div>
   )
 });
@@ -147,13 +144,6 @@ export const Disabled = meta.story({
 });
 
 export const AsChild = meta.story({
-  render: () => (
-    <ColorSwatch color="#3b82f6" asChild>
-      <button type="button" onClick={() => alert("Clicked!")}>
-        Click me
-      </button>
-    </ColorSwatch>
-  ),
   play: async ({ canvas, step }) => {
     await step("AsChild renders child element with swatch styles", async () => {
       const button = canvas.getByRole("img", { name: /Color swatch: #3b82f6/ });
@@ -163,17 +153,17 @@ export const AsChild = meta.story({
       // The button type attribute should be preserved
       await expect(button).toHaveAttribute("type", "button");
     });
-  }
+  },
+  render: () => (
+    <ColorSwatch asChild color="#3b82f6">
+      <button onClick={() => alert("Clicked!")} type="button">
+        Click me
+      </button>
+    </ColorSwatch>
+  )
 });
 
 export const Accessibility = meta.story({
-  render: () => (
-    <div className="flex items-center gap-4">
-      <ColorSwatch data-testid="swatch-with-color" color="#3b82f6" />
-      <ColorSwatch data-testid="swatch-no-color" />
-      <ColorSwatch data-testid="swatch-disabled" color="#3b82f6" disabled />
-    </div>
-  ),
   play: async ({ canvas, step }) => {
     await step("Swatches have correct ARIA attributes", async () => {
       const withColor = canvas.getByTestId("swatch-with-color");
@@ -194,21 +184,17 @@ export const Accessibility = meta.story({
       await expect(disabled).toHaveAttribute("aria-disabled", "true");
       await expect(disabled).toHaveAttribute("data-disabled", "");
     });
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-4">
+      <ColorSwatch color="#3b82f6" data-testid="swatch-with-color" />
+      <ColorSwatch data-testid="swatch-no-color" />
+      <ColorSwatch color="#3b82f6" data-testid="swatch-disabled" disabled />
+    </div>
+  )
 });
 
 export const ColorValidation = meta.story({
-  render: () => (
-    <div className="flex items-center gap-4">
-      <ColorSwatch data-testid="hex-color" color="#ff5733" />
-      <ColorSwatch data-testid="rgb-color" color="rgb(59, 130, 246)" />
-      <ColorSwatch data-testid="rgba-color" color="rgba(59, 130, 246, 0.5)" />
-      <ColorSwatch data-testid="named-color" color="rebeccapurple" />
-      <ColorSwatch data-testid="invalid-color" color="not-a-valid-color" />
-      <ColorSwatch data-testid="empty-color" color="" />
-      <ColorSwatch data-testid="whitespace-color" color="   " />
-    </div>
-  ),
   play: async ({ canvas, step }) => {
     await step("Valid colors render with correct aria-label", async () => {
       const hexColor = canvas.getByTestId("hex-color");
@@ -229,5 +215,16 @@ export const ColorValidation = meta.story({
       await expect(emptyColor).toHaveAttribute("aria-label", "No color selected");
       await expect(whitespaceColor).toHaveAttribute("aria-label", "No color selected");
     });
-  }
+  },
+  render: () => (
+    <div className="flex items-center gap-4">
+      <ColorSwatch color="#ff5733" data-testid="hex-color" />
+      <ColorSwatch color="rgb(59, 130, 246)" data-testid="rgb-color" />
+      <ColorSwatch color="rgba(59, 130, 246, 0.5)" data-testid="rgba-color" />
+      <ColorSwatch color="rebeccapurple" data-testid="named-color" />
+      <ColorSwatch color="not-a-valid-color" data-testid="invalid-color" />
+      <ColorSwatch color="" data-testid="empty-color" />
+      <ColorSwatch color="   " data-testid="whitespace-color" />
+    </div>
+  )
 });

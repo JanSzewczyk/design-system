@@ -1,14 +1,12 @@
-import * as React from "react";
-
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
-
-import { StepperFocusContext, type StepperFocusContextValue, type StepperItemData } from "./stepper-focus.context";
 import { STEPPER_ENTRY_FOCUS, STEPPER_EVENT_OPTIONS, STEPPER_NAV_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore } from "./stepper.store";
 import { focusFirst } from "./stepper.utils";
+import { StepperFocusContext, type StepperFocusContextValue, type StepperItemData } from "./stepper-focus.context";
 
 export type StepperNavProps = React.ComponentProps<"nav"> & {
   asChild?: boolean;
@@ -79,7 +77,6 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
 
       setIsTabbingBackOut(false);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listProps.onBlur]
   );
 
@@ -99,9 +96,7 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
           const activeItem = items.find((item) => item.active);
           const currentItem = items.find((item) => item.id === tabStopId);
 
-          const candidateItems = [selectedItem, activeItem, currentItem, ...items].filter(
-            Boolean
-          ) as Array<StepperItemData>;
+          const candidateItems = [selectedItem, activeItem, currentItem, ...items].filter(Boolean) as StepperItemData[];
           const candidateRefs = candidateItems.map((item) => item.ref);
           focusFirst(candidateRefs, false);
         }
@@ -109,7 +104,6 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
       isClickFocusRef.current = false;
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listProps.onFocus, isTabbingBackOut, currentValue, tabStopId]
   );
 
@@ -121,20 +115,19 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
 
       isClickFocusRef.current = true;
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [listProps.onMouseDown]
   );
 
   const focusContextValue = React.useMemo<StepperFocusContextValue>(
     () => ({
-      tabStopId,
-      onItemFocus,
-      onItemShiftTab,
+      getItems,
       onFocusableItemAdd,
       onFocusableItemRemove,
+      onItemFocus,
       onItemRegister,
+      onItemShiftTab,
       onItemUnregister,
-      getItems
+      tabStopId
     }),
     [
       tabStopId,
@@ -154,21 +147,21 @@ export function StepperNav({ className, children, asChild, ref, ...listProps }: 
   return (
     <StepperFocusContext.Provider value={focusContextValue}>
       <StepperNavPrimitive
-        role="tablist"
-        data-slot="stepper-nav"
         aria-orientation={orientation}
-        data-orientation={orientation}
-        dir={context.dir}
-        tabIndex={isTabbingBackOut || focusableItemCount === 0 ? -1 : 0}
-        ref={composedRef}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        onMouseDown={onMouseDown}
         className={cn(
           "group/stepper-nav inline-flex gap-4",
           "data-[orientation=horizontal]:w-full data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
           className
         )}
+        data-orientation={orientation}
+        data-slot="stepper-nav"
+        dir={context.dir}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onMouseDown={onMouseDown}
+        ref={composedRef}
+        role="tablist"
+        tabIndex={isTabbingBackOut || focusableItemCount === 0 ? -1 : 0}
         {...listProps}
       >
         {children}

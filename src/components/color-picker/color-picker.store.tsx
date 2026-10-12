@@ -46,11 +46,10 @@ export function createColorPickerStore(
   }>
 ): ColorPickerStore {
   const store: ColorPickerStore = {
-    subscribe: (cb) => {
-      listenersRef.current.add(cb);
-      return () => listenersRef.current.delete(cb);
-    },
     getState: () => stateRef.current,
+    notify: () => {
+      for (const cb of listenersRef.current) cb();
+    },
     setColor: (value: ColorValue) => {
       if (Object.is(stateRef.current.color, value)) return;
       const prevState = { ...stateRef.current };
@@ -58,6 +57,12 @@ export function createColorPickerStore(
       if (propsRef.current.onValueChange) {
         propsRef.current.onValueChange(colorToString(value, prevState.format));
       }
+      store.notify();
+    },
+    setFormat: (value: ColorFormat) => {
+      if (Object.is(stateRef.current.format, value)) return;
+      stateRef.current.format = value;
+      propsRef.current.onFormatChange?.(value);
       store.notify();
     },
     setHsv: (value: HSVColorValue) => {
@@ -75,14 +80,9 @@ export function createColorPickerStore(
       propsRef.current.onOpenChange?.(value);
       store.notify();
     },
-    setFormat: (value: ColorFormat) => {
-      if (Object.is(stateRef.current.format, value)) return;
-      stateRef.current.format = value;
-      propsRef.current.onFormatChange?.(value);
-      store.notify();
-    },
-    notify: () => {
-      for (const cb of listenersRef.current) cb();
+    subscribe: (cb) => {
+      listenersRef.current.add(cb);
+      return () => listenersRef.current.delete(cb);
     }
   };
   return store;

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { useAsRef } from "~/hooks/use-as-ref";
 
@@ -35,10 +34,10 @@ export function FileUploadTrigger(props: FileUploadTriggerProps) {
 
   return (
     <TriggerPrimitive
-      type="button"
       aria-controls={context.inputId}
       data-disabled={context.disabled ? "" : undefined}
       data-slot="file-upload-trigger"
+      type="button"
       {...triggerProps}
       disabled={context.disabled}
       onClick={onClick}

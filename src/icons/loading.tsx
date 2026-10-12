@@ -6,11 +6,11 @@ import * as React from "react";
 export function LoadingIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
       fill="currentColor"
       version="1.1"
       viewBox="0 0 26.349 26.35"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       xmlSpace="preserve"
       {...props}
     >

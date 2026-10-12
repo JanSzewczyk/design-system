@@ -1,20 +1,18 @@
 import { expect, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Button } from "~/components/button";
-
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Collapsible",
   component: Collapsible,
-  subcomponents: { CollapsibleTrigger, CollapsibleContent },
-  tags: ["autodocs"],
   parameters: {
     docs: {
       subtitle: "An interactive component which expands/collapses a panel."
     }
-  }
+  },
+  subcomponents: { CollapsibleContent, CollapsibleTrigger },
+  tags: ["autodocs"],
+  title: "Components/Collapsible"
 });
 
 export const Default = meta.story({
@@ -24,7 +22,7 @@ export const Default = meta.story({
   render: (args) => (
     <Collapsible {...args} className="w-64">
       <CollapsibleTrigger asChild>
-        <Button variant="outline" className="w-full justify-between">
+        <Button className="w-full justify-between" variant="outline">
           Toggle content
         </Button>
       </CollapsibleTrigger>
@@ -60,14 +58,14 @@ Default.test("opens content on trigger click", async ({ canvasElement, userEvent
 });
 
 export const DefaultOpen = meta.story({
-  name: "Default Open",
   args: {
     defaultOpen: true
   },
+  name: "Default Open",
   render: (args) => (
     <Collapsible {...args} className="w-64">
       <CollapsibleTrigger asChild>
-        <Button variant="outline" className="w-full justify-between">
+        <Button className="w-full justify-between" variant="outline">
           Toggle content
         </Button>
       </CollapsibleTrigger>

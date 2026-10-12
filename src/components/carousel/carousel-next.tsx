@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { ArrowRight } from "lucide-react";
+import * as React from "react";
 
 import { Button } from "~/components/button";
 import { cn } from "~/utils";
@@ -14,9 +13,6 @@ export function CarouselNext({ className, variant = "outline", size = "icon", ..
 
   return (
     <Button
-      data-slot="carousel-next"
-      variant={variant}
-      size={size}
       className={cn(
         "absolute size-8 rounded-full",
         orientation === "horizontal"
@@ -24,8 +20,11 @@ export function CarouselNext({ className, variant = "outline", size = "icon", ..
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
+      data-slot="carousel-next"
       disabled={!canScrollNext}
       onClick={scrollNext}
+      size={size}
+      variant={variant}
       {...props}
     >
       <ArrowRight />

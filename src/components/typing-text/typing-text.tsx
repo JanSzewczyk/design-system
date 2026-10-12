@@ -1,6 +1,5 @@
+import { type MotionProps, motion, type UseInViewOptions, useInView, type Variants } from "motion/react";
 import * as React from "react";
-
-import { motion, type MotionProps, useInView, type UseInViewOptions, type Variants } from "motion/react";
 import { cn } from "~/utils";
 
 import { type TypingTextAnimationVariant } from "./typing-text.types";
@@ -10,64 +9,64 @@ const cursorVariants: Variants = {
     opacity: [0, 0, 1, 1],
     transition: {
       duration: 1,
+      ease: "linear",
       repeat: Infinity,
       repeatDelay: 0,
-      ease: "linear",
       times: [0, 0.5, 0.5, 1]
     }
   }
 };
 
 const animationVariants: Record<TypingTextAnimationVariant, Variants> = {
-  fadeIn: {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0 },
-    exit: { opacity: 0 }
-  },
   blurIn: {
-    hidden: { opacity: 0, filter: "blur(4px)" },
-    show: { opacity: 1, filter: "blur(0px)" },
-    exit: { opacity: 0, filter: "blur(4px)" }
-  },
-  blurInUp: {
-    hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
-    show: { opacity: 1, y: 0, filter: "blur(0px)" },
-    exit: { opacity: 0, y: -20, filter: "blur(4px)" }
+    exit: { filter: "blur(4px)", opacity: 0 },
+    hidden: { filter: "blur(4px)", opacity: 0 },
+    show: { filter: "blur(0px)", opacity: 1 }
   },
   blurInDown: {
-    hidden: { opacity: 0, y: -20, filter: "blur(4px)" },
-    show: { opacity: 1, y: 0, filter: "blur(0px)" },
-    exit: { opacity: 0, y: 20, filter: "blur(4px)" }
+    exit: { filter: "blur(4px)", opacity: 0, y: 20 },
+    hidden: { filter: "blur(4px)", opacity: 0, y: -20 },
+    show: { filter: "blur(0px)", opacity: 1, y: 0 }
   },
-  slideUp: {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 }
+  blurInUp: {
+    exit: { filter: "blur(4px)", opacity: 0, y: -20 },
+    hidden: { filter: "blur(4px)", opacity: 0, y: 20 },
+    show: { filter: "blur(0px)", opacity: 1, y: 0 }
   },
-  slideDown: {
-    hidden: { opacity: 0, y: -20 },
-    show: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 20 }
-  },
-  slideLeft: {
-    hidden: { opacity: 0, x: 20 },
-    show: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -20 }
-  },
-  slideRight: {
-    hidden: { opacity: 0, x: -20 },
-    show: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: 20 }
-  },
-  scaleUp: {
-    hidden: { opacity: 0, scale: 0.8 },
-    show: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 1.2 }
+  fadeIn: {
+    exit: { opacity: 0 },
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0 }
   },
   scaleDown: {
+    exit: { opacity: 0, scale: 0.8 },
     hidden: { opacity: 0, scale: 1.2 },
-    show: { opacity: 1, scale: 1 },
-    exit: { opacity: 0, scale: 0.8 }
+    show: { opacity: 1, scale: 1 }
+  },
+  scaleUp: {
+    exit: { opacity: 0, scale: 1.2 },
+    hidden: { opacity: 0, scale: 0.8 },
+    show: { opacity: 1, scale: 1 }
+  },
+  slideDown: {
+    exit: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: -20 },
+    show: { opacity: 1, y: 0 }
+  },
+  slideLeft: {
+    exit: { opacity: 0, x: -20 },
+    hidden: { opacity: 0, x: 20 },
+    show: { opacity: 1, x: 0 }
+  },
+  slideRight: {
+    exit: { opacity: 0, x: 20 },
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0 }
+  },
+  slideUp: {
+    exit: { opacity: 0, y: -20 },
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
   }
 };
 
@@ -123,7 +122,7 @@ export function TypingText({
   ...props
 }: TypingTextProps) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: inViewMargin as UseInViewOptions["margin"] });
+  const isInView = useInView(ref, { margin: inViewMargin as UseInViewOptions["margin"], once });
   const [hasAnimated, setHasAnimated] = React.useState(false);
   const [displayText, setDisplayText] = React.useState("");
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -178,24 +177,24 @@ export function TypingText({
 
   return (
     <MotionComponent
+      animate={startOnView ? undefined : "show"}
+      className={cn("whitespace-pre-wrap", className)}
+      data-slot="typing-text"
+      exit="exit"
+      initial="hidden"
       ref={ref}
       variants={selectedVariants}
-      initial="hidden"
-      whileInView={startOnView ? "show" : undefined}
-      animate={startOnView ? undefined : "show"}
-      exit="exit"
-      className={cn("whitespace-pre-wrap", className)}
       viewport={{ once }}
-      data-slot="typing-text"
+      whileInView={startOnView ? "show" : undefined}
       {...props}
     >
-      <span style={{ display: "inline-flex", alignItems: "center" }}>
+      <span style={{ alignItems: "center", display: "inline-flex" }}>
         {displayText}
         {showCursor && (
           <motion.span
-            variants={cursorVariants}
             animate="blinking"
-            className={cn("text-foreground ms-1 inline-block w-px font-normal select-none", cursorClassName)}
+            className={cn("ms-1 inline-block w-px select-none font-normal text-foreground", cursorClassName)}
+            variants={cursorVariants}
           >
             {cursor}
           </motion.span>

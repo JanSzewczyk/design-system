@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { colorSwatchVariants } from "~/components/color-swatch/color-swatch.styles";
 import { type ColorSwatchSize } from "~/components/color-swatch/color-swatch.types";
@@ -54,11 +53,11 @@ export function ColorSwatch({
 
   return (
     <Primitive
-      role="img"
-      aria-label={ariaLabel}
       aria-disabled={disabled || undefined}
+      aria-label={ariaLabel}
       data-disabled={disabled ? "" : undefined}
       data-slot="color-swatch"
+      role="img"
       {...props}
       className={cn(colorSwatchVariants({ size }), className)}
       style={{

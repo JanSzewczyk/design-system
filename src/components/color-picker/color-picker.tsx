@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Direction as DirectionPrimitive, Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { Popover } from "~/components/popover";
 import { VisuallyHiddenInput } from "~/components/visually-hidden-input/visually-hidden-input";
@@ -63,13 +62,13 @@ export function ColorPicker(props: ColorPickerProps) {
     const color = hexToRgb(colorString);
     return {
       color,
+      format: formatProp ?? defaultFormat,
       hsv: rgbToHsv(color),
-      open: openProp ?? defaultOpen ?? false,
-      format: formatProp ?? defaultFormat
+      open: openProp ?? defaultOpen ?? false
     };
   });
 
-  const propsRef = useAsRef({ onValueChange, onOpenChange, onFormatChange });
+  const propsRef = useAsRef({ onFormatChange, onOpenChange, onValueChange });
   const store = React.useMemo(
     () => createColorPickerStore(listenersRef, stateRef, propsRef),
     [listenersRef, stateRef, propsRef]
@@ -79,15 +78,15 @@ export function ColorPicker(props: ColorPickerProps) {
     <ColorPickerStoreContext.Provider value={store}>
       <ColorPickerImpl
         {...rootProps}
-        value={valueProp}
         defaultOpen={defaultOpen}
-        open={openProp}
-        modal={modal}
-        name={name}
         disabled={disabled}
         inline={inline}
+        modal={modal}
+        name={name}
+        open={openProp}
         readOnly={readOnly}
         required={required}
+        value={valueProp}
       />
     </ColorPickerStoreContext.Provider>
   );
@@ -153,13 +152,13 @@ function ColorPickerImpl(props: ColorPickerImplProps) {
         <RootPrimitive data-slot="color-picker" {...rootProps} ref={composedRef} />
         {isFormControl && (
           <VisuallyHiddenInput
-            type="hidden"
             control={formTrigger}
-            name={name}
-            value={value}
             disabled={disabled}
+            name={name}
             readOnly={readOnly}
             required={required}
+            type="hidden"
+            value={value}
           />
         )}
       </ColorPickerContext.Provider>
@@ -168,17 +167,17 @@ function ColorPickerImpl(props: ColorPickerImplProps) {
 
   return (
     <ColorPickerContext.Provider value={contextValue}>
-      <Popover defaultOpen={defaultOpen} open={open} onOpenChange={store.setOpen} modal={modal}>
+      <Popover defaultOpen={defaultOpen} modal={modal} onOpenChange={store.setOpen} open={open}>
         <RootPrimitive data-slot="color-picker" {...rootProps} ref={composedRef} />
         {isFormControl && (
           <VisuallyHiddenInput
-            type="hidden"
             control={formTrigger}
-            name={name}
-            value={value}
             disabled={disabled}
+            name={name}
             readOnly={readOnly}
             required={required}
+            type="hidden"
+            value={value}
           />
         )}
       </Popover>

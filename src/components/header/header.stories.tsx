@@ -1,15 +1,9 @@
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
-
 import { Header } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Header",
-  component: Header,
-  tags: ["autodocs"],
   args: {
     children: (
       <div className="flex w-full justify-between">
@@ -34,14 +28,17 @@ const meta = preview.meta({
   argTypes: {
     variant: {
       control: "select",
-      options: ["container", "full"],
       description:
         "Controls the width constraint of the header's inner content area. `container` constrains content to the responsive container max-width; `full` stretches content to the full viewport width with horizontal padding.",
+      options: ["container", "full"],
       table: {
         defaultValue: { summary: "container" }
       }
     }
-  }
+  },
+  component: Header,
+  tags: ["autodocs"],
+  title: "Components/Header"
 });
 
 export const Container = meta.story({});

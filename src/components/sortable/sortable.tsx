@@ -1,21 +1,16 @@
-import * as React from "react";
-
-import { Slot } from "radix-ui";
-import { createPortal } from "react-dom";
-
 import {
   DndContext,
+  type DragEndEvent,
   DragOverlay,
+  type DragStartEvent,
   KeyboardSensor,
   MeasuringStrategy,
+  type Modifiers,
   MouseSensor,
   TouchSensor,
+  type UniqueIdentifier,
   useSensor,
-  useSensors,
-  type DragEndEvent,
-  type DragStartEvent,
-  type Modifiers,
-  type UniqueIdentifier
+  useSensors
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -24,6 +19,9 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
+import { Slot } from "radix-ui";
+import * as React from "react";
+import { createPortal } from "react-dom";
 import { cn } from "~/utils";
 
 import { dropAnimationConfig } from "./sortable.constants";
@@ -99,7 +97,7 @@ export function Sortable<T>({
 
       if (activeIndex !== overIndex) {
         if (onMove) {
-          onMove({ event, activeIndex, overIndex });
+          onMove({ activeIndex, event, overIndex });
         } else {
           const newValue = arrayMove(value, activeIndex, overIndex);
           onValueChange(newValue);
@@ -119,7 +117,6 @@ export function Sortable<T>({
         return rectSortingStrategy;
       case "grid":
         return rectSortingStrategy;
-      case "vertical":
       default:
         return verticalListSortingStrategy;
     }
@@ -148,22 +145,22 @@ export function Sortable<T>({
   return (
     <SortableInternalContext.Provider value={contextValue}>
       <DndContext
-        sensors={sensors}
-        modifiers={modifiers}
         measuring={{
           droppable: {
             strategy: MeasuringStrategy.Always
           }
         }}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
+        modifiers={modifiers}
         onDragCancel={handleDragCancel}
+        onDragEnd={handleDragEnd}
+        onDragStart={handleDragStart}
+        sensors={sensors}
       >
         <SortableContext items={itemIds} strategy={getStrategy()}>
           <Comp
-            data-slot="sortable"
-            data-dragging={activeId !== null}
             className={cn(activeId !== null && "cursor-grabbing!", className)}
+            data-dragging={activeId !== null}
+            data-slot="sortable"
             {...props}
           >
             {children}
@@ -172,9 +169,9 @@ export function Sortable<T>({
         {mounted &&
           createPortal(
             <DragOverlay
+              className={cn("z-50", activeId && "cursor-grabbing")}
               dropAnimation={dropAnimationConfig}
               modifiers={modifiers}
-              className={cn("z-50", activeId && "cursor-grabbing")}
             >
               <IsOverlayContext.Provider value={true}>{overlayContent}</IsOverlayContext.Provider>
             </DragOverlay>,

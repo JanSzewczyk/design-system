@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { cn } from "~/utils";
 
 export type ButtonGroupTextProps = React.ComponentProps<"div"> & {
@@ -12,11 +11,11 @@ export function ButtonGroupText({ className, asChild = false, ...props }: Button
 
   return (
     <Comp
-      data-slot="button-group-text"
       className={cn(
-        "bg-muted flex items-center gap-2 rounded-lg border px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 rounded-lg border bg-muted px-2.5 font-medium text-sm [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none",
         className
       )}
+      data-slot="button-group-text"
       {...props}
     />
   );

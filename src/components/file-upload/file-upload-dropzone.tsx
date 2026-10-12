@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { useAsRef } from "~/hooks/use-as-ref";
 import { cn } from "~/utils";
@@ -34,12 +33,12 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
 
   const propsRef = useAsRef({
     onClick: onClickProp,
-    onDragOver: onDragOverProp,
     onDragEnter: onDragEnterProp,
     onDragLeave: onDragLeaveProp,
+    onDragOver: onDragOverProp,
     onDrop: onDropProp,
-    onPaste: onPasteProp,
-    onKeyDown: onKeyDownProp
+    onKeyDown: onKeyDownProp,
+    onPaste: onPasteProp
   });
 
   const onClick = React.useCallback(
@@ -66,7 +65,7 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       if (event.defaultPrevented) return;
 
       event.preventDefault();
-      store.dispatch({ type: "SET_DRAG_OVER", dragOver: true });
+      store.dispatch({ dragOver: true, type: "SET_DRAG_OVER" });
     },
     [store, propsRef]
   );
@@ -78,7 +77,7 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       if (event.defaultPrevented) return;
 
       event.preventDefault();
-      store.dispatch({ type: "SET_DRAG_OVER", dragOver: true });
+      store.dispatch({ dragOver: true, type: "SET_DRAG_OVER" });
     },
     [store, propsRef]
   );
@@ -95,7 +94,7 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       }
 
       event.preventDefault();
-      store.dispatch({ type: "SET_DRAG_OVER", dragOver: false });
+      store.dispatch({ dragOver: false, type: "SET_DRAG_OVER" });
     },
     [store, propsRef]
   );
@@ -107,7 +106,7 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       if (event.defaultPrevented) return;
 
       event.preventDefault();
-      store.dispatch({ type: "SET_DRAG_OVER", dragOver: false });
+      store.dispatch({ dragOver: false, type: "SET_DRAG_OVER" });
 
       const droppedFiles = Array.from(event.dataTransfer.files);
       const inputElement = context.inputRef.current;
@@ -131,7 +130,7 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       if (event.defaultPrevented) return;
 
       event.preventDefault();
-      store.dispatch({ type: "SET_DRAG_OVER", dragOver: false });
+      store.dispatch({ dragOver: false, type: "SET_DRAG_OVER" });
 
       const items = event.clipboardData?.items;
       if (!items) return;
@@ -179,8 +178,6 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
 
   return (
     <DropzonePrimitive
-      role="region"
-      id={context.dropzoneId}
       aria-controls={`${context.inputId} ${context.listId}`}
       aria-disabled={context.disabled}
       aria-invalid={invalid}
@@ -189,10 +186,12 @@ export function FileUploadDropzone(props: FileUploadDropzoneProps) {
       data-invalid={invalid ? "" : undefined}
       data-slot="file-upload-dropzone"
       dir={context.dir}
+      id={context.dropzoneId}
+      role="region"
       tabIndex={context.disabled ? undefined : 0}
       {...dropzoneProps}
       className={cn(
-        "hover:bg-accent/30 focus-visible:border-ring/50 data-dragging:border-primary/30 data-invalid:border-error data-dragging:bg-accent/30 data-invalid:ring-error/20 relative flex flex-col items-center justify-center gap-2 rounded border-2 border-dashed p-6 transition-colors outline-none select-none data-disabled:pointer-events-none",
+        "relative flex select-none flex-col items-center justify-center gap-2 rounded border-2 border-dashed p-6 outline-none transition-colors hover:bg-accent/30 focus-visible:border-ring/50 data-disabled:pointer-events-none data-dragging:border-primary/30 data-invalid:border-error data-dragging:bg-accent/30 data-invalid:ring-error/20",
         className
       )}
       onClick={onClick}

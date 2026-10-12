@@ -1,10 +1,9 @@
 import * as React from "react";
 
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Spinner } from "~/components";
-
 import { Button } from "../button";
-
 import {
   Stepper,
   StepperContent,
@@ -19,20 +18,27 @@ import {
   StepperTrigger
 } from "./index";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Stepper",
   component: Stepper,
-  tags: ["autodocs", "new"]
+  tags: ["autodocs", "new"],
+  title: "Components/Stepper"
 });
 
 export const Default = meta.story({
+  play: async ({ canvas }) => {
+    // Check if all steps are rendered
+    await expect(canvas.getByText("Step 1")).toBeInTheDocument();
+    await expect(canvas.getByText("Step 2")).toBeInTheDocument();
+    await expect(canvas.getByText("Step 3")).toBeInTheDocument();
+
+    // Check if first step content is visible
+    await expect(canvas.getByText("Step 1: Basic Information")).toBeInTheDocument();
+  },
   render: () => {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep}>
+      <Stepper onValueChange={setStep} value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -66,7 +72,7 @@ export const Default = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1: Basic Information</h3>
               <p className="mb-4 text-gray-600">Enter your basic information to get started.</p>
               <StepperNextTrigger asChild>
                 <Button>Next</Button>
@@ -76,7 +82,7 @@ export const Default = meta.story({
 
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2: Details</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2: Details</h3>
               <p className="mb-4 text-gray-600">Provide additional details about yourself.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
@@ -91,7 +97,7 @@ export const Default = meta.story({
 
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3: Review</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3: Review</h3>
               <p className="mb-4 text-gray-600">Review your information and submit.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
@@ -104,15 +110,6 @@ export const Default = meta.story({
         </StepperPanel>
       </Stepper>
     );
-  },
-  play: async ({ canvas }) => {
-    // Check if all steps are rendered
-    await expect(canvas.getByText("Step 1")).toBeInTheDocument();
-    await expect(canvas.getByText("Step 2")).toBeInTheDocument();
-    await expect(canvas.getByText("Step 3")).toBeInTheDocument();
-
-    // Check if first step content is visible
-    await expect(canvas.getByText("Step 1: Basic Information")).toBeInTheDocument();
   }
 });
 
@@ -121,7 +118,7 @@ export const VerticalOrientation = meta.story({
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} orientation="vertical">
+      <Stepper onValueChange={setStep} orientation="vertical" value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -155,7 +152,7 @@ export const VerticalOrientation = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1: Basic Information</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1: Basic Information</h3>
               <p className="mb-4 text-gray-600">Enter your basic information.</p>
               <StepperNextTrigger asChild>
                 <Button>Next</Button>
@@ -165,7 +162,7 @@ export const VerticalOrientation = meta.story({
 
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2: Details</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2: Details</h3>
               <p className="mb-4 text-gray-600">Provide additional details.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
@@ -180,7 +177,7 @@ export const VerticalOrientation = meta.story({
 
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3: Review</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3: Review</h3>
               <p className="mb-4 text-gray-600">Review and submit.</p>
               <div className="flex gap-2">
                 <StepperPrevTrigger asChild>
@@ -201,9 +198,9 @@ export const WithCompletedSteps = meta.story({
     const [step, setStep] = React.useState("step2");
 
     return (
-      <Stepper value={step} onValueChange={setStep}>
+      <Stepper onValueChange={setStep} value={step}>
         <StepperNav>
-          <StepperItem value="step1" completed>
+          <StepperItem completed value="step1">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -235,17 +232,17 @@ export const WithCompletedSteps = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3 Content</h3>
             </div>
           </StepperContent>
         </StepperPanel>
@@ -259,7 +256,7 @@ export const WithDisabledSteps = meta.story({
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep}>
+      <Stepper onValueChange={setStep} value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -270,7 +267,7 @@ export const WithDisabledSteps = meta.story({
               </div>
             </StepperTrigger>
           </StepperItem>
-          <StepperItem value="step2" disabled>
+          <StepperItem disabled value="step2">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -279,7 +276,7 @@ export const WithDisabledSteps = meta.story({
               </div>
             </StepperTrigger>
           </StepperItem>
-          <StepperItem value="step3" disabled>
+          <StepperItem disabled value="step3">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -293,7 +290,7 @@ export const WithDisabledSteps = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Only Step 1 is Available</h3>
+              <h3 className="mb-4 font-semibold text-lg">Only Step 1 is Available</h3>
               <p className="text-gray-600">Other steps are disabled.</p>
             </div>
           </StepperContent>
@@ -308,9 +305,9 @@ export const WithLoadingState = meta.story({
     const [step, setStep] = React.useState("step2");
 
     return (
-      <Stepper value={step} onValueChange={setStep} indicators={{ loading: <Spinner /> }}>
+      <Stepper indicators={{ loading: <Spinner /> }} onValueChange={setStep} value={step}>
         <StepperNav>
-          <StepperItem value="step1" completed>
+          <StepperItem completed value="step1">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -319,7 +316,7 @@ export const WithLoadingState = meta.story({
               </div>
             </StepperTrigger>
           </StepperItem>
-          <StepperItem value="step2" loading>
+          <StepperItem loading value="step2">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -342,18 +339,18 @@ export const WithLoadingState = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2 is Loading</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2 is Loading</h3>
               <p className="text-gray-600">Please wait...</p>
             </div>
           </StepperContent>
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3 Content</h3>
             </div>
           </StepperContent>
         </StepperPanel>
@@ -367,7 +364,7 @@ export const ManualActivation = meta.story({
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep} activationMode="manual">
+      <Stepper activationMode="manual" onValueChange={setStep} value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -401,7 +398,7 @@ export const ManualActivation = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Manual Activation Mode</h3>
+              <h3 className="mb-4 font-semibold text-lg">Manual Activation Mode</h3>
               <p className="mb-4 text-gray-600">
                 Navigate with arrow keys, then press Enter or Space to activate a step.
               </p>
@@ -409,12 +406,12 @@ export const ManualActivation = meta.story({
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3 Content</h3>
             </div>
           </StepperContent>
         </StepperPanel>
@@ -429,16 +426,16 @@ export const WithCustomIndicators = meta.story({
 
     return (
       <Stepper
-        value={step}
-        onValueChange={setStep}
         indicators={{
           active: <span className="text-xl">→</span>,
           completed: <span className="text-xl">✓</span>,
           inactive: <span className="text-xl">○</span>
         }}
+        onValueChange={setStep}
+        value={step}
       >
         <StepperNav>
-          <StepperItem value="step1" completed>
+          <StepperItem completed value="step1">
             <StepperTrigger>
               <StepperIndicator />
               <div>
@@ -470,17 +467,17 @@ export const WithCustomIndicators = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2 Content</h3>
             </div>
           </StepperContent>
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3 Content</h3>
             </div>
           </StepperContent>
         </StepperPanel>
@@ -505,7 +502,7 @@ export const WithValidation = meta.story({
     );
 
     return (
-      <Stepper value={step} onValueChange={setStep} onValidate={handleValidate}>
+      <Stepper onValidate={handleValidate} onValueChange={setStep} value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -530,9 +527,9 @@ export const WithValidation = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Validation Example</h3>
+              <h3 className="mb-4 font-semibold text-lg">Validation Example</h3>
               <label className="mb-4 flex items-center gap-2">
-                <input type="checkbox" checked={formValid} onChange={(e) => setFormValid(e.target.checked)} />
+                <input checked={formValid} onChange={(e) => setFormValid(e.target.checked)} type="checkbox" />
                 <span>Check this to enable next step</span>
               </label>
               <StepperNextTrigger asChild>
@@ -542,7 +539,7 @@ export const WithValidation = meta.story({
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2 Content</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2 Content</h3>
               <p className="text-gray-600">You successfully validated form!</p>
             </div>
           </StepperContent>
@@ -553,11 +550,22 @@ export const WithValidation = meta.story({
 });
 
 export const InteractiveNavigation = meta.story({
+  play: async ({ canvas, userEvent }) => {
+    // Verify initial state
+    await expect(canvas.getByText("Step 1: Interactive Navigation")).toBeInTheDocument();
+
+    // Click on Step 2
+    const step2Trigger = canvas.getByText("Step 2");
+    await userEvent.click(step2Trigger);
+
+    // Verify Step 2 content is now visible
+    await expect(canvas.getByText("Step 2: Interactive Navigation")).toBeInTheDocument();
+  },
   render: () => {
     const [step, setStep] = React.useState("step1");
 
     return (
-      <Stepper value={step} onValueChange={setStep}>
+      <Stepper onValueChange={setStep} value={step}>
         <StepperNav>
           <StepperItem value="step1">
             <StepperTrigger>
@@ -591,21 +599,21 @@ export const InteractiveNavigation = meta.story({
         <StepperPanel>
           <StepperContent value="step1">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 1: Interactive Navigation</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 1: Interactive Navigation</h3>
               <p className="mb-4 text-gray-600">Click on any step above to navigate directly.</p>
               <p className="mb-4 text-gray-600">Current step: {step}</p>
             </div>
           </StepperContent>
           <StepperContent value="step2">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 2: Interactive Navigation</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 2: Interactive Navigation</h3>
               <p className="mb-4 text-gray-600">Click on any step above to navigate directly.</p>
               <p className="mb-4 text-gray-600">Current step: {step}</p>
             </div>
           </StepperContent>
           <StepperContent value="step3">
             <div className="rounded-lg border p-6">
-              <h3 className="mb-4 text-lg font-semibold">Step 3: Interactive Navigation</h3>
+              <h3 className="mb-4 font-semibold text-lg">Step 3: Interactive Navigation</h3>
               <p className="mb-4 text-gray-600">Click on any step above to navigate directly.</p>
               <p className="mb-4 text-gray-600">Current step: {step}</p>
             </div>
@@ -613,16 +621,5 @@ export const InteractiveNavigation = meta.story({
         </StepperPanel>
       </Stepper>
     );
-  },
-  play: async ({ canvas, userEvent }) => {
-    // Verify initial state
-    await expect(canvas.getByText("Step 1: Interactive Navigation")).toBeInTheDocument();
-
-    // Click on Step 2
-    const step2Trigger = canvas.getByText("Step 2");
-    await userEvent.click(step2Trigger);
-
-    // Verify Step 2 content is now visible
-    await expect(canvas.getByText("Step 2: Interactive Navigation")).toBeInTheDocument();
   }
 });

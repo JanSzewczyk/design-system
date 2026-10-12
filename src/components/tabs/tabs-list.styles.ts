@@ -8,14 +8,14 @@ export const tabsListVariants = cva(
     "data-[variant=line]:rounded-none"
   ],
   {
+    defaultVariants: {
+      variant: "default"
+    },
     variants: {
       variant: {
         default: "bg-muted",
         line: "gap-1 bg-transparent"
       }
-    },
-    defaultVariants: {
-      variant: "default"
     }
   }
 );

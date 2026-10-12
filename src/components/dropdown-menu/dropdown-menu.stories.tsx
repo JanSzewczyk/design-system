@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   BadgeCheckIcon,
   BellIcon,
@@ -34,12 +32,12 @@ import {
   UserIcon,
   WalletIcon
 } from "lucide-react";
+import * as React from "react";
 
 import { expect, screen, waitFor } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 import { Button } from "../button";
-
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -58,33 +56,22 @@ import {
   DropdownMenuTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Dropdown Menu",
-  component: DropdownMenu,
-  tags: ["autodocs"],
-  parameters: {
-    docs: {
-      subtitle:
-        "Dropdown menu component built on Radix UI primitives. Displays a menu of actions or options triggered by a button. Supports items, checkbox items, radio items, sub-menus, labels, separators, and keyboard shortcuts."
-    }
-  },
   argTypes: {
-    open: {
-      control: "boolean",
-      description: "The controlled open state of the dropdown menu.",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "undefined" }
-      }
-    },
     defaultOpen: {
       control: "boolean",
       description: "The open state when initially rendered.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" }
+      }
+    },
+    modal: {
+      control: "boolean",
+      description: "Whether the dropdown menu is modal.",
+      table: {
+        defaultValue: { summary: "true" },
+        type: { summary: "boolean" }
       }
     },
     onOpenChange: {
@@ -93,15 +80,24 @@ const meta = preview.meta({
         type: { summary: "(open: boolean) => void" }
       }
     },
-    modal: {
+    open: {
       control: "boolean",
-      description: "Whether the dropdown menu is modal.",
+      description: "The controlled open state of the dropdown menu.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" }
+        defaultValue: { summary: "undefined" },
+        type: { summary: "boolean" }
       }
     }
-  }
+  },
+  component: DropdownMenu,
+  parameters: {
+    docs: {
+      subtitle:
+        "Dropdown menu component built on Radix UI primitives. Displays a menu of actions or options triggered by a button. Supports items, checkbox items, radio items, sub-menus, labels, separators, and keyboard shortcuts."
+    }
+  },
+  tags: ["autodocs"],
+  title: "Components/Dropdown Menu"
 });
 
 // -- Basic --------------------------------------------------------------------
@@ -351,7 +347,7 @@ export const Checkboxes = meta.story({
             <DropdownMenuCheckboxItem checked={showStatusBar ?? false} onCheckedChange={setShowStatusBar}>
               Status Bar
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>
+            <DropdownMenuCheckboxItem checked={showActivityBar} disabled onCheckedChange={setShowActivityBar}>
               Activity Bar
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
@@ -393,8 +389,8 @@ export const CheckboxesIcons = meta.story({
   render() {
     const [notifications, setNotifications] = React.useState({
       email: true,
-      sms: false,
-      push: true
+      push: true,
+      sms: false
     });
 
     return (
@@ -459,7 +455,7 @@ export const RadioGroup = meta.story({
         <DropdownMenuContent className="w-32">
           <DropdownMenuGroup>
             <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-            <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+            <DropdownMenuRadioGroup onValueChange={setPosition} value={position}>
               <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
@@ -508,7 +504,7 @@ export const RadioIcons = meta.story({
         <DropdownMenuContent className="min-w-56">
           <DropdownMenuGroup>
             <DropdownMenuLabel>Select Payment Method</DropdownMenuLabel>
-            <DropdownMenuRadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
+            <DropdownMenuRadioGroup onValueChange={setPaymentMethod} value={paymentMethod}>
               <DropdownMenuRadioItem value="card">
                 <CreditCardIcon />
                 Credit Card
@@ -604,9 +600,9 @@ export const AvatarDemo = meta.story({
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="rounded-full">
+          <Button className="rounded-full" size="icon" variant="ghost">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+              <AvatarImage alt="shadcn" src="https://github.com/shadcn.png" />
               <AvatarFallback>LR</AvatarFallback>
             </Avatar>
           </Button>
@@ -659,8 +655,8 @@ export const Complex = meta.story({
   render() {
     const [notifications, setNotifications] = React.useState({
       email: true,
-      sms: false,
-      push: true
+      push: true,
+      sms: false
     });
     const [theme, setTheme] = React.useState("light");
 
@@ -766,7 +762,7 @@ export const Complex = meta.story({
                 <DropdownMenuSubContent>
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                    <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
+                    <DropdownMenuRadioGroup onValueChange={setTheme} value={theme}>
                       <DropdownMenuRadioItem value="light">
                         <SunIcon />
                         Light

@@ -1,19 +1,16 @@
-import * as React from "react";
-
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Skeleton } from "~/components";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Skeleton",
-  component: Skeleton,
   argTypes: {
     className: {
       control: "text"
     }
   },
-  tags: ["autodocs"]
+  component: Skeleton,
+  tags: ["autodocs"],
+  title: "Components/Skeleton"
 });
 
 export const Default = meta.story({

@@ -12,10 +12,10 @@ export function CarouselItem({ className, ...props }: CarouselItemProps) {
 
   return (
     <div
-      role="group"
       aria-roledescription="slide"
+      className={cn(carouselItemVariants({ className, orientation }))}
       data-slot="carousel-item"
-      className={cn(carouselItemVariants({ orientation, className }))}
+      role="group"
       {...props}
     />
   );

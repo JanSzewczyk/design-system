@@ -1,17 +1,15 @@
-import * as React from "react";
-
 import { useComposedRefs } from "@radix-ui/react-compose-refs";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { useIsomorphicLayoutEffect } from "~/hooks";
 import { cn } from "~/utils";
-
-import { useStepperFocusContext } from "./stepper-focus.context";
-import { useStepperItemContext } from "./stepper-item.context";
 import { STEPPER_ARROW_KEYS, STEPPER_TRIGGER_NAME } from "./stepper.constants";
 import { useStepperContext } from "./stepper.context";
 import { useStepperStore, useStepperStoreContext } from "./stepper.store";
 import { type StepperNavigationDirection } from "./stepper.types";
 import { focusFirst, getDataState, getFocusIntent, getId, wrapArray } from "./stepper.utils";
+import { useStepperFocusContext } from "./stepper-focus.context";
+import { useStepperItemContext } from "./stepper-item.context";
 
 export type StepperTriggerElement = React.ComponentRef<typeof StepperTrigger>;
 
@@ -71,11 +69,11 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
 
   useIsomorphicLayoutEffect(() => {
     focusContext.onItemRegister({
+      active: isTabStop,
+      disabled: !!isDisabled,
       id: triggerId,
       ref: triggerRef,
-      value: itemValue,
-      active: isTabStop,
-      disabled: !!isDisabled
+      value: itemValue
     });
 
     if (!isDisabled) {
@@ -103,7 +101,6 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
         await store.setStateWithValidation(itemValue, direction);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [isDisabled, context.nonInteractive, store, itemValue, value, steps, triggerProps.onClick]
   );
 
@@ -208,7 +205,6 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
         queueMicrotask(() => focusFirst(candidateRefs));
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       focusContext,
       context.nonInteractive,
@@ -240,7 +236,6 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
         focusContext.onItemFocus(triggerId);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [focusContext, triggerId, isDisabled, triggerProps.onMouseDown]
   );
 
@@ -248,15 +243,6 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
 
   return (
     <TriggerPrimitive
-      id={triggerId}
-      role="tab"
-      type="button"
-      disabled={isDisabled}
-      tabIndex={isTabStop ? 0 : -1}
-      ref={composedRef}
-      data-slot="stepper-trigger"
-      data-disabled={isDisabled ? "" : undefined}
-      data-state={dataState}
       aria-controls={contentId}
       aria-current={isActive ? "step" : undefined}
       aria-describedby={`${titleId} ${descriptionId}`}
@@ -269,15 +255,24 @@ export function StepperTrigger({ asChild, disabled, className, ref, ...triggerPr
       //   className
       // )}
       className={cn(
-        "inline-flex w-full cursor-pointer items-center gap-3 rounded text-left transition-colors duration-500 outline-none",
+        "inline-flex w-full cursor-pointer items-center gap-3 rounded text-left outline-none transition-colors duration-500",
         "disabled:pointer-events-none",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
         className
       )}
+      data-disabled={isDisabled ? "" : undefined}
+      data-slot="stepper-trigger"
+      data-state={dataState}
+      disabled={isDisabled}
+      id={triggerId}
       onClick={onClick}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
       onMouseDown={onMouseDown}
+      ref={composedRef}
+      role="tab"
+      tabIndex={isTabStop ? 0 : -1}
+      type="button"
       {...triggerProps}
     />
   );

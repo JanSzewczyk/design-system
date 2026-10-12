@@ -7,13 +7,13 @@ export type EmptyProps = React.ComponentProps<"div"> & { border?: boolean | "das
 export function Empty({ className, border = false, ...props }: EmptyProps) {
   return (
     <div
-      data-slot="empty"
       className={cn(
-        "border-border flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded p-6 text-center text-balance md:p-12",
+        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded border-border p-6 text-center md:p-12",
         border ? "border" : "",
         border === "dashed" ? "border-dashed" : "",
         className
       )}
+      data-slot="empty"
       {...props}
     />
   );

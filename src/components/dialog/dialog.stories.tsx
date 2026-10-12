@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import { screen, waitFor, within, expect } from "storybook/test";
+import { expect, screen, waitFor, within } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Input, Label } from "~/components";
-
 import { Button } from "../button";
-
 import {
   Dialog,
   DialogClose,
@@ -16,33 +15,23 @@ import {
   DialogTrigger
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Dialog",
-  component: Dialog,
-  tags: ["autodocs"],
-  parameters: {
-    docs: {
-      subtitle:
-        "Dialog component built on Radix UI primitives. Provides a modal dialog overlay that can contain any content. Supports multiple width variants, controlled/uncontrolled modes, nested dialogs, and proper focus management."
-    }
-  },
   argTypes: {
-    open: {
-      control: "boolean",
-      description: "The controlled open state of dialog. Must be used with `onOpenChange`.",
-      table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "undefined" }
-      }
-    },
     defaultOpen: {
       control: "boolean",
       description: "The open state of dialog when it is initially rendered. Use when not controlling state.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" }
+      }
+    },
+    modal: {
+      control: "boolean",
+      description:
+        "When true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+      table: {
+        defaultValue: { summary: "true" },
+        type: { summary: "boolean" }
       }
     },
     onOpenChange: {
@@ -51,16 +40,24 @@ const meta = preview.meta({
         type: { summary: "(open: boolean) => void" }
       }
     },
-    modal: {
+    open: {
       control: "boolean",
-      description:
-        "When true, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
+      description: "The controlled open state of dialog. Must be used with `onOpenChange`.",
       table: {
-        type: { summary: "boolean" },
-        defaultValue: { summary: "true" }
+        defaultValue: { summary: "undefined" },
+        type: { summary: "boolean" }
       }
     }
-  }
+  },
+  component: Dialog,
+  parameters: {
+    docs: {
+      subtitle:
+        "Dialog component built on Radix UI primitives. Provides a modal dialog overlay that can contain any content. Supports multiple width variants, controlled/uncontrolled modes, nested dialogs, and proper focus management."
+    }
+  },
+  tags: ["autodocs"],
+  title: "Components/Dialog"
 });
 
 const BasicDialogContent = () => (
@@ -82,14 +79,6 @@ const BasicDialogContent = () => (
 );
 
 export const Default = meta.story({
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Open Dialog</Button>
-      </DialogTrigger>
-      <BasicDialogContent />
-    </Dialog>
-  ),
   play: async ({ step, userEvent, canvas }) => {
     await step("Trigger button is rendered with data-slot", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog" });
@@ -128,37 +117,18 @@ export const Default = meta.story({
         await expect(screen.queryByRole("dialog")).not.toBeVisible();
       });
     });
-  }
-});
-
-export const WithoutCloseButton = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Open Dialog without X Button</Button>
+        <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent showCloseButton={false}>
-        <DialogHeader>
-          <DialogTitle>No X Button Dialog</DialogTitle>
-          <DialogDescription>This dialog does not have a close button in the top-right corner.</DialogDescription>
-        </DialogHeader>
-        <div className="py-4">
-          <p>You can close this dialog using:</p>
-          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
-            <li>The Cancel button below</li>
-            <li>The Escape key</li>
-            <li>Clicking outside the dialog</li>
-          </ul>
-        </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button color="neutral">Cancel</Button>
-          </DialogClose>
-          <Button>Confirm</Button>
-        </DialogFooter>
-      </DialogContent>
+      <BasicDialogContent />
     </Dialog>
-  ),
+  )
+});
+
+export const WithoutCloseButton = meta.story({
   play: async ({ canvas, step, userEvent }) => {
     await step("Open dialog", async () => {
       const triggerButton = canvas.getByRole("button", { name: "Open Dialog without X Button" });
@@ -196,26 +166,20 @@ export const WithoutCloseButton = meta.story({
         await expect(screen.queryByRole("dialog")).not.toBeVisible();
       });
     });
-  }
-});
-
-export const WithCloseButton = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Open Dialog with Close Button</Button>
+        <Button>Open Dialog without X Button</Button>
       </DialogTrigger>
-      <DialogContent showCloseButton>
+      <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>Dialog with Close Button</DialogTitle>
-          <DialogDescription>
-            This dialog displays a close button (X) in the top-right corner for additional closing control.
-          </DialogDescription>
+          <DialogTitle>No X Button Dialog</DialogTitle>
+          <DialogDescription>This dialog does not have a close button in the top-right corner.</DialogDescription>
         </DialogHeader>
         <div className="py-4">
           <p>You can close this dialog using:</p>
-          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
-            <li>The X button in the top-right corner</li>
+          <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground text-sm">
             <li>The Cancel button below</li>
             <li>The Escape key</li>
             <li>Clicking outside the dialog</li>
@@ -229,7 +193,10 @@ export const WithCloseButton = meta.story({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  ),
+  )
+});
+
+export const WithCloseButton = meta.story({
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -270,38 +237,42 @@ export const WithCloseButton = meta.story({
         });
       }
     });
-  }
+  },
+  render: () => (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open Dialog with Close Button</Button>
+      </DialogTrigger>
+      <DialogContent showCloseButton>
+        <DialogHeader>
+          <DialogTitle>Dialog with Close Button</DialogTitle>
+          <DialogDescription>
+            This dialog displays a close button (X) in the top-right corner for additional closing control.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <p>You can close this dialog using:</p>
+          <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground text-sm">
+            <li>The X button in the top-right corner</li>
+            <li>The Cancel button below</li>
+            <li>The Escape key</li>
+            <li>Clicking outside the dialog</li>
+          </ul>
+        </div>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button color="neutral">Cancel</Button>
+          </DialogClose>
+          <Button>Confirm</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
 });
 
 const DIALOG_WIDTHS = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "full"] as const;
 
 export const Width = meta.story({
-  render: () => (
-    <div className="grid grid-cols-4 gap-2">
-      {DIALOG_WIDTHS.map((width) => (
-        <Dialog key={width}>
-          <DialogTrigger asChild>
-            <Button color="neutral">{width}</Button>
-          </DialogTrigger>
-          <DialogContent width={width}>
-            <DialogHeader>
-              <DialogTitle>Dialog Title</DialogTitle>
-              <DialogDescription>This is a description of what this dialog is for.</DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
-              <p>This is the main content of the dialog.</p>
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button color="neutral">Cancel</Button>
-              </DialogClose>
-              <Button>Confirm</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      ))}
-    </div>
-  ),
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -329,18 +300,36 @@ export const Width = meta.story({
         });
       });
     }
-  }
+  },
+  render: () => (
+    <div className="grid grid-cols-4 gap-2">
+      {DIALOG_WIDTHS.map((width) => (
+        <Dialog key={width}>
+          <DialogTrigger asChild>
+            <Button color="neutral">{width}</Button>
+          </DialogTrigger>
+          <DialogContent width={width}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+              <DialogDescription>This is a description of what this dialog is for.</DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <p>This is the main content of the dialog.</p>
+            </div>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button color="neutral">Cancel</Button>
+              </DialogClose>
+              <Button>Confirm</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      ))}
+    </div>
+  )
 });
 
 export const OpenDialog = meta.story({
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Open Dialog</Button>
-      </DialogTrigger>
-      <BasicDialogContent />
-    </Dialog>
-  ),
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -364,10 +353,7 @@ export const OpenDialog = meta.story({
 
     const mainContent = canvas.getByText("This is the main content of the dialog.");
     await expect(mainContent).toBeVisible();
-  }
-});
-
-export const DialogWithFooterButtons = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -375,7 +361,10 @@ export const DialogWithFooterButtons = meta.story({
       </DialogTrigger>
       <BasicDialogContent />
     </Dialog>
-  ),
+  )
+});
+
+export const DialogWithFooterButtons = meta.story({
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -392,10 +381,7 @@ export const DialogWithFooterButtons = meta.story({
     // Test the footer buttons
     await expect(canvas.getByRole("button", { name: "Cancel" })).toBeVisible();
     await expect(canvas.getByRole("button", { name: "Confirm" })).toBeVisible();
-  }
-});
-
-export const CloseDialogWithCancelButton = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -403,7 +389,10 @@ export const CloseDialogWithCancelButton = meta.story({
       </DialogTrigger>
       <BasicDialogContent />
     </Dialog>
-  ),
+  )
+});
+
+export const CloseDialogWithCancelButton = meta.story({
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -426,29 +415,18 @@ export const CloseDialogWithCancelButton = meta.story({
       const dialog = canvas.queryByRole("dialog");
       await expect(dialog).not.toBeVisible();
     });
-  }
-});
-
-export const CloseDialogWithOverlayClick = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Click Outside Test</DialogTitle>
-          <DialogDescription>Click outside the dialog to close it</DialogDescription>
-        </DialogHeader>
-        <div className="py-4">
-          <p>This dialog can be closed by clicking the overlay.</p>
-        </div>
-        <DialogFooter>
-          <Button>OK</Button>
-        </DialogFooter>
-      </DialogContent>
+      <BasicDialogContent />
     </Dialog>
-  ),
+  )
+});
+
+export const CloseDialogWithOverlayClick = meta.story({
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -479,18 +457,29 @@ export const CloseDialogWithOverlayClick = meta.story({
         });
       }
     });
-  }
-});
-
-export const CloseDialogWithEscapeKey = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <BasicDialogContent />
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Click Outside Test</DialogTitle>
+          <DialogDescription>Click outside the dialog to close it</DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <p>This dialog can be closed by clicking the overlay.</p>
+        </div>
+        <DialogFooter>
+          <Button>OK</Button>
+        </DialogFooter>
+      </DialogContent>
     </Dialog>
-  ),
+  )
+});
+
+export const CloseDialogWithEscapeKey = meta.story({
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -523,37 +512,18 @@ export const CloseDialogWithEscapeKey = meta.story({
       await expect(triggerButton).toBeVisible();
       await expect(triggerButton).toBeEnabled();
     });
-  }
+  },
+  render: () => (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open Dialog</Button>
+      </DialogTrigger>
+      <BasicDialogContent />
+    </Dialog>
+  )
 });
 
 export const DialogFocusManagement = meta.story({
-  render: () => (
-    <div className="space-y-4">
-      <Input placeholder="Input before dialog" />
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>Open Dialog</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Focus Test Dialog</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <Input placeholder="First input in dialog" />
-            <Input placeholder="Second input in dialog" />
-          </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="button" color="neutral">
-                Close
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      <Input placeholder="Input after dialog" />
-    </div>
-  ),
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -580,35 +550,37 @@ export const DialogFocusManagement = meta.story({
 
     await userEvent.tab();
     await expect(canvas.getByRole("button", { name: "Close" })).toHaveFocus();
-  }
+  },
+  render: () => (
+    <div className="space-y-4">
+      <Input placeholder="Input before dialog" />
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>Open Dialog</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Focus Test Dialog</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <Input placeholder="First input in dialog" />
+            <Input placeholder="Second input in dialog" />
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button color="neutral" type="button">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Input placeholder="Input after dialog" />
+    </div>
+  )
 });
 
 export const ControlledDialog = meta.story({
-  render: () => {
-    const [open, setOpen] = React.useState(false);
-
-    return (
-      <div>
-        <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Controlled Dialog</DialogTitle>
-              <DialogDescription>This dialog is controlled by external state.</DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
-              <p>Dialog is {open ? "open" : "closed"}</p>
-            </div>
-            <DialogFooter>
-              <Button color="neutral" onClick={() => setOpen(false)}>
-                Close Programmatically
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </div>
-    );
-  },
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -631,41 +603,35 @@ export const ControlledDialog = meta.story({
       const dialog = canvas.queryByRole("dialog");
       await expect(dialog).not.toBeVisible();
     });
+  },
+  render: () => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+      <div>
+        <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
+        <Dialog onOpenChange={setOpen} open={open}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Controlled Dialog</DialogTitle>
+              <DialogDescription>This dialog is controlled by external state.</DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <p>Dialog is {open ? "open" : "closed"}</p>
+            </div>
+            <DialogFooter>
+              <Button color="neutral" onClick={() => setOpen(false)}>
+                Close Programmatically
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
   }
 });
 
 export const DialogWithForm = meta.story({
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>Open Form Dialog</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>User Information</DialogTitle>
-          <DialogDescription>Please fill out the form below.</DialogDescription>
-        </DialogHeader>
-        <form className="space-y-4 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
-            <Input id="name" placeholder="Enter your name" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
-          </div>
-        </form>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" color="neutral">
-              Cancel
-            </Button>
-          </DialogClose>
-          <Button type="submit">Submit</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  ),
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -694,31 +660,41 @@ export const DialogWithForm = meta.story({
 
     await expect(cancelButton).toBeVisible();
     await expect(submitButton).toBeVisible();
-  }
-});
-
-export const DataSlotAttributes = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Open Dialog</Button>
+        <Button>Open Form Dialog</Button>
       </DialogTrigger>
-      <DialogContent showCloseButton>
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>Data Slot Test</DialogTitle>
-          <DialogDescription>Testing data-slot attributes</DialogDescription>
+          <DialogTitle>User Information</DialogTitle>
+          <DialogDescription>Please fill out the form below.</DialogDescription>
         </DialogHeader>
-        <div className="py-4">
-          <p>All dialog components should have appropriate data-slot attributes.</p>
-        </div>
+        <form className="space-y-4 py-4">
+          <div className="space-y-2">
+            <Label htmlFor="name">Name</Label>
+            <Input id="name" placeholder="Enter your name" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" placeholder="Enter your email" type="email" />
+          </div>
+        </form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button>Close</Button>
+            <Button color="neutral" type="button">
+              Cancel
+            </Button>
           </DialogClose>
+          <Button type="submit">Submit</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  ),
+  )
+});
+
+export const DataSlotAttributes = meta.story({
   play: async ({ canvasElement, step, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -763,31 +739,31 @@ export const DataSlotAttributes = meta.story({
     // Check close button data-slot (both X and Close button)
     const closeButtons = document.querySelectorAll('[data-slot="dialog-close"]');
     await expect(closeButtons.length).toBeGreaterThanOrEqual(2); // X button and Close button
-  }
-});
-
-export const AccessibilityTest = meta.story({
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Open Accessible Dialog</Button>
+        <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent showCloseButton>
         <DialogHeader>
-          <DialogTitle>Accessibility Test</DialogTitle>
-          <DialogDescription>Testing dialog accessibility features.</DialogDescription>
+          <DialogTitle>Data Slot Test</DialogTitle>
+          <DialogDescription>Testing data-slot attributes</DialogDescription>
         </DialogHeader>
         <div className="py-4">
-          <p>This dialog should be properly accessible.</p>
+          <p>All dialog components should have appropriate data-slot attributes.</p>
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button">Close</Button>
+            <Button>Close</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  ),
+  )
+});
+
+export const AccessibilityTest = meta.story({
   play: async ({ canvasElement, userEvent }) => {
     const canvas = within(canvasElement?.parentElement as HTMLElement);
 
@@ -808,10 +784,59 @@ export const AccessibilityTest = meta.story({
     // Test that description is accessible
     const description = canvas.getByText("Testing dialog accessibility features.");
     await expect(description).toBeVisible();
-  }
+  },
+  render: () => (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Open Accessible Dialog</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Accessibility Test</DialogTitle>
+          <DialogDescription>Testing dialog accessibility features.</DialogDescription>
+        </DialogHeader>
+        <div className="py-4">
+          <p>This dialog should be properly accessible.</p>
+        </div>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button">Close</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
 });
 
 export const NestedDialogs = meta.story({
+  play: async ({ canvasElement, step, userEvent }) => {
+    const canvas = within(canvasElement?.parentElement as HTMLElement);
+
+    await step("Open parent dialog", async () => {
+      await userEvent.click(canvas.getByRole("button", { name: "Open Parent Dialog" }));
+
+      await waitFor(async () => {
+        await expect(canvas.getByRole("dialog")).toBeVisible();
+      });
+    });
+
+    await step("Open child dialog", async () => {
+      await userEvent.click(canvas.getByRole("button", { name: "Open Child Dialog" }));
+
+      // Wait for child dialog to appear
+      await waitFor(async () => {
+        await expect(canvas.getByRole("heading", { name: "Child Dialog" })).toBeVisible();
+      });
+    });
+
+    await step("Parent dialog should still be open after close child dialog", async () => {
+      await userEvent.click(canvas.getByRole("button", { name: "Close Child" }));
+
+      await waitFor(async () => {
+        await expect(canvas.getByRole("heading", { name: "Parent Dialog" })).toBeVisible();
+      });
+    });
+  },
   render: () => (
     <Dialog>
       <DialogTrigger asChild>
@@ -850,33 +875,5 @@ export const NestedDialogs = meta.story({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  ),
-  play: async ({ canvasElement, step, userEvent }) => {
-    const canvas = within(canvasElement?.parentElement as HTMLElement);
-
-    await step("Open parent dialog", async () => {
-      await userEvent.click(canvas.getByRole("button", { name: "Open Parent Dialog" }));
-
-      await waitFor(async () => {
-        await expect(canvas.getByRole("dialog")).toBeVisible();
-      });
-    });
-
-    await step("Open child dialog", async () => {
-      await userEvent.click(canvas.getByRole("button", { name: "Open Child Dialog" }));
-
-      // Wait for child dialog to appear
-      await waitFor(async () => {
-        await expect(canvas.getByRole("heading", { name: "Child Dialog" })).toBeVisible();
-      });
-    });
-
-    await step("Parent dialog should still be open after close child dialog", async () => {
-      await userEvent.click(canvas.getByRole("button", { name: "Close Child" }));
-
-      await waitFor(async () => {
-        await expect(canvas.getByRole("heading", { name: "Parent Dialog" })).toBeVisible();
-      });
-    });
-  }
+  )
 });

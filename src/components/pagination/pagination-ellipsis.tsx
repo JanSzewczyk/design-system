@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { MoreHorizontalIcon } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -10,8 +9,8 @@ export function PaginationEllipsis({ className, ...props }: PaginationEllipsisPr
   return (
     <span
       aria-hidden
-      data-slot="pagination-ellipsis"
       className={cn("flex size-8 items-center justify-center [&_svg:not([class*='size-'])]:size-4", className)}
+      data-slot="pagination-ellipsis"
       {...props}
     >
       <MoreHorizontalIcon />

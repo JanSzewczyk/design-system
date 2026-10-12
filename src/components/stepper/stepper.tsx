@@ -1,7 +1,6 @@
-import * as React from "react";
-
 import { useDirection } from "@radix-ui/react-direction";
 import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
 import { useIsomorphicLayoutEffect, useLazyRef } from "~/hooks";
 import { cn } from "~/utils";
 
@@ -78,14 +77,14 @@ export function Stepper({
 
   const contextValue = React.useMemo<StepperContextValue>(
     () => ({
-      id: rootId,
-      dir,
-      orientation,
       activationMode,
+      dir,
       disabled,
-      nonInteractive,
+      id: rootId,
+      indicators,
       loop,
-      indicators
+      nonInteractive,
+      orientation
     }),
     [rootId, dir, orientation, activationMode, disabled, nonInteractive, loop, indicators]
   );
@@ -96,11 +95,11 @@ export function Stepper({
     <StepperStoreContext.Provider value={store}>
       <StepperContext.Provider value={contextValue}>
         <RootPrimitive
-          id={rootId}
           data-disabled={disabled ? "" : undefined}
           data-orientation={orientation}
           data-slot="stepper"
           dir={dir}
+          id={rootId}
           {...rootProps}
           className={cn("flex w-full flex-col gap-4 data-[orientation=vertical]:flex-row", className)}
         />

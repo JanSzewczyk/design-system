@@ -14,9 +14,9 @@ export function SidebarMenuSkeleton({ className, showIcon = false, ...props }: S
   });
   return (
     <div
-      data-slot="sidebar-menu-skeleton"
-      data-sidebar="menu-skeleton"
       className={cn("flex h-8 items-center gap-2 rounded px-2", className)}
+      data-sidebar="menu-skeleton"
+      data-slot="sidebar-menu-skeleton"
       {...props}
     >
       {showIcon && <Skeleton className="size-4 rounded" data-sidebar="menu-skeleton-icon" />}

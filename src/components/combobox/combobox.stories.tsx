@@ -1,10 +1,9 @@
+import { GlobeIcon } from "lucide-react";
 import * as React from "react";
 
-import { GlobeIcon } from "lucide-react";
-
 import { expect, screen, waitFor } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { InputGroupAddon } from "~/components";
-
 import {
   Combobox,
   ComboboxChip,
@@ -22,8 +21,6 @@ import {
   ComboboxValue,
   useComboboxAnchor
 } from "./index";
-
-import preview from "~/.storybook/preview";
 
 const meta = preview.meta({
   title: "Components/Combobox"
@@ -111,7 +108,7 @@ export const MultipleSelect = meta.story({
 
     return (
       <div className="w-full max-w-xs">
-        <Combobox items={languages} multiple value={value} onValueChange={setValue}>
+        <Combobox items={languages} multiple onValueChange={setValue} value={value}>
           <ComboboxChips ref={anchor}>
             <ComboboxValue>
               {value.map((item) => (
@@ -184,16 +181,16 @@ MultipleSelect.test("chip has remove button", async ({ canvas, userEvent, step }
 
 const timezones = [
   {
-    value: "Americas",
-    items: ["(GMT-5) New York", "(GMT-8) Los Angeles", "(GMT-6) Chicago"]
+    items: ["(GMT-5) New York", "(GMT-8) Los Angeles", "(GMT-6) Chicago"],
+    value: "Americas"
   },
   {
-    value: "Europe",
-    items: ["(GMT+0) London", "(GMT+1) Paris", "(GMT+1) Berlin"]
+    items: ["(GMT+0) London", "(GMT+1) Paris", "(GMT+1) Berlin"],
+    value: "Europe"
   },
   {
-    value: "Asia/Pacific",
-    items: ["(GMT+9) Tokyo", "(GMT+8) Shanghai", "(GMT+8) Singapore"]
+    items: ["(GMT+9) Tokyo", "(GMT+8) Shanghai", "(GMT+8) Singapore"],
+    value: "Asia/Pacific"
   }
 ] as const;
 
@@ -206,7 +203,7 @@ export const Groups = meta.story({
           <ComboboxEmpty>No timezones found.</ComboboxEmpty>
           <ComboboxList>
             {(group, index) => (
-              <ComboboxGroup key={group.value} items={group.items}>
+              <ComboboxGroup items={group.items} key={group.value}>
                 <ComboboxLabel>{group.value}</ComboboxLabel>
                 <ComboboxCollection>
                   {(item) => (
@@ -257,7 +254,7 @@ export const WithClear = meta.story({
   name: "With Clear",
   render: () => {
     return (
-      <Combobox items={frameworks} defaultValue={frameworks[0]}>
+      <Combobox defaultValue={frameworks[0]} items={frameworks}>
         <ComboboxInput placeholder="Select a framework" showClear />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
@@ -300,7 +297,7 @@ export const DisabledCombobox = meta.story({
   render: () => {
     return (
       <Combobox items={frameworks}>
-        <ComboboxInput placeholder="Select a framework" disabled />
+        <ComboboxInput disabled placeholder="Select a framework" />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>
@@ -335,7 +332,7 @@ export const WithInputAddon = meta.story({
           <ComboboxEmpty>No timezones found.</ComboboxEmpty>
           <ComboboxList>
             {(group) => (
-              <ComboboxGroup key={group.value} items={group.items}>
+              <ComboboxGroup items={group.items} key={group.value}>
                 <ComboboxLabel>{group.value}</ComboboxLabel>
                 <ComboboxCollection>
                   {(item) => (
@@ -375,7 +372,7 @@ export const InvalidCombobox = meta.story({
   render: () => {
     return (
       <Combobox items={frameworks}>
-        <ComboboxInput placeholder="Select a framework" aria-invalid="true" />
+        <ComboboxInput aria-invalid="true" placeholder="Select a framework" />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
           <ComboboxList>
@@ -409,7 +406,7 @@ export const AutoHighlight = meta.story({
   name: "Auto Highlight",
   render: () => {
     return (
-      <Combobox items={frameworks} autoHighlight>
+      <Combobox autoHighlight items={frameworks}>
         <ComboboxInput placeholder="Select a framework" />
         <ComboboxContent>
           <ComboboxEmpty>No items found.</ComboboxEmpty>
@@ -459,7 +456,7 @@ export const EmptyState = meta.story({
 
     return (
       <Combobox items={filtered}>
-        <ComboboxInput placeholder="Search frameworks" onChange={(e) => setSearch(e.currentTarget.value)} />
+        <ComboboxInput onChange={(e) => setSearch(e.currentTarget.value)} placeholder="Search frameworks" />
         <ComboboxContent>
           <ComboboxEmpty>No frameworks found.</ComboboxEmpty>
           <ComboboxList>

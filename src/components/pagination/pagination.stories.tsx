@@ -1,21 +1,19 @@
 import { expect } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Field, FieldLabel, Select, SelectContent, SelectGroup, SelectItem } from "~/components";
-
 import {
   Pagination,
-  PaginationNext,
-  PaginationPrevious,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
-  PaginationLink
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious
 } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Pagination",
-  component: Pagination
+  component: Pagination,
+  title: "Components/Pagination"
 });
 
 export const PaginationStory = meta.story({
@@ -162,9 +160,9 @@ export const IconsOnly = meta.story({
   render() {
     return (
       <div className="flex items-center justify-between gap-4">
-        <Field orientation="horizontal" className="w-fit">
+        <Field className="w-fit" orientation="horizontal">
           <FieldLabel htmlFor="select-rows-per-page">Rows per page</FieldLabel>
-          <Select defaultValue="25" className="w-20" id="select-rows-per-page">
+          <Select className="w-20" defaultValue="25" id="select-rows-per-page">
             <SelectContent align="start">
               <SelectGroup>
                 <SelectItem value="10">10</SelectItem>

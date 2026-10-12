@@ -62,18 +62,18 @@ export function Marquee({
   return (
     <div
       {...props}
-      ref={marqueeRef}
-      data-slot="marquee"
+      aria-label={ariaLabel}
+      aria-live={ariaLive}
       className={cn(
         "group flex gap-(--gap) overflow-hidden p-2 [--duration:40s] [--gap:1rem]",
         {
-          "flex-row": !vertical,
-          "flex-col": vertical
+          "flex-col": vertical,
+          "flex-row": !vertical
         },
         className
       )}
-      aria-label={ariaLabel}
-      aria-live={ariaLive}
+      data-slot="marquee"
+      ref={marqueeRef}
       role={ariaRole}
       tabIndex={0}
     >
@@ -82,13 +82,13 @@ export function Marquee({
           <>
             {Array.from({ length: repeat }, (_, i) => (
               <div
-                key={i}
                 className={cn(
                   "flex shrink-0 justify-around gap-(--gap)",
                   !vertical ? "animate-marquee flex-row" : "animate-marquee-vertical flex-col",
                   pauseOnHover && "group-hover:paused",
                   reverse && "direction-reverse"
                 )}
+                key={i}
               >
                 {children}
               </div>

@@ -1,6 +1,5 @@
-import * as React from "react";
-
 import { Slot as SlotPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { cn } from "~/utils";
 
@@ -29,13 +28,13 @@ export function FileUploadList(props: FileUploadListProps) {
 
   return (
     <ListPrimitive
-      role="list"
-      id={context.listId}
       aria-orientation={orientation}
       data-orientation={orientation}
       data-slot="file-upload-list"
       data-state={shouldRender ? "active" : "inactive"}
       dir={context.dir}
+      id={context.listId}
+      role="list"
       {...listProps}
       className={cn(fileUploadListVariants({ orientation }), className)}
     />

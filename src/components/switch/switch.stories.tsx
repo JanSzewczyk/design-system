@@ -1,15 +1,11 @@
 import * as React from "react";
 
 import { expect, fn } from "storybook/test";
+import preview from "~/.storybook/preview";
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel, FieldTitle } from "~/components";
-
 import { Switch } from ".";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Switch",
-  component: Switch,
   args: {
     onCheckedChange: fn()
   },
@@ -26,21 +22,23 @@ const meta = preview.meta({
       control: "boolean",
       description: "When true, prevents interaction with the switch"
     },
+    name: {
+      control: "text",
+      description: "The name of the switch (used in form submission)"
+    },
     required: {
       control: "boolean",
       description: "When true, indicates that user must check the switch before submitting"
     },
     size: {
       control: "select",
-      options: ["default", "sm"],
-      description: "The size of the switch"
-    },
-    name: {
-      control: "text",
-      description: "The name of the switch (used in form submission)"
+      description: "The size of the switch",
+      options: ["default", "sm"]
     }
   },
-  tags: ["autodocs"]
+  component: Switch,
+  tags: ["autodocs"],
+  title: "Components/Switch"
 });
 
 export const SwitchStory = meta.story({
@@ -48,7 +46,7 @@ export const SwitchStory = meta.story({
   render: () => (
     <div className="flex items-center gap-2">
       <Switch id="default-switch" />
-      <label htmlFor="default-switch" className="cursor-pointer text-sm">
+      <label className="cursor-pointer text-sm" htmlFor="default-switch">
         Toggle option
       </label>
     </div>
@@ -114,12 +112,12 @@ SwitchStory.test("Has correct data-slot attribute", async ({ canvas }) => {
 export const Disabled = meta.story({
   render: () => (
     <FieldGroup className="w-full max-w-40">
-      <Field orientation="horizontal" data-disabled>
-        <Switch id="switch-disabled-unchecked" disabled />
+      <Field data-disabled orientation="horizontal">
+        <Switch disabled id="switch-disabled-unchecked" />
         <FieldLabel htmlFor="switch-disabled-unchecked">Disabled</FieldLabel>
       </Field>
-      <Field orientation="horizontal" data-disabled>
-        <Switch id="switch-disabled-checked" disabled defaultChecked />
+      <Field data-disabled orientation="horizontal">
+        <Switch defaultChecked disabled id="switch-disabled-checked" />
         <FieldLabel htmlFor="switch-disabled-checked">Disabled checked</FieldLabel>
       </Field>
     </FieldGroup>
@@ -142,12 +140,12 @@ Disabled.test("Preserves checked state when disabled", async ({ canvas }) => {
 
 export const Invalid = meta.story({
   render: () => (
-    <Field orientation="horizontal" className="max-w-sm" data-invalid>
+    <Field className="max-w-sm" data-invalid orientation="horizontal">
       <FieldContent>
         <FieldLabel htmlFor="switch-terms">Accept terms and conditions</FieldLabel>
         <FieldDescription>You must accept the terms and conditions to continue.</FieldDescription>
       </FieldContent>
-      <Switch id="switch-terms" aria-invalid />
+      <Switch aria-invalid id="switch-terms" />
     </Field>
   )
 });
@@ -165,8 +163,8 @@ export const ControlledSwitch = meta.story({
     return (
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
-          <Switch id="controlled-switch" checked={checked} onCheckedChange={setChecked} />
-          <label htmlFor="controlled-switch" className="cursor-pointer text-sm">
+          <Switch checked={checked} id="controlled-switch" onCheckedChange={setChecked} />
+          <label className="cursor-pointer text-sm" htmlFor="controlled-switch">
             Controlled switch
           </label>
         </div>
@@ -228,19 +226,19 @@ export const KeyboardNavigation = meta.story({
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2">
         <Switch id="keyboard-1" />
-        <label htmlFor="keyboard-1" className="cursor-pointer text-sm">
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-1">
           Option 1
         </label>
       </div>
       <div className="flex items-center gap-2">
         <Switch id="keyboard-2" />
-        <label htmlFor="keyboard-2" className="cursor-pointer text-sm">
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-2">
           Option 2
         </label>
       </div>
       <div className="flex items-center gap-2">
         <Switch id="keyboard-3" />
-        <label htmlFor="keyboard-3" className="cursor-pointer text-sm">
+        <label className="cursor-pointer text-sm" htmlFor="keyboard-3">
           Option 3
         </label>
       </div>
@@ -280,7 +278,7 @@ KeyboardNavigation.test("Space key toggles focused switch", async ({ canvas, use
 export const Description = meta.story({
   render() {
     return (
-      <Field orientation="horizontal" className="max-w-sm">
+      <Field className="max-w-sm" orientation="horizontal">
         <FieldContent>
           <FieldLabel htmlFor="switch-focus-mode">Share across devices</FieldLabel>
           <FieldDescription>Focus is shared across devices, and turns off when you leave the app.</FieldDescription>
@@ -310,7 +308,7 @@ export const ChoiceCard = meta.story({
               <FieldTitle>Enable notifications</FieldTitle>
               <FieldDescription>Receive notifications when focus mode is enabled or disabled.</FieldDescription>
             </FieldContent>
-            <Switch id="switch-notifications" defaultChecked />
+            <Switch defaultChecked id="switch-notifications" />
           </Field>
         </FieldLabel>
       </FieldGroup>

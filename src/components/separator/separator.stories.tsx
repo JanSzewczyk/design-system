@@ -1,13 +1,11 @@
 import { expect } from "storybook/test";
-
+import preview from "~/.storybook/preview";
 import { Separator } from "./separator";
 
-import preview from "~/.storybook/preview";
-
 const meta = preview.meta({
-  title: "Components/Separator",
   component: Separator,
-  tags: ["autodocs", "beta"]
+  tags: ["autodocs", "beta"],
+  title: "Components/Separator"
 });
 
 export const Horizontal = meta.story({
@@ -20,7 +18,7 @@ export const Horizontal = meta.story({
 });
 
 export const Vertical = meta.story({
-  args: { orientation: "vertical", className: "h-32" },
+  args: { className: "h-32", orientation: "vertical" },
   play: async ({ canvas }) => {
     const separator = canvas.getByRole("separator");
     await expect(separator).toBeVisible();

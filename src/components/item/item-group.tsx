@@ -6,6 +6,6 @@ export type ItemGroupProps = React.ComponentProps<"div">;
 
 export function ItemGroup({ className, ...props }: ItemGroupProps) {
   return (
-    <div role="list" data-slot="item-group" className={cn("group/item-group flex flex-col", className)} {...props} />
+    <div className={cn("group/item-group flex flex-col", className)} data-slot="item-group" role="list" {...props} />
   );
 }
